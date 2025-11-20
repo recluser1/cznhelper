@@ -1,6 +1,100 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
+
+/* Accessibility theme for high contrast, comfortable reading, and global background */
+.accessibility-theme {
+  --background: #222 !important;
+  --foreground: #FFD700 !important;
+  --card: #222 !important;
+  --card-foreground: #FFD700 !important;
+  --popover: #222 !important;
+  --popover-foreground: #FFD700 !important;
+  --primary: #FFD700 !important;
+  --primary-foreground: #222 !important;
+  --secondary: #222 !important;
+  --secondary-foreground: #FFD700 !important;
+  --muted: #222 !important;
+  --muted-foreground: #FFD700 !important;
+  --accent: #FFD700 !important;
+  --accent-foreground: #222 !important;
+  --destructive: #FFD700 !important;
+  --destructive-foreground: #222 !important;
+  --border: #FFD700 !important;
+  --input: #FFD700 !important;
+  --ring: #FFD700 !important;
+  --chart-1: #FFD700 !important;
+  --chart-2: #FFD700 !important;
+  --chart-3: #FFD700 !important;
+  --chart-4: #FFD700 !important;
+  --chart-5: #FFD700 !important;
+  --radius: 0.75rem !important;
+  font-size: 1.05rem !important;
+  letter-spacing: 0.02em !important;
+}
+.accessibility-theme * {
+  color: #FFD700 !important;
+  border-color: #FFD700 !important;
+  background: #222 !important;
+}
+}
+.accessibility-theme, .accessibility-theme body, .accessibility-theme .card, .accessibility-theme .bg-card, .accessibility-theme .border-border, .accessibility-theme .popover {
+  background: #222 !important;
+  color: #FFD700 !important;
+}
+.accessibility-theme .text-[#19F7E1],
+.accessibility-theme .text-[#5B1FAF],
+.accessibility-theme .text-[#C41729],
+.accessibility-theme .text-[#FF601A],
+.accessibility-theme .text-[#4A1890],
+.accessibility-theme .text-[#C3C7D0],
+.accessibility-theme .text-[#0A0B0F],
+.accessibility-theme .text-[#1F2127],
+.accessibility-theme .text-[#71767F],
+.accessibility-theme .text-[#FFFACD],
+.accessibility-theme .text-muted-foreground,
+.accessibility-theme .text-foreground,
+.accessibility-theme .font-bold,
+.accessibility-theme .font-semibold {
+  color: #FFD700 !important;
+}
+.accessibility-theme .border-[#19F7E1],
+.accessibility-theme .border-[#5B1FAF],
+.accessibility-theme .border-[#C41729],
+.accessibility-theme .border-[#FF601A],
+.accessibility-theme .border-[#4A1890],
+.accessibility-theme .border-[#C3C7D0],
+.accessibility-theme .border-[#0A0B0F],
+.accessibility-theme .border-[#1F2127],
+.accessibility-theme .border-[#71767F],
+.accessibility-theme .border-[#FFFACD] {
+  border-color: #FFD700 !important;
+}
+.accessibility-theme .bg-[#19F7E1],
+.accessibility-theme .bg-[#5B1FAF],
+.accessibility-theme .bg-[#C41729],
+.accessibility-theme .bg-[#FF601A],
+.accessibility-theme .bg-[#4A1890],
+.accessibility-theme .bg-[#C3C7D0],
+.accessibility-theme .bg-[#0A0B0F],
+.accessibility-theme .bg-[#1F2127],
+.accessibility-theme .bg-[#71767F],
+.accessibility-theme .bg-[#FFFACD],
+.accessibility-theme .bg-secondary,
+.accessibility-theme .bg-card,
+.accessibility-theme .bg-popover {
+  background: #222 !important;
+}
+}
+.accessibility-theme .text-muted-foreground, .accessibility-theme .helper-tab, .accessibility-theme .text-foreground {
+  color: #FFFACD !important;
+}
+.accessibility-theme .helper-tab {
+  background: #222 !important;
+  color: #FFD700 !important;
+  border-color: #FFD700 !important;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {

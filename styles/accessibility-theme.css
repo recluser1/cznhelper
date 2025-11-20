@@ -1,0 +1,43 @@
+/* Accessibility theme for high contrast, larger font, and comfortable reading colors */
+.accessibility-theme {
+  background: #222 !important;
+  color: #FFD700 !important;
+  font-size: 1.25rem !important;
+  letter-spacing: 0.05em !important;
+}
+.accessibility-theme * {
+  background: transparent !important;
+  color: #FFD700 !important;
+  font-size: 1.15em !important;
+  letter-spacing: 0.03em !important;
+  border-color: #FFD700 !important;
+}
+.accessibility-theme .card,
+.accessibility-theme .bg-card,
+.accessibility-theme .border-border {
+  background: #222 !important;
+  color: #FFD700 !important;
+  border-color: #FFD700 !important;
+}
+.accessibility-theme .text-muted-foreground {
+  color: #FFFACD !important;
+}
+.accessibility-theme .text-[#C41729],
+.accessibility-theme .text-[#19F7E1],
+.accessibility-theme .text-[#5B1FAF] {
+  color: #FFD700 !important;
+}
+.accessibility-theme .bg-[#C41729]/10,
+.accessibility-theme .bg-[#5B1FAF]/10 {
+  background: #333 !important;
+}
+.accessibility-theme .border-2 {
+  border-width: 2px !important;
+  border-color: #FFD700 !important;
+}
+.accessibility-theme .rounded-lg {
+  border-radius: 0.75rem !important;
+}
+.accessibility-theme .shadow-md {
+  box-shadow: 0 2px 8px #FFD70033 !important;
+}

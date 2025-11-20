@@ -1,6 +1,6 @@
+import { useState, useEffect } from 'react'
 'use client'
 
-import { useState } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -177,6 +177,8 @@ export function RunTracker() {
   const [selectedCard, setSelectedCard] = useState<string | null>(null)
   const [showAddCard, setShowAddCard] = useState(false)
   const [actionHistory, setActionHistory] = useState<Action[]>([])
+  // Accessibility theme toggle
+  const [accessibilityMode, setAccessibilityMode] = useState(false)
   
   const [deck, setDeck] = useState<DeckCard[]>([
     { id: '1', name: '', cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
@@ -528,9 +530,12 @@ export function RunTracker() {
     setSelectedCard(null)
   }
 
+  // Toggle accessibility-theme class on body for global effect
+
+
   return (
     <TooltipProvider>
-      <div className="space-y-6">
+      <div className={`space-y-6${accessibilityMode ? ' accessibility-theme' : ''}`}> 
         {/* Warning banner added to match site design */}
         <div role="alert" className="rounded-md border border-[#C41729]/30 bg-[#C41729]/10 p-3 text-sm text-[#C41729] flex items-start gap-2">
           <AlertTriangle className="h-4 w-4 mt-0.5" />
@@ -559,7 +564,7 @@ export function RunTracker() {
                 <div className="flex items-end gap-4">
                   <div className="flex-1 space-y-2">
                     <Label>Tier</Label>
-                    <Select value={tier.toString()} onValueChange={(val) => setTier(parseInt(val))}>
+                    <Select value={tier.toString()} onValueChange={(val: string) => setTier(parseInt(val))}>
                       <SelectTrigger>
                         <SelectValue />
                       </SelectTrigger>
@@ -577,7 +582,7 @@ export function RunTracker() {
                     <Checkbox 
                       id="nightmare" 
                       checked={nightmareMode}
-                      onCheckedChange={(checked) => setNightmareMode(checked as boolean)}
+                      onCheckedChange={(checked: boolean | undefined) => setNightmareMode(!!checked)}
                     />
                     <Label htmlFor="nightmare" className="cursor-pointer">
                       Nightmare Mode
@@ -711,7 +716,7 @@ export function RunTracker() {
                     >
                       {card.isRemoved && (
                         <button
-                          onClick={(e) => {
+                          onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                             e.stopPropagation()
                             deleteCard(card.id)
                           }}
@@ -759,7 +764,7 @@ export function RunTracker() {
                             variant="outline"
                             className="h-8 text-xs border-[#5B1FAF]/30 hover:bg-[#5B1FAF]/20 hover:border-[#5B1FAF]/50"
                             disabled={card.hasDivineEpiphany || card.cardType === 'forbidden'}
-                            onClick={(e) => {
+                            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                               e.stopPropagation()
                               toggleNormalEpiphany(card.id)
                             }}
@@ -771,7 +776,7 @@ export function RunTracker() {
                             variant="outline"
                             className="h-8 text-xs border-[#19F7E1]/30 hover:bg-[#19F7E1]/20 hover:border-[#19F7E1]/50"
                             disabled={card.hasNormalEpiphany || card.cardType === 'forbidden'}
-                            onClick={(e) => {
+                            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                               e.stopPropagation()
                               toggleDivineEpiphany(card.id)
                             }}
@@ -783,7 +788,7 @@ export function RunTracker() {
                             variant="outline"
                             className="h-8 text-xs border-border hover:bg-secondary"
                             disabled={card.cardType === 'forbidden'}
-                            onClick={(e) => {
+                            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                               e.stopPropagation()
                               duplicateCard(card.id)
                             }}
@@ -795,7 +800,7 @@ export function RunTracker() {
                             variant="outline"
                             className="h-8 text-xs border-border hover:bg-secondary"
                             disabled={card.wasConverted || card.cardType === 'forbidden'}
-                            onClick={(e) => {
+                            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                               e.stopPropagation()
                               convertCard(card.id)
                             }}
@@ -807,7 +812,7 @@ export function RunTracker() {
                             variant="destructive"
                             className="h-8 text-xs bg-[#C41729]/20 border-[#C41729]/50 hover:bg-[#C41729]/30"
                             disabled={card.cardType === 'forbidden'}
-                            onClick={(e) => {
+                            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                               e.stopPropagation()
                               removeCard(card.id)
                             }}
