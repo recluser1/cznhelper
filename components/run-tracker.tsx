@@ -153,10 +153,10 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
       { name: 'Hovering Metal', image: '/images/character/amir/starter3.png' }
     ],
     unique: [
-      { name: 'Metal Pierce', image: '/images/characters/amir/unique1.png' },
-      { name: 'Metal Extraction', image: '/images/characters/amir/unique2.png' },
-      { name: 'Full Metal Hurricane', image: '/images/characters/amir/unique3.png' },
-      { name: 'Iron Skin', image: '/images/characters/amir/unique4.png' }
+      { name: 'Metal Pierce', image: '/images/character/amir/unique1.png' },
+      { name: 'Metal Extraction', image: '/images/character/amir/unique2.png' },
+      { name: 'Full Metal Hurricane', image: '/images/character/amir/unique3.png' },
+      { name: 'Iron Skin', image: '/images/character/amir/unique4.png' }
     ]
   },
   'tressa': {
