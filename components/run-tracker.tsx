@@ -429,6 +429,12 @@ type Action = {
   previousConversionCount?: number
 }
 
+const formatCharacterName = (key: string) =>
+  key
+    .split(/[-_ ]+/)
+    .map(part => part ? part.charAt(0).toUpperCase() + part.slice(1) : '')
+    .join(' ');
+
 export function RunTracker() {
   const [tier, setTier] = useState(1)
   const [nightmareMode, setNightmareMode] = useState(false)
@@ -947,7 +953,7 @@ export function RunTracker() {
                       <SelectItem value="none">None</SelectItem>
                       {Object.keys(CHARACTER_CARDS).sort().map(char => (
                         <SelectItem key={char} value={char}>
-                          {char.charAt(0).toUpperCase() + char.slice(1).replace('-', ' ')}
+                          {formatCharacterName(char)}
                         </SelectItem>
                       ))}
                     </SelectContent>
