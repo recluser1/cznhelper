@@ -149,8 +149,8 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
     starter: [
       { name: 'Rapier', image: '/images/character/amir/starter1.png' },
       { name: 'Rapier', image: '/images/character/amir/starter2.png' },
-      { name: 'Steel Barrier', image: '/images/character/amir/starter2.png' },
-      { name: 'Hovering Metal', image: '/images/character/amir/starter3.png' }
+      { name: 'Steel Barrier', image: '/images/character/amir/starter3.png' },
+      { name: 'Hovering Metal', image: '/images/character/amir/starter4.png' }
     ],
     unique: [
       { name: 'Metal Pierce', image: '/images/character/amir/unique1.png' },
