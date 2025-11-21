@@ -1010,7 +1010,7 @@ export function RunTracker() {
                         )}
 
                         {/* Overlay content — z-10 so it sits above the image. gradient to keep text readable */}
-                        <div className="absolute inset-0 z-10 flex flex-col justify-between p-4 bg-gradient-to-t from-black/70 via-transparent/0 to-transparent/0">
+                        <div className="absolute inset-0 z-0 pointer-events-none flex flex-col justify-between p-4 bg-gradient-to-t from-black/70 via-transparent/0 to-transparent/0">
                           <div className="space-y-2">
                             {card.name && (
                               <div
@@ -1044,9 +1044,9 @@ export function RunTracker() {
                         </div>
                       </div>
                     </div>
-                    
+
                       {selectedCard === card.id && !card.isRemoved && (
-                        <div className="absolute inset-0 flex flex-col gap-1 rounded-lg bg-[#06070A]/98 p-2 backdrop-blur-sm ring-2 ring-[#5B1FAF]/50">
+                          <div className="absolute inset-0 z-30 flex flex-col gap-1 rounded-lg bg-[#06070A]/98 p-2 backdrop-blur-sm ring-2 ring-[#5B1FAF]/50">
                           <Button
                             size="sm"
                             variant="outline"
