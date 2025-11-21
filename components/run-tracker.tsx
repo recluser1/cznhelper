@@ -1044,10 +1044,9 @@ export function RunTracker() {
           <AlertTriangle className="h-4 w-4 mt-0.5" />
           <div className="leading-tight">
             <strong className="font-semibold"></strong> There’s a bug making [Remove] card conversions cost 0 — i.e.
-            converting a card to a Mutant Sample currently costs 0
+            converting a card to a Mutant Sample or Fresh Meat currently costs 0
             <br />
-            If you converted a base card into a [Remove], just don’t remove the base card — not removing the base card
-            and converting it into a [Remove] card currently has the same cost: 0
+            If you converted a card into a [Remove], just don’t remove the card — not removing it will cost 0 when the run end.
           </div>
         </div>
 
