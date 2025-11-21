@@ -678,27 +678,33 @@ export function RunTracker() {
     setSelectedCard(null)
   }
 
-  const removeCard = (cardId: string) => {
-    const card = deck.find(c => c.id === cardId)
-    if (!card || card.isRemoved) return
-    if (card.cardType === 'forbidden') return
-    
-    const actualRemovalCount = deck.filter(c => c.isRemoved).length
-    const cost = calculateRemovalCost(card, removalCount)
-    
-    setActionHistory([...actionHistory, {
-      type: 'remove',
-      cardId,
-      previousDeck: [...deck],
-      previousPoints: totalPoints,
-      previousRemovalCount: removalCount
-    }])
-    
-    setDeck(deck.map(c => c.id === cardId ? { ...c, isRemoved: true, removalCost: cost } : c))
-    setRemovalCount(removalCount + 1)
-    setTotalPoints(totalPoints + cost)
-    setSelectedCard(null)
-  }
+const removeCard = (cardId: string) => {
+  const card = deck.find(c => c.id === cardId)
+  if (!card || card.isRemoved || card.cardType === 'forbidden') return
+
+  const newRemovalCount = removalCount + 1
+
+  let scaleCost = 0
+  if (newRemovalCount === 1) scaleCost = 0
+  else if (newRemovalCount === 2) scaleCost = 10
+  else if (newRemovalCount === 3) scaleCost = 30
+  else if (newRemovalCount === 4) scaleCost = 50
+  else scaleCost = 70
+
+  // Total points contributed by the card (base + epiphany)
+  const totalCardPoints = getCardPointValue(card)
+
+  // Final removal cost: scaleCost minus total points (so removing card sets its contribution to 0)
+  const removalCost = scaleCost - totalCardPoints
+
+  setDeck(deck.map(c =>
+    c.id === cardId ? { ...c, isRemoved: true, removalCost } : c
+  ))
+
+  setRemovalCount(newRemovalCount)
+  setTotalPoints(totalPoints + removalCost)
+  setSelectedCard(null)
+}
 
   const addNewCard = (type: CardType) => {
     const newCard: DeckCard = {
