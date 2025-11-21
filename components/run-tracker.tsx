@@ -414,6 +414,7 @@ type DeckCard = {
   isRemoved: boolean
   wasConverted: boolean
   removalCost?: number
+  isMutantSample?: boolean // Added to differentiate mutant samples
 }
 
 type Action = {
@@ -784,6 +785,7 @@ export function RunTracker() {
           ? {
               ...c,
               isRemoved: true,
+              isMutantSample: true,
               removalCost: 0,
               image: "/images/remove.png",
             }
@@ -1283,7 +1285,7 @@ export function RunTracker() {
                         </div>
                       </div>
 
-                      {selectedCard === card.id && !card.isRemoved && (
+                      {selectedCard === card.id && !card.isRemoved && !card.isMutantSample && (
                         <div className="absolute inset-0 z-30 flex flex-col gap-1 rounded-lg bg-[#06070A]/98 p-2 backdrop-blur-sm ring-2 ring-[#5B1FAF]/50">
                           <Button
                             size="sm"
@@ -1343,7 +1345,6 @@ export function RunTracker() {
                               convertToMutantSample(card.id)
                             }}
                           >
-                            
                             Mutant Sample
                           </Button>
                           <Button
