@@ -678,6 +678,7 @@ export function RunTracker() {
     setSelectedCard(null)
   }
 
+  
 const removeCard = (cardId: string) => {
   const card = deck.find(c => c.id === cardId)
   if (!card || card.isRemoved || card.cardType === 'forbidden') return
@@ -693,13 +694,17 @@ const removeCard = (cardId: string) => {
   else scaleCost = 70
 
   // Starter/base card tax (+20) if applicable
-  const starterTax = (card.isStartingCard || card.hasNormalEpiphany) && !card.wasConverted ? 20 : 0
+  const starterTax = card.isStartingCard ? 20 : 0
 
   // Total points contributed by the card (base + epiphanies)
   const totalCardPoints = getCardPointValue(card)
 
   // Final removal cost = scaleCost + starterTax - totalCardPoints
-  const removalCost = scaleCost + starterTax - totalCardPoints
+  // Ensure that any card with normal/divine epiphany is fully removed (neutral/monster cards)
+  const removalCost =
+    card.cardType === 'neutral' || card.cardType === 'monster'
+      ? -totalCardPoints + starterTax + scaleCost
+      : scaleCost + starterTax - totalCardPoints
 
   setDeck(deck.map(c =>
     c.id === cardId ? { ...c, isRemoved: true, removalCost } : c
