@@ -1206,6 +1206,9 @@ export function RunTracker() {
                               : "border-[#C41729]/30 bg-gradient-to-br from-[#0A0B0F] to-[#06070A] shadow-[#C41729]/5"
                       }`}
                       onClick={() => {
+                        if (card.isMutantSample) {
+                          return
+                        }
                         if (card.isRemoved) {
                           restoreCard(card.id)
                         } else {
