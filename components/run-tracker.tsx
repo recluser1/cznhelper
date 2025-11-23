@@ -373,6 +373,8 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
       { name: "Finisher Round", image: "/images/character/luke/unique4.png" },
     ],
   },
+  // Duplicate entries for renoa, veronica, mei-lin, orlea, rin, magna, khalipe, luke were removed as they were redundant.
+  // Assuming the first instance is the correct one.
 }
 
 // default images for generic cards
@@ -1243,6 +1245,48 @@ export function RunTracker() {
                             <div className="absolute inset-0 flex items-center justify-center bg-[#0A0B0F] text-xs text-muted-foreground">
                               No image
                             </div>
+                          )}
+
+                          {["amir", "luke", "hugo", "yuki"].includes(selectedCharacter) && (
+                            <img
+                              src="/images/card/order-border.png"
+                              alt="Order border"
+                              className="absolute left-0 top-0 h-full w-auto z-[5] pointer-events-none"
+                            />
+                          )}
+
+                          {["tressa", "rin", "renoa", "rei", "kayron"].includes(selectedCharacter) && (
+                            <img
+                              src="/images/card/void-border.png"
+                              alt="Void border"
+                              className="absolute left-0 top-0 h-full w-auto z-[5] pointer-events-none"
+                            />
+                          )}
+
+                          {["nia", "khalipe", "orlea", "cassius"].includes(selectedCharacter) && (
+                            <img
+                              src="/images/card/instinct-border.png"
+                              alt="Instinct border"
+                              className="absolute left-0 top-0 h-full w-auto z-[5] pointer-events-none"
+                            />
+                          )}
+
+                          {["selena", "lucas", "mei-lin", "maribell", "veronica", "owen"].includes(
+                            selectedCharacter,
+                          ) && (
+                            <img
+                              src="/images/card/passion-border.png"
+                              alt="Passion border"
+                              className="absolute left-0 top-0 h-full w-auto z-[5] pointer-events-none"
+                            />
+                          )}
+
+                          {["magna", "mika", "beryl", "haru"].includes(selectedCharacter) && (
+                            <img
+                              src="/images/card/justice-border.jpg"
+                              alt="Justice border"
+                              className="absolute left-0 top-0 h-full w-auto z-[5] pointer-events-none"
+                            />
                           )}
 
                           {/* Overlay content — z-10 so it sits above the image. gradient to keep text readable */}
