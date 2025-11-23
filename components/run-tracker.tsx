@@ -1271,24 +1271,6 @@ export function RunTracker() {
                             />
                           )}
 
-                          {["selena", "lucas", "mei-lin", "maribell", "veronica", "owen"].includes(
-                            selectedCharacter,
-                          ) && (
-                            <img
-                              src="/images/card/passion-border.png"
-                              alt="Passion border"
-                              className="absolute left-0 top-0 h-full w-auto z-[5] pointer-events-none"
-                            />
-                          )}
-
-                          {["magna", "mika", "beryl", "haru"].includes(selectedCharacter) && (
-                            <img
-                              src="/images/card/justice-border.jpg"
-                              alt="Justice border"
-                              className="absolute left-0 top-0 h-full w-auto z-[5] pointer-events-none"
-                            />
-                          )}
-
                           {/* Overlay content — z-10 so it sits above the image. gradient to keep text readable */}
                           <div className="absolute inset-0 z-0 pointer-events-none flex flex-col justify-between p-4 bg-gradient-to-b from-black/60 via-transparent to-black/70">
                             <div className="space-y-2">
