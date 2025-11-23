@@ -1198,16 +1198,16 @@ export function RunTracker() {
                   {deck.map((card, index) => (
                     <div
                       key={card.id}
-                      className={`group relative aspect-[2/3] cursor-pointer rounded-lg border-2 p-4 transition-all hover:scale-105 ${
-                        selectedCard === card.id ? "border-[#5B1FAF] shadow-lg shadow-[#5B1FAF]/20" : "border-border"
+                      className={`group relative aspect-[2/3] cursor-pointer rounded-lg transition-all hover:scale-105 ${
+                        selectedCard === card.id ? "shadow-lg shadow-[#5B1FAF]/20" : ""
                       } ${card.isRemoved ? "opacity-30 grayscale" : ""} ${
                         card.cardType === "starter"
-                          ? "border-[#1F2127] bg-gradient-to-br from-[#0A0B0F] to-[#06070A]"
+                          ? "bg-gradient-to-br from-[#0A0B0F] to-[#06070A]"
                           : card.cardType === "neutral"
-                            ? "border-[#19F7E1]/20 bg-gradient-to-br from-[#0A0B0F] to-[#06070A] shadow-[#19F7E1]/5"
+                            ? "bg-gradient-to-br from-[#0A0B0F] to-[#06070A] shadow-[#19F7E1]/5"
                             : card.cardType === "monster"
-                              ? "border-[#5B1FAF]/30 bg-gradient-to-br from-[#0A0B0F] to-[#06070A] shadow-[#5B1FAF]/5"
-                              : "border-[#C41729]/30 bg-gradient-to-br from-[#0A0B0F] to-[#06070A] shadow-[#C41729]/5"
+                              ? "bg-gradient-to-br from-[#0A0B0F] to-[#06070A] shadow-[#5B1FAF]/5"
+                              : "bg-gradient-to-br from-[#0A0B0F] to-[#06070A] shadow-[#C41729]/5"
                       }`}
                       onClick={() => {
                         if (card.isMutantSample) {
@@ -1242,7 +1242,7 @@ export function RunTracker() {
                               className="absolute inset-0 h-full w-full object-cover"
                             />
                           ) : (
-                            <div className="absolute inset-0 flex items-center justify-center bg-[#0A0B0F] text-xs text-muted-foreground">
+                            <div className="absolute inset-0 flex items-center justify-center bg-card/50 border-2 border-dashed border-border/30 text-xs text-muted-foreground">
                               No image
                             </div>
                           )}
