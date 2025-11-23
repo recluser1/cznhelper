@@ -1046,7 +1046,8 @@ export function RunTracker() {
             <strong className="font-semibold"></strong> There’s a bug making [Remove] card conversions cost 0 — i.e.
             converting a card to a Mutant Sample or Fresh Meat currently costs 0
             <br />
-            If you converted a card into a [Remove], just don’t remove the card — not removing it will cost 0 when the run end.
+            If you converted a card into a [Remove], just don’t remove the card — not removing it will cost 0 when the
+            run end.
           </div>
         </div>
 
@@ -1227,7 +1228,6 @@ export function RunTracker() {
                         </button>
                       )}
 
-                      {/* REPLACE the existing: <div className="flex h-full flex-col justify-between"> ... </div> */}
                       <div className="flex h-full flex-col">
                         <div className="relative h-full w-full rounded-md overflow-hidden">
                           {card.image ? (
@@ -1244,19 +1244,19 @@ export function RunTracker() {
                           )}
 
                           {/* Overlay content — z-10 so it sits above the image. gradient to keep text readable */}
-                          <div className="absolute inset-0 z-0 pointer-events-none flex flex-col justify-between p-4 bg-gradient-to-t from-black/70 via-transparent/0 to-transparent/0">
+                          <div className="absolute inset-0 z-0 pointer-events-none flex flex-col justify-between p-4 bg-gradient-to-b from-black/60 via-transparent to-black/70">
                             <div className="space-y-2">
                               {card.name && (
                                 <div
-                                  className={`text-sm font-medium leading-tight break-words ${
-                                    card.wasConverted ? "text-muted-foreground/50" : "text-foreground"
+                                  className={`text-base font-medium leading-tight break-words ${
+                                    card.wasConverted ? "text-muted-foreground/50" : "text-white"
                                   }`}
                                 >
                                   {card.name}
                                 </div>
                               )}
 
-                              <div className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
+                              <div className="text-[10px] font-bold uppercase tracking-wide text-white">
                                 {card.cardType === "starter" ? (index < 4 ? "Starter" : "Unique") : card.cardType}
                               </div>
 
@@ -1264,7 +1264,11 @@ export function RunTracker() {
                                 {card.hasNormalEpiphany && (
                                   <Badge
                                     variant="outline"
-                                    className="h-5 text-[10px] border-[#5B1FAF]/30 bg-[#5B1FAF]/10 text-[#5B1FAF]"
+                                    className="h-5 text-[10px] border-[#5B1FAF]/50 bg-[#5B1FAF]/30 text-white font-semibold"
+                                    style={{
+                                      textShadow:
+                                        "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0 0 3px #000",
+                                    }}
                                   >
                                     Epiphany
                                   </Badge>
@@ -1272,7 +1276,11 @@ export function RunTracker() {
                                 {card.hasDivineEpiphany && (
                                   <Badge
                                     variant="outline"
-                                    className="h-5 text-[10px] border-[#19F7E1]/30 bg-[#19F7E1]/10 text-[#19F7E1]"
+                                    className="h-5 text-[10px] border-[#19F7E1]/50 bg-[#19F7E1]/30 text-white font-semibold"
+                                    style={{
+                                      textShadow:
+                                        "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0 0 3px #000",
+                                    }}
                                   >
                                     Divine Epiphany
                                   </Badge>
@@ -1281,7 +1289,7 @@ export function RunTracker() {
                             </div>
 
                             <div className="text-right">
-                              <div className="text-2xl font-bold text-[#5B1FAF]">{getCardPointValue(card)}</div>
+                              <div className="text-2xl font-bold text-gray-300">{getCardPointValue(card)}</div>
                             </div>
                           </div>
                         </div>
