@@ -1123,22 +1123,24 @@ export function RunTracker() {
                     />
                   </div>
                   {percentage > 100 && (
-                    <p className="text-xs text-[#C41729] font-semibold">Over limit by {totalPoints - limit} points!</p>
+                    // CHANGE: Changed from harsh #C41729 to softer red-400
+                    <p className="text-xs text-red-400 font-semibold">Over limit by {totalPoints - limit} points!</p>
                   )}
                 </div>
 
                 <div className="grid grid-cols-3 gap-4 rounded-lg border border-border bg-card p-3 text-center text-sm">
                   <div>
                     <div className="text-xs text-muted-foreground">Removals</div>
-                    <div className="font-bold text-[#19F7E1]">{removalCount}</div>
+                    {/* CHANGE: Changed from harsh #19F7E1 to softer cyan-400 */}
+                    <div className="font-bold text-cyan-400">{removalCount}</div>
                   </div>
                   <div>
                     <div className="text-xs text-muted-foreground">Duplications</div>
-                    <div className="font-bold text-[#19F7E1]">{duplicationCount}</div>
+                    <div className="font-bold text-cyan-400">{duplicationCount}</div>
                   </div>
                   <div>
                     <div className="text-xs text-muted-foreground">Conversions</div>
-                    <div className="font-bold text-[#19F7E1]">{conversionCount}</div>
+                    <div className="font-bold text-cyan-400">{conversionCount}</div>
                   </div>
                 </div>
               </CardContent>
@@ -1463,7 +1465,8 @@ export function RunTracker() {
                     <div className="grid gap-3">
                       <Button
                         variant="outline"
-                        className="h-20 border-[#19F7E1]/20 bg-[#0A0B0F] text-[#C3C7D0] hover:border-[#19F7E1]/40 hover:bg-[#19F7E1]/10 hover:text-[#19F7E1]"
+                        // CHANGE: Changed from harsh #19F7E1 to softer cyan-400
+                        className="h-20 border-cyan-400/20 bg-[#0A0B0F] text-[#C3C7D0] hover:border-cyan-400/40 hover:bg-cyan-400/10 hover:text-cyan-400"
                         onClick={() => addNewCard("neutral")}
                       >
                         <div className="text-center">
@@ -1473,7 +1476,8 @@ export function RunTracker() {
                       </Button>
                       <Button
                         variant="outline"
-                        className="h-20 border-[#5B1FAF]/20 bg-[#0A0B0F] text-[#C3C7D0] hover:border-[#5B1FAF]/40 hover:bg-[#5B1FAF]/10 hover:text-[#5B1FAF]"
+                        // CHANGE: Changed from harsh #5B1FAF to softer purple-400
+                        className="h-20 border-purple-400/20 bg-[#0A0B0F] text-[#C3C7D0] hover:border-purple-400/40 hover:bg-purple-400/10 hover:text-purple-400"
                         onClick={() => addNewCard("monster")}
                       >
                         <div className="text-center">
@@ -1508,7 +1512,8 @@ export function RunTracker() {
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Tier</span>
-                    <span className="font-bold text-[#19F7E1]">{nightmareMode ? `${tier + 1} (Nightmare)` : tier}</span>
+                    {/* CHANGE: Changed from harsh #19F7E1 to softer cyan-400 */}
+                    <span className="font-bold text-cyan-400">{nightmareMode ? `${tier + 1} (Nightmare)` : tier}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Point Limit</span>
@@ -1516,15 +1521,14 @@ export function RunTracker() {
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Points Used</span>
-                    <span className={`font-bold ${percentage > 100 ? "text-[#C41729]" : "text-[#19F7E1]"}`}>
+                    {/* CHANGE: Changed from harsh colors to softer red-400 and cyan-400 */}
+                    <span className={`font-bold ${percentage > 100 ? "text-red-400" : "text-cyan-400"}`}>
                       {totalPoints}
                     </span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Remaining</span>
-                    <span className={`font-bold ${percentage > 100 ? "text-[#C41729]" : ""}`}>
-                      {limit - totalPoints}
-                    </span>
+                    <span className={`font-bold ${percentage > 100 ? "text-red-400" : ""}`}>{limit - totalPoints}</span>
                   </div>
                 </div>
 
@@ -1550,11 +1554,13 @@ export function RunTracker() {
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Epiphanies</span>
-                    <span className="font-bold text-[#5B1FAF]">{deck.filter((c) => c.hasNormalEpiphany).length}</span>
+                    {/* CHANGE: Changed from harsh #5B1FAF to softer purple-400 */}
+                    <span className="font-bold text-purple-400">{deck.filter((c) => c.hasNormalEpiphany).length}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Divine Epiphanies</span>
-                    <span className="font-bold text-[#19F7E1]">{deck.filter((c) => c.hasDivineEpiphany).length}</span>
+                    {/* CHANGE: Changed from harsh #19F7E1 to softer cyan-400 */}
+                    <span className="font-bold text-cyan-400">{deck.filter((c) => c.hasDivineEpiphany).length}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Conversions</span>
