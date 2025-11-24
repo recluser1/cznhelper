@@ -1123,25 +1123,8 @@ export function RunTracker() {
                     />
                   </div>
                   {percentage > 100 && (
-                    // CHANGE: Changed from harsh #C41729 to softer red-400
                     <p className="text-xs text-red-400 font-semibold">Over limit by {totalPoints - limit} points!</p>
                   )}
-                </div>
-
-                <div className="grid grid-cols-3 gap-4 rounded-lg border border-border bg-card p-3 text-center text-sm">
-                  <div>
-                    <div className="text-xs text-muted-foreground">Removals</div>
-                    {/* CHANGE: Changed from harsh #19F7E1 to softer cyan-400 */}
-                    <div className="font-bold text-cyan-400">{removalCount}</div>
-                  </div>
-                  <div>
-                    <div className="text-xs text-muted-foreground">Duplications</div>
-                    <div className="font-bold text-cyan-400">{duplicationCount}</div>
-                  </div>
-                  <div>
-                    <div className="text-xs text-muted-foreground">Conversions</div>
-                    <div className="font-bold text-cyan-400">{conversionCount}</div>
-                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -1368,11 +1351,11 @@ export function RunTracker() {
                       </div>
 
                       {selectedCard === card.id && !card.isRemoved && !card.isMutantSample && (
-                        <div className="absolute inset-0 z-30 flex flex-col gap-1 rounded-lg bg-[#06070A]/98 p-2 backdrop-blur-sm ring-2 ring-[#5B1FAF]/50">
+                        <div className="absolute inset-0 z-30 flex flex-col gap-1 rounded-lg bg-[#06070A]/98 p-2 backdrop-blur-sm ring-2 ring-purple-400/50">
                           <Button
                             size="sm"
                             variant="outline"
-                            className="h-8 text-xs border-[#5B1FAF]/30 hover:bg-[#5B1FAF]/20 hover:border-[#5B1FAF]/50 bg-transparent"
+                            className="h-8 text-xs border-border hover:bg-secondary bg-transparent"
                             disabled={card.hasDivineEpiphany || card.cardType === "forbidden"}
                             onClick={(e) => {
                               e.stopPropagation()
@@ -1384,7 +1367,7 @@ export function RunTracker() {
                           <Button
                             size="sm"
                             variant="outline"
-                            className="h-8 text-xs border-[#19F7E1]/30 hover:bg-[#19F7E1]/20 hover:border-[#19F7E1]/50 bg-transparent"
+                            className="h-8 text-xs border-border hover:bg-secondary bg-transparent"
                             disabled={card.hasNormalEpiphany || card.cardType === "forbidden"}
                             onClick={(e) => {
                               e.stopPropagation()
@@ -1420,7 +1403,7 @@ export function RunTracker() {
                           <Button
                             size="sm"
                             variant="outline"
-                            className="h-8 text-xs border-purple-500/50 bg-purple-500/10 hover:bg-purple-500/20"
+                            className="h-8 text-xs border-purple-400/50 bg-purple-400/10 hover:bg-purple-400/20"
                             disabled={card.cardType === "forbidden"}
                             onClick={(e) => {
                               e.stopPropagation()
@@ -1432,7 +1415,7 @@ export function RunTracker() {
                           <Button
                             size="sm"
                             variant="destructive"
-                            className="h-8 text-xs bg-[#C41729]/20 border-[#C41729]/50 hover:bg-[#C41729]/30"
+                            className="h-8 text-xs bg-red-400/20 border-red-400/50 hover:bg-red-400/30"
                             disabled={card.cardType === "forbidden"}
                             onClick={(e) => {
                               e.stopPropagation()
@@ -1516,19 +1499,11 @@ export function RunTracker() {
                     <span className="font-bold text-cyan-400">{nightmareMode ? `${tier + 1} (Nightmare)` : tier}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Point Limit</span>
-                    <span className="font-bold">{limit}</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Points Used</span>
+                    <span className="text-muted-foreground">Points</span>
                     {/* CHANGE: Changed from harsh colors to softer red-400 and cyan-400 */}
                     <span className={`font-bold ${percentage > 100 ? "text-red-400" : "text-cyan-400"}`}>
-                      {totalPoints}
+                      {totalPoints} / {limit}
                     </span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Remaining</span>
-                    <span className={`font-bold ${percentage > 100 ? "text-red-400" : ""}`}>{limit - totalPoints}</span>
                   </div>
                 </div>
 
@@ -1540,10 +1515,6 @@ export function RunTracker() {
                     <span className="font-bold">{deck.filter((c) => !c.isRemoved).length}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Removed Cards</span>
-                    <span className="font-bold">{deck.filter((c) => c.isRemoved).length}</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Total Cards</span>
                     <span className="font-bold">{deck.length}</span>
                   </div>
@@ -1552,19 +1523,30 @@ export function RunTracker() {
                 <div className="h-px bg-border" />
 
                 <div className="space-y-2">
+                  <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                    Modifications
+                  </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Epiphanies</span>
+                    <span className="text-muted-foreground">Cards Removed</span>
+                    <span className="font-bold">{removalCount}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Cards Duplicated</span>
+                    <span className="font-bold">{duplicationCount}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Cards Converted</span>
+                    <span className="font-bold">{conversionCount}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Normal Epiphanies</span>
                     {/* CHANGE: Changed from harsh #5B1FAF to softer purple-400 */}
-                    <span className="font-bold text-purple-400">{deck.filter((c) => c.hasNormalEpiphany).length}</span>
+                    <span className="font-bold">{deck.filter((c) => c.hasNormalEpiphany).length}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Divine Epiphanies</span>
                     {/* CHANGE: Changed from harsh #19F7E1 to softer cyan-400 */}
-                    <span className="font-bold text-cyan-400">{deck.filter((c) => c.hasDivineEpiphany).length}</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Conversions</span>
-                    <span className="font-bold">{conversionCount}</span>
+                    <span className="font-bold">{deck.filter((c) => c.hasDivineEpiphany).length}</span>
                   </div>
                 </div>
               </CardContent>
