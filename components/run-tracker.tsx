@@ -438,9 +438,9 @@ const formatCharacterName = (key: string) =>
     .join(" ")
 
 export function RunTracker() {
-  const [character, setCharacter] = useState("") // Renamed from selectedCharacter
+  const [character, setCharacter] = useState("")
   const [tier, setTier] = useState(1)
-  const [nightmareMode, setNightmareMode] = useState(false) // Renamed from isNightmare
+  const [nightmareMode, setNightmareMode] = useState(false)
   const [selectedCard, setSelectedCard] = useState<string | null>(null)
   const [showAddCard, setShowAddCard] = useState(false)
   const [removalCount, setRemovalCount] = useState(0)
@@ -448,7 +448,7 @@ export function RunTracker() {
   const [conversionCount, setConversionCount] = useState(0)
   const [totalPoints, setTotalPoints] = useState(0)
   const [actionHistory, setActionHistory] = useState<Action[]>([])
-  const [deck, setDeck] = useState<DeckCard[]>([]) // Moved state initialization up
+  const [deck, setDeck] = useState<DeckCard[]>([])
 
   useEffect(() => {
     const savedState = localStorage.getItem("czn-run-tracker")
@@ -457,14 +457,14 @@ export function RunTracker() {
         const parsed = JSON.parse(savedState)
         setCharacter(parsed.character || "")
         setTier(parsed.tier || 1)
-        setNightmareMode(parsed.isNightmare || false) // Use setNightmareMode
+        setNightmareMode(parsed.isNightmare || false)
         setDeck(parsed.deck || [])
         setActionHistory(parsed.actionHistory || [])
         setRemovalCount(parsed.removalCount || 0)
         setDuplicationCount(parsed.duplicationCount || 0)
         setConversionCount(parsed.conversionCount || 0)
-      } catch (e) {
-        console.error("Failed to parse saved state:", e)
+      } catch (error) {
+        console.error("Failed to parse saved state:", error)
       }
     }
   }, [])
@@ -475,7 +475,7 @@ export function RunTracker() {
       const state = {
         character,
         tier,
-        isNightmare: nightmareMode, // Use nightmareMode
+        isNightmare: nightmareMode,
         deck,
         actionHistory,
         removalCount,
@@ -488,35 +488,61 @@ export function RunTracker() {
 
   const handleCharacterChange = (character: string) => {
     const actualCharacter = character === "none" ? "" : character
-    setCharacter(actualCharacter || "none") // Use setCharacter
+    setCharacter(actualCharacter || "none")
 
     if (!actualCharacter) {
-      // Reset to empty names/images if no character selected
-      setDeck((prev) =>
-        prev.map((card) => ({
-          ...card,
-          name: "",
-          image: undefined,
-        })),
-      )
+      // Reset to empty deck if no character selected
+      setDeck([])
     } else {
-      // Update deck with character's card names and images
+      // Get character data
       const characterData = CHARACTER_CARDS[actualCharacter]
       if (!characterData) return
 
-      setDeck((prev) =>
-        prev.map((card, index) => {
-          const isStarter = index < 4
-          const source: CardEntry | undefined = isStarter
-            ? characterData.starter[index]
-            : characterData.unique[index - 4]
-          return {
-            ...card,
-            name: source?.name ?? "",
-            image: source?.image,
-          }
-        }),
-      )
+      // If deck is empty, create initial 8-card deck
+      if (deck.length === 0) {
+        const initialDeck: DeckCard[] = [
+          // 4 starter cards
+          ...characterData.starter.map((card, index) => ({
+            id: String(index + 1),
+            name: card.name,
+            image: card.image,
+            cardType: "starter" as CardType,
+            isStartingCard: true,
+            hasNormalEpiphany: false,
+            hasDivineEpiphany: false,
+            isRemoved: false,
+            wasConverted: false,
+          })),
+          // 4 unique cards
+          ...characterData.unique.map((card, index) => ({
+            id: String(index + 5),
+            name: card.name,
+            image: card.image,
+            cardType: "starter" as CardType, // Defaulting to starter, might need adjustment if unique cards have different types
+            isStartingCard: true,
+            hasNormalEpiphany: false,
+            hasDivineEpiphany: false,
+            isRemoved: false,
+            wasConverted: false,
+          })),
+        ]
+        setDeck(initialDeck)
+      } else {
+        // Update existing deck with character's card names and images
+        setDeck((prev) =>
+          prev.map((card, index) => {
+            const isStarter = index < 4
+            const source: CardEntry | undefined = isStarter
+              ? characterData.starter[index]
+              : characterData.unique[index - 4]
+            return {
+              ...card,
+              name: source?.name ?? "",
+              image: source?.image,
+            }
+          }),
+        )
+      }
     }
   }
 
