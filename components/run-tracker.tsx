@@ -448,7 +448,21 @@ export function RunTracker() {
   const [conversionCount, setConversionCount] = useState(0)
   const [totalPoints, setTotalPoints] = useState(0)
   const [actionHistory, setActionHistory] = useState<Action[]>([])
-  const [deck, setDeck] = useState<DeckCard[]>([])
+  const [deck, setDeck] = useState<DeckCard[]>(() =>
+    Array(8)
+      .fill(null)
+      .map((_, index) => ({
+        id: String(index + 1),
+        name: "",
+        image: DEFAULT_CARD_IMAGES.placeholder,
+        cardType: "starter" as const,
+        isStartingCard: true,
+        hasNormalEpiphany: false,
+        hasDivineEpiphany: false,
+        isRemoved: false,
+        wasConverted: false,
+      })),
+  )
 
   useEffect(() => {
     const savedState = localStorage.getItem("czn-run-tracker")
@@ -486,12 +500,10 @@ export function RunTracker() {
     }
   }, [character, tier, nightmareMode, deck, actionHistory, removalCount, duplicationCount, conversionCount])
 
-  const handleCharacterChange = (character: string) => {
-    const actualCharacter = character === "none" ? "" : character
-    setCharacter(actualCharacter || "none")
+  const handleCharacterChange = (value: string) => {
+    setCharacter(value)
 
-    if (!actualCharacter) {
-      // Show 8 placeholder cards
+    if (!value) {
       setDeck([
         ...Array(8)
           .fill(null)
@@ -509,7 +521,7 @@ export function RunTracker() {
       ])
     } else {
       // Get character data
-      const characterData = CHARACTER_CARDS[actualCharacter]
+      const characterData = CHARACTER_CARDS[value]
       if (!characterData) return
 
       // If deck is empty, create initial 8-card deck
@@ -872,11 +884,10 @@ export function RunTracker() {
   }
 
   const resetDeck = () => {
-    const characterData = character !== "none" ? CHARACTER_CARDS[character] : null
+    if (!character) return
 
-    if (!characterData) {
-      return
-    }
+    const characterData = CHARACTER_CARDS[character]
+    if (!characterData) return
 
     setDeck([
       {
@@ -1153,13 +1164,10 @@ export function RunTracker() {
                 <div className="space-y-2">
                   <Label>Character</Label>
                   <Select value={character} onValueChange={handleCharacterChange}>
-                    {" "}
-                    {/* Use character state */}
                     <SelectTrigger>
                       <SelectValue placeholder="Select a character..." />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="none">None</SelectItem>
                       {Object.keys(CHARACTER_CARDS)
                         .sort()
                         .map((char) => (

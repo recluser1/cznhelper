@@ -287,6 +287,7 @@ export default function CharacterGuidesPage() {
                       alt={character.name}
                       fill
                       className="object-cover"
+                      unoptimized
                     />
                   </div>
 
