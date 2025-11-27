@@ -280,64 +280,13 @@ export default function CharacterGuidesPage() {
                   className="group relative aspect-[3/4] rounded-lg overflow-hidden border-2 border-border bg-card hover:border-purple-400 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-400/20"
                 >
                   <div className="absolute inset-0">
-                    {character.id === "rin" && (
-                      <Image src="/images/characters/rinhalf.webp" alt={character.name} fill className="object-cover" />
-                    )}
-                    {character.id === "amir" && (
-                      <Image src="/images/amirhalf.webp" alt={character.name} fill className="object-cover" />
-                    )}
-                    {character.id === "beryl" && (
-                      <Image src="/images/berylhalf.webp" alt={character.name} fill className="object-cover" />
-                    )}
-                    {character.id === "cassius" && (
-                      <Image src="/images/cassiushalf.webp" alt={character.name} fill className="object-cover" />
-                    )}
-                    {character.id === "haru" && (
-                      <Image src="/images/haruhalf.webp" alt={character.name} fill className="object-cover" />
-                    )}
-                    {character.id === "khalipe" && (
-                      <Image src="/images/khalipehalf.webp" alt={character.name} fill className="object-cover" />
-                    )}
-                    {character.id === "hugo" && (
-                      <Image src="/images/hugohalf.webp" alt={character.name} fill className="object-cover" />
-                    )}
-                    {character.id === "magna" && (
-                      <Image src="/images/magnahalf.webp" alt={character.name} fill className="object-cover" />
-                    )}
-                    {character.id === "lucas" && (
-                      <Image src="/images/lucashalf.webp" alt={character.name} fill className="object-cover" />
-                    )}
-                    {character.id === "luke" && (
-                      <Image src="/images/lukehalf.webp" alt={character.name} fill className="object-cover" />
-                    )}
-                    {character.id === "maribell" && (
-                      <Image src="/images/maribellhalf.webp" alt={character.name} fill className="object-cover" />
-                    )}
-                    {character.id === "mika" && (
-                      <Image src="/images/mikahalf.webp" alt={character.name} fill className="object-cover" />
-                    )}
-                    {character.id === "mei-lin" && (
-                      <Image src="/images/meilinhalf.webp" alt={character.name} fill className="object-cover" />
-                    )}
-                    {![
-                      "rin",
-                      "amir",
-                      "beryl",
-                      "cassius",
-                      "haru",
-                      "khalipe",
-                      "hugo",
-                      "magna",
-                      "lucas",
-                      "luke",
-                      "maribell",
-                      "mika",
-                      "mei-lin",
-                    ].includes(character.id) && (
-                      <div className="w-full h-full bg-gradient-to-br from-gray-800/50 to-gray-900/50 flex items-center justify-center">
-                        <span className="text-4xl text-muted-foreground/30">?</span>
-                      </div>
-                    )}
+                    {/* Update: Remove hyphen from filename */}
+                    <Image
+                      src={`/images/characters/${character.id}half.webp`}
+                      alt={character.name}
+                      fill
+                      className="object-cover"
+                    />
                   </div>
 
                   <div className="absolute top-2 left-2 flex flex-col gap-1">

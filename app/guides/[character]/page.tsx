@@ -321,149 +321,15 @@ export default async function CharacterGuidePage({
           <div className="flex-1">
             <div className="rounded-lg border border-border bg-card overflow-hidden">
               {/* Full Character Artwork */}
-              {character === "rin" && (
-                <div className="relative w-full h-[500px] bg-gradient-to-br from-purple-900/20 to-black/40 flex items-center justify-center">
-                  <Image
-                    src="/images/characters/rin-full.webp"
-                    alt={characterName}
-                    width={400}
-                    height={500}
-                    className="object-contain"
-                  />
-                </div>
-              )}
-              {character === "amir" && (
-                <div className="relative w-full h-[500px] bg-gradient-to-br from-green-900/20 to-black/40 flex items-center justify-center">
-                  <Image
-                    src="/images/amircrop.webp"
-                    alt={characterName}
-                    width={400}
-                    height={500}
-                    className="object-contain"
-                  />
-                </div>
-              )}
-              {character === "beryl" && (
-                <div className="relative w-full h-[500px] bg-gradient-to-br from-blue-900/20 to-black/40 flex items-center justify-center">
-                  <Image
-                    src="/images/berylcrop.webp"
-                    alt={characterName}
-                    width={400}
-                    height={500}
-                    className="object-contain"
-                  />
-                </div>
-              )}
-              {character === "cassius" && (
-                <div className="relative w-full h-[500px] bg-gradient-to-br from-orange-900/20 to-black/40 flex items-center justify-center">
-                  <Image
-                    src="/images/cassiuscrop.webp"
-                    alt={characterName}
-                    width={400}
-                    height={500}
-                    className="object-contain"
-                  />
-                </div>
-              )}
-              {character === "haru" && (
-                <div className="relative w-full h-[500px] bg-gradient-to-br from-blue-900/20 to-black/40 flex items-center justify-center">
-                  <Image
-                    src="/images/harucrop.webp"
-                    alt={characterName}
-                    width={400}
-                    height={500}
-                    className="object-contain"
-                  />
-                </div>
-              )}
-              {character === "khalipe" && (
-                <div className="relative w-full h-[500px] bg-gradient-to-br from-orange-900/20 to-black/40 flex items-center justify-center">
-                  <Image
-                    src="/images/khalipecrop.webp"
-                    alt={characterName}
-                    width={400}
-                    height={500}
-                    className="object-contain"
-                  />
-                </div>
-              )}
-              {character === "hugo" && (
-                <div className="relative w-full h-[500px] bg-gradient-to-br from-green-900/20 to-black/40 flex items-center justify-center">
-                  <Image
-                    src="/images/hugocrop.webp"
-                    alt={characterName}
-                    width={400}
-                    height={500}
-                    className="object-contain"
-                  />
-                </div>
-              )}
-              {character === "magna" && (
-                <div className="relative w-full h-[500px] bg-gradient-to-br from-blue-900/20 to-black/40 flex items-center justify-center">
-                  <Image
-                    src="/images/magnacrop.webp"
-                    alt={characterName}
-                    width={400}
-                    height={500}
-                    className="object-contain"
-                  />
-                </div>
-              )}
-              {character === "lucas" && (
-                <div className="relative w-full h-[500px] bg-gradient-to-br from-red-900/20 to-black/40 flex items-center justify-center">
-                  <Image
-                    src="/images/lucascrop.webp"
-                    alt={characterName}
-                    width={400}
-                    height={500}
-                    className="object-contain"
-                  />
-                </div>
-              )}
-              {character === "luke" && (
-                <div className="relative w-full h-[500px] bg-gradient-to-br from-green-900/20 to-black/40 flex items-center justify-center">
-                  <Image
-                    src="/images/lukecrop.webp"
-                    alt={characterName}
-                    width={400}
-                    height={500}
-                    className="object-contain"
-                  />
-                </div>
-              )}
-              {character === "maribell" && (
-                <div className="relative w-full h-[500px] bg-gradient-to-br from-red-900/20 to-black/40 flex items-center justify-center">
-                  <Image
-                    src="/images/maribellcrop.webp"
-                    alt={characterName}
-                    width={400}
-                    height={500}
-                    className="object-contain"
-                  />
-                </div>
-              )}
-              {character === "mika" && (
-                <div className="relative w-full h-[500px] bg-gradient-to-br from-blue-900/20 to-black/40 flex items-center justify-center">
-                  <Image
-                    src="/images/mikacrop.webp"
-                    alt={characterName}
-                    width={400}
-                    height={500}
-                    className="object-contain"
-                  />
-                </div>
-              )}
-              {character === "mei-lin" && (
-                <div className="relative w-full h-[500px] bg-gradient-to-br from-red-900/20 to-black/40 flex items-center justify-center">
-                  <Image
-                    src="/images/meilincrop.webp"
-                    alt={characterName}
-                    width={400}
-                    height={500}
-                    className="object-contain"
-                  />
-                </div>
-              )}
+              <div className="relative w-full h-[500px] bg-gradient-to-br from-purple-900/20 to-black/40 flex items-center justify-center">
+                <Image
+                  src={`/images/characters/${character.replace(/-/g, "")}.webp`}
+                  alt={characterName}
+                  width={400}
+                  height={500}
+                  className="object-contain"
+                />
+              </div>
 
               {/* Guide Content Sections */}
               <div className="p-8 space-y-8">
