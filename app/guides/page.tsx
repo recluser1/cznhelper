@@ -245,13 +245,7 @@ export default function CharacterGuidesPage() {
                   selectedFaction === faction.id ? faction.color : "bg-card hover:bg-card/80"
                 }`}
               >
-                <Image
-                  src={faction.icon || "/placeholder.svg"}
-                  alt={faction.name}
-                  width={16}
-                  height={16}
-                  className="opacity-70"
-                />
+                <Image src={faction.icon || "/placeholder.svg"} alt={faction.name} width={20} height={20} unoptimized />
                 {faction.name}
               </Button>
             ))}
@@ -270,13 +264,7 @@ export default function CharacterGuidesPage() {
                     : "bg-card hover:bg-card/80"
                 }`}
               >
-                <Image
-                  src={job.icon || "/placeholder.svg"}
-                  alt={job.name}
-                  width={16}
-                  height={16}
-                  className="opacity-70"
-                />
+                <Image src={job.icon || "/placeholder.svg"} alt={job.name} width={20} height={20} unoptimized />
                 {job.name}
               </Button>
             ))}
@@ -294,7 +282,6 @@ export default function CharacterGuidesPage() {
                   className="group relative aspect-[3/4] rounded-lg overflow-hidden border-2 border-border bg-card hover:border-purple-400 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-400/20"
                 >
                   <div className="absolute inset-0">
-                    {/* Update: Remove hyphen from filename */}
                     <Image
                       src={`/images/characters/${character.id}half.webp`}
                       alt={character.name}
@@ -306,13 +293,7 @@ export default function CharacterGuidesPage() {
                   <div className="absolute top-2 left-2 flex flex-col gap-1">
                     <div className="w-9 h-9 rounded-md bg-black/70 backdrop-blur-sm border border-white/20 flex items-center justify-center p-1.5">
                       {job && (
-                        <Image
-                          src={job.icon || "/placeholder.svg"}
-                          alt={job.name}
-                          width={22}
-                          height={22}
-                          className="opacity-90 brightness-200"
-                        />
+                        <Image src={job.icon || "/placeholder.svg"} alt={job.name} width={24} height={24} unoptimized />
                       )}
                     </div>
                     <div className="w-9 h-9 rounded-md bg-black/70 backdrop-blur-sm border border-white/20 flex items-center justify-center p-1.5">
@@ -320,9 +301,9 @@ export default function CharacterGuidesPage() {
                         <Image
                           src={faction.icon || "/placeholder.svg"}
                           alt={faction.name}
-                          width={22}
-                          height={22}
-                          className="opacity-90 brightness-200"
+                          width={24}
+                          height={24}
+                          unoptimized
                         />
                       )}
                     </div>

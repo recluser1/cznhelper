@@ -491,8 +491,22 @@ export function RunTracker() {
     setCharacter(actualCharacter || "none")
 
     if (!actualCharacter) {
-      // Reset to empty deck if no character selected
-      setDeck([])
+      // Show 8 placeholder cards
+      setDeck([
+        ...Array(8)
+          .fill(null)
+          .map((_, index) => ({
+            id: String(index + 1),
+            name: "",
+            image: DEFAULT_CARD_IMAGES.placeholder,
+            cardType: "starter" as const,
+            isStartingCard: true,
+            hasNormalEpiphany: false,
+            hasDivineEpiphany: false,
+            isRemoved: false,
+            wasConverted: false,
+          })),
+      ])
     } else {
       // Get character data
       const characterData = CHARACTER_CARDS[actualCharacter]
@@ -858,7 +872,11 @@ export function RunTracker() {
   }
 
   const resetDeck = () => {
-    const characterData = character !== "none" ? CHARACTER_CARDS[character] : null // Use character state
+    const characterData = character !== "none" ? CHARACTER_CARDS[character] : null
+
+    if (!characterData) {
+      return
+    }
 
     setDeck([
       {
