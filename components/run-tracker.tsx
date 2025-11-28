@@ -451,7 +451,7 @@ export function RunTracker() {
   const [deck, setDeck] = useState<DeckCard[]>([])
 
   useEffect(() => {
-    const savedState = localStorage.getItem("czn-run-tracker")
+    const savedState = sessionStorage.getItem("czn-run-tracker")
     if (savedState) {
       try {
         const parsed = JSON.parse(savedState)
@@ -495,7 +495,7 @@ export function RunTracker() {
         duplicationCount,
         conversionCount,
       }
-      localStorage.setItem("czn-run-tracker", JSON.stringify(state))
+      sessionStorage.setItem("czn-run-tracker", JSON.stringify(state))
     }
   }, [character, tier, nightmareMode, deck, actionHistory, removalCount, duplicationCount, conversionCount])
 
