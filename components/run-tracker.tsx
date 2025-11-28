@@ -17,7 +17,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import Image from "next/image" // Import Image from next/image
 
 /**
  * Inline CHARACTER_CARDS with images (option 2).
@@ -496,7 +495,7 @@ export function RunTracker() {
         duplicationCount,
         conversionCount,
       }
-      localStorage.setItem("czn-run-tracker", JSON.stringify(state))
+      localStorage.setItem("czn-run-tracker", JSON.JSON.stringify(state))
     }
   }, [character, tier, nightmareMode, deck, actionHistory, removalCount, duplicationCount, conversionCount])
 
@@ -1221,17 +1220,22 @@ export function RunTracker() {
                         {/* Card image - position relative for proper stacking */}
                         <div className="relative flex-1 overflow-hidden rounded-t-lg">
                           {card.image === DEFAULT_CARD_IMAGES.placeholder || card.image === "none" ? (
-                            <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-slate-900 to-black" />
+                            <div className="absolute inset-0 bg-gradient-to-b from-slate-800/80 to-slate-950" />
                           ) : (
-                            <Image
+                            <img
                               src={card.image || "/placeholder.svg"}
                               alt={card.name || "Card"}
-                              fill
-                              className="object-cover"
-                              unoptimized
+                              className="absolute inset-0 w-full h-full object-cover"
                               onError={(e) => {
                                 const target = e.target as HTMLImageElement
-                                target.src = "/placeholder.svg?height=300&width=200"
+                                target.style.display = "none"
+                                const parent = target.parentElement
+                                if (parent) {
+                                  const fallbackDiv = document.createElement("div")
+                                  fallbackDiv.className =
+                                    "absolute inset-0 bg-gradient-to-b from-slate-800/80 to-slate-950"
+                                  parent.appendChild(fallbackDiv)
+                                }
                               }}
                             />
                           )}

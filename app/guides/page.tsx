@@ -244,16 +244,18 @@ export default function CharacterGuidesPage() {
                   selectedFaction === faction.id ? faction.color : "bg-card hover:bg-card/80"
                 }`}
               >
-                <img
-                  src={faction.icon || "/placeholder.svg"}
-                  alt={faction.name}
-                  width={20}
-                  height={20}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement
-                    target.style.display = "none"
-                  }}
-                />
+                {faction.icon && faction.icon !== "/placeholder.svg" && (
+                  <img
+                    src={faction.icon || "/placeholder.svg"}
+                    alt=""
+                    width={20}
+                    height={20}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement
+                      target.style.display = "none"
+                    }}
+                  />
+                )}
                 {faction.name}
               </Button>
             ))}
@@ -272,16 +274,18 @@ export default function CharacterGuidesPage() {
                     : "bg-card hover:bg-card/80"
                 }`}
               >
-                <img
-                  src={job.icon || "/placeholder.svg"}
-                  alt={job.name}
-                  width={20}
-                  height={20}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement
-                    target.src = "/placeholder.svg?height=20&width=20"
-                  }}
-                />
+                {job.icon && job.icon !== "/placeholder.svg" && (
+                  <img
+                    src={job.icon || "/placeholder.svg"}
+                    alt=""
+                    width={20}
+                    height={20}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement
+                      target.style.display = "none"
+                    }}
+                  />
+                )}
                 {job.name}
               </Button>
             ))}
