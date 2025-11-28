@@ -495,7 +495,8 @@ export function RunTracker() {
         duplicationCount,
         conversionCount,
       }
-      localStorage.setItem("czn-run-tracker", JSON.JSON.stringify(state))
+      // CHANGE: Use JSON.stringify correctly
+      localStorage.setItem("czn-run-tracker", JSON.stringify(state))
     }
   }, [character, tier, nightmareMode, deck, actionHistory, removalCount, duplicationCount, conversionCount])
 
@@ -1357,7 +1358,7 @@ export function RunTracker() {
                       </div>
 
                       {selectedCard === card.id && !card.isRemoved && !card.isMutantSample && (
-                        <div className="absolute inset-0 z-30 flex flex-col gap-1 rounded-lg bg-[#06070A]/98 p-2 backdrop-blur-sm ring-2 ring-purple-400/50">
+                        <div className="absolute inset-0 z-30 flex flex-col gap-1 rounded-lg bg-[#0A0B0F]/98 p-2 backdrop-blur-sm ring-2 ring-purple-400/50">
                           <Button
                             size="sm"
                             variant="outline"
