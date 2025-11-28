@@ -116,6 +116,17 @@ export default function CharacterGuidesPage() {
     return matchesSearch && matchesJob && matchesFaction && matchesRarity
   })
 
+  console.log("[v0] Total characters:", characters.length)
+  console.log("[v0] Filtered characters:", filteredCharacters.length)
+  console.log(
+    "[v0] Tressa in filtered?",
+    filteredCharacters.find((c) => c.id === "tressa"),
+  )
+  console.log(
+    "[v0] Yuki in filtered?",
+    filteredCharacters.find((c) => c.id === "yuki"),
+  )
+
   const handleJobFilter = (jobId: string) => {
     setSelectedJob(selectedJob === jobId ? null : jobId)
   }
@@ -274,6 +285,9 @@ export default function CharacterGuidesPage() {
               const job = jobTypes.find((j) => j.id === character.job)
               const faction = factionTypes.find((f) => f.id === character.faction)
 
+              const imagePath = `/images/characters/${character.id}half.webp`
+              console.log(`[v0] Rendering ${character.name} with image:`, imagePath)
+
               return (
                 <Link
                   key={character.id}
@@ -282,9 +296,12 @@ export default function CharacterGuidesPage() {
                 >
                   <div className="absolute inset-0">
                     <img
-                      src={`/images/characters/${character.id}half.webp`}
+                      src={imagePath || "/placeholder.svg"}
                       alt={character.name}
                       className="object-cover w-full h-full"
+                      onError={(e) => {
+                        console.error(`[v0] Failed to load image for ${character.name}:`, imagePath)
+                      }}
                     />
                   </div>
 
