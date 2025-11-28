@@ -1220,20 +1220,21 @@ export function RunTracker() {
                       <div className="flex h-full flex-col">
                         {/* Card image - position relative for proper stacking */}
                         <div className="relative flex-1 overflow-hidden rounded-t-lg">
-                          {card.image === DEFAULT_CARD_IMAGES.placeholder && (
-                            <div className="absolute inset-0 bg-black/70 z-[1]" />
+                          {card.image === DEFAULT_CARD_IMAGES.placeholder ? (
+                            <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-slate-900 to-black" />
+                          ) : (
+                            <Image
+                              src={card.image || "/placeholder.svg"}
+                              alt={card.name || "Card"}
+                              fill
+                              className="object-cover"
+                              unoptimized
+                              onError={(e) => {
+                                const target = e.target as HTMLImageElement
+                                target.src = "/placeholder.svg?height=300&width=200"
+                              }}
+                            />
                           )}
-                          <Image
-                            src={card.image || "/placeholder.svg"}
-                            alt={card.name || "Card"}
-                            fill
-                            className="object-cover"
-                            unoptimized
-                            onError={(e) => {
-                              const target = e.target as HTMLImageElement
-                              target.src = "/placeholder.svg?height=300&width=200"
-                            }}
-                          />
 
                           {["amir", "luke", "hugo", "yuki"].includes(character) && (
                             <img
