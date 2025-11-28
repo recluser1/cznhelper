@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import Image from "next/image"
 import Link from "next/link"
 import { Search, X, Home, AlertTriangle } from "lucide-react"
 
@@ -244,18 +245,7 @@ export default function CharacterGuidesPage() {
                   selectedFaction === faction.id ? faction.color : "bg-card hover:bg-card/80"
                 }`}
               >
-                {faction.icon && faction.icon !== "/placeholder.svg" && (
-                  <img
-                    src={faction.icon || "/placeholder.svg"}
-                    alt=""
-                    width={20}
-                    height={20}
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement
-                      target.style.display = "none"
-                    }}
-                  />
-                )}
+                <Image src={faction.icon || "/placeholder.svg"} alt={faction.name} width={20} height={20} unoptimized />
                 {faction.name}
               </Button>
             ))}
@@ -274,18 +264,7 @@ export default function CharacterGuidesPage() {
                     : "bg-card hover:bg-card/80"
                 }`}
               >
-                {job.icon && job.icon !== "/placeholder.svg" && (
-                  <img
-                    src={job.icon || "/placeholder.svg"}
-                    alt=""
-                    width={20}
-                    height={20}
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement
-                      target.style.display = "none"
-                    }}
-                  />
-                )}
+                <Image src={job.icon || "/placeholder.svg"} alt={job.name} width={20} height={20} unoptimized />
                 {job.name}
               </Button>
             ))}
@@ -303,43 +282,28 @@ export default function CharacterGuidesPage() {
                   className="group relative aspect-[3/4] rounded-lg overflow-hidden border-2 border-border bg-card hover:border-purple-400 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-400/20"
                 >
                   <div className="absolute inset-0">
-                    <img
+                    <Image
                       src={`/images/characters/${character.id}half.webp`}
                       alt={character.name}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement
-                        target.src = "/placeholder.svg?height=400&width=300"
-                      }}
+                      fill
+                      className="object-cover"
                     />
                   </div>
 
                   <div className="absolute top-2 left-2 flex flex-col gap-1">
                     <div className="w-9 h-9 rounded-md bg-black/70 backdrop-blur-sm border border-white/20 flex items-center justify-center p-1.5">
                       {job && (
-                        <img
-                          src={job.icon || "/placeholder.svg"}
-                          alt={job.name}
-                          width={24}
-                          height={24}
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement
-                            target.style.display = "none"
-                          }}
-                        />
+                        <Image src={job.icon || "/placeholder.svg"} alt={job.name} width={24} height={24} unoptimized />
                       )}
                     </div>
                     <div className="w-9 h-9 rounded-md bg-black/70 backdrop-blur-sm border border-white/20 flex items-center justify-center p-1.5">
                       {faction && (
-                        <img
+                        <Image
                           src={faction.icon || "/placeholder.svg"}
                           alt={faction.name}
                           width={24}
                           height={24}
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement
-                            target.style.display = "none"
-                          }}
+                          unoptimized
                         />
                       )}
                     </div>

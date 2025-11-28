@@ -377,12 +377,13 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
   // Assuming the first instance is the correct one.
 }
 
+// default images for generic cards
 const DEFAULT_CARD_IMAGES: Record<"neutral" | "monster" | "forbidden" | "starter" | "placeholder", string> = {
   neutral: "/images/card/neutral.png",
   monster: "/images/card/monster.png",
   forbidden: "/images/card/forbidden.png",
   starter: "/images/card/starter.png",
-  placeholder: "none", // Changed from placeholder.svg to "none" to indicate no image
+  placeholder: "/images/card/placeholder.png",
 }
 
 const TIER_LIMITS: Record<number, number> = {
@@ -447,21 +448,7 @@ export function RunTracker() {
   const [conversionCount, setConversionCount] = useState(0)
   const [totalPoints, setTotalPoints] = useState(0)
   const [actionHistory, setActionHistory] = useState<Action[]>([])
-  const [deck, setDeck] = useState<DeckCard[]>(() =>
-    Array(8)
-      .fill(null)
-      .map((_, index) => ({
-        id: String(index + 1),
-        name: "",
-        image: DEFAULT_CARD_IMAGES.placeholder,
-        cardType: "starter" as const,
-        isStartingCard: true,
-        hasNormalEpiphany: false,
-        hasDivineEpiphany: false,
-        isRemoved: false,
-        wasConverted: false,
-      })),
-  )
+  const [deck, setDeck] = useState<DeckCard[]>([])
 
   useEffect(() => {
     const savedState = localStorage.getItem("czn-run-tracker")
@@ -495,33 +482,20 @@ export function RunTracker() {
         duplicationCount,
         conversionCount,
       }
-      // CHANGE: Use JSON.stringify correctly
       localStorage.setItem("czn-run-tracker", JSON.stringify(state))
     }
   }, [character, tier, nightmareMode, deck, actionHistory, removalCount, duplicationCount, conversionCount])
 
-  const handleCharacterChange = (value: string) => {
-    setCharacter(value)
+  const handleCharacterChange = (character: string) => {
+    const actualCharacter = character === "none" ? "" : character
+    setCharacter(actualCharacter || "none")
 
-    if (!value) {
-      setDeck([
-        ...Array(8)
-          .fill(null)
-          .map((_, index) => ({
-            id: String(index + 1),
-            name: "",
-            image: DEFAULT_CARD_IMAGES.placeholder,
-            cardType: "starter" as const,
-            isStartingCard: true,
-            hasNormalEpiphany: false,
-            hasDivineEpiphany: false,
-            isRemoved: false,
-            wasConverted: false,
-          })),
-      ])
+    if (!actualCharacter) {
+      // Reset to empty deck if no character selected
+      setDeck([])
     } else {
       // Get character data
-      const characterData = CHARACTER_CARDS[value]
+      const characterData = CHARACTER_CARDS[actualCharacter]
       if (!characterData) return
 
       // If deck is empty, create initial 8-card deck
@@ -884,10 +858,7 @@ export function RunTracker() {
   }
 
   const resetDeck = () => {
-    if (!character) return
-
-    const characterData = CHARACTER_CARDS[character]
-    if (!characterData) return
+    const characterData = character !== "none" ? CHARACTER_CARDS[character] : null // Use character state
 
     setDeck([
       {
@@ -1164,10 +1135,13 @@ export function RunTracker() {
                 <div className="space-y-2">
                   <Label>Character</Label>
                   <Select value={character} onValueChange={handleCharacterChange}>
-                    <SelectTrigger className="relative z-50">
+                    {" "}
+                    {/* Use character state */}
+                    <SelectTrigger>
                       <SelectValue placeholder="Select a character..." />
                     </SelectTrigger>
-                    <SelectContent className="z-50">
+                    <SelectContent>
+                      <SelectItem value="none">None</SelectItem>
                       {Object.keys(CHARACTER_CARDS)
                         .sort()
                         .map((char) => (
@@ -1218,66 +1192,59 @@ export function RunTracker() {
                       )}
 
                       <div className="flex h-full flex-col">
-                        {/* Card image - position relative for proper stacking */}
-                        <div className="relative flex-1 overflow-hidden rounded-t-lg">
-                          {card.image === DEFAULT_CARD_IMAGES.placeholder || card.image === "none" ? (
-                            <div className="absolute inset-0 bg-gradient-to-b from-slate-800/80 to-slate-950" />
-                          ) : (
+                        <div className="relative h-full w-full rounded-md overflow-hidden">
+                          {card.image ? (
+                            // image fills the entire card area
                             <img
                               src={card.image || "/placeholder.svg"}
-                              alt={card.name || "Card"}
-                              className="absolute inset-0 w-full h-full object-cover"
-                              onError={(e) => {
-                                const target = e.target as HTMLImageElement
-                                target.style.display = "none"
-                                const parent = target.parentElement
-                                if (parent) {
-                                  const fallbackDiv = document.createElement("div")
-                                  fallbackDiv.className =
-                                    "absolute inset-0 bg-gradient-to-b from-slate-800/80 to-slate-950"
-                                  parent.appendChild(fallbackDiv)
-                                }
-                              }}
+                              alt={card.name || "card image"}
+                              className="absolute inset-0 h-full w-full object-cover"
                             />
+                          ) : (
+                            <div className="absolute inset-0 flex items-center justify-center bg-card/50 border-2 border-dashed border-border/30 text-xs text-muted-foreground">
+                              No image
+                            </div>
                           )}
 
-                          {["amir", "luke", "hugo", "yuki"].includes(character) && (
+                          {["amir", "luke", "hugo", "yuki"].includes(character) && ( // Use character state
                             <img
                               src="/images/card/order-border.png"
                               alt="Order border"
-                              className="absolute left-0 top-0 h-full w-auto z-10 pointer-events-none"
+                              className="absolute left-0 top-0 h-full w-auto z-[5] pointer-events-none"
                             />
                           )}
 
-                          {["tressa", "rin", "renoa", "rei", "kayron"].includes(character) && (
+                          {["tressa", "rin", "renoa", "rei", "kayron"].includes(character) && ( // Use character state
                             <img
                               src="/images/card/void-border.png"
                               alt="Void border"
-                              className="absolute left-0 top-0 h-full w-auto z-10 pointer-events-none"
+                              className="absolute left-0 top-0 h-full w-auto z-[5] pointer-events-none"
                             />
                           )}
 
-                          {["nia", "khalipe", "orlea", "cassius"].includes(character) && (
+                          {["nia", "khalipe", "orlea", "cassius"].includes(character) && ( // Use character state
                             <img
                               src="/images/card/instinct-border.png"
                               alt="Instinct border"
-                              className="absolute left-0 top-0 h-full w-auto z-10 pointer-events-none"
+                              className="absolute left-0 top-0 h-full w-auto z-[5] pointer-events-none"
                             />
                           )}
 
-                          {["selena", "lucas", "mei-lin", "maribell", "veronica", "owen"].includes(character) && (
+                          {["selena", "lucas", "mei-lin", "maribell", "veronica", "owen"].includes(
+                            character, // Use character state
+                          ) && (
                             <img
                               src="/images/card/passion-border.png"
                               alt="Passion border"
-                              className="absolute left-0 top-0 h-full w-auto z-10 pointer-events-none"
+                              className="absolute left-0 top-0 h-full w-auto z-[5] pointer-events-none"
                             />
                           )}
 
-                          {["magna", "mika", "beryl", "haru"].includes(character) && (
+                          {["magna", "mika", "beryl", "haru"].includes(character) && ( // Use character state
                             <img
                               src="/images/card/justice-border.png"
                               alt="Justice border"
-                              className="absolute left-0 top-0 h-full w-auto z-10 pointer-events-none"
+                              className="absolute left-0 top-0 h-full w-auto z-[5] pointer-events-none"
                             />
                           )}
 
@@ -1358,7 +1325,7 @@ export function RunTracker() {
                       </div>
 
                       {selectedCard === card.id && !card.isRemoved && !card.isMutantSample && (
-                        <div className="absolute inset-0 z-30 flex flex-col gap-1 rounded-lg bg-[#0A0B0F]/98 p-2 backdrop-blur-sm ring-2 ring-purple-400/50">
+                        <div className="absolute inset-0 z-30 flex flex-col gap-1 rounded-lg bg-[#06070A]/98 p-2 backdrop-blur-sm ring-2 ring-purple-400/50">
                           <Button
                             size="sm"
                             variant="outline"
