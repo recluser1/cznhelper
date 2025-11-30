@@ -89,6 +89,7 @@ const characters = [
   { id: "luke", name: "Luke", job: "hunter", faction: "order", rarity: 5 },
   { id: "magna", name: "Magna", job: "vanguard", faction: "justice", rarity: 5 },
   { id: "maribell", name: "Maribell", job: "vanguard", faction: "passion", rarity: 4 },
+  { id: "meilin", name: "Mei Lin", job: "striker", faction: "passion", rarity: 5 },
   { id: "mika", name: "Mika", job: "controller", faction: "justice", rarity: 4 },
   { id: "nia", name: "Nia", job: "controller", faction: "instinct", rarity: 4 },
   { id: "orlea", name: "Orlea", job: "controller", faction: "instinct", rarity: 5 },

@@ -4,7 +4,7 @@ import { ArrowLeft } from "lucide-react"
 
 const characters = [
   "rin",
-  "mei-lin",
+  "meilin",
   "yuki",
   "haru",
   "owen",

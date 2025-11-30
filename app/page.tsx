@@ -9,7 +9,7 @@ export default function Home() {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-3xl font-bold tracking-tight text-balance bg-gradient-to-r from-red-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                {"CZN Save Data Helper"}
+                {"CZN Helper"}
               </h1>
               <p className="mt-1 text-sm text-muted-foreground">Track your progress through the ongoing nightmare</p>
             </div>

@@ -1203,7 +1203,7 @@ export function RunTracker() {
                             <img
                               src={card.image || "/placeholder.svg"}
                               alt={card.name || "card image"}
-                              className="absolute inset-0 h-full w-full object-cover"
+                              className="absolute inset-0 h-[108%] w-[full] object-cover"
                             />
                           ) : (
                             <div className="absolute inset-0 flex items-center justify-center bg-card/50 border-2 border-dashed border-border/30 text-xs text-muted-foreground">
@@ -1235,9 +1235,7 @@ export function RunTracker() {
                             />
                           )}
 
-                          {["selena", "lucas", "mei-lin", "maribell", "veronica", "owen"].includes(
-                            character, // Use character state
-                          ) && (
+                          {["selena", "lucas", "mei-lin", "maribell", "veronica", "owen"].includes(character) && ( // Use character state
                             <img
                               src="/images/card/passion-border.png"
                               alt="Passion border"
@@ -1254,7 +1252,7 @@ export function RunTracker() {
                           )}
 
                           {/* Overlay content — z-10 so it sits above the image. gradient to keep text readable */}
-                          <div className="absolute inset-0 z-0 pointer-events-none flex flex-col justify-between p-4 bg-gradient-to-b from-black/60 via-transparent to-black/70">
+                          <div className="absolute inset-0 z-0 pointer-events-none flex flex-col justify-between p-4 pl-6 bg-gradient-to-b from-black/60 via-transparent to-black/70">
                             <div className="space-y-2">
                               {card.name && (
                                 <div
