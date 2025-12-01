@@ -1251,72 +1251,58 @@ export function RunTracker() {
                             />
                           )}
 
+                          {card.isDuplicated && (
+                            <img
+                              src="/images/card/deco_card_copy.png"
+                              alt="Duplicate border"
+                              className="absolute right-0 top-0 h-full w-auto z-[5] pointer-events-none"
+                            />
+                          )}
+
                           {/* Overlay content — z-10 so it sits above the image. gradient to keep text readable */}
                           <div className="absolute inset-0 z-0 pointer-events-none flex flex-col justify-between p-4 pl-6 bg-gradient-to-b from-black/60 via-transparent to-black/70">
                             <div className="space-y-2">
-                              {card.name && (
-                                <div
-                                  className={`text-base font-medium leading-tight break-words ${
-                                    card.wasConverted ? "text-muted-foreground/50" : "text-white"
-                                  }`}
-                                >
-                                  {card.name}
+                              {!card.isRemoved && (
+                                <div className="flex items-center gap-2">
+                                  <div
+                                    className={`text-base font-medium leading-tight break-words ${card.wasConverted ? "text-muted-foreground/50" : "text-white"}`}
+                                  >
+                                    {card.name}
+                                  </div>
                                 </div>
                               )}
 
-                              <div className="text-[10px] font-bold uppercase tracking-wide text-white">
-                                {card.cardType === "starter" ? (index < 4 ? "Starter" : "Unique") : card.cardType}
-                              </div>
-
                               <div className="space-y-1">
-                                {card.hasNormalEpiphany && (
-                                  <Badge
-                                    variant="outline"
-                                    className="h-5 text-[10px] border-gray-400/40 bg-gray-700/40 text-white font-semibold"
-                                    style={{
-                                      textShadow:
-                                        "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0 0 3px #000",
-                                    }}
-                                  >
-                                    Epiphany
-                                  </Badge>
-                                )}
-                                {card.hasDivineEpiphany && (
-                                  <Badge
-                                    variant="outline"
-                                    className="h-5 text-[10px] border-slate-300/40 bg-slate-600/40 text-white font-semibold"
-                                    style={{
-                                      textShadow:
-                                        "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0 0 3px #000",
-                                    }}
-                                  >
-                                    Divine Epiphany
-                                  </Badge>
-                                )}
-                                {card.isDuplicated && (
-                                  <Badge
-                                    variant="outline"
-                                    className="h-5 text-[10px] border-zinc-400/40 bg-zinc-700/40 text-white font-semibold"
-                                    style={{
-                                      textShadow:
-                                        "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0 0 3px #000",
-                                    }}
-                                  >
-                                    Duplicated
-                                  </Badge>
-                                )}
-                                {card.wasConverted && (
-                                  <Badge
-                                    variant="outline"
-                                    className="h-5 text-[10px] border-neutral-400/40 bg-neutral-700/40 text-white font-semibold"
-                                    style={{
-                                      textShadow:
-                                        "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0 0 3px #000",
-                                    }}
-                                  >
-                                    Converted
-                                  </Badge>
-                                )}
+                                <div className="flex items-start gap-1.5">
+                                  {card.hasDivineEpiphany && (
+                                    <img
+                                      src="/images/card/icon_card_battle_expand_circen.png"
+                                      alt="Divine Epiphany"
+                                      className="w-12 h-12 flex-shrink-0 object-contain"
+                                    />
+                                  )}
+                                  {card.hasNormalEpiphany && (
+                                    <img
+                                      src="/images/card/icon_card_battle_expand_default.png"
+                                      alt="Epiphany"
+                                      className="w-12 h-12 flex-shrink-0 object-contain"
+                                    />
+                                  )}
+                                  <div className="space-y-1">
+                                    {card.wasConverted && (
+                                      <Badge
+                                        variant="outline"
+                                        className="h-5 text-[10px] border-neutral-400/40 bg-neutral-700/40 text-white font-semibold"
+                                        style={{
+                                          textShadow:
+                                            "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0 0 3px #000",
+                                        }}
+                                      >
+                                        Converted
+                                      </Badge>
+                                    )}
+                                  </div>
+                                </div>
                               </div>
                             </div>
 
