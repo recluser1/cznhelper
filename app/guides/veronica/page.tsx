@@ -1,5 +1,10 @@
+"use client";
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
+import { ChevronDown, ChevronUp } from "lucide-react";
+import { useState } from "react";
+import ExpandableSetCard from "@/components/ui/ExpandableSetCard";
+
 
 export default function VeronicaGuidePage() {
   const sections = [
@@ -32,7 +37,7 @@ export default function VeronicaGuidePage() {
           reasoning: "[Placeholder]",
         },
         {
-          tier: "Niche",
+          tier: "Situational",
           cost: 1,
           type: "upgrade",
           description: "[ Unique / Initiation ] Create 1 Piercing Ballista.\nAt the start of the turn, \ncreate 1 Piercing Ballista card(s)",
@@ -139,7 +144,7 @@ export default function VeronicaGuidePage() {
           reasoning: "[Placeholder]",
         },
         {
-          tier: "Niche",
+          tier: "Situational",
           cost: 1,
           type: "skill",
           description: "[ Retain / Retrieve 4 ] Reload 2",
@@ -182,7 +187,7 @@ export default function VeronicaGuidePage() {
           reasoning: "[Placeholder]",
         },
         {
-          tier: "Niche",
+          tier: "Situational",
           cost: 2,
           type: "skill",
           description: "Choose 2 Ballista cards in hand, +120% Damage amount until activated. Draw 2",
@@ -202,33 +207,26 @@ export default function VeronicaGuidePage() {
     return { bracketedText: null, remainingText: desc }
   }
 
-  const getTierColor = (tier: string) => {
-    switch (tier) {
-      case "S+":
-        // Radiant, eye-catching top tier: fiery gradient
-        return "bg-gradient-to-r from-pink-500 via-red-500 to-orange-400 text-black"
-      case "S":
-        // Premium golden vibe
-        return "bg-gradient-to-r from-yellow-400 via-amber-500 to-rose-400 text-black"
-      case "A+":
-        // Energetic, strong: neon blue-cyan
-        return "bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 text-white"
-      case "A":
-        // Cool, solid high tier
-        return "bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-400 text-white"
-      case "B":
-        // Balanced, mid-tier: green-teal calm gradient
-        return "bg-gradient-to-r from-green-400 via-teal-400 to-cyan-400 text-white"
-      case "C":
-        // Low-tier but noticeable: muted red-orange
-        return "bg-gradient-to-r from-orange-400 via-amber-500 to-red-500 text-white"
-      case "Niche":
-        // Unique / situational: subtle grayscale with contrast
-        return "bg-gradient-to-r from-gray-700 via-gray-500 to-gray-400 text-white"
-      default:
-        return "bg-gray-600 text-white"
-    }
+const getTierColor = (tier: string) => {
+  switch (tier) {
+    case "S+":
+      return "bg-gray-950 text-pink-300 border-pink-500/80 shadow-2xl shadow-pink-500/60 ring-4 ring-pink-500/40 font-bold"
+    case "S":
+      return "bg-gray-950 text-orange-300 border-orange-500/70 shadow-xl shadow-orange-500/50 ring-4 ring-orange-500/30 font-bold"
+    case "A+":
+      return "bg-gray-950 text-purple-300 border-purple-500/70 shadow-lg shadow-purple-500/40 ring-2 ring-purple-500/30 font-semibold"
+    case "A":
+      return "bg-gray-950 text-indigo-300 border-indigo-500/60 shadow-md shadow-indigo-500/30 ring-2 ring-indigo-500/20 font-semibold"
+    case "B":
+      return "bg-gray-950 text-cyan-300 border-cyan-500/50 shadow shadow-cyan-500/20 ring-1 ring-cyan-500/20"
+    case "C":
+      return "bg-gray-950 text-emerald-400 border-emerald-600/40 shadow-sm shadow-emerald-600/10"
+    case "Situational":
+      return "bg-gray-950 text-gray-500 border-gray-700/50"
+    default:
+      return "bg-gray-950 text-gray-600"
   }
+}
 
   return (
     <div className="min-h-screen bg-background">
@@ -304,7 +302,7 @@ export default function VeronicaGuidePage() {
             <section id="card-epiphany" className="rounded-lg border border-border bg-card p-8 scroll-mt-24">
               <h2 className="text-2xl font-bold mb-6 text-purple-400">2. Card Epiphany</h2>
               <p className="text-muted-foreground mb-6">
-              Ratings are: S+ (Top Tier), S (Best), A+ (Very Strong), A (Strong), B (Situational), Niche (Specific builds only).
+              Ratings are: S+ (Top Tier), S (Best), A+ (Very Strong), A (Strong), B (Weak), C (Very Weak), Situational (Specific builds only).
               </p>
 
               <div className="space-y-12">
@@ -574,176 +572,135 @@ export default function VeronicaGuidePage() {
               </div>
             </section>
 
-            {/* 4. Memory Fragments - Reworked SECTION */}
-            <section id="memory-fragments" className="rounded-lg border border-border bg-card p-8 scroll-mt-24">
-              <h2 className="text-2xl font-bold mb-6 text-purple-400">4. Memory Fragments</h2>
+              {/* 4. Memory Fragments */}
+              <section id="memory-fragments" className="rounded-xl border border-border bg-card p-6 md:p-8 scroll-mt-24">
+                <h2 className="text-2xl font-bold mb-8 text-purple-400 text-center">Memory Fragments</h2>
 
-              {/* Recommended Sets */}
-              <div className="mb-8">
-                <h3 className="text-xl font-semibold mb-6 text-foreground">Recommended Sets</h3>
+                {/* Recommended Sets */}
+                <div className="space-y-12">
 
-                {/* Best in Slot */}
-                <div className="mb-8">
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className="px-3 py-1 rounded text-sm font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30">
-                      BEST IN SLOT
-                    </span>
+                  {/* BEST IN SLOT */}
+                  <div>
+                    <div className="text-center mb-6">
+                      <span className="px-4 py-1.5 rounded-lg text-sm font-bold uppercase tracking-wider bg-amber-500/20 text-amber-400 border border-amber-500/40 shadow-sm">
+                        Best in Slot
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                      {[
+                        {
+                          name: "Black Wing",
+                          effect: "+12% Attack",
+                          icon: "/images/sets/black-wing.webp",
+                          why: "Why?"
+                        },
+                        {
+                          name: "Executioner's Tool",
+                          effect: "+25% Critical Damage",
+                          icon: "/images/sets/executioners-tool.webp",
+                          why: "Why?"
+                        },
+                        {
+                          name: "Cursed Corpse",
+                          effect: "Increases damage dealt to target inflicted with Agony by 10%",
+                          icon: "/images/sets/cursed-corpse.webp",
+                          why: "Prioritize Cursed Corpse when Agony debuff is reliably applied. Otherwise, slot any Memory Fragment piece purely for its main stat + substats"
+                        },
+                      ].map((set) => (
+                        <ExpandableSetCard key={set.name} set={set} tier="bis" />
+                      ))}
+                    </div>
                   </div>
-                  <div className="space-y-4">
-                    {/* Black Wing */}
-                    <div className="flex items-start gap-4 p-4 rounded-lg bg-background/50 border border-border">
-                      <div className="w-14 h-14 rounded-lg bg-muted/50 flex-shrink-0 flex items-center justify-center">
-                        <span className="text-xl font-bold text-muted-foreground">?</span>
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="font-semibold text-white mb-1">Black Wing</h4>
-                        <p className="text-sm text-muted-foreground mb-2">2 Set: +12% Attack</p>
-                        <p className="text-xs text-muted-foreground/80">[Explanation placeholder]</p>
-                      </div>
+
+                  {/* SECONDARY */}
+                  <div>
+                    <div className="text-center mb-6">
+                      <span className="px-4 py-1.5 rounded-lg text-sm font-bold uppercase tracking-wider bg-cyan-500/20 text-cyan-400 border border-cyan-500/40">
+                        Secondary
+                      </span>
                     </div>
 
-                    {/* Executioner's Tool */}
-                    <div className="flex items-start gap-4 p-4 rounded-lg bg-background/50 border border-border">
-                      <div className="w-14 h-14 rounded-lg bg-muted/50 flex-shrink-0 flex items-center justify-center">
-                        <span className="text-xl font-bold text-muted-foreground">?</span>
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="font-semibold text-white mb-1">Executioner's Tool</h4>
-                        <p className="text-sm text-muted-foreground mb-2">2 Set: +25% Critical Damage</p>
-                        <p className="text-xs text-muted-foreground/80">[Explanation placeholder]</p>
-                      </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                      {[
+                        {
+                          name: "Spark of Passion",
+                          effect: "When Upgrade Cards are used, increase Damage Amount of the next 5 Passion Cards used by 20%",
+                          icon: "/images/sets/spark-of-passion.webp",
+                          why: "Why?"
+                        },
+                        {
+                          name: "Black Wing",
+                          effect: "+12% Attack",
+                          icon: "/images/sets/black-wing.webp",
+                          why: "Why?"
+                        },
+                      ].map((set) => (
+                        <ExpandableSetCard key={set.name} set={set} tier="secondary" />
+                      ))}
                     </div>
+                  </div>
+                </div>
 
-                    {/* Seth's Scarab */}
-                    <div className="flex items-start gap-4 p-4 rounded-lg bg-background/50 border border-border">
-                      <div className="w-14 h-14 rounded-lg bg-muted/50 flex-shrink-0 flex items-center justify-center">
-                        <span className="text-xl font-bold text-muted-foreground">?</span>
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="font-semibold text-white mb-1">Seth's Scarab</h4>
-                        <p className="text-sm text-muted-foreground mb-2">
-                          {"2 Set: Increase the damage, Shield and Healing of Basic Cards by 20%"}
-                        </p>
-                        <p className="text-xs text-muted-foreground/80">[Explanation placeholder] </p>
-                      </div>
+              {/* Main Stats + Substat Priority */}
+              <div className="mt-8 space-y-7">
+                {/* Main Stats */}
+                <div className="grid grid-cols-3 gap-4">
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-purple-400">IV</div>
+                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Ideal</div>
+                    <div className="py-2 px-4 rounded bg-purple-500/10 border border-purple-500/30 text-sm font-medium text-purple-300">
+                      Critical Rate
+                    </div>
+                  </div>
+
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-red-400">V</div>
+                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Desire</div>
+                    <div className="py-2 px-4 rounded bg-red-500/10 border border-red-500/30 text-sm font-medium text-red-300">
+                      Passion Damage
+                    </div>
+                  </div>
+
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-cyan-400">VI</div>
+                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Imagination</div>
+                    <div className="py-2 px-4 rounded bg-cyan-500/10 border border-cyan-500/30 text-sm font-medium text-cyan-300">
+                      Attack %
                     </div>
                   </div>
                 </div>
 
-                {/* Secondary Option */}
-                <div>
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className="px-3 py-1 rounded text-sm font-bold bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
-                      SECONDARY
-                    </span>
-                  </div>
-                  <div className="space-y-4">
-                    {/* Alternative Set 1 */}
-                    <div className="flex items-start gap-4 p-4 rounded-lg bg-background/50 border border-border">
-                      <div className="w-14 h-14 rounded-lg bg-muted/50 flex-shrink-0 flex items-center justify-center">
-                        <span className="text-xl font-bold text-muted-foreground">?</span>
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="font-semibold text-white mb-1">Spark of Passion</h4>
-                        <p className="text-sm text-muted-foreground mb-2">
-                          {
-                            "4 Set: When Upgrade Cards are used, increase Damage Amount of the next 5 Passion Cards used by 20%"
-                          }{" "}
-                        </p>
-                        <p className="text-xs text-muted-foreground/80">[Explanation placeholder]</p>
-                      </div>
+                {/* Substat Priority */}
+                <div className="mt-10 text-center justify-center text-[12px]">
+                  {/* Priority Chain */}
+                  <div className="flex items-center justify-center gap-4 md:gap-6 flex-wrap">
+                    <div className="px-6 py-3 rounded-full bg-pink-500/20 border-2 border-pink-500/70 font-bold text-pink-300 shadow-lg shadow-pink-500/20">
+                      Critical Rate
                     </div>
-
-                    {/* Alternative Set 2 */}
-                    <div className="flex items-start gap-4 p-4 rounded-lg bg-background/50 border border-border">
-                      <div className="w-14 h-14 rounded-lg bg-muted/50 flex-shrink-0 flex items-center justify-center">
-                        <span className="text-xl font-bold text-muted-foreground">?</span>
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="font-semibold text-white mb-1">Black Wing</h4>
-                        <p className="text-sm text-muted-foreground mb-2">2 Set: +12% Attack</p>
-                        <p className="text-xs text-muted-foreground/80">[Explanation placeholder]</p>
-                      </div>
+                    <span className="text-3xl font-light text-muted-foreground/40 select-none">=</span>
+                    <div className="px-6 py-3 rounded-full bg-pink-500/20 border- border-2 border-pink-500/70 font-bold text-pink-300 shadow-lg shadow-pink-500/20">
+                      Critical Damage
                     </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* 4.1 Main Stats */}
-              <div id="main-stats" className="mb-8 scroll-mt-24">
-                <h3 className="text-xl font-semibold mb-4 text-foreground">4.1. Main</h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Recommended main stats for Memory Fragment slots IV, V, and VI.
-                </p>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {/* Slot IV - Ideal */}
-                  <div className="p-5 rounded-lg bg-background/50 border border-border">
-                    <div className="flex flex-col gap-2 mb-3">
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-3xl font-bold text-purple-400">IV</span>
-                        <span className="text-sm font-medium text-muted-foreground">Ideal</span>
-                      </div>
-                      <div className="h-px bg-border" />
+                    <span className="text-3xl font-light text-muted-foreground/40 select-none">›</span>
+                    <div className="px-5 py-2.5 rounded-full bg-purple-500/20 border border-purple-500/50 font-semibold text-purple-300">
+                      Attack +
                     </div>
-                    <div className="p-3 rounded bg-purple-500/10 border border-purple-500/30">
-                      <span className="text-sm font-semibold text-purple-300">[Placeholder]</span>
+                    <span className="text-2xl text-muted-foreground/40">›</span>
+                    <div className="px-5 py-2 rounded-full bg-muted/70 border border-border text-muted-foreground">
+                      Extra Damage
+                    </div>
+                    <span className="text-muted-foreground/60 mx-2">or</span>
+                    <div className="px-5 py-2 rounded-full bg-muted/70 border border-border text-muted-foreground">
+                      Attack %
                     </div>
                   </div>
 
-                  {/* Slot V - Desire */}
-                  <div className="p-5 rounded-lg bg-background/50 border border-border">
-                    <div className="flex flex-col gap-2 mb-3">
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-3xl font-bold text-red-400">V</span>
-                        <span className="text-sm font-medium text-muted-foreground">Desire</span>
-                      </div>
-                      <div className="h-px bg-border" />
-                    </div>
-                    <div className="p-3 rounded bg-red-500/10 border border-red-500/30">
-                      <span className="text-sm font-semibold text-red-300">[Placeholder]</span>
-                    </div>
-                  </div>
-
-                  {/* Slot VI - Imagination */}
-                  <div className="p-5 rounded-lg bg-background/50 border border-border">
-                    <div className="flex flex-col gap-2 mb-3">
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-3xl font-bold text-cyan-400">VI</span>
-                        <span className="text-sm font-medium text-muted-foreground">Imagination</span>
-                      </div>
-                      <div className="h-px bg-border" />
-                    </div>
-                    <div className="p-3 rounded bg-cyan-500/10 border border-cyan-500/30">
-                      <span className="text-sm font-semibold text-cyan-300">[Placeholder]</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* 4.2 Sub Stats */}
-              <div id="sub-stats" className="scroll-mt-24">
-                <h3 className="text-xl font-semibold mb-4 text-foreground">4.2. Sub</h3>
-                <p className="text-sm text-muted-foreground mb-4">Substat priority for all Memory Fragments.</p>
-
-                <div className="space-y-3">
-                  <div className="flex items-center gap-4 p-4 rounded-lg bg-gradient-to-r from-amber-500/20 to-transparent border-l-4 border-l-amber-500">
-                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-amber-500/30 border border-amber-500/50">
-                      <span className="text-sm font-bold text-amber-300">1</span>
-                    </div>
-                    <span className="text-sm font-semibold text-foreground">[Placeholder]</span>
-                  </div>
-                  <div className="flex items-center gap-4 p-4 rounded-lg bg-gradient-to-r from-purple-500/15 to-transparent border-l-4 border-l-purple-500/70">
-                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-purple-500/20 border border-purple-500/40">
-                      <span className="text-sm font-bold text-purple-300">2</span>
-                    </div>
-                    <span className="text-sm text-muted-foreground">[Placeholder]</span>
-                  </div>
-                  <div className="flex items-center gap-4 p-4 rounded-lg bg-gradient-to-r from-cyan-500/10 to-transparent border-l-4 border-l-cyan-500/50">
-                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-cyan-500/15 border border-cyan-500/30">
-                      <span className="text-sm font-bold text-cyan-300">3</span>
-                    </div>
-                    <span className="text-sm text-muted-foreground">[Placeholder]</span>
+                  {/* Explanation */}
+                  <div className="mt-7.5 mx-auto text-center">
+                    <p className="text-[12px] leading-relaxed text-muted-foreground">
+                      <strong className="text-foreground">Placeholder</strong>
+                    </p>
                   </div>
                 </div>
               </div>
