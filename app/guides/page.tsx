@@ -81,6 +81,7 @@ const characters = [
   { id: "amir", name: "Amir", job: "vanguard", faction: "order", rarity: 4 },
   { id: "beryl", name: "Beryl", job: "ranger", faction: "justice", rarity: 4 },
   { id: "cassius", name: "Cassius", job: "controller", faction: "instinct", rarity: 4 },
+  { id: "chizuru", name: "Chizuru", job: "psionic", faction: "void", rarity: 5 },
   { id: "haru", name: "Haru", job: "striker", faction: "justice", rarity: 5 },
   { id: "hugo", name: "Hugo", job: "ranger", faction: "order", rarity: 5 },
   { id: "kayron", name: "Kayron", job: "psionic", faction: "void", rarity: 5 },
