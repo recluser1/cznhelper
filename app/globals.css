@@ -51,7 +51,7 @@
   --secondary: #2a2d36;
   --secondary-foreground: #c3c7d0;
   --muted: #2a2d36;
-  --muted-foreground: #71767f;
+  --muted-foreground: #a5aab3;
   --accent: #4a1890;
   --accent-foreground: #c3c7d0;
   --destructive: #c41729;
@@ -74,6 +74,11 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(0.269 0 0);
   --sidebar-ring: oklch(0.439 0 0);
+}
+
+/* drop this in globals.css */
+.text-discord-muted {
+  color: #caccd1; /* very soft white-gray */
 }
 
 @theme inline {

@@ -258,7 +258,7 @@ export default function VeronicaGuidePage() {
             </div>
             <Link
               href="/guides"
-              className="flex items-center gap-2 px-4 py-2 rounded-lg border border-purple-500/20 bg-purple-500/10 text-purple-400 hover:bg-purple-500/20 hover:border-purple-500/40 transition-all duration-200"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg border border-purple-500/20 bg-purple-500/10 text-purple-400 hover:bg-purple-500/20 hover:border-purple-400/40 transition-all duration-200"
             >
               <ArrowLeft className="w-4 h-4" />
               <span className="text-sm font-medium">Back to Characters</span>
@@ -335,7 +335,7 @@ export default function VeronicaGuidePage() {
 
                     <Dialog>
                       <DialogTrigger asChild>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 cursor-pointer p-4 rounded-xl border-2 border-dashed border-purple-500/30 hover:border-purple-500/60 hover:bg-purple-500/5 transition-all duration-200">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 cursor-pointer p-4 rounded-xl border-2 border-dashed border-purple-500/30 hover:border-purple-400/60 hover:bg-purple-500/5 transition-all duration-200">
                           {cardData.epiphanies.map((epiphany, index) => (
                             <div key={index} className="flex flex-col gap-3">
                               {/* Tier Badge */}
@@ -348,7 +348,7 @@ export default function VeronicaGuidePage() {
                               </div>
 
                               {/* Card Display */}
-                              <div className="relative rounded-lg overflow-hidden border-2 border-border hover:border-purple-500/50 transition-all duration-200 max-w-[250px] mx-auto">
+                              <div className="relative rounded-lg overflow-hidden border-2 border-border hover:border-purple-400/50 transition-all duration-200 max-w-[250px] mx-auto">
                                 {/* Passion Border */}
                                 <div className="absolute left-0 -top-0.5 -bottom-0.5 w-3 z-10">
                                   <img
@@ -687,11 +687,11 @@ export default function VeronicaGuidePage() {
                       },
                     ].map((set) => (
                       <ExpandableSetCard
-                        key={set.name}
+                        key={set.name + "bis"}
                         set={set}
                         tier="bis"
-                        isExpanded={expandedMemorySet === set.name}
-                        onToggle={() => setExpandedMemorySet(expandedMemorySet === set.name ? null : set.name)}
+                        isExpanded={expandedMemorySet === set.name + "bis"}
+                        onToggle={() => setExpandedMemorySet(expandedMemorySet === set.name + "bis" ? null : set.name + "bis")}
                       />
                     ))}
                   </div>
@@ -723,11 +723,11 @@ export default function VeronicaGuidePage() {
                       },
                     ].map((set) => (
                       <ExpandableSetCard
-                        key={set.name}
+                        key={set.name + "secondary"}
                         set={set}
                         tier="secondary"
-                        isExpanded={expandedMemorySet === set.name}
-                        onToggle={() => setExpandedMemorySet(expandedMemorySet === set.name ? null : set.name)}
+                        isExpanded={expandedMemorySet === set.name + "secondary"}
+                        onToggle={() => setExpandedMemorySet(expandedMemorySet === set.name + "secondary" ? null : set.name + "secondary")}
                       />
                     ))}
                   </div>
@@ -802,11 +802,8 @@ export default function VeronicaGuidePage() {
             <section id="partners" className="rounded-lg border border-border bg-card p-8 scroll-mt-24">
               <h2 className="text-2xl font-bold mb-6 text-purple-400">5. Partners</h2>
               <p className="text-muted-foreground mb-6 whitespace-pre-line">
-                {`These are Veronica's best Partners that synergize well with her kit and playstyle.
-                They are ranked on a scale of 1 to 5, with 1 being very bad  and 5 being best in slot.`}
-                
+                {`Placeholder`}
               </p>
-
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                 {[
                   {
@@ -864,7 +861,7 @@ export default function VeronicaGuidePage() {
                     onOpenChange={(open) => setSelectedPartner(open ? partner.id : null)}
                   >
                     <DialogTrigger asChild>
-                      <div className="relative aspect-[9/16] rounded-lg overflow-hidden border-2 border-border hover:border-purple-500 bg-card cursor-pointer transition-all hover:scale-105">
+                      <div className="relative aspect-[9/16] hover:scale-105 rounded-lg overflow-hidden border-2 border-border hover:border-purple-400 bg-card cursor-pointer transition-all ">
                         <img
                           src={partner.image || "/placeholder.svg"}
                           alt={partner.name}
@@ -906,24 +903,22 @@ export default function VeronicaGuidePage() {
             {/* 6. Teams */}
             <section id="teams" className="rounded-lg border border-border bg-card p-8 scroll-mt-24">
               <h2 className="text-2xl font-bold mb-6 text-purple-400">6. Teams</h2>
-
-              <p className="text-muted-foreground mb-6 text-sm">
-                These are examples of 3 popular and strong team compositions. Click on any team to view detailed synergy
-                explanations.
+              <p className="text-muted-foreground mb-6 whitespace-pre-line">
+                Placeholder
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {/* Team 1 */}
                 <Dialog>
                   <DialogTrigger asChild>
-                    <div className="group cursor-pointer rounded-xl border-2 border-purple-500/30 bg-gradient-to-br from-purple-500/5 to-transparent p-4 hover:border-purple-500 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300">
+                    <div className="group cursor-pointer hover:scale-105 rounded-xl border-2 border-purple-500/30 bg-gradient-to-br from-purple-500/5 to-transparent p-4 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-2 h-2 rounded-full bg-purple-500 animate-pulse"></div>
                         <h3 className="text-base font-semibold text-purple-400">Passion Weakness</h3>
                       </div>
                       <div className="grid grid-cols-3 gap-2 mb-3">
                         {/* Veronica */}
-                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-purple-500/50 bg-card shadow-md group-hover:scale-105 transition-transform">
+                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-purple-500/50 bg-card shadow-md group- transition-transform">
                           <img
                             src="/images/characters/veronicahalf.webp"
                             alt="Veronica"
@@ -943,7 +938,7 @@ export default function VeronicaGuidePage() {
                         </div>
 
                         {/* Mei Lin */}
-                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-red-500/50 bg-card shadow-md group-hover:scale-105 transition-transform">
+                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-red-500/50 bg-card shadow-md group- transition-transform">
                           <img
                             src="/images/characters/meilinhalf.webp"
                             alt="Mei Lin"
@@ -963,7 +958,7 @@ export default function VeronicaGuidePage() {
                         </div>
 
                         {/* Rei */}
-                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-violet-500/50 bg-card shadow-md group-hover:scale-105 transition-transform">
+                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-violet-500/50 bg-card shadow-md group- transition-transform">
                           <img src="/images/characters/reihalf.webp" alt="Rei" className="object-cover w-full h-full" />
                           <div className="absolute top-1 left-1 flex flex-col gap-0.5">
                             <div className="w-6 h-6 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
@@ -1010,14 +1005,14 @@ export default function VeronicaGuidePage() {
                 {/* Team 2 */}
                 <Dialog>
                   <DialogTrigger asChild>
-                    <div className="group cursor-pointer rounded-xl border-2 border-blue-500/30 bg-gradient-to-br from-blue-500/5 to-transparent p-4 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300">
+                    <div className="group cursor-pointer hover:scale-105 rounded-xl border-2 border-blue-500/30 bg-gradient-to-br from-blue-500/5 to-transparent p-4 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div>
                         <h3 className="text-base font-semibold text-blue-400">Team 2</h3>
                       </div>
                       <div className="grid grid-cols-3 gap-2 mb-3">
                         {/* Veronica */}
-                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-purple-500/50 bg-card shadow-md group-hover:scale-105 transition-transform">
+                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-purple-500/50 bg-card shadow-md group- transition-transform">
                           <img
                             src="/images/characters/veronicahalf.webp"
                             alt="Veronica"
@@ -1037,7 +1032,7 @@ export default function VeronicaGuidePage() {
                         </div>
 
                         {/* Haru */}
-                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-blue-500/50 bg-card shadow-md group-hover:scale-105 transition-transform">
+                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-blue-500/50 bg-card shadow-md group- transition-transform">
                           <img
                             src="/images/characters/haruhalf.webp"
                             alt="Haru"
@@ -1057,7 +1052,7 @@ export default function VeronicaGuidePage() {
                         </div>
 
                         {/* Orlea */}
-                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-pink-500/50 bg-card shadow-md group-hover:scale-105 transition-transform">
+                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-pink-500/50 bg-card shadow-md group- transition-transform">
                           <img
                             src="/images/characters/orleahalf.webp"
                             alt="Orlea"
@@ -1108,14 +1103,14 @@ export default function VeronicaGuidePage() {
                 {/* Team 3 */}
                 <Dialog>
                   <DialogTrigger asChild>
-                    <div className="group cursor-pointer rounded-xl border-2 border-cyan-500/30 bg-gradient-to-br from-cyan-500/5 to-transparent p-4 hover:border-cyan-500 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300">
+                    <div className="group cursor-pointer hover:scale-105 rounded-xl border-2 border-cyan-500/30 bg-gradient-to-br from-cyan-500/5 to-transparent p-4 hover:border-cyan-500 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse"></div>
                         <h3 className="text-base font-semibold text-cyan-400">Team 3</h3>
                       </div>
                       <div className="grid grid-cols-3 gap-2 mb-3">
                         {/* Veronica */}
-                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-purple-500/50 bg-card shadow-md group-hover:scale-105 transition-transform">
+                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-purple-500/50 bg-card shadow-md group- transition-transform">
                           <img
                             src="/images/characters/veronicahalf.webp"
                             alt="Veronica"
@@ -1135,7 +1130,7 @@ export default function VeronicaGuidePage() {
                         </div>
 
                         {/* Rin */}
-                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-blue-500/50 bg-card shadow-md group-hover:scale-105 transition-transform">
+                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-blue-500/50 bg-card shadow-md group- transition-transform">
                           <img src="/images/characters/rinhalf.webp" alt="Rin" className="object-cover w-full h-full" />
                           <div className="absolute top-1 left-1 flex flex-col gap-0.5">
                             <div className="w-6 h-6 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
@@ -1151,7 +1146,7 @@ export default function VeronicaGuidePage() {
                         </div>
 
                         {/* Owen */}
-                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-gray-500/50 bg-card shadow-md group-hover:scale-105 transition-transform">
+                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-gray-500/50 bg-card shadow-md group- transition-transform">
                           <img
                             src="/images/characters/owenhalf.webp"
                             alt="Owen"
