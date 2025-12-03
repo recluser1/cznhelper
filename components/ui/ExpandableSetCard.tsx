@@ -1,6 +1,5 @@
 // components/ExpandableSetCard.tsx
 import { ChevronDown, ChevronUp } from "lucide-react";
-import { useState } from "react";
 
 type Set = {
   name: string;
@@ -12,16 +11,21 @@ type Set = {
 type Props = {
   set: Set;
   tier: "bis" | "secondary";
+  isExpanded: boolean;
+  onToggle: () => void;
 };
 
-export default function ExpandableSetCard({ set }: Props) {
-  const [isOpen, setIsOpen] = useState(false);
-
+export default function ExpandableSetCard({
+  set,
+  tier,
+  isExpanded,
+  onToggle,
+}: Props) {
   return (
     <div className="flex flex-col">
       {/* Clickable Card */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={onToggle}
         className="w-full text-left group transition-all duration-300"
       >
         <div className="rounded-lg overflow-hidden border-2 border-border bg-card hover:border-purple-400 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-400/20">
@@ -40,7 +44,7 @@ export default function ExpandableSetCard({ set }: Props) {
               <div className="flex items-center justify-between">
                 <h3 className="font-bold text-foreground text-lg">{set.name}</h3>
                 <div className="ml-3 transition-transform group-hover:rotate-180">
-                  {isOpen ? (
+                  {isExpanded ? (
                     <ChevronUp className="w-6 h-6 text-purple-400" />
                   ) : (
                     <ChevronDown className="w-6 h-6 text-muted-foreground group-hover:text-purple-400" />
@@ -56,7 +60,7 @@ export default function ExpandableSetCard({ set }: Props) {
       {/* Expandable Explanation */}
       <div
         className={`overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen ? "max-h-64 opacity-100 mt-4" : "max-h-0 opacity-0"
+          isExpanded ? "max-h-64 opacity-100 mt-4" : "max-h-0 opacity-0"
         }`}
       >
         <div className="px-1 pb-1">

@@ -40,7 +40,7 @@ export default function VeronicaGuidePage() {
   const uniqueCards = [
     {
       id: "firing-preparation",
-      name: "2.1. Firing Preparation",
+      name: "Firing Preparation",
       image: "/images/character/veronica/starter4.png",
       baseType: "upgrade",
       epiphanies: [
@@ -48,47 +48,43 @@ export default function VeronicaGuidePage() {
           tier: "A+",
           cost: 1,
           type: "upgrade",
-          description: "[ Unique / Initiation ]\nCreate 1 Ballista card(s). At the start of the turn, create 1 more",
+          description: "[ Unique / Initiation ] Create 1 Ballista card(s).\nAt the start of the turn,\ncreate 1 Ballista card(s),\nwith a 50% chance to additionally create 1 more",
           reasoning:
-            "Firing Preparation is a strong early-game card that provides consistent card generation. The A+ tier version creates one Ballista card immediately and generates another at the start of each turn, providing excellent value over time. This variant is ideal for decks that want sustained card advantage without sacrificing too much energy. The automatic generation helps maintain hand size while you focus on playing other cards. Best used in control-oriented builds where you can leverage the long-term value.",
+            "[Placeholder reasoning text]",
         },
         {
           tier: "Situational",
           cost: 1,
           type: "upgrade",
-          description:
-            "[ Unique / Initiation ]\nCreate 1 Piercing Ballista card(s). At the start of the turn, create 1 more",
+          description: "[ Unique / Initiation ] Create 1 Piercing Ballista.\nAt the start of the turn, \ncreate 1 Piercing Ballista card(s)",
           reasoning: "[Placeholder reasoning text]",
         },
         {
           tier: "A",
           cost: 1,
           type: "upgrade",
-          description:
-            "[ Unique / Initiation ]\nCreate 1 Enhanced Ballista card(s). At the start of the turn, create 1 more",
+          description: "[ Unique / Initiation ] Create 1 Enhanced Ballista.\nAt the start of the turn, \ncreate 1 Enhanced Ballista card(s)",
           reasoning: "[Placeholder reasoning text]",
         },
         {
           tier: "S+",
           cost: 1,
           type: "upgrade",
-          description:
-            "[ Unique / Initiation ]\nCreate 1 Giant Ballista card(s). At the start of the turn, create 1 more",
+          description: "[ Unique / Initiation ] Create 1 Giant Ballista. \nAt the start of the turn, \ncreate 1 Giant Ballista \ncard(s)",
           reasoning: "[Placeholder reasoning text]",
         },
         {
           tier: "A+",
           cost: 1,
           type: "upgrade",
-          description:
-            "[ Unique / Initiation ]\nCreate 1 Shelling Ballista card(s). At the start of the turn, create 1 more",
+          description: "[ Unique / Initiation ] Create 1 Shelling Ballista. \nAt the start of the turn, \ncreate 1 Shelling Ballista \ncard(s)",
           reasoning: "[Placeholder reasoning text]",
         },
       ],
     },
     {
       id: "repose",
-      name: "2.2. Repose",
+      name: "Repose",
       image: "/images/character/veronica/unique1.png",
       baseType: "skill",
       epiphanies: [
@@ -132,7 +128,7 @@ export default function VeronicaGuidePage() {
     },
     {
       id: "pendant-of-resolution",
-      name: "2.4. Pendant of Resolution",
+      name: "Pendant of Resolution",
       image: "/images/character/veronica/unique2.png",
       baseType: "upgrade",
       epiphanies: [
@@ -176,7 +172,7 @@ export default function VeronicaGuidePage() {
     },
     {
       id: "sir-kowalski",
-      name: "2.3. Sir Kowalski",
+      name: "Sir Kowalski",
       image: "/images/character/veronica/unique3.png",
       baseType: "skill",
       epiphanies: [
@@ -321,9 +317,9 @@ export default function VeronicaGuidePage() {
             {/* 2. Card Epiphany */}
             <section id="card-epiphany" className="rounded-lg border border-border bg-card p-8 scroll-mt-24">
               <h2 className="text-2xl font-bold mb-6 text-purple-400">2. Card Epiphany</h2>
-              <p className="text-muted-foreground mb-6">
-                Ratings are: S+ (Top Tier), S (Best), A+ (Very Strong), A (Strong), B (Weak), C (Very Weak), Situational
-                (Specific builds only). Click on any card group to view detailed explanations.
+              <p className="text-muted-foreground mb-6 whitespace-pre-line">
+              {`S+ (Top Tier); S (Best); A+ (Very Strong); A (Strong); B (Weak); C (Very Weak); Situational (Niche).
+              Click on any card group to view detailed explanations.`}
               </p>
 
               <div className="space-y-12">
@@ -372,26 +368,28 @@ export default function VeronicaGuidePage() {
                                         {/* Cost */}
                                         <div className="flex-shrink-0 flex flex-col items-center justify-center">
                                           <span
-                                            className="text-white font-bold text-5xl scale-x-75"
+                                            className="text-white font-bold text-5xl scale-x-80"
                                             style={{
-                                              WebkitTextStroke: "1px rgba(96, 78, 255, 0.62)",
+                                              WebkitTextStroke: "1px rgba(0, 0, 0, 0.38)",
                                               textShadow: `
-                                                0 0 15px rgba(96, 78, 255, 0.6),
-                                                0 0 30px rgba(96, 78, 255, 0.4),
-                                                0 0 45px rgba(96, 78, 255, 0.2),
-                                              `,
+                                              -1px -1px 0 #000,
+                                               1px -1px 0 #000,
+                                              -1px  1px 0 #000,
+                                               1px  1px 0 #000
+                                            `,
                                             }}
                                           >
                                             {epiphany.cost}
                                           </span>
                                           <div
-                                            className="w-full h-0.5 bg-white mt-0.5 scale-x-75"
+                                            className="w-full h-0.5 bg-white mt-0.5 scale-x-80"
                                             style={{
                                               backgroundColor: "#ffffff",
                                               WebkitBoxShadow: `
-                                                0 0 6px rgba(96, 78, 255, 0.9),
-                                                0 0 9px rgba(96, 78, 255, 0.6),
-                                                0 0 9px rgba(96, 78, 255, 0.3)
+                                              -1px -1px 0 #000,
+                                               1px -1px 0 #000,
+                                              -1px  1px 0 #000,
+                                               1px  1px 0 #000
                                               `,
                                             }}
                                           />
@@ -408,7 +406,7 @@ export default function VeronicaGuidePage() {
                                               -1px  1px 0 #000,
                                                1px  1px 0 #000
                                             `,
-                                              transform: "scaleX(0.7)",
+                                              transform: "scaleX(0.65)",
                                               transformOrigin: "left",
                                               maxWidth: "180%",
                                               whiteSpace: "nowrap",
@@ -679,7 +677,7 @@ export default function VeronicaGuidePage() {
                         name: "Cursed Corpse",
                         effect: "Increases damage dealt to target inflicted with Agony by 10%",
                         icon: "/images/sets/cursed-corpse.webp",
-                        why: "Prioritize Cursed Corpse when Agony debuff is reliably applied. Otherwise, slot any Memory Fragment piece purely for its main stat + substats",
+                        why: "Prioritize Cursed Corpse when Agony debuff is reliably applied. Otherwise, slot any Memory Fragment piece purely for its substats"
                       },
                     ].map((set) => (
                       <ExpandableSetCard
@@ -708,13 +706,14 @@ export default function VeronicaGuidePage() {
                         effect:
                           "When Upgrade Cards are used, increase Damage Amount of the next 5 Passion Cards used by 20%",
                         icon: "/images/sets/spark-of-passion.webp",
-                        why: "Why?",
+                        why: "Due to Veronica's Reload mechanic, the Passion set's 20% bonus is effectively outperformed by the consistent +12% Attack provided by Black Wing. While Passion is a viable option, Blackwing offers better overall performance for her."
                       },
+
                       {
                         name: "Black Wing",
                         effect: "+12% Attack",
                         icon: "/images/sets/black-wing.webp",
-                        why: "Why?",
+                        why: "Why?",                      
                       },
                     ].map((set) => (
                       <ExpandableSetCard
@@ -761,32 +760,32 @@ export default function VeronicaGuidePage() {
                 {/* Substat Priority */}
                 <div className="mt-10 text-center justify-center text-[12px]">
                   {/* Priority Chain */}
-                  <div className="flex items-center justify-center gap-4 md:gap-6 flex-wrap">
+                  <div className="flex items-center justify-center gap-4 md:gap-4 flex-wrap">
                     <div className="px-6 py-3 rounded-full bg-pink-500/20 border-2 border-pink-500/70 font-bold text-pink-300 shadow-lg shadow-pink-500/20">
-                      Critical Rate
-                    </div>
-                    <span className="text-3xl font-light text-muted-foreground/40 select-none">=</span>
-                    <div className="px-6 py-3 rounded-full bg-pink-500/20 border border-2 border-pink-500/70 font-bold text-pink-300 shadow-lg shadow-pink-500/20">
-                      Critical Damage
+                      Extra Damage
                     </div>
                     <span className="text-3xl font-light text-muted-foreground/40 select-none">›</span>
                     <div className="px-5 py-2.5 rounded-full bg-purple-500/20 border border-purple-500/50 font-semibold text-purple-300">
-                      Attack +
+                      Critical Rate
+                    </div>
+                    <span className="text-3xl font-light text-muted-foreground/40 select-none">›</span>
+                    <div className="px-5 py-2.5 rounded-full bg-purple-500/20 border border-purple-500/50 font-semibold text-purple-300">
+                      Critical Damage
                     </div>
                     <span className="text-2xl text-muted-foreground/40">›</span>
                     <div className="px-5 py-2 rounded-full bg-muted/70 border border-border text-muted-foreground">
-                      Extra Damage
+                      Attack %
                     </div>
                     <span className="text-muted-foreground/60 mx-2">or</span>
                     <div className="px-5 py-2 rounded-full bg-muted/70 border border-border text-muted-foreground">
-                      Attack %
+                      Attack +
                     </div>
                   </div>
 
                   {/* Explanation */}
                   <div className="mt-7.5 mx-auto text-center">
                     <p className="text-[12px] leading-relaxed text-muted-foreground">
-                      <strong className="text-foreground">Placeholder</strong>
+                      <strong className="text-foreground">bleh blah blah</strong>
                     </p>
                   </div>
                 </div>
@@ -796,56 +795,58 @@ export default function VeronicaGuidePage() {
             {/* 5. Partners */}
             <section id="partners" className="rounded-lg border border-border bg-card p-8 scroll-mt-24">
               <h2 className="text-2xl font-bold mb-6 text-purple-400">5. Partners</h2>
-              <p className="text-muted-foreground mb-6">
-                These are Veronica's best partner characters that synergize well with her kit and playstyle.
+              <p className="text-muted-foreground mb-6 whitespace-pre-line">
+                {`These are Veronica's best Partners that synergize well with her kit and playstyle.
+                They are ranked on a scale of 1 to 5, with 1 being very bad  and 5 being best in slot.`}
+                
               </p>
 
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                 {[
                   {
                     id: 1,
-                    name: "Partner 1",
-                    role: "Support",
+                    name: "Daisy",
+                    role: "2/5",
                     image: "/images/partners/partner1.png",
                     description: "Placeholder partner explanation",
                     synergy: "Placeholder synergy details",
                   },
                   {
                     id: 2,
-                    name: "Partner 2",
-                    role: "DPS",
+                    name: "Nakia",
+                    role: "5/5",
                     image: "/images/partners/partner2.png",
                     description: "Placeholder partner explanation",
                     synergy: "Placeholder synergy details",
                   },
                   {
                     id: 3,
-                    name: "Partner 3",
-                    role: "Tank",
+                    name: "Marin",
+                    role: "1/5",
                     image: "/images/partners/partner3.png",
                     description: "Placeholder partner explanation",
                     synergy: "Placeholder synergy details",
                   },
                   {
                     id: 4,
-                    name: "Partner 4",
-                    role: "Healer",
+                    name: "Rosaria",
+                    role: "5/5",
                     image: "/images/partners/partner4.png",
                     description: "Placeholder partner explanation",
                     synergy: "Placeholder synergy details",
                   },
                   {
                     id: 5,
-                    name: "Partner 5",
-                    role: "Support",
+                    name: "Solia",
+                    role: "3/5",
                     image: "/images/partners/partner5.png",
                     description: "Placeholder partner explanation",
                     synergy: "Placeholder synergy details",
                   },
                   {
                     id: 6,
-                    name: "Partner 6",
-                    role: "DPS",
+                    name: "Tina",
+                    role: "0/5",
                     image: "/images/partners/partner6.png",
                     description: "Placeholder partner explanation",
                     synergy: "Placeholder synergy details",
@@ -864,8 +865,8 @@ export default function VeronicaGuidePage() {
                           className="object-cover w-full h-full"
                         />
                         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-2 pt-6">
-                          <p className="text-sm font-semibold text-white text-center">{partner.name}</p>
-                          <p className="text-xs text-purple-300 text-center">{partner.role}</p>
+                          <p className="text-[18px] font-semibold text-white text-center">{partner.name}</p>
+                          <p className="text-[16px] text-purple-300 text-center">{partner.role}</p>
                         </div>
                       </div>
                     </DialogTrigger>
@@ -915,7 +916,7 @@ export default function VeronicaGuidePage() {
                     <div className="group cursor-pointer rounded-xl border-2 border-purple-500/30 bg-gradient-to-br from-purple-500/5 to-transparent p-4 hover:border-purple-500 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-2 h-2 rounded-full bg-purple-500 animate-pulse"></div>
-                        <h3 className="text-base font-semibold text-purple-400">Team 1</h3>
+                        <h3 className="text-base font-semibold text-purple-400">Passion Weakness</h3>
                       </div>
                       <div className="grid grid-cols-3 gap-2 mb-3">
                         {/* Veronica */}
