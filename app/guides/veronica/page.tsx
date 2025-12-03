@@ -290,7 +290,7 @@ const getTierColor = (tier: string) => {
                 </div>
 
                 <div className="p-4 rounded-lg bg-background/50 border border-border">
-                  <h3 className="text-lg font-semibold mb-2 text-purple-300">Role: [Placeholder]</h3>
+                  <h3 className="text-lg font-semibold mb-2 text-purple-300">Draw Engine / DPS</h3>
                   <p className="text-muted-foreground leading-relaxed">
                    [Placeholder]
                   </p>
@@ -605,7 +605,7 @@ const getTierColor = (tier: string) => {
                           name: "Cursed Corpse",
                           effect: "Increases damage dealt to target inflicted with Agony by 10%",
                           icon: "/images/sets/cursed-corpse.webp",
-                          why: "Prioritize Cursed Corpse when Agony debuff is reliably applied. Otherwise, slot any Memory Fragment piece purely for its main stat + substats"
+                          why: "Prioritize Cursed Corpse when Agony debuff is reliably applied. Otherwise, slot any Memory Fragment piece purely for its substats"
                         },
                       ].map((set) => (
                         <ExpandableSetCard key={set.name} set={set} tier="bis" />
@@ -627,7 +627,7 @@ const getTierColor = (tier: string) => {
                           name: "Spark of Passion",
                           effect: "When Upgrade Cards are used, increase Damage Amount of the next 5 Passion Cards used by 20%",
                           icon: "/images/sets/spark-of-passion.webp",
-                          why: "Why?"
+                          why: "Due to Veronica's Reload mechanic, the Passion set's 20% bonus is effectively outperformed by the consistent +12% Attack provided by Black Wing. While Passion is a viable option, Blackwing offers better overall performance for her."
                         },
                         {
                           name: "Black Wing",
@@ -674,25 +674,25 @@ const getTierColor = (tier: string) => {
                 {/* Substat Priority */}
                 <div className="mt-10 text-center justify-center text-[12px]">
                   {/* Priority Chain */}
-                  <div className="flex items-center justify-center gap-4 md:gap-6 flex-wrap">
+                  <div className="flex items-center justify-center gap-4 md:gap-4 flex-wrap">
                     <div className="px-6 py-3 rounded-full bg-pink-500/20 border-2 border-pink-500/70 font-bold text-pink-300 shadow-lg shadow-pink-500/20">
-                      Critical Rate
-                    </div>
-                    <span className="text-3xl font-light text-muted-foreground/40 select-none">=</span>
-                    <div className="px-6 py-3 rounded-full bg-pink-500/20 border- border-2 border-pink-500/70 font-bold text-pink-300 shadow-lg shadow-pink-500/20">
-                      Critical Damage
+                      Extra Damage
                     </div>
                     <span className="text-3xl font-light text-muted-foreground/40 select-none">›</span>
                     <div className="px-5 py-2.5 rounded-full bg-purple-500/20 border border-purple-500/50 font-semibold text-purple-300">
-                      Attack +
+                      Critical Rate
+                    </div>
+                    <span className="text-3xl font-light text-muted-foreground/40 select-none">=</span>
+                    <div className="px-5 py-2.5 rounded-full bg-purple-500/20 border border-purple-500/50 font-semibold text-purple-300">
+                      Critical Damage
                     </div>
                     <span className="text-2xl text-muted-foreground/40">›</span>
                     <div className="px-5 py-2 rounded-full bg-muted/70 border border-border text-muted-foreground">
-                      Extra Damage
+                      Attack%
                     </div>
                     <span className="text-muted-foreground/60 mx-2">or</span>
                     <div className="px-5 py-2 rounded-full bg-muted/70 border border-border text-muted-foreground">
-                      Attack %
+                      Attack +
                     </div>
                   </div>
 
