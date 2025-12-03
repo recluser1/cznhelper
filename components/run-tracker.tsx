@@ -40,7 +40,7 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
       { name: "Resonating Darkness", image: "/images/character/rei/unique1.png" },
       { name: "Snack Time", image: "/images/character/rei/unique2.png" },
       { name: "Dark Condensation", image: "/images/character/rei/unique3.png" },
-      { name: "Predator's Blade", image: "/images/character/rei/unique4.png" },
+      { name: "Predator’s Blade", image: "/images/character/rei/unique4.png" },
     ],
   },
   owen: {
@@ -113,7 +113,7 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
     ],
     unique: [
       { name: "Maribell Shelter MK.II", image: "/images/character/maribell/unique1.png" },
-      { name: "Wolve's Dome", image: "/images/character/maribell/unique2.png" },
+      { name: "Wolve’s Dome", image: "/images/character/maribell/unique2.png" },
       { name: "Oh... I See.", image: "/images/character/maribell/unique3.png" },
       { name: "Shelter Strike", image: "/images/character/maribell/unique4.png" },
     ],
@@ -175,7 +175,7 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
       { name: "Target Spotted", image: "/images/character/selena/unique1.png" },
       { name: "Drone Bombing", image: "/images/character/selena/unique2.png" },
       { name: "Tactical Maneuver", image: "/images/character/selena/unique3.png" },
-      { name: "Sniper's Domain", image: "/images/character/selena/unique4.png" },
+      { name: "Sniper’s Domain", image: "/images/character/selena/unique4.png" },
     ],
   },
   nia: {
@@ -190,7 +190,7 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
       { name: "Mute Accent", image: "/images/character/nia/unique1.png" },
       { name: "Soul Rip", image: "/images/character/nia/unique2.png" },
       { name: "Adagio", image: "/images/character/nia/unique3.png" },
-      { name: "Nia's Curiosity", image: "/images/character/nia/unique4.png" },
+      { name: "Nia’s Curiosity", image: "/images/character/nia/unique4.png" },
     ],
   },
   kayron: {
@@ -250,7 +250,7 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
       { name: "Fan of Daggers", image: "/images/character/hugo/unique1.png" },
       { name: "Quick Fix", image: "/images/character/hugo/unique2.png" },
       { name: "Dingo Howling", image: "/images/character/hugo/unique3.png" },
-      { name: "Fixer's Approach", image: "/images/character/hugo/unique4.png" },
+      { name: "Fixer’s Approach", image: "/images/character/hugo/unique4.png" },
     ],
   },
   renoa: {
@@ -295,7 +295,7 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
       { name: "Rising Dragon Spire", image: "/images/character/mei-lin/unique1.png" },
       { name: "Unity of Attack and Defense", image: "/images/character/mei-lin/unique2.png" },
       { name: "Spirit of the Aroma", image: "/images/character/mei-lin/unique3.png" },
-      { name: "Flame Dragon's Sovereighty", image: "/images/character/mei-lin/unique4.png" },
+      { name: "Flame Dragon’s Sovereighty", image: "/images/character/mei-lin/unique4.png" },
     ],
   },
   orlea: {
@@ -303,7 +303,7 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
     starter: [
       { name: "Attack, My Minions", image: "/images/character/orlea/starter1.png" },
       { name: "Attack, My Minions", image: "/images/character/orlea/starter2.png" },
-      { name: "Heaven's Healing", image: "/images/character/orlea/starter3.png" },
+      { name: "Heaven’s Healing", image: "/images/character/orlea/starter3.png" },
       { name: "Sacred Censer", image: "/images/character/orlea/starter4.png" },
     ],
     unique: [
@@ -348,7 +348,7 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
     starter: [
       { name: "Lashing", image: "/images/character/khalipe/starter1.png" },
       { name: "Upward Slash", image: "/images/character/khalipe/starter2.png" },
-      { name: "Tyr's Vow", image: "/images/character/khalipe/starter3.png" },
+      { name: "Tyr’s Vow", image: "/images/character/khalipe/starter3.png" },
       { name: "Vulture Ejection", image: "/images/character/khalipe/starter4.png" },
     ],
     unique: [
@@ -356,6 +356,21 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
       { name: "Overpower", image: "/images/character/khalipe/unique2.png" },
       { name: "Rally", image: "/images/character/khalipe/unique3.png" },
       { name: "Absolute Protection", image: "/images/character/khalipe/unique4.png" },
+    ],
+  },
+  chizuru: {
+    portrait: "/images/character/chizuru/portrait.png",
+    starter: [
+      { name: "Moonslash", image: "/images/character/chizuru/starter1.png" },
+      { name: "Moonslash", image: "/images/character/chizuru/starter2.png" },
+      { name: "Spiritflame’s Ward", image: "/images/character/chizuru/starter3.png" },
+      { name: "Karmic Flames", image: "/images/character/chizuru/starter4.png" },
+    ],
+    unique: [
+      { name: "Tsukuyomi", image: "/images/character/chizuru/unique1.png" },
+      { name: "Bound At Dusk", image: "/images/character/chizuru/unique2.png" },
+      { name: "Oni Hunt", image: "/images/character/chizuru/unique3.png" },
+      { name: "Shadow of the Moon", image: "/images/character/chizuru/unique4.png" },
     ],
   },
   luke: {
@@ -1219,7 +1234,7 @@ export function RunTracker() {
                             />
                           )}
 
-                          {["tressa", "rin", "renoa", "rei", "kayron"].includes(character) && ( // Use character state
+                          {["tressa", "rin", "renoa", "rei", "kayron", "chizuru"].includes(character) && ( // Use character state
                             <img
                               src="/images/card/void-border.png"
                               alt="Void border"
