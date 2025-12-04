@@ -783,7 +783,7 @@ export function RunTracker() {
               isRemoved: true,
               isMutantSample: true,
               removalCost: 0,
-              image: "/images/remove.png",
+              image: "/images/card/remove.png",
             }
           : c,
       ),
