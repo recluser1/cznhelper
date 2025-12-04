@@ -31,8 +31,6 @@ export default function VeronicaGuidePage() {
     { id: "pendant-of-resolution", title: "2.4. Pendant of Resolution", level: 2 },
     { id: "recommended-save-data", title: "3. Recommended Save Data", level: 1 },
     { id: "memory-fragments", title: "4. Memory Fragments", level: 1 },
-    { id: "main-stats", title: "4.1. Main", level: 2 },
-    { id: "sub-stats", title: "4.2. Sub", level: 2 },
     { id: "partners", title: "5. Partners", level: 1 },
     { id: "teams", title: "6. Teams", level: 1 },
   ]
@@ -45,7 +43,7 @@ export default function VeronicaGuidePage() {
       baseType: "upgrade",
       epiphanies: [
         {
-          tier: "A+",
+          tier: "A",
           cost: 1,
           type: "upgrade",
           description: "[ Unique / Initiation ] Create 1 Ballista card(s).\nAt the start of the turn,\ncreate 1 Ballista card(s),\nwith a 50% chance to additionally create 1 more",
@@ -60,7 +58,7 @@ export default function VeronicaGuidePage() {
           reasoning: "[Placeholder reasoning text]",
         },
         {
-          tier: "B",
+          tier: "C",
           cost: 1,
           type: "upgrade",
           description: "[ Unique / Initiation ] Create 1 Enhanced Ballista.\nAt the start of the turn, \ncreate 1 Enhanced Ballista card(s)",
@@ -96,7 +94,7 @@ export default function VeronicaGuidePage() {
           reasoning: "[Placeholder]",
         },
         {
-          tier: "A+",
+          tier: "A",
           cost: 1,
           type: "skill",
           description: "150% Shield \nDraw 2 other \nCombatant's card(s) \nIf that card is a Skill Card, \n1 Reload",
@@ -140,7 +138,7 @@ export default function VeronicaGuidePage() {
           reasoning: "[Placeholder]",
         },
         {
-          tier: "A+",
+          tier: "A",
           cost: 0,
           type: "upgrade",
           description:
@@ -148,7 +146,7 @@ export default function VeronicaGuidePage() {
           reasoning: "[Placeholder]",
         },
         {
-          tier: "A",
+          tier: "C",
           cost: 1,
           type: "skill",
           description: "[Exhaust 2] For 1 turn(s), when a \ncard is used, \n1 Reload",
@@ -198,14 +196,14 @@ export default function VeronicaGuidePage() {
           reasoning: "[Placeholder]",
         },
         {
-          tier: "S",
+          tier: "Situational",
           cost: 1,
           type: "skill",
           description: "+250% Damage Amount of 1 random Ballista card in hand, \nExhaust after activation",
           reasoning: "[Placeholder]",
         },
         {
-          tier: "C",
+          tier: "B",
           cost: 1,
           type: "skill",
           description: "Select and Exhaust 1 Ballista in hand \nCreate 2 Ballista, decrease Damage Amount of those cards by 25% until activated",
@@ -228,21 +226,66 @@ export default function VeronicaGuidePage() {
   const getTierColor = (tier: string) => {
     switch (tier) {
       case "S+":
-        return "bg-gray-950 text-pink-300 border-pink-500/80 shadow-2xl shadow-pink-500/60 ring-4 ring-pink-500/40 font-bold"
+        return `
+          bg-black/80
+          text-pink-400
+          font-black text-xs tracking-widest
+          border border-pink-500/60
+          shadow-lg shadow-pink-500/30
+          ring-1 ring-pink-500/40
+          ring-offset-1 ring-offset-pink-900/20
+          relative overflow-hidden
+        `
+  
       case "S":
-        return "bg-gray-950 text-orange-300 border-orange-500/70 shadow-xl shadow-orange-500/50 ring-4 ring-orange-500/30 font-bold"
-      case "A+":
-        return "bg-gray-950 text-purple-300 border-purple-500/70 shadow-lg shadow-purple-500/40 ring-2 ring-purple-500/30 font-semibold"
+        return `
+          bg-black/80
+          text-orange-400
+          font-bold text-xs tracking-wider
+          border border-orange-500/60
+          shadow-lg shadow-orange-500/25
+          ring-1 ring-orange-500/30
+          ring-offset-1 ring-offset-orange-900/20
+        `
+  
       case "A":
-        return "bg-gray-950 text-indigo-300 border-indigo-500/60 shadow-md shadow-indigo-500/30 ring-2 ring-indigo-500/20 font-semibold"
+        return `
+          bg-black/70
+          text-purple-300
+          font-bold text-xs tracking-wide
+          border border-purple-500/50
+          shadow-md shadow-purple-500/20
+          ring-1 ring-purple-500/20
+        `
+  
       case "B":
-        return "bg-gray-950 text-cyan-300 border-cyan-500/50 shadow shadow-cyan-500/20 ring-1 ring-cyan-500/20"
+        return `
+          bg-black/60
+          text-cyan-300
+          font-semibold text-xs
+          border border-cyan-600/40
+          shadow shadow-cyan-500/10
+        `
+  
       case "C":
-        return "bg-gray-950 text-emerald-400 border-emerald-600/40 shadow-sm shadow-emerald-600/10"
+        return `
+          bg-black/50
+          text-emerald-400
+          font-medium text-xs
+          border border-emerald-700/30
+        `
+  
       case "Situational":
-        return "bg-gray-950 text-gray-500 border-gray-700/50"
+      case "Niche":
+        return `
+          bg-gray-900/80
+          text-gray-400
+          font-medium text-xs
+          border border-gray-700/50
+        `
+  
       default:
-        return "bg-gray-950 text-gray-600"
+        return "bg-gray-900/70 text-gray-600 border border-gray-800/50 text-xs"
     }
   }
 
@@ -324,8 +367,8 @@ export default function VeronicaGuidePage() {
             <section id="card-epiphany" className="rounded-lg border border-border bg-card p-8 scroll-mt-24">
               <h2 className="text-2xl font-bold mb-6 text-purple-400">2. Card Epiphany</h2>
               <p className="text-muted-foreground mb-6 whitespace-pre-line">
-              {`S+ (Top Tier); S (Best); A+ (Very Strong); A (Strong); B (Weak); C (Very Weak); Situational (Niche).
-              Click on any card group to view detailed explanations.`}
+              {`S+ (Best), S (Excellent), A (Strong), B (Average), C (Low Impact), Situational (Niche-use only). 
+              Click a Epiphany group for details.`}
               </p>
 
               <div className="space-y-12">
@@ -712,7 +755,7 @@ export default function VeronicaGuidePage() {
                         effect:
                           "When Upgrade Cards are used, increase Damage Amount of the next 5 Passion Cards used by 20%",
                         icon: "/images/sets/spark-of-passion.webp",
-                        why: "Due to Veronica's Reload mechanic, the Passion set's 20% bonus is effectively outperformed by the consistent +12% Attack provided by Black Wing. While Passion is a viable option, Black Wing offers better overall performance for her."
+                        why: "Due to Veronica's Reload mechanic, the Passion set's 20% bonus is effectively outperformed by the consistent +12% Attack provided by Black Wing or +25% Critical Damage from Executioner's Tool. While Passion is a viable option, using 2/2 set offers better overall performance for her."
                       },
 
                       {
@@ -774,7 +817,7 @@ export default function VeronicaGuidePage() {
                     <div className="px-5 py-2.5 rounded-full bg-purple-500/20 border border-purple-500/50 font-semibold text-purple-300">
                       Critical Rate
                     </div>
-                    <span className="text-3xl font-light text-muted-foreground/40 select-none">›</span>
+                    <span className="text-3xl font-light text-muted-foreground/40 select-none">=</span>
                     <div className="px-5 py-2.5 rounded-full bg-purple-500/20 border border-purple-500/50 font-semibold text-purple-300">
                       Critical Damage
                     </div>
@@ -861,18 +904,26 @@ export default function VeronicaGuidePage() {
                     onOpenChange={(open) => setSelectedPartner(open ? partner.id : null)}
                   >
                     <DialogTrigger asChild>
-                      <div className="relative aspect-[9/16] hover:scale-105 rounded-lg overflow-hidden border-2 border-border hover:border-purple-400 bg-card cursor-pointer transition-all ">
-                        <img
-                          src={partner.image || "/placeholder.svg"}
-                          alt={partner.name}
-                          className="object-cover w-full h-full"
-                        />
-                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-2 pt-6">
-                          <p className="text-[18px] font-semibold text-white text-center">{partner.name}</p>
-                          <p className="text-[24px] text-purple-300 text-center px-5">{partner.role}</p>
+                      <div className="flex flex-col items-center gap-4 cursor-pointer">
+                        {/* Tier Badge outside the card */}
+                        <span className={`px-3 py-1.5 rounded-full text-sm font-bold ${getTierColor(partner.role)}`}>
+                          {partner.role} Tier
+                        </span>
+              
+                        {/* Card Image */}
+                        <div className="relative aspect-[9/16] hover:scale-105 rounded-lg overflow-hidden border-2 border-border hover:border-purple-400 bg-card transition-all">
+                          <img
+                            src={partner.image || "/placeholder.svg"}
+                            alt={partner.name}
+                            className="object-cover w-full h-full"
+                          />
+                          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-2 pt-6">
+                            <p className="text-[18px] py-2 font-semibold text-white text-center">{partner.name}</p>
+                          </div>
                         </div>
                       </div>
                     </DialogTrigger>
+              
                     <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
                       <DialogHeader>
                         <DialogTitle className="text-2xl text-purple-400 text-center">{partner.name}</DialogTitle>
@@ -914,9 +965,10 @@ export default function VeronicaGuidePage() {
                     <div className="group cursor-pointer hover:scale-105 rounded-xl border-2 border-purple-500/30 bg-gradient-to-br from-purple-500/5 to-transparent p-4 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-2 h-2 rounded-full bg-red-400"></div>
-                        <h3 className="text-base font-semibold text-[#ff7a7a]">Passion Weakness</h3>
+                        <h3 className="text-base font-semibold text-[#ff7a7a]">Mei Lin Hypercarry</h3>
                         </div>
                       <div className="grid grid-cols-3 gap-2 mb-3">
+
                         {/* Veronica */}
                         <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-red-400/50 bg-card shadow-md group- transition-transform">
                           <img
@@ -1005,12 +1057,13 @@ export default function VeronicaGuidePage() {
                 {/* Team 2 */}
                 <Dialog>
                   <DialogTrigger asChild>
-                    <div className="group cursor-pointer hover:scale-105 rounded-xl border-2 border-blue-500/30 bg-gradient-to-br from-blue-500/5 to-transparent p-4 hover:border-purple-400 hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300">
+                    <div className="group cursor-pointer hover:scale-105 rounded-xl border-2 border-purple-500/30 bg-gradient-to-br from-purple-500/5 to-transparent p-4 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300">
                       <div className="flex items-center gap-2 mb-3">
-                        <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div>
-                        <h3 className="text-base font-semibold text-blue-400">Team 2</h3>
-                      </div>
+                        <div className="w-2 h-2 rounded-full bg-red-400"></div>
+                        <h3 className="text-base font-semibold text-[#ff7a7a]">Veronica DPS</h3>
+                        </div>
                       <div className="grid grid-cols-3 gap-2 mb-3">
+
                         {/* Veronica */}
                         <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-red-400/50 bg-card shadow-md group- transition-transform">
                           <img
@@ -1027,15 +1080,15 @@ export default function VeronicaGuidePage() {
                             </div>
                           </div>
                           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent px-1 py-1.5">
-                            <p className="text-[10px] font-semibold text-white text-center">Veronica</p>
+                            <p className="text-sm font-semibold text-white text-center">Veronica</p>
                           </div>
                         </div>
 
                         {/* Owen */}
-                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-blue-500/50 bg-card shadow-md group- transition-transform">
+                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-red-400/50 bg-card shadow-md group- transition-transform">
                           <img
                             src="/images/characters/owenhalf.webp"
-                            alt="Haru"
+                            alt="Owen"
                             className="object-cover w-full h-full"
                           />
                           <div className="absolute top-1 left-1 flex flex-col gap-0.5">
@@ -1047,121 +1100,23 @@ export default function VeronicaGuidePage() {
                             </div>
                           </div>
                           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent px-1 py-1.5">
-                            <p className="text-[10px] font-semibold text-white text-center">Haru</p>
+                            <p className="text-sm font-semibold text-white text-center">Owen</p>
                           </div>
                         </div>
 
-                        {/* Orlea */}
-                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-pink-500/50 bg-card shadow-md group- transition-transform">
-                          <img
-                            src="/images/characters/orleahalf.webp"
-                            alt="Orlea"
-                            className="object-cover w-full h-full"
-                          />
+                        {/* Rei */}
+                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-violet-400/50 bg-card shadow-md group- transition-transform">
+                          <img src="/images/characters/reihalf.webp" alt="Rei" className="object-cover w-full h-full" />
                           <div className="absolute top-1 left-1 flex flex-col gap-0.5">
                             <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
-                              <img src="/images/icon-job-vanguard.webp" alt="Vanguard" className="w-full h-full" />
-                            </div>
-                            <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
-                              <img src="/images/icon-ego-instinct.webp" alt="Instinct" className="w-full h-full" />
-                            </div>
-                          </div>
-                          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent px-1 py-1.5">
-                            <p className="text-[10px] font-semibold text-white text-center">Orlea</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex items-center justify-between text-xs text-muted-foreground">
-                        <span className="font-medium">[Placeholder Name]</span>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-4 w-4 group-hover:translate-x-1 transition-transform"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </div>
-                    </div>
-                  </DialogTrigger>
-                  <DialogContent className="max-w-2xl">
-                    <DialogHeader>
-                      <DialogTitle className="text-2xl text-blue-400">Team 2: [Placeholder Name]</DialogTitle>
-                      <DialogDescription>Detailed team composition and synergy explanation</DialogDescription>
-                    </DialogHeader>
-                    <div className="space-y-4 mt-4">
-                      <p className="text-muted-foreground leading-relaxed">
-                        [Placeholder explanation for Team 2 - why this composition works, synergies between characters,
-                        role distribution (DPS/Support/Control), strengths and weaknesses, ideal use cases and game
-                        modes]
-                      </p>
-                    </div>
-                  </DialogContent>
-                </Dialog>
-
-                {/* Team 3 */}
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <div className="group cursor-pointer hover:scale-105 rounded-xl border-2 border-cyan-500/30 bg-gradient-to-br from-cyan-500/5 to-transparent p-4 hover:border-cyan-500 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300">
-                      <div className="flex items-center gap-2 mb-3">
-                        <div className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse"></div>
-                        <h3 className="text-base font-semibold text-cyan-400">Team 3</h3>
-                      </div>
-                      <div className="grid grid-cols-3 gap-2 mb-3">
-                        {/* Veronica */}
-                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-purple-500/50 bg-card shadow-md group- transition-transform">
-                          <img
-                            src="/images/characters/veronicahalf.webp"
-                            alt="Veronica"
-                            className="object-cover w-full h-full"
-                          />
-                          <div className="absolute top-1 left-1 flex flex-col gap-0.5">
-                            <div className="w-6 h-6 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
-                              <img src="/images/icon-job-ranger.webp" alt="Ranger" className="w-full h-full" />
-                            </div>
-                            <div className="w-6 h-6 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
-                              <img src="/images/icon-ego-passion.webp" alt="Passion" className="w-full h-full" />
-                            </div>
-                          </div>
-                          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent px-1 py-1.5">
-                            <p className="text-[10px] font-semibold text-white text-center">Veronica</p>
-                          </div>
-                        </div>
-
-                        {/* Rin */}
-                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-blue-500/50 bg-card shadow-md group- transition-transform">
-                          <img src="/images/characters/rinhalf.webp" alt="Rin" className="object-cover w-full h-full" />
-                          <div className="absolute top-1 left-1 flex flex-col gap-0.5">
-                            <div className="w-6 h-6 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
-                              <img src="/images/icon-job-ranger.webp" alt="Ranger" className="w-full h-full" />
-                            </div>
-                            <div className="w-6 h-6 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
-                              <img src="/images/icon-ego-justice.webp" alt="Justice" className="w-full h-full" />
-                            </div>
-                          </div>
-                          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent px-1 py-1.5">
-                            <p className="text-[10px] font-semibold text-white text-center">Rin</p>
-                          </div>
-                        </div>
-
-                        {/* Owen */}
-                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-gray-500/50 bg-card shadow-md group- transition-transform">
-                          <img
-                            src="/images/characters/owenhalf.webp"
-                            alt="Owen"
-                            className="object-cover w-full h-full"
-                          />
-                          <div className="absolute top-1 left-1 flex flex-col gap-0.5">
-                            <div className="w-6 h-6 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
                               <img src="/images/icon-job-controller.webp" alt="Controller" className="w-full h-full" />
                             </div>
-                            <div className="w-6 h-6 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
-                              <img src="/images/icon-ego-order.webp" alt="Order" className="w-full h-full" />
+                            <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
+                              <img src="/images/icon-ego-void.webp" alt="Void" className="w-full h-full" />
                             </div>
                           </div>
                           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent px-1 py-1.5">
-                            <p className="text-[10px] font-semibold text-white text-center">Owen</p>
+                            <p className="text-sm font-semibold text-white text-center">Rei</p>
                           </div>
                         </div>
                       </div>
@@ -1181,12 +1136,12 @@ export default function VeronicaGuidePage() {
                   </DialogTrigger>
                   <DialogContent className="max-w-2xl">
                     <DialogHeader>
-                      <DialogTitle className="text-2xl text-cyan-400">Team 3: [Placeholder Name]</DialogTitle>
+                      <DialogTitle className="text-2xl text-purple-400">Team 1: [Placeholder Name]</DialogTitle>
                       <DialogDescription>Detailed team composition and synergy explanation</DialogDescription>
                     </DialogHeader>
                     <div className="space-y-4 mt-4">
                       <p className="text-muted-foreground leading-relaxed">
-                        [Placeholder explanation for Team 3 - why this composition works, synergies between characters,
+                        [Placeholder explanation for Team 1 - why this composition works, synergies between characters,
                         role distribution (DPS/Support/Control), strengths and weaknesses, ideal use cases and game
                         modes]
                       </p>
