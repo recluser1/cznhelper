@@ -868,7 +868,7 @@ export default function VeronicaGuidePage() {
                   {
                     id: 3,
                     name: "Marin",
-                    role: "B",
+                    role: "S+",
                     image: "/images/partners/partner3.png",
                     description: "Placeholder partner explanation",
                     synergy: "Placeholder synergy details",
@@ -892,7 +892,7 @@ export default function VeronicaGuidePage() {
                   {
                     id: 6,
                     name: "Tina",
-                    role: "?",
+                    role: "",
                     image: "/images/partners/partner6.png",
                     description: "Placeholder partner explanation",
                     synergy: "Placeholder synergy details",
