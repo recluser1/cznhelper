@@ -534,7 +534,7 @@ export default function VeronicaGuidePage() {
                             {cardData.name} - Epiphany Guide
                           </DialogTitle>
                           <DialogDescription className="text-base">
-                            Detailed explanations for each epiphany variant
+                            Detailed explanations for each epiphany
                           </DialogDescription>
                         </DialogHeader>
                         <div className="space-y-6 mt-4">
