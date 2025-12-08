@@ -3,12 +3,12 @@
 export function GearTooltip({ text }: { text: string }) {
   return (
     <div className="absolute top-2 right-2 group inline-block">
-      {/* Icon */}
+
       <div className="w-5 h-5 flex items-center justify-center rounded-full bg-black/40 text-gray-300 text-xs cursor-pointer">
         ?
       </div>
 
-      {/* Tooltip Bubble */}
+
       <div
         className="
           absolute -right-2 -top-12
@@ -24,7 +24,6 @@ export function GearTooltip({ text }: { text: string }) {
       >
         {text}
 
-        {/* Arrow */}
         <div
           className="
             absolute right-2 top-full

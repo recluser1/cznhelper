@@ -18,13 +18,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 
-/**
- * Inline CHARACTER_CARDS with images (option 2).
- * Keep images in /public/images/character/<key>/
- * e.g. /public/images/character/amir/starter1.png, unique1.png, portrait.png
- */
 
-// helper type for entries
 type CardEntry = { name: string; image?: string }
 
 const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[]; unique: CardEntry[] }> = {
@@ -388,11 +382,9 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
       { name: "Finisher Round", image: "/images/character/luke/unique4.png" },
     ],
   },
-  // Duplicate entries for renoa, veronica, mei-lin, orlea, rin, magna, khalipe, luke were removed as they were redundant.
-  // Assuming the first instance is the correct one.
+
 }
 
-// default images for generic cards
 const DEFAULT_CARD_IMAGES: Record<"neutral" | "monster" | "forbidden" | "starter" | "placeholder", string> = {
   neutral: "/images/card/neutral.png",
   monster: "/images/card/monster.png",
@@ -431,12 +423,12 @@ type DeckCard = {
   isRemoved: boolean
   wasConverted: boolean
   removalCost?: number
-  isMutantSample?: boolean // Added to differentiate mutant samples
+  isMutantSample?: boolean
   isDuplicated?: boolean
 }
 
 type Action = {
-  type: "epiphany" | "divine" | "duplicate" | "convert" | "remove" | "add" | "restore" | "mutant" // Added 'mutant' action type
+  type: "epiphany" | "divine" | "duplicate" | "convert" | "remove" | "add" | "restore" | "mutant"
   cardId: string
   previousState?: DeckCard
   previousDeck?: DeckCard[]
@@ -498,7 +490,7 @@ export function RunTracker() {
   }, [])
 
   useEffect(() => {
-    // Only save if we have some data to save (character selected or deck has cards)
+    // Only save if we have some data to save
     if (character || deck.length > 0) {
       const state = {
         character,
@@ -554,7 +546,7 @@ export function RunTracker() {
           id: String(index + 5),
           name: card.name,
           image: card.image,
-          cardType: "starter" as CardType, // Defaulting to starter, might need adjustment if unique cards have different types
+          cardType: "starter" as CardType,
           isStartingCard: true,
           hasNormalEpiphany: false,
           hasDivineEpiphany: false,
@@ -566,7 +558,7 @@ export function RunTracker() {
     }
   }
 
-  const limit = TIER_LIMITS[tier] + (nightmareMode ? 10 : 0) // Use nightmareMode
+  const limit = TIER_LIMITS[tier] + (nightmareMode ? 10 : 0) // Deep Trauma
 
   const calculateRemovalCost = (card: DeckCard, currentRemovalCount: number): number => {
     const count = currentRemovalCount + 1
@@ -702,9 +694,9 @@ export function RunTracker() {
     const newCard: DeckCard = {
       ...card,
       id: Date.now().toString(),
-      name: card.name, // Changed from `${card.name} (Copy)`
+      name: card.name,
       isRemoved: false,
-      isDuplicated: true, // Added flag
+      isDuplicated: true,
     }
 
     setActionHistory([
@@ -929,7 +921,7 @@ export function RunTracker() {
         id: "5",
         name: characterData ? (characterData.unique[0] as CardEntry).name : "",
         image: characterData ? (characterData.unique[0] as CardEntry).image : undefined,
-        cardType: "starter", // Defaulting to starter, might need adjustment if unique cards have different types
+        cardType: "starter", // Defaulting to starter
         isStartingCard: true,
         hasNormalEpiphany: false,
         hasDivineEpiphany: false,
@@ -1032,20 +1024,6 @@ export function RunTracker() {
   return (
     <TooltipProvider>
       <div className="space-y-6">
-        {/* Warning banner added to match site design */}
-        <div
-          role="alert"
-          className="rounded-md border border-[#C41729]/30 bg-[#C41729]/10 p-3 text-sm text-[#C41729] flex items-start gap-2"
-        >
-          <AlertTriangle className="h-4 w-4 mt-0.5" />
-          <div className="leading-tight">
-            <strong className="font-semibold"></strong> There’s a bug making [Remove] card conversions cost 0 — i.e.
-            converting a card to a Mutant Sample or Fresh Meat currently costs 0
-            <br />
-            If you converted a card into a [Remove], just don’t remove the card — not removing it will cost 0 when the
-            run end.
-          </div>
-        </div>
 
         <div className="space-y-1">
           <h2 className="text-2xl font-bold">Run Tracker</h2>
@@ -1057,7 +1035,7 @@ export function RunTracker() {
             <Card>
               <CardHeader>
                 <CardTitle>Run Configuration</CardTitle>
-                <CardDescription>Select your tier and mode</CardDescription>
+                <CardDescription>Select your Tier</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-end gap-4">
@@ -1426,7 +1404,6 @@ export function RunTracker() {
                     <div className="grid gap-3">
                       <Button
                         variant="outline"
-                        // CHANGE: Changed from harsh #19F7E1 to softer cyan-400
                         className="h-20 border-cyan-400/20 bg-[#0A0B0F] text-[#C3C7D0] hover:border-cyan-400/40 hover:bg-cyan-400/10 hover:text-cyan-400"
                         onClick={() => addNewCard("neutral")}
                       >
@@ -1437,7 +1414,6 @@ export function RunTracker() {
                       </Button>
                       <Button
                         variant="outline"
-                        // CHANGE: Changed from harsh #5B1FAF to softer purple-400
                         className="h-20 border-purple-400/20 bg-[#0A0B0F] text-[#C3C7D0] hover:border-purple-400/40 hover:bg-purple-400/10 hover:text-purple-400"
                         onClick={() => addNewCard("monster")}
                       >

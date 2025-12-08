@@ -84,9 +84,8 @@
   scrollbar-width: none; /* Firefox */
 }
 
-/* drop this in globals.css */
 .text-discord-muted {
-  color: #caccd1; /* very soft white-gray */
+  color: #caccd1;
 }
 
 @theme inline {

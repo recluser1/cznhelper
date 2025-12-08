@@ -23,14 +23,12 @@ export default function ExpandableSetCard({
 }: Props) {
   return (
     <div className="flex flex-col">
-      {/* Clickable Card */}
       <button
         onClick={onToggle}
         className="w-full text-left group transition-all duration-300"
       >
         <div className="rounded-lg overflow-hidden border-2 border-border bg-card hover:border-purple-400 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-400/20">
           <div className="flex items-center gap-5 p-5">
-            {/* Icon */}
             <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 ring-2 ring-border/50">
               <img
                 src={set.icon}
@@ -38,8 +36,6 @@ export default function ExpandableSetCard({
                 className="w-full h-full object-cover"
               />
             </div>
-
-            {/* Text */}
             <div className="flex-1 min-w-0">
               <div className="flex items-center justify-between">
                 <h3 className="font-bold text-foreground text-lg">{set.name}</h3>
@@ -56,8 +52,6 @@ export default function ExpandableSetCard({
           </div>
         </div>
       </button>
-
-      {/* Expandable Explanation */}
       <div
         className={`overflow-hidden transition-all duration-300 ease-in-out ${
           isExpanded ? "max-h-64 opacity-100 mt-4" : "max-h-0 opacity-0"
