@@ -1229,7 +1229,7 @@ export function RunTracker() {
                 </div>
 
 
-                <div className="grid grid-cols-4 gap-3 max-w-[780px]">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 max-w-[780px] mx-auto">
                   {deck.map((card, index) => (
                     <div
                       key={card.id}
