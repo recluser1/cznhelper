@@ -1275,7 +1275,7 @@ export function RunTracker() {
                             <img
                               src={card.image || "/placeholder.svg"}
                               alt={card.name || "card image"}
-                              className={`absolute inset-0 h-[100%] w-full overflow-hidden scale-105 ${card.isDuplicated ? "scale-x-[-1]" : ""}`}
+                              className={`absolute inset-0 w-full overflow-hidden scale-106 ${card.isDuplicated ? "scale-x-[-1]" : ""}`}
                             />
                           ) : (
                             <div className="absolute inset-0 flex items-center justify-center bg-card/50 border-2 border-dashed border-border/30 text-xs text-muted-foreground">
@@ -1345,7 +1345,7 @@ export function RunTracker() {
                             <img
                               src="/images/card/deco_card_copy.png"
                               alt="Duplicate border"
-                              className="absolute -right-0.5 top-0 h-full w-auto z-[7] pointer-events-none"
+                              className="absolute right-0 top-0 h-full w-auto z-[7] pointer-events-none"
                             />
                           )}
 
