@@ -1345,7 +1345,7 @@ export function RunTracker() {
                             <img
                               src="/images/card/deco_card_copy.png"
                               alt="Duplicate border"
-                              className="absolute right-0 top-0 h-full w-auto z-[7] pointer-events-none"
+                              className="absolute -right-0.5 top-0 h-full w-auto z-[7] pointer-events-none"
                             />
                           )}
 
