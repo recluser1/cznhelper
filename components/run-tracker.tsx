@@ -425,6 +425,7 @@ type DeckCard = {
   removalCost?: number
   isMutantSample?: boolean
   isDuplicated?: boolean
+  duplicationCost?: number
 }
 
 type Action = {
@@ -685,6 +686,7 @@ export function RunTracker() {
     setSelectedCard(null)
   }
 
+  
   const duplicateCard = (cardId: string) => {
     const card = deck.find((c) => c.id === cardId)
     if (!card || card.isRemoved) return
@@ -697,6 +699,7 @@ export function RunTracker() {
       name: card.name,
       isRemoved: false,
       isDuplicated: true,
+      duplicationCost: cost,
     }
 
     setActionHistory([
@@ -716,13 +719,30 @@ export function RunTracker() {
     setSelectedCard(null)
   }
 
+  const getDuplicationCostForCard = (card: DeckCard): number => {
+    if (!card.isDuplicated) return 0
+  
+    // how many duplicates were made BEFORE this one
+    const previousDupes = deck.filter(c => 
+      c.isDuplicated && 
+      c.id !== card.id &&
+      deck.findIndex(dc => dc.id === c.id) < deck.findIndex(dc => dc.id === card.id)
+    ).length
+  
+    if (previousDupes === 0) return 0
+    if (previousDupes === 1) return 10
+    if (previousDupes === 2) return 30
+    if (previousDupes === 3) return 50
+    return 70
+  }
+
+
   const convertCard = (cardId: string) => {
     const card = deck.find((c) => c.id === cardId)
-    if (!card || card.isRemoved || card.wasConverted) return
-    if (card.cardType === "forbidden") return
-
+    if (!card || card.isRemoved || card.wasConverted || card.cardType === "forbidden") return
+  
     const cost = calculateConversionCost(card)
-
+  
     setActionHistory([
       ...actionHistory,
       {
@@ -733,7 +753,7 @@ export function RunTracker() {
         previousConversionCount: conversionCount,
       },
     ])
-
+  
     setDeck(
       deck.map((c) =>
         c.id === cardId
@@ -743,10 +763,12 @@ export function RunTracker() {
               wasConverted: true,
               isStartingCard: false,
               image: DEFAULT_CARD_IMAGES.neutral,
+              name: "Neutral Card",
             }
-          : c,
-      ),
+          : c
+      )
     )
+  
     setConversionCount(conversionCount + 1)
     setTotalPoints(totalPoints + cost)
     setSelectedCard(null)
@@ -801,7 +823,6 @@ export function RunTracker() {
 
     // Starter/base card tax (+20) if applicable
     const starterTax = card.isStartingCard ? 20 : 0
-
     // Total points contributed by the card (base + epiphanies)
     const totalCardPoints = getCardPointValue(card)
 
@@ -812,17 +833,34 @@ export function RunTracker() {
         ? -totalCardPoints + starterTax + scaleCost
         : scaleCost + starterTax - totalCardPoints
 
-    setDeck(deck.map((c) => (c.id === cardId ? { ...c, isRemoved: true, removalCost } : c)))
+        setActionHistory([
+          ...actionHistory,
+          {
+            type: "remove",
+            cardId,
+            previousDeck: [...deck],
+            previousPoints: totalPoints,
+            previousRemovalCount: removalCount,
+          },
+        ])
 
+    setDeck(deck.map((c) => (c.id === cardId ? { ...c, isRemoved: true, removalCost } : c)))
     setRemovalCount(newRemovalCount)
     setTotalPoints(totalPoints + removalCost)
     setSelectedCard(null)
   }
 
   const addNewCard = (type: CardType) => {
+    const nameMap = {
+      neutral: "Neutral Card",
+      monster: "Monster Card",
+      forbidden: "Forbidden Card",
+      starter: "Starter Card", // just in case
+    }
+  
     const newCard: DeckCard = {
       id: Date.now().toString(),
-      name: "",
+      name: nameMap[type],
       image: DEFAULT_CARD_IMAGES[type] ?? DEFAULT_CARD_IMAGES.placeholder,
       cardType: type,
       isStartingCard: false,
@@ -831,7 +869,7 @@ export function RunTracker() {
       isRemoved: false,
       wasConverted: false,
     }
-
+  
     setActionHistory([
       ...actionHistory,
       {
@@ -841,33 +879,33 @@ export function RunTracker() {
         previousPoints: totalPoints,
       },
     ])
-
+  
     setDeck([...deck, newCard])
     setTotalPoints(totalPoints + getCardPointValue(newCard))
     setShowAddCard(false)
   }
 
-  const restoreCard = (cardId: string) => {
-    const card = deck.find((c) => c.id === cardId)
-    if (!card || !card.isRemoved) return
+  // const restoreCard = (cardId: string) => {
+  //   const card = deck.find((c) => c.id === cardId)
+  //   if (!card || !card.isRemoved) return
 
-    const cost = card.removalCost || 0
+  //   const cost = card.removalCost || 0
 
-    setActionHistory([
-      ...actionHistory,
-      {
-        type: "restore",
-        cardId,
-        previousDeck: [...deck],
-        previousPoints: totalPoints,
-        previousRemovalCount: removalCount,
-      },
-    ])
+  //   setActionHistory([
+  //     ...actionHistory,
+  //     {
+  //       type: "restore",
+  //       cardId,
+  //       previousDeck: [...deck],
+  //       previousPoints: totalPoints,
+  //       previousRemovalCount: removalCount,
+  //     },
+  //   ])
 
-    setDeck(deck.map((c) => (c.id === cardId ? { ...c, isRemoved: false, removalCost: undefined } : c)))
-    setRemovalCount(removalCount - 1)
-    setTotalPoints(totalPoints - cost)
-  }
+  //   setDeck(deck.map((c) => (c.id === cardId ? { ...c, isRemoved: false, removalCost: undefined } : c)))
+  //   setRemovalCount(removalCount - 1)
+  //   setTotalPoints(totalPoints - cost)
+  // }
 
   const resetDeck = () => {
     const characterData = character !== "none" ? CHARACTER_CARDS[character] : null // Use character state
@@ -1026,8 +1064,8 @@ export function RunTracker() {
       <div className="space-y-6">
 
         <div className="space-y-1">
-          <h2 className="text-2xl font-bold">Run Tracker</h2>
-          <p className="text-sm text-muted-foreground">Track your current run progress and card effects</p>
+          <h2 className="text-2xl font-bold">Save Data Calculator</h2>
+          <p className="text-sm text-muted-foreground">Track your current run progress</p>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-3">
@@ -1112,22 +1150,33 @@ export function RunTracker() {
                       size="sm"
                       onClick={undoLastAction}
                       disabled={actionHistory.length === 0}
-                      className="gap-2 border-[#5B1FAF]/30 bg-[#5B1FAF]/10 hover:bg-[#5B1FAF]/20 hover:border-[#5B1FAF]/50 disabled:opacity-50"
+                      className="gap-2 
+                        !border !border-[#5B1FAF]/50 
+                        !bg-[#5B1FAF]/10 
+                        hover:!bg-[#5B1FAF]/20 
+                        hover:!border-[#5B1FAF]/70
+                        disabled:opacity-50"
                     >
                       <Undo className="h-4 w-4" />
                       Undo
                     </Button>
+
                     <Button
                       variant="outline"
                       size="sm"
                       onClick={resetDeck}
-                      className="gap-2 border-[#C41729]/30 bg-[#C41729]/10 hover:bg-[#C41729]/20 hover:border-[#C41729]/50"
+                      className="gap-2 
+                        !border !border-[#C41729]/50 
+                        !bg-[#C41729]/10 
+                        hover:!bg-[#C41729]/20 
+                        hover:!border-[#C41729]/70"
                     >
                       <RotateCcw className="h-4 w-4" />
                       Reset
                     </Button>
                   </div>
                 </div>
+                
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
@@ -1151,7 +1200,8 @@ export function RunTracker() {
                   </Select>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+
+                <div className="grid grid-cols-4 gap-3 max-w-[720px] mx-auto">
                   {deck.map((card, index) => (
                     <div
                       key={card.id}
@@ -1171,7 +1221,7 @@ export function RunTracker() {
                           return
                         }
                         if (card.isRemoved) {
-                          restoreCard(card.id)
+                          undoLastAction()
                         } else {
                           setSelectedCard(selectedCard === card.id ? null : card.id)
                         }
@@ -1196,11 +1246,11 @@ export function RunTracker() {
                             <img
                               src={card.image || "/placeholder.svg"}
                               alt={card.name || "card image"}
-                              className="absolute inset-0 h-[108%] w-[full] object-cover"
+                              className="absolute inset-0 h-[107%] w-full object-cover"
                             />
                           ) : (
                             <div className="absolute inset-0 flex items-center justify-center bg-card/50 border-2 border-dashed border-border/30 text-xs text-muted-foreground">
-                              No image
+                              No Image
                             </div>
                           )}
 
@@ -1244,21 +1294,39 @@ export function RunTracker() {
                             />
                           )}
 
+                          {/* Neutral border */}
+                          {card.cardType === "neutral" && !card.isStartingCard && (
+                            <img
+                              src="/images/card/neutral-border.png"
+                              alt="Neutral border"
+                              className="absolute left-0 top-0 h-full w-auto z-[6] pointer-events-none"
+                            />
+                          )}
+
+                          {/* Monster border */}
+                          {card.cardType === "monster" && (
+                            <img
+                              src="/images/card/monster-border.png"
+                              alt="Monster Card Border"
+                              className="absolute left-0 top-0 h-full w-auto z-[6] pointer-events-none"
+                            />
+                          )}
+
                           {card.isDuplicated && (
                             <img
                               src="/images/card/deco_card_copy.png"
                               alt="Duplicate border"
-                              className="absolute right-0 top-0 h-full w-auto z-[5] pointer-events-none"
+                              className="absolute right-0 top-0 h-full w-auto z-[7] pointer-events-none"
                             />
                           )}
 
                           {/* Overlay content — z-10 so it sits above the image. gradient to keep text readable */}
                           <div className="absolute inset-0 z-0 pointer-events-none flex flex-col justify-between p-4 pl-6 bg-gradient-to-b from-black/60 via-transparent to-black/70">
-                            <div className="space-y-2">
+                            <div className="space-y-4">
                               {!card.isRemoved && (
                                 <div className="flex items-center gap-2">
                                   <div
-                                    className={`text-base font-medium leading-tight break-words ${card.wasConverted ? "text-muted-foreground/50" : "text-white"}`}
+                                    className={`text-base font-medium leading-tight break-words ${card.wasConverted ? "text-white" : "text-white"}`}
                                   >
                                     {card.name}
                                   </div>
@@ -1281,7 +1349,7 @@ export function RunTracker() {
                                       className="w-12 h-12 flex-shrink-0 object-contain"
                                     />
                                   )}
-                                  <div className="space-y-1">
+                                  {/* <div className="space-y-1">
                                     {card.wasConverted && (
                                       <Badge
                                         variant="outline"
@@ -1291,23 +1359,25 @@ export function RunTracker() {
                                             "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0 0 3px #000",
                                         }}
                                       >
-                                        Converted
+                                        Neutral Card
                                       </Badge>
                                     )}
-                                  </div>
+                                  </div> */}
                                 </div>
                               </div>
                             </div>
-
                             <div className="text-right">
-                              <div className="text-2xl font-bold text-gray-300">{getCardPointValue(card)}</div>
+                              <div className="text-2xl font-bold text-gray-300">
+                              {card.duplicationCost !== undefined ? card.duplicationCost : getCardPointValue(card)}
+                              </div>
                             </div>
                           </div>
+
                         </div>
                       </div>
 
                       {selectedCard === card.id && !card.isRemoved && !card.isMutantSample && (
-                        <div className="absolute inset-0 z-30 flex flex-col gap-1 rounded-lg bg-[#06070A]/98 p-2 backdrop-blur-sm ring-2 ring-purple-400/50">
+                        <div className="absolute inset-0 z-30 flex flex-col gap-1 rounded-lg bg-[#06070A]/80 p-2 backdrop-blur-sm ring-2 ring-purple-400/100">
                           <Button
                             size="sm"
                             variant="outline"
@@ -1366,7 +1436,7 @@ export function RunTracker() {
                               convertToMutantSample(card.id)
                             }}
                           >
-                            Convert [Remove]
+                            Convert to [Remove]
                           </Button>
                           <Button
                             size="sm"

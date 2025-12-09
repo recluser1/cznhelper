@@ -713,7 +713,7 @@ export default function VeronicaGuidePage() {
             <section id="equipments" className="rounded-lg border border-border bg-card p-8 scroll-mt-6">
               <h2 className="text-2xl font-bold mb-6 text-purple-400">3.1. Equipments</h2>
               <p className="text-muted-foreground mb-6 whitespace-pre-line">
-                These are her best equipment options, listed by priority, you usually can’t equip them all at once.
+                These are her best equipment options, only weapon is listed by priority, you usually can’t equip them all at once.
                 <br/>
                 Only one unique item per character or they come from different Chaos Manifestations.
                 <br/>
@@ -1054,7 +1054,7 @@ export default function VeronicaGuidePage() {
                       Alternative Armor
                     </DialogTitle>
                     <DialogDescription className="text-sm text-gray-300">
-                      Scroll to see more options, listed by priority.
+                      Scroll to see more options.
                     </DialogDescription>
                   </DialogHeader>
 
@@ -1238,7 +1238,7 @@ export default function VeronicaGuidePage() {
                       Alternative Acessory
                     </DialogTitle>
                     <DialogDescription className="text-sm text-gray-300">
-                      Scroll to see more options, listed by priority.
+                      Scroll to see more options.
                     </DialogDescription>
                   </DialogHeader>
 
