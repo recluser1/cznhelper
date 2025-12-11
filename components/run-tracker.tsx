@@ -690,7 +690,7 @@ export function RunTracker() {
   const duplicateCard = (cardId: string) => {
     const card = deck.find((c) => c.id === cardId)
     if (!card || card.isRemoved) return
-    if (card.cardType === "forbidden") return
+    // if (card.cardType === "forbidden") return
 
     const cost = calculateDuplicationCost(card)
     const newCard: DeckCard = {
@@ -1436,7 +1436,7 @@ export function RunTracker() {
                             size="sm"
                             variant="outline"
                             className="h-8 text-xs border-border hover:bg-secondary bg-transparent"
-                            disabled={card.cardType === "forbidden"}
+                            // disabled={card.cardType === "forbidden"}
                             onClick={(e) => {
                               e.stopPropagation()
                               duplicateCard(card.id)
@@ -1472,7 +1472,7 @@ export function RunTracker() {
                             size="sm"
                             variant="destructive"
                             className="h-8 text-xs bg-red-400/20 border-red-400/50 hover:bg-red-400/30"
-                            disabled={card.cardType === "forbidden"}
+                            // disabled={card.cardType === "forbidden"}
                             onClick={(e) => {
                               e.stopPropagation()
                               removeCard(card.id)
