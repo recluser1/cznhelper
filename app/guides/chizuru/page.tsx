@@ -970,7 +970,7 @@ export default function ChizuruGuidePage() {
                     ))}
                   </div>
 
-                  {/* Dropdown */}
+                  {/* Dropdown  */}
                   <Collapsible>
                     <CollapsibleTrigger className="w-full px-4 py-2.5 rounded-lg bg-background/50 border border-border hover:bg-background/70 transition-colors flex items-center justify-between group">
                       <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground">
