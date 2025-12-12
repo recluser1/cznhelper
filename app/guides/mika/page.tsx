@@ -228,7 +228,7 @@ export default function ChizuruGuidePage() {
           tier: "C",
           cost: 2,
           type: "attack",
-          description: "Heal 100%\n100%(200) Damage to all enemies\nIncrease Damage Amount equal to Heal Amount of this card",
+          description: "Heal 100%\n100% (200%) Damage to all enemies\nIncrease Damage Amount equal to Heal Amount of this card",
           reasoning: "Poor for DPS. Even with damage scaling based on heal amount, Mika's base damage is too weak to make this effective. The healing doesn't translate to meaningful damage output.",
         },
       ],
