@@ -235,6 +235,258 @@ export default function VeronicaGuidePage() {
     },
   ]
 
+  const commonCards: Record<string, any> = {
+    "Bombardment Prep": {
+      id: "bombardment-prep",
+      name: "Bombardment Prep",
+      image: "/images/character/veronica/unique4.png",
+      cost: 1,
+      type: "upgrade",
+      description: "At start of turn,\ncreate 1 Ballista card(s)",
+    },
+  };
+
+  function getEpiphanyFromRef(ref: string, cardsArray = uniqueCards) {
+    const match = ref.match(/(.*)\s+(I|II|III|IV|V)$/i);
+    let baseRef: string;
+    let roman: string | undefined;
+    
+    if (match) {
+      baseRef = match[1].trim().toLowerCase();
+      roman = match[2].toUpperCase();
+    } else {
+      baseRef = ref.trim().toLowerCase();
+    }
+  
+    const baseCard = cardsArray.find(
+      c => c.id === baseRef || c.name.toLowerCase() === baseRef.replace(/\s+/g, ' ')
+    );
+  
+    const romanToIndex: Record<string, number> = { I: 0, II: 1, III: 2, IV: 3, V: 4 };
+    
+    if (baseCard) {
+      let epiphany;
+      if (roman && romanToIndex[roman] !== undefined) {
+        epiphany = baseCard.epiphanies[romanToIndex[roman]];
+      }
+      epiphany = epiphany || baseCard.epiphanies[0]; // safe fallback
+    
+      return {
+        id: `epiphany-${ref.replace(/\s+/g, '-')}`,
+        name: epiphany.id,
+        image: baseCard.image,
+        cost: epiphany.cost,
+        type: epiphany.type || baseCard.baseType,
+        description: epiphany.description,
+      };
+    }
+  
+    const commonKey = Object.keys(commonCards).find(
+      key => key.toLowerCase() === ref.toLowerCase()
+    );
+    if (commonKey) {
+      const card = commonCards[commonKey];
+      return {
+        id: card.id,
+        name: card.name,
+        image: card.image,
+        cost: card.cost,
+        type: card.type,
+        description: card.description,
+      };
+    }
+  }
+
+// Define the type for a single deck entry
+type DeckEntry = {
+  ref: string;
+  count?: number;
+  cardsArray?: typeof uniqueCards;
+};
+
+// Define the type for recommendedDecks
+type RecommendedDecks = {
+  [key: string]: DeckEntry[];
+};
+
+// Type your recommendedDecks object
+const recommendedDecks: RecommendedDecks = {
+  "draw-engine": [
+    { ref: "Firing Preparation IV", count: 1 },
+    { ref: "Repose I", count: 4 },
+    { ref: "Pendant of Resolution I", count: 1 },
+    { ref: "Sir Kowalski III", count: 1 },
+    { ref: "Bombardment Prep", count: 1 },
+  ],
+  "mei-lin": [
+    { ref: "Firing Preparation IV", count: 1 },
+    { ref: "Repose I", count: 2 },
+    { ref: "Pendant of Resolution V", count: 3 },
+    { ref: "Sir Kowalski III", count: 1 },
+    { ref: "Bombardment Prep", count: 1 },
+  ],
+};
+
+function generateDeckRows(deckKey: keyof typeof recommendedDecks): { topRow: any[]; bottomRow: any[] } {
+  const spec = recommendedDecks[deckKey] || [];
+  const deck: any[] = [];           // This will hold only the real cards
+  let globalIndex = 0;
+
+  // Add all real cards (with unique IDs)
+  spec.forEach((entry) => {
+    const { ref, count = 1, cardsArray = uniqueCards } = entry;
+    const baseCard = getEpiphanyFromRef(ref, cardsArray);
+
+    if (!baseCard) {
+      console.warn(`Card not found: ${ref}`);
+      return;
+    }
+
+    for (let i = 0; i < count; i++) {
+      deck.push({
+        ...baseCard,
+        id: `${baseCard.id}-${globalIndex++}`,
+      });
+    }
+  });
+
+  // Build top row → exactly 4 cards + 1 empty on the right
+  const topRow: any[] = [];
+  for (let i = 0; i < 4; i++) {
+    topRow.push(deck[i] || createPlaceholder(`top-${i}`));
+  }
+  topRow.push(createPlaceholder("top-right-empty")); // Always empty
+
+  // Build bottom row → next 4 cards + 1 empty on the right
+  const bottomRow: any[] = [];
+  for (let i = 0; i < 4; i++) {
+    const card = deck[4 + i];
+    bottomRow.push(card || createPlaceholder(`bottom-${i}`));
+  }
+  bottomRow.push(createPlaceholder("bottom-right-empty")); // Always empty
+
+  return { topRow, bottomRow };
+}
+
+// Helper function to avoid repeating placeholder object
+function createPlaceholder(idSuffix: string) {
+  return {
+    id: `placeholder-${idSuffix}`,
+    name: "Placeholder",
+    image: "/placeholder.svg",
+    cost: 0,
+    type: "skill",
+    description: "",
+  };
+}
+
+function CardDisplay({ card }: { card: any }) {
+  const isPlaceholder = card.name === "Placeholder";
+
+  return (
+    <div className="relative rounded-lg overflow-hidden border-2 border-border hover:border-purple-400/50 transition-all duration-200">
+      {/* Passion Border */}
+      <div className="absolute left-0 -top-0.5 -bottom-0.5 w-3 z-10">
+        <img src="/images/card/passion-border.png" alt="" className="h-full w-full object-cover" />
+      </div>
+
+      <div className="relative aspect-[2/3] bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden rounded-md">
+        {isPlaceholder ? (
+          <div className="w-full h-full flex flex-col items-center justify-center">
+            <span className="text-sm text-muted-foreground font-semibold">Placeholder</span>
+            <span className="text-xs text-muted-foreground/70">[Empty Slot]</span>
+          </div>
+        ) : (
+          <>
+            <img
+              src={card.image || "/placeholder.svg"}
+              alt={card.name}
+              className="w-full h-full object-cover scale-108"
+            />
+            <div className="absolute inset-0 flex flex-col">
+              {/* Top Section: Cost + Name + Type */}
+              <div className="p-2 pt-1.5 pl-5">
+                <div className="flex items-start gap-1.5">
+                  <div className="flex-shrink-0 flex flex-col items-center justify-center">
+                    <span
+                      className="text-white font-bold text-5xl scale-x-80"
+                      style={{
+                        WebkitTextStroke: "1px rgba(0, 0, 0, 0.38)",
+                        textShadow: `-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000`,
+                      }}
+                    >
+                      {card.cost}
+                    </span>
+                    <div className="w-full h-0.5 bg-white mt-0.5 scale-x-80" style={{ backgroundColor: "#ffffff", WebkitBoxShadow: `-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000` }} />
+                  </div>
+                  <div className="flex-1 pt-0.5">
+                    <h5
+                      className="text-white font-bold text-[20px] leading-tight drop-shadow-lg"
+                      style={{
+                        textShadow: `-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000`,
+                        transform: "scaleX(0.65)",
+                        transformOrigin: "left",
+                        maxWidth: "180%",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                      }}
+                    >
+                      {card.name}
+                    </h5>
+                    <div className="flex items-center gap-1">
+                      <img
+                        src={
+                          card.type === "attack"
+                            ? "/images/icon-category-card-attack.webp"
+                            : card.type === "skill"
+                            ? "/images/icon-category-card-skill.webp"
+                            : "/images/icon-category-card-upgrade.webp"
+                        }
+                        alt={card.type}
+                        className="w-5 h-5"
+                      />
+                      <span className="text-white/100 text-[14px] font-large capitalize drop-shadow" style={{ textShadow: `-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000` }}>
+                        {card.type}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Description */}
+              {card.description && (
+                <div className="mt-auto p-2.5 pl-3 py-5 bg-gradient-to-t from-black/95 via-black/90 to-transparent flex flex-col items-center justify-center gap-0">
+                  {(() => {
+                    const { bracketedText, remainingText } = parseDescription(card.description);
+                    return (
+                      <>
+                        {bracketedText && (
+                          <p className="text-center font-medium text-sm leading-snug m-0" style={{ color: "#e3b46c" }}>
+                            {bracketedText}
+                          </p>
+                        )}
+                        <p
+                          className="text-white text-center text-sm leading-snug m-0 whitespace-pre-line"
+                          dangerouslySetInnerHTML={{
+                            __html: remainingText
+                              .replace(/(\d+%?)/g, '<span style="color: #7ce2fb">$1</span>')
+                              .replace(/Giant Ballista/gi, '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>')
+                              .replace(/Ballista/gi, '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>')
+                          }}
+                        />
+                      </>
+                    );
+                  })()}
+                </div>
+              )}
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
   const parseDescription = (desc: string) => {
     const bracketMatch = desc.match(/\[([^\]]+)\]/)
     if (bracketMatch) {
@@ -595,128 +847,111 @@ export default function VeronicaGuidePage() {
               </div>
             </section>
 
-            {/* 3. Recommended Save Data */}
-            <section id="recommended-save-data" className="rounded-lg border border-border bg-card p-8 scroll-mt-6">
-            <h2 className="text-2xl font-bold mb-6 text-purple-400">3. Recommended Save Data</h2>
-              <p className="text-muted-foreground mb-6">
-                These are examples - you can change based on your playstyle.
-              </p>
+              {/* 3. Recommended Save Data */}
+              <section id="recommended-save-data" className="rounded-lg border border-border bg-card p-8 scroll-mt-6">
+                <h2 className="text-2xl font-bold mb-6 text-purple-400">3. Recommended Save Data</h2>
+                <p className="text-muted-foreground mb-6">
+                  These are examples - you can change based on your playstyle.
+                </p>
 
-              <div className="space-y-12">
-                {/* Build 1 */}
-                <div className="space-y-6">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-xl font-bold text-purple-300">Draw Engine</h3>
-                    <span className="px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/40 text-blue-400 text-sm font-bold">
-                      [XXX]
-                    </span>
-                  </div>
-
-                  {/* 5 cards on top */}
-                  <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
-                    {[1, 2, 3, 4, 5,].map((i) => (
-                      <div
-                        key={i}
-                        className="relative rounded-lg overflow-hidden border-2 border-dashed border-red-500/50 bg-red-900/20"
-                      >
-                        <div className="relative aspect-[2/3] bg-gradient-to-br from-gray-800 to-gray-900 flex flex-col items-center justify-center">
-                          <span className="text-sm text-red-400 font-semibold">Card {i}</span>
-                          <span className="text-xs text-red-400/70">[Placeholder]</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* 5 cards on bottom */}
-                  <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
-                    {[6, 7, 8, 9, 10].map((i) => (
-                      <div
-                        key={i}
-                        className="relative rounded-lg overflow-hidden border-2 border-dashed border-red-500/50 bg-red-900/20"
-                      >
-                        <div className="relative aspect-[2/3] bg-gradient-to-br from-gray-800 to-gray-900 flex flex-col items-center justify-center">
-                          <span className="text-sm text-red-400 font-semibold">Card {i}</span>
-                          <span className="text-xs text-red-400/70">[Placeholder]</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Dropdown */}
-                  <Collapsible>
-                    <CollapsibleTrigger className="w-full px-4 py-2.5 rounded-lg bg-background/50 border border-border hover:bg-background/70 transition-colors flex items-center justify-between group">
-                      <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground">
-                        Save Data Explanation
+                <div className="space-y-12">
+                  {/* Build 1: Draw Engine */}
+                  <div className="space-y-6">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-xl font-bold text-purple-300">Draw Engine Build</h3>
+                      <span className="px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/40 text-blue-400 text-sm font-bold">
+                        [XXX]
                       </span>
-                      <ChevronDown className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-transform group-data-[state=open]:rotate-180" />
-                    </CollapsibleTrigger>
-                    <CollapsibleContent className="mt-3">
-                      <div className="p-4 rounded-lg bg-background/50 border border-border">
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                          Explanation will be added here
-                        </p>
-                      </div>
-                    </CollapsibleContent>
-                  </Collapsible>
-                </div>
+                    </div>
 
-                {/* Build 2 */}
-                <div className="space-y-6">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-xl font-bold text-purple-300">Mei Lin</h3>
-                    <span className="px-3 py-1 rounded-full bg-red-500/20 border border-red-500/40 text-red-400 text-sm font-bold">
-                      [XXX Points]
-                    </span>
-                  </div>
+                    {(() => {
+                      const { topRow, bottomRow } = generateDeckRows("draw-engine");
+                      return (
+                        <>
+                          {/* Top Row */}
+                          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
+                            {topRow.map((card, index) => (
+                              <CardDisplay key={card.id || index} card={card} />
+                            ))}
+                          </div>
 
-                  {/* 5 cards on top */}
-                  <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
-                    {[1, 2, 3, 4, 5].map((i) => (
-                      <div
-                        key={i}
-                        className="relative rounded-lg overflow-hidden border-2 border-dashed border-red-500/50 bg-red-900/20"
-                      >
-                        <div className="relative aspect-[2/3] bg-gradient-to-br from-gray-800 to-gray-900 flex flex-col items-center justify-center">
-                          <span className="text-sm text-red-400 font-semibold">Card {i}</span>
-                          <span className="text-xs text-red-400/70">[Placeholder]</span>
+                          {/* Bottom Row */}
+                          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
+                            {bottomRow.map((card, index) => (
+                              <CardDisplay key={card.id || index} card={card} />
+                            ))}
+                          </div>
+                        </>
+                      );
+                    })()}
+
+                    <Collapsible>
+                      <CollapsibleTrigger className="w-full px-4 py-2.5 rounded-lg bg-background/50 border border-border hover:bg-background/70 transition-colors flex items-center justify-between group">
+                        <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground">
+                          Save Data Explanation
+                        </span>
+                        <ChevronDown className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-transform group-data-[state=open]:rotate-180" />
+                      </CollapsibleTrigger>
+                      <CollapsibleContent className="mt-3">
+                        <div className="p-4 rounded-lg bg-background/50 border border-border">
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            4x Repose I for insane card draw, combined with Sir Kowalski III to generate Ballistas on skill draws.
+                            <br />
+                            Firing Preparation IV gives reliable Giant Ballista AoE every turn.
+                            <br />
+                            Pendant of Resolution I provides consistent Reload on skill use.
+                          </p>
                         </div>
-                      </div>
-                    ))}
+                      </CollapsibleContent>
+                    </Collapsible>
                   </div>
 
-                  {/* 5 cards on bottom */}
-                  <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
-                    {[6, 7, 8, 9, 10].map((i) => (
-                      <div
-                        key={i}
-                        className="relative rounded-lg overflow-hidden border-2 border-dashed border-red-500/50 bg-red-900/20"
-                      >
-                        <div className="relative aspect-[2/3] bg-gradient-to-br from-gray-800 to-gray-900 flex flex-col items-center justify-center">
-                          <span className="text-sm text-red-400 font-semibold">Card {i}</span>
-                          <span className="text-xs text-red-400/70">[Placeholder]</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  <Collapsible>
-                    <CollapsibleTrigger className="w-full px-4 py-2.5 rounded-lg bg-background/50 border border-border hover:bg-background/70 transition-colors flex items-center justify-between group">
-                      <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground">
-                        Save Data Explanation
+                  {/* Build 2: Mei Lin Synergy */}
+                  <div className="space-y-6">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-xl font-bold text-purple-300">Mei Lin Passion Build</h3>
+                      <span className="px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/40 text-blue-400 text-sm font-bold">
+                        [XXX]
                       </span>
-                      <ChevronDown className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-transform group-data-[state=open]:rotate-180" />
-                    </CollapsibleTrigger>
-                    <CollapsibleContent className="mt-3">
-                      <div className="p-4 rounded-lg bg-background/50 border border-border">
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                          Explanation will be added here
-                        </p>
-                      </div>
-                    </CollapsibleContent>
-                  </Collapsible>
+                    </div>
+
+                    {(() => {
+                      const { topRow, bottomRow } = generateDeckRows("mei-lin");
+                      return (
+                        <>
+                          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
+                            {topRow.map((card, index) => (
+                              <CardDisplay key={card.id || index} card={card} />
+                            ))}
+                          </div>
+
+                          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
+                            {bottomRow.map((card, index) => (
+                              <CardDisplay key={card.id || index} card={card} />
+                            ))}
+                          </div>
+                        </>
+                      );
+                    })()}
+
+                    <Collapsible>
+                      <CollapsibleTrigger className="w-full px-4 py-2.5 rounded-lg bg-background/50 border border-border hover:bg-background/70 transition-colors flex items-center justify-between group">
+                        <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground">
+                          Save Data Explanation
+                        </span>
+                        <ChevronDown className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-transform group-data-[state=open]:rotate-180" />
+                      </CollapsibleTrigger>
+                      <CollapsibleContent className="mt-3">
+                        <div className="p-4 rounded-lg bg-background/50 border border-border">
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            Optimized for Mei Lin synergy. Pendant of Resolution V gives massive Passion stacks.
+                          </p>
+                        </div>
+                      </CollapsibleContent>
+                    </Collapsible>
+                  </div>
                 </div>
-              </div>
-            </section>
+              </section>
 
             {/* 3.1. Equipments */}
             <section id="equipments" className="rounded-lg border border-border bg-card p-8 scroll-mt-6">
