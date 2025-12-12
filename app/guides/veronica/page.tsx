@@ -539,7 +539,7 @@ export default function VeronicaGuidePage() {
                                                   '<span style="color: #7ce2fb">$1</span>',
                                                 )
                                                 .replace(
-                                                  /(Piercing\s*Ballista|Enhanced\s*Ballista|Giant\s*Ballista|Shelling\s*Ballista)/gi,
+                                                  /(Piercing\s*Ballista|Enhanced\s*Ballista|Giant\s*Ballista|Shelling\s*Ballista|Micro\s*Ballista)/gi,
                                                   '<span style="color: #C8FF2E; text-decoration: underline; text-underline-offset: 2px">$1</span>',
                                                 )
                                                 .replace(
