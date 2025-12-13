@@ -229,7 +229,7 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
       { name: "Flash Slash", image: "/images/character/yuki/unique1.png" },
       { name: "Trickery Strike", image: "/images/character/yuki/unique2.png" },
       { name: "Freezing Blade", image: "/images/character/yuki/unique3.png" },
-      { name: "Iceberg Cleave", image: "/images/character/yuki/unique4.webm" },
+      { name: "Iceberg Cleave", image: "/images/character/yuki/unique4.png" },
     ],
   },
   hugo: {
