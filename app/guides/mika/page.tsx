@@ -44,7 +44,7 @@ export default function ChizuruGuidePage() {
     {
       id: "source-of-water",
       name: "Source of Water",
-      image: "/images/character/mika/starter4.gif",
+      image: "/images/character/mika/starter4.png",
       baseType: "skill",
       epiphanies: [
         {
@@ -92,7 +92,7 @@ export default function ChizuruGuidePage() {
     {
       id: "blessing-of-waves",
       name: "Blessing of Waves",
-      image: "/images/character/mika/unique1.gif",
+      image: "/images/character/mika/unique1.png",
       baseType: "skill",
       epiphanies: [
         {
@@ -140,7 +140,7 @@ export default function ChizuruGuidePage() {
     {
       id: "tactical-analysis",
       name: "Tactical Analysis",
-      image: "/images/character/mika/unique2.gif",
+      image: "/images/character/mika/unique2.png",
       baseType: "skill",
       epiphanies: [
         {
@@ -188,7 +188,7 @@ export default function ChizuruGuidePage() {
     {
       id: "whirlpool",
       name: "Whirlpool",
-      image: "/images/character/mika/unique3.gif",
+      image: "/images/character/mika/unique3.png",
       baseType: "attack",
       epiphanies: [
         {
@@ -247,7 +247,7 @@ export default function ChizuruGuidePage() {
     "Deluge": {
       id: "deluge",
       name: "Deluge",
-      image: "/images/character/mika/unique4.gif",
+      image: "/images/character/mika/unique4.png",
       cost: 1,
       type: "upgrade",
       description: "[Unique / Initiation]\n1 Wave\nAt the start of the turn, 1 Wave",

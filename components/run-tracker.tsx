@@ -1269,33 +1269,19 @@ export function RunTracker() {
 
                       <div className="flex w-full h-full flex-col">
                         <div className="relative h-full w-full rounded-md overflow-hidden">
-                          {card.image ? (
-                            <>
-                              {/* Check if the image is a GIF */}
-                              {card.image.endsWith('.gif') ? (
-                                // For GIFs: Use object-cover to crop/fit without distortion, centered
-                                // Remove scale-125 to avoid over-zooming uncropped GIFs
-                                // Add object-center for better centering if needed
-                                <img
-                                  src={card.image || "/placeholder.svg"}
-                                  alt={card.name || "card image"}
-                                  className="absolute inset-0 w-full h-full object-cover object-center [backface-visibility:hidden] [transform:translateZ(0)]"
-                                  style={{
-                                    transform: card.isDuplicated
-                                      ? 'scaleX(-1) scale(1.20)'
-                                      : 'scale(1.20)',
-                                  }}
-                                />
-                              ) : (
-                                // For PNGs/static images: Keep your existing scaling
-                                <img
-                                  src={card.image || "/placeholder.svg"}
-                                  alt={card.name || "card image"}
-                                  className={`absolute inset-0 w-full overflow-hidden scale-125 ${card.isDuplicated ? "scale-x-[-1]" : ""}`}
-                                />
-                              )}
-                            </>
-                          ) : (
+                        {card.image ? (
+                            <img
+                              src={card.image || "/placeholder.svg"}
+                              alt={card.name || "card image"}
+                              className="absolute inset-0 w-full h-full object-cover object-center [backface-visibility:hidden] [transform:translateZ(0)]"
+                              style={{
+                                transform: card.isDuplicated
+                                  ? 'scaleX(-1) scale(1.10)'  // Flip + zoom for duplicated
+                                  : 'scale(1.10)',           // Normal zoom
+                              }}
+                            />
+                          ) 
+                          : (
                             <div className="absolute inset-0 flex items-center justify-center bg-card/50 border-2 border-dashed border-border/30 text-xs text-muted-foreground">
                               No Image
                             </div>
