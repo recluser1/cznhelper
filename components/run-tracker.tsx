@@ -822,7 +822,7 @@ export function RunTracker() {
 
     // Starter/base card tax (+20) if applicable
     const starterTax = card.isStartingCard ? 20 : 0
-    // Total points contributed by the card (base + epiphanies)
+    // Total points contributed by the card (base + epiphanies) 
     const totalCardPoints = getCardPointValue(card)
 
     // Final removal cost = scaleCost + starterTax - totalCardPoints
