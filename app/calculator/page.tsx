@@ -7,16 +7,16 @@ export default function CalculatorPage() {
   return (
     <div className="min-h-screen bg-background">
       <header className="border-b border-border bg-card backdrop-blur-sm">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight text-balance bg-gradient-to-r from-red-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+        <div className="container mx-auto px-4 py-4 sm:py-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="flex-1">
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-balance bg-gradient-to-r from-red-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
                 CZN Save Data Helper
               </h1>
-              <p className="mt-1 text-sm text-muted-foreground">Track your progress through the ongoing nightmare</p>
+              <p className="mt-1 text-xs sm:text-sm text-muted-foreground">Track your progress through the ongoing nightmare</p>
             </div>
-            <div className="flex items-center gap-6">
-              <div className="text-right">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6 w-full sm:w-auto">
+              <div className="text-left sm:text-right">
                 <p className="text-xs text-muted-foreground">
                   Made by <span className="text-purple-400 font-semibold">lilyium.box</span>
                 </p>
@@ -24,7 +24,7 @@ export default function CalculatorPage() {
               </div>
               <Link
                 href="/"
-                className="flex items-center gap-2 px-4 py-2 rounded-lg border border-purple-400/30 bg-purple-400/10 hover:bg-purple-400/20 transition-colors"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg border border-purple-400/30 bg-purple-400/10 hover:bg-purple-400/20 transition-colors w-full sm:w-auto justify-center sm:justify-start"
               >
                 <Home className="w-4 h-4 text-purple-400" />
                 <span className="text-sm font-medium text-purple-400">Home</span>
@@ -34,8 +34,8 @@ export default function CalculatorPage() {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8">
-        <Tabs defaultValue="tracker" className="space-y-6">
+      <main className="container mx-auto px-4 py-6 sm:py-8">
+        <Tabs defaultValue="tracker" className="space-y-4 sm:space-y-6">
           <TabsList className="grid w-full max-w-md grid-cols-2 bg-card border border-border">
             <TabsTrigger
               value="tracker"
@@ -55,18 +55,18 @@ export default function CalculatorPage() {
             <RunTracker />
           </TabsContent>
 
-          <TabsContent value="helper" className="space-y-6">
-            <div className="rounded-lg border border-border bg-card p-6 space-y-8">
+          <TabsContent value="helper" className="space-y-4 sm:space-y-6">
+            <div className="rounded-lg border border-border bg-card p-4 sm:p-6 space-y-6 sm:space-y-8">
               <div>
-                <h2 className="text-2xl font-bold mb-4 text-purple-400">Point System Guide</h2>
-                <p className="text-sm text-muted-foreground mb-6">
+                <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-purple-400">Point System Guide</h2>
+                <p className="text-xs sm:text-sm text-muted-foreground mb-4 sm:mb-6">
                   Understanding the math behind deck building and Faint Memory calculations
                 </p>
               </div>
 
               {/* Card Base Values */}
-              <section className="space-y-4">
-                <h3 className="text-xl font-semibold text-foreground">Card Base Values</h3>
+              <section className="space-y-3 sm:space-y-4">
+                <h3 className="text-lg sm:text-xl font-semibold text-foreground">Card Base Values</h3>
                 <div className="grid gap-3">
                   <div className="flex items-center justify-between p-3 rounded-md bg-background border border-border">
                     <span className="text-sm font-medium">Neutral Cards</span>
@@ -88,8 +88,8 @@ export default function CalculatorPage() {
               </section>
 
               {/* Epiphany Bonuses */}
-              <section className="space-y-4">
-                <h3 className="text-xl font-semibold text-foreground">Epiphany Bonuses</h3>
+              <section className="space-y-3 sm:space-y-4">
+                <h3 className="text-lg sm:text-xl font-semibold text-foreground">Epiphany Bonuses</h3>
                 <div className="grid gap-3">
                   <div className="p-4 rounded-md bg-background border border-border space-y-2">
                     <div className="flex items-center justify-between">
@@ -118,12 +118,12 @@ export default function CalculatorPage() {
               </section>
 
               {/* Card Removal Costs */}
-              <section className="space-y-4">
-                <h3 className="text-xl font-semibold text-foreground">Card Removal Costs</h3>
+              <section className="space-y-3 sm:space-y-4">
+                <h3 className="text-lg sm:text-xl font-semibold text-foreground">Card Removal Costs</h3>
                 <div className="space-y-3">
-                  <div className="p-4 rounded-md bg-background border border-border">
-                    <p className="text-sm font-medium mb-3">Scaling Cost by Removal Count:</p>
-                    <div className="grid grid-cols-5 gap-2 text-center">
+                  <div className="p-3 sm:p-4 rounded-md bg-background border border-border">
+                    <p className="text-xs sm:text-sm font-medium mb-2 sm:mb-3">Scaling Cost by Removal Count:</p>
+                    <div className="grid grid-cols-5 gap-1.5 sm:gap-2 text-center">
                       <div className="p-2 rounded bg-card border border-border">
                         <div className="text-xs text-muted-foreground">1st</div>
                         <div className="text-sm font-mono text-purple-400">0</div>
@@ -164,12 +164,12 @@ export default function CalculatorPage() {
               </section>
 
               {/* Card Duplication Costs */}
-              <section className="space-y-4">
-                <h3 className="text-xl font-semibold text-foreground">Card Duplication Costs</h3>
+              <section className="space-y-3 sm:space-y-4">
+                <h3 className="text-lg sm:text-xl font-semibold text-foreground">Card Duplication Costs</h3>
                 <div className="space-y-3">
-                  <div className="p-4 rounded-md bg-background border border-border">
-                    <p className="text-sm font-medium mb-3">Scaling Cost by Duplication Count:</p>
-                    <div className="grid grid-cols-5 gap-2 text-center">
+                  <div className="p-3 sm:p-4 rounded-md bg-background border border-border">
+                    <p className="text-xs sm:text-sm font-medium mb-2 sm:mb-3">Scaling Cost by Duplication Count:</p>
+                    <div className="grid grid-cols-5 gap-1.5 sm:gap-2 text-center">
                       <div className="p-2 rounded bg-card border border-border">
                         <div className="text-xs text-muted-foreground">1st</div>
                         <div className="text-sm font-mono text-purple-400">0</div>
@@ -201,8 +201,8 @@ export default function CalculatorPage() {
               </section>
 
               {/* Card Conversion Costs */}
-              <section className="space-y-4">
-                <h3 className="text-xl font-semibold text-foreground">Card Conversion Costs</h3>
+              <section className="space-y-3 sm:space-y-4">
+                <h3 className="text-lg sm:text-xl font-semibold text-foreground">Card Conversion Costs</h3>
                 <div className="space-y-3">
                   <div className="p-4 rounded-md bg-background border border-border space-y-2">
                     <div className="flex items-center justify-between">
@@ -231,10 +231,10 @@ export default function CalculatorPage() {
               </section>
 
               {/* Faint Memory Tier Caps */}
-              <section className="space-y-4">
-                <h3 className="text-xl font-semibold text-foreground">Faint Memory Tier Caps</h3>
-                <p className="text-sm text-muted-foreground">Maximum point limits for each Faint Memory tier level</p>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <section className="space-y-3 sm:space-y-4">
+                <h3 className="text-lg sm:text-xl font-semibold text-foreground">Faint Memory Tier Caps</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground">Maximum point limits for each Faint Memory tier level</p>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3">
                   {[
                     { tier: 1, cap: 30 },
                     { tier: 2, cap: 40 },
