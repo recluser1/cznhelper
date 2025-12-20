@@ -280,7 +280,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Swamp of Judgment"],
   atk: "82",
-  imageName: "Dagger-That-Tricked-The-Shadow",
+  imageName: "Dagger-That-Tricked-the-Shadow",
   effect: `+12% Critical Damage`,
 },
 {
