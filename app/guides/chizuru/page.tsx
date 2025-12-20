@@ -24,7 +24,7 @@ export default function ChizuruGuidePage() {
 
 
 
-  
+
   const sections = [
     { id: "overview", title: "1. Overview", level: 1 },
     { id: "base-cards", title: "2. Base Cards", level: 1 },
@@ -319,27 +319,27 @@ export default function ChizuruGuidePage() {
     const match = ref.match(/(.*)\s+(I|II|III|IV|V)$/i);
     let baseRef: string;
     let roman: string | undefined;
-    
+
     if (match) {
       baseRef = match[1].trim().toLowerCase();
       roman = match[2].toUpperCase();
     } else {
       baseRef = ref.trim().toLowerCase();
     }
-  
+
     const baseCard = cardsArray.find(
       c => c.id === baseRef || c.name.toLowerCase() === baseRef.replace(/\s+/g, ' ')
     );
-  
+
     const romanToIndex: Record<string, number> = { I: 0, II: 1, III: 2, IV: 3, V: 4 };
-    
+
     if (baseCard) {
       let epiphany;
       if (roman && romanToIndex[roman] !== undefined) {
         epiphany = baseCard.epiphanies[romanToIndex[roman]];
       }
       epiphany = epiphany || baseCard.epiphanies[0]; // safe fallback
-    
+
       return {
         id: `epiphany-${ref.replace(/\s+/g, '-')}`,
         name: baseCard.name,
@@ -349,7 +349,7 @@ export default function ChizuruGuidePage() {
         description: epiphany.description,
       };
     }
-  
+
     const commonKey = Object.keys(commonCards).find(
       key => key.toLowerCase() === ref.toLowerCase()
     );
@@ -396,7 +396,7 @@ export default function ChizuruGuidePage() {
     ],
   };
 
-  function generateDeckRows(deckKey: keyof typeof recommendedDecks): { topRow: any[]; bottomRow: any[] } {
+  function generateDeckRows(deckKey: keyof typeof recommendedDecks): { topRow: any[]; bottomRow: any[]; deck: any[] } {
     const spec = recommendedDecks[deckKey] || [];
     const deck: any[] = [];           // This will hold only the real cards
     let globalIndex = 0;
@@ -434,7 +434,7 @@ export default function ChizuruGuidePage() {
     }
     bottomRow.push(createPlaceholder("bottom-right-empty")); // Always empty
 
-    return { topRow, bottomRow };
+    return { topRow, bottomRow, deck };
   }
 
   // Helper function to avoid repeating placeholder object
@@ -494,39 +494,39 @@ export default function ChizuruGuidePage() {
             </div>
           ) : (
             <>
-            <img
-              src={card.image || "/placeholder.svg"}
-              alt={card.name}
-              className="w-full h-full object-cover scale-108"
-            />
-            
-            <div className="absolute inset-0 flex flex-col">
-              {/* Top Section: Cost + Name + Type */}
-              <div className="p-2 pt-1.5 pl-3">
-                <div className="flex items-start gap-1.5 relative">
-                  {/* Rarity Image */}
-                  <div className="absolute left-0 top-0 z-20 flex items-center" style={{ transform: 'translateX(-18px)' }}>
-                    <img
-                      src={
-                        card.name?.includes("Oni Hunt")
-                          ? "/images/card/card_rarity_legend.png"
-                          : card.name?.includes("Shadow of the Moon")
-                            ? "/images/card/card_rarity_unique.png"
-                            : "/images/card/card_rarity_rare.png"
-                      }
-                      alt=""
-                      className="h-11 sm:h-13 object-contain"
-                    />
-                  </div>
+              <img
+                src={card.image || "/placeholder.svg"}
+                alt={card.name}
+                className="w-full h-full object-cover scale-108"
+              />
 
-                  {/* Cost */}
-                  <div className="flex-shrink-0 flex flex-col items-center justify-center ml-3 relative z-30">
-                    <span
-                      className="font-bold text-3xl sm:text-4xl md:text-2xl lg:text-4xl"
-                      style={{
-                        color: "#FFFFFF",
-                        WebkitTextStroke: "1.3px #2D4CAE",
-                        textShadow: `
+              <div className="absolute inset-0 flex flex-col">
+                {/* Top Section: Cost + Name + Type */}
+                <div className="p-2 pt-1.5 pl-3">
+                  <div className="flex items-start gap-1.5 relative">
+                    {/* Rarity Image */}
+                    <div className="absolute left-0 top-0 z-20 flex items-center" style={{ transform: 'translateX(-18px)' }}>
+                      <img
+                        src={
+                          card.name?.includes("Oni Hunt")
+                            ? "/images/card/card_rarity_legend.png"
+                            : card.name?.includes("Shadow of the Moon")
+                              ? "/images/card/card_rarity_unique.png"
+                              : "/images/card/card_rarity_rare.png"
+                        }
+                        alt=""
+                        className="h-11 sm:h-13 object-contain"
+                      />
+                    </div>
+
+                    {/* Cost */}
+                    <div className="flex-shrink-0 flex flex-col items-center justify-center ml-3 relative z-30">
+                      <span
+                        className="font-bold text-3xl sm:text-4xl md:text-2xl lg:text-4xl"
+                        style={{
+                          color: "#FFFFFF",
+                          WebkitTextStroke: "1.3px #2D4CAE",
+                          textShadow: `
                         0 0 2px #5B91FB,
                         0 0 4px #5B91FB,
                         0 0 6px #5B91FB,
@@ -542,80 +542,80 @@ export default function ChizuruGuidePage() {
                         -2px  2px 4px rgba(91, 145, 251, 0.8),
                          2px  2px 4px rgba(91, 145, 251, 0.8)
                       `,
-                      }}
-                    >
-                      {card.cost}
-                    </span>
-                    <div
-                      className="w-full h-0.5 mt-0.5"
-                      style={{
-                        backgroundColor: "#B6C4F9",
-                        boxShadow: `
+                        }}
+                      >
+                        {card.cost}
+                      </span>
+                      <div
+                        className="w-full h-0.5 mt-0.5"
+                        style={{
+                          backgroundColor: "#B6C4F9",
+                          boxShadow: `
                           0 0 2px #5B91FB,
                           0 0 4px #5B91FB,
                           0 0 6px #5B91FB,
                           0 0 8px rgba(91, 145, 251, 0.6),
                           inset 0 1px 0 rgba(255, 255, 255, 0.3)
                         `,
-                      }}
-                    />
-                  </div>
-
-                  {/* Name and Type */}
-                  <div className="flex-1 pt-0.5 min-w-0">
-                    <div className="relative w-full">
-                      {/* Background Image - can be positioned separately */}
-                      <div
-                        className="absolute"
-                        style={{
-                          backgroundImage: `url(${getRarityBackgroundImage(card.name)})`,
-                          backgroundRepeat: "no-repeat",
-                          backgroundPosition: "left center",
-                          backgroundSize: "contain",
-                          left: -50,
-                          right: 0,
-                          top: 7,
-                          bottom: 0,
-                          height: "70%",
-                          width: "700%",
                         }}
                       />
+                    </div>
 
-                      {/* Card Name */}
-                      <h5
-                        className="relative font-bold leading-tight drop-shadow-lg overflow-hidden text-ellipsis whitespace-nowrap"
-                        style={{
-                          color: getRarityColor(card.name),
-                          fontSize: "clamp(0.8rem, 2.8vw, 1.1rem)",
-                          padding: "4px 6px",
-                          textShadow: `
+                    {/* Name and Type */}
+                    <div className="flex-1 pt-0.5 min-w-0">
+                      <div className="relative w-full">
+                        {/* Background Image - can be positioned separately */}
+                        <div
+                          className="absolute"
+                          style={{
+                            backgroundImage: `url(${getRarityBackgroundImage(card.name)})`,
+                            backgroundRepeat: "no-repeat",
+                            backgroundPosition: "left center",
+                            backgroundSize: "contain",
+                            left: -50,
+                            right: 0,
+                            top: 7,
+                            bottom: 0,
+                            height: "70%",
+                            width: "700%",
+                          }}
+                        />
+
+                        {/* Card Name */}
+                        <h5
+                          className="relative font-bold leading-tight drop-shadow-lg overflow-hidden text-ellipsis whitespace-nowrap"
+                          style={{
+                            color: getRarityColor(card.name),
+                            fontSize: "clamp(0.8rem, 2.8vw, 1.1rem)",
+                            padding: "4px 6px",
+                            textShadow: `
                         -1px -1px 0 #000,
                          1px -1px 0 #000,
                         -1px  1px 0 #000,
                          1px  1px 0 #000
                       `,
-                          transform: "scaleX(1)",
-                          transformOrigin: "left",
-                          maxWidth: "100%",
-                        }}
-                      >
-                        {card.name}
-                      </h5>
-                    </div>
+                            transform: "scaleX(1)",
+                            transformOrigin: "left",
+                            maxWidth: "100%",
+                          }}
+                        >
+                          {card.name}
+                        </h5>
+                      </div>
 
                       {/* Type Icon + Text */}
                       <div className="flex items-center gap-1 -mt-1"
-                      style={{
-                        padding: "4px 6px",
-                      }}
+                        style={{
+                          padding: "4px 6px",
+                        }}
                       >
                         <img
                           src={
                             card.type === "attack"
                               ? "/images/icon-category-card-attack.webp"
                               : card.type === "skill"
-                              ? "/images/icon-category-card-skill.webp"
-                              : "/images/icon-category-card-upgrade.webp"
+                                ? "/images/icon-category-card-skill.webp"
+                                : "/images/icon-category-card-upgrade.webp"
                           }
                           alt={card.type}
                           className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0"
@@ -655,7 +655,7 @@ export default function ChizuruGuidePage() {
                         <>
                           {bracketedText && (
                             <p
-                              className="text-center font-medium text-xs sm:text-base leading-snug m-0" 
+                              className="text-center font-medium text-xs sm:text-base leading-snug m-0"
                               style={{ color: "#e3b46c" }}>
                               {bracketedText}
                             </p>
@@ -711,7 +711,7 @@ export default function ChizuruGuidePage() {
           ring-offset-1 ring-offset-pink-900/20
           relative overflow-hidden
         `
-  
+
       case "S":
         return `
           bg-black/80
@@ -722,7 +722,7 @@ export default function ChizuruGuidePage() {
           ring-1 ring-orange-500/30
           ring-offset-1 ring-offset-orange-900/20
         `
-  
+
       case "A":
         return `
           bg-black/70
@@ -732,7 +732,7 @@ export default function ChizuruGuidePage() {
           shadow-md shadow-purple-500/20
           ring-1 ring-purple-500/20
         `
-  
+
       case "B":
         return `
           bg-black/60
@@ -741,7 +741,7 @@ export default function ChizuruGuidePage() {
           border border-cyan-600/40
           shadow shadow-cyan-500/10
         `
-  
+
       case "C":
         return `
           bg-black/50
@@ -749,7 +749,7 @@ export default function ChizuruGuidePage() {
           font-medium text-xs
           border border-emerald-700/30
         `
-        case "Niche":
+      case "Niche":
         return `
           bg-gray-900/80
           text-gray-400
@@ -764,7 +764,7 @@ export default function ChizuruGuidePage() {
           font-medium text-xs
           border border-red-700/50
         `
-  
+
       default:
         return `bg-gray-900/70 
         text-gray-600 
@@ -775,36 +775,36 @@ export default function ChizuruGuidePage() {
   }
 
 
-const chizuruWeapons = [
-  weapons.find(g => g.name === "Intellect of Discord"),
-  weapons.find(g => g.name === "Tentacles of Chaos"),
-  weapons.find(g => g.name === "Foggy Crystal Ball"),
-  weapons.find(g => g.name === "Mutant Predator Spike"),
-  weapons.find(g => g.name === "Dagger That Tricked the Shadow"),
-  weapons.find(g => g.name === "RFS-17"),
-  weapons.find(g => g.name === "Bone Cutter"),
-  weapons.find(g => g.name === "Obsidian Sword"),
-].filter(Boolean) as GearData[];
+  const chizuruWeapons = [
+    weapons.find(g => g.name === "Intellect of Discord"),
+    weapons.find(g => g.name === "Tentacles of Chaos"),
+    weapons.find(g => g.name === "Foggy Crystal Ball"),
+    weapons.find(g => g.name === "Mutant Predator Spike"),
+    weapons.find(g => g.name === "Dagger That Tricked the Shadow"),
+    weapons.find(g => g.name === "RFS-17"),
+    weapons.find(g => g.name === "Bone Cutter"),
+    weapons.find(g => g.name === "Obsidian Sword"),
+  ].filter(Boolean) as GearData[];
 
-const chizuruArmors = [
-  armors.find(g => g.name === "Wings of Freedom"),
-  armors.find(g => g.name === "Fairy King's Crown"),
-  armors.find(g => g.name === "Shield of the Watcher"),
-  armors.find(g => g.name === "Fragment of the Empty Void"),
-  armors.find(g => g.name === "Rocket-Adorned Cape"), 
-].filter(Boolean) as GearData[];
+  const chizuruArmors = [
+    armors.find(g => g.name === "Wings of Freedom"),
+    armors.find(g => g.name === "Fairy King's Crown"),
+    armors.find(g => g.name === "Shield of the Watcher"),
+    armors.find(g => g.name === "Fragment of the Empty Void"),
+    armors.find(g => g.name === "Rocket-Adorned Cape"),
+  ].filter(Boolean) as GearData[];
 
-const chizuruAccessories = [
-  accessories.find(g => g.name === "Emblem of an Exceptional Entity"),
-  accessories.find(g => g.name === "Eye of the Eyeless"),
-  accessories.find(g => g.name === "Clover of the Forest"),
-  accessories.find(g => g.name === "Verdant Shackles"),
-  accessories.find(g => g.name === "Dimensional Cube"),
-  accessories.find(g => g.name === "Nerve Hacking Module"),
-  accessories.find(g => g.name === "Amorphous Cube"),
-].filter(Boolean) as GearData[];
+  const chizuruAccessories = [
+    accessories.find(g => g.name === "Emblem of an Exceptional Entity"),
+    accessories.find(g => g.name === "Eye of the Eyeless"),
+    accessories.find(g => g.name === "Clover of the Forest"),
+    accessories.find(g => g.name === "Verdant Shackles"),
+    accessories.find(g => g.name === "Dimensional Cube"),
+    accessories.find(g => g.name === "Nerve Hacking Module"),
+    accessories.find(g => g.name === "Amorphous Cube"),
+  ].filter(Boolean) as GearData[];
 
-const [selectedSources, setSelectedSources] = useState<string[]>([]);
+  const [selectedSources, setSelectedSources] = useState<string[]>([]);
 
   const toggleSource = (source: string) => {
     setSelectedSources(prev =>
@@ -909,9 +909,8 @@ const [selectedSources, setSelectedSources] = useState<string[]>([]);
                   <li key={section.id}>
                     <a
                       href={`#${section.id}`}
-                      className={`text-sm text-muted-foreground hover:text-purple-400 transition-colors block py-1 ${
-                        section.level === 2 ? "pl-4" : ""
-                      }`}
+                      className={`text-sm text-muted-foreground hover:text-purple-400 transition-colors block py-1 ${section.level === 2 ? "pl-4" : ""
+                        }`}
                     >
                       {section.title}
                     </a>
@@ -925,14 +924,14 @@ const [selectedSources, setSelectedSources] = useState<string[]>([]);
           <div className="flex-1 space-y-8">
             {/* 1. Overview */}
             <section id="overview" className="hidden lg:block rounded-lg border border-border bg-card p-8 scroll-mt-6">
-            <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-purple-400">1. Overview</h2>
+              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-purple-400">1. Overview</h2>
               <div className="space-y-4">
                 <div className="flex flex-wrap gap-3 mb-4">
                   <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-500/20 border border-purple-500/50">
                     <img src="/images/icon-ego-void.webp" alt="Void" className="w-5 h-5" />
                     <span className="text-purple-400 text-sm font-medium">Void</span>
                   </div>
-                  
+
                   <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black-500/20 border border-black-500/40">
                     <img src="/images/icon-job-psionic.webp" alt="Psionic" className="w-5 h-5" />
                     <span className="text-black-400 text-sm font-medium">Psionic</span>
@@ -940,55 +939,55 @@ const [selectedSources, setSelectedSources] = useState<string[]>([]);
                 </div>
 
                 <div className="rounded-sm bg-background/50 border border-border">
-                <div className="relative w-full h-[400px] bg-gradient-to-br from-purple-500/20 to-black/30 flex items-center justify-center warp">
-                <img
-                  src={`/images/characters/chizuru.webp`}
-                  alt={`chizuru full artwork`}
-                  className="w-full h-full object-contain"
-                />
-              </div>
+                  <div className="relative w-full h-[400px] bg-gradient-to-br from-purple-500/20 to-black/30 flex items-center justify-center warp">
+                    <img
+                      src={`/images/characters/chizuru.webp`}
+                      alt={`chizuru full artwork`}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
                 </div>
               </div>
             </section>
 
-{/* 2. Base Cards */}
-<section id="base-cards" className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-6">
-  <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-purple-400 text-center">2. Base Cards</h2>
-  <p className="text-muted-foreground mb-6 sm:mb-8 text-sm sm:text-base text-center px-4 max-w-3xl mx-auto">
-    Click a Base Card to view the Epiphanies Tier List
-  </p>
+            {/* 2. Base Cards */}
+            <section id="base-cards" className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-6">
+              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-purple-400 text-center">2. Base Cards</h2>
+              <p className="text-muted-foreground mb-6 sm:mb-8 text-sm sm:text-base text-center px-4 max-w-3xl mx-auto">
+                Click a Base Card to view the Epiphanies Tier List
+              </p>
 
-  {/* Base Cards Grid */}
-  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-3 sm:gap-4 justify-items-center">
-    {uniqueCards.map((cardData) => {
-      const baseCost = cardData.epiphanies[0]?.cost ?? 0;
-      const baseType = cardData.epiphanies[0]?.type ?? cardData.baseType;
-                  
-      return (
-        <Dialog
-          key={cardData.id ?? cardData.name}
-          open={selectedCardForEpiphanies?.id === cardData.id}
-          onOpenChange={(open) => {
-            if (open) setSelectedCardForEpiphanies(cardData);
-            else setSelectedCardForEpiphanies(null);
-          }}
-        >
-          <DialogTrigger asChild>
-            {/* Tile - matches Partner tile sizing and interaction */}
-            <div className="group cursor-pointer rounded-xl transition-all duration-300 hover:scale-103 hover:shadow-lg hover:shadow-purple-400/20 w-full max-w-full sm:max-w-[280px]">
-              <div className="relative rounded-lg overflow-hidden border-2 border-border hover:border-purple-400/100 transition-all duration-200 cursor-pointer">
-                {/* Void Border */}
-                <div className="absolute left-0 -top-0.5 -bottom-0.5 w-3 z-10">
-                  <img src="/images/card/void-border.png" alt="" className="h-full w-full object-cover" />
-                </div>
+              {/* Base Cards Grid */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 justify-items-center">
+                {uniqueCards.map((cardData) => {
+                  const baseCost = cardData.epiphanies[0]?.cost ?? 0;
+                  const baseType = cardData.epiphanies[0]?.type ?? cardData.baseType;
 
-                <div className="relative aspect-[2/3] bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden rounded-md">
-                  <img
-                    src={cardData.image || "/placeholder.svg"}
-                    alt={cardData.name}
-                    className="w-full h-full object-cover scale-108"/>
-                  </div>
-                  
+                  return (
+                    <Dialog
+                      key={cardData.id ?? cardData.name}
+                      open={selectedCardForEpiphanies?.id === cardData.id}
+                      onOpenChange={(open) => {
+                        if (open) setSelectedCardForEpiphanies(cardData);
+                        else setSelectedCardForEpiphanies(null);
+                      }}
+                    >
+                      <DialogTrigger asChild>
+                        {/* Tile - matches Partner tile sizing and interaction */}
+                        <div className="group cursor-pointer rounded-xl transition-all duration-300 hover:scale-103 hover:shadow-lg hover:shadow-purple-400/20 w-full max-w-full sm:max-w-[280px]">
+                          <div className="relative rounded-lg overflow-hidden border-2 border-border hover:border-purple-400/100 transition-all duration-200 cursor-pointer">
+                            {/* Void Border */}
+                            <div className="absolute left-0 -top-0.5 -bottom-0.5 w-3 z-10">
+                              <img src="/images/card/void-border.png" alt="" className="h-full w-full object-cover" />
+                            </div>
+
+                            <div className="relative aspect-[2/3] bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden rounded-md">
+                              <img
+                                src={cardData.image || "/placeholder.svg"}
+                                alt={cardData.name}
+                                className="w-full h-full object-cover scale-108" />
+                            </div>
+
                             <div className="absolute inset-0 flex flex-col">
                               {/* Top Section */}
                               <div className="p-2 pt-1.5 pl-3">
@@ -1135,9 +1134,9 @@ const [selectedSources, setSelectedSources] = useState<string[]>([]);
                                     return (
                                       <>
                                         {bracketedText && (
-                                          <p 
-                                          className="text-center font-medium text-xs sm:text-base leading-snug m-0" 
-                                          style={{ color: "#e3b46c" }}>
+                                          <p
+                                            className="text-center font-medium text-xs sm:text-base leading-snug m-0"
+                                            style={{ color: "#e3b46c" }}>
                                             {bracketedText}
                                           </p>
                                         )}
@@ -1160,66 +1159,66 @@ const [selectedSources, setSelectedSources] = useState<string[]>([]);
                         </div>
                       </DialogTrigger>
 
-          <DialogContent className="!w-[95vw] !max-w-6xl max-h-[90vh] overflow-y-auto scrollbar-none bg-gray-900/95 border border-gray-800 rounded-xl ">
-            <DialogHeader className="bg-gray-900 border-b border-gray-800 px-6 py-4 pr-12">
-             <DialogTitle className="text-xl sm:text-2xl font-bold text-purple-300">
-                {cardData.name} - Epiphanies
-              </DialogTitle>
-            </DialogHeader>
+                      <DialogContent className="!w-[95vw] !max-w-6xl max-h-[90vh] overflow-y-auto scrollbar-none bg-gray-900/95 border border-gray-800 rounded-xl ">
+                        <DialogHeader className="bg-gray-900 border-b border-gray-800 px-6 py-4 pr-12">
+                          <DialogTitle className="text-xl sm:text-2xl font-bold text-purple-300">
+                            {cardData.name} - Epiphanies
+                          </DialogTitle>
+                        </DialogHeader>
 
-            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-5 gap-4">
-                {cardData.epiphanies.map((epiphany, index) => (
-                  <div key={index} className="flex flex-col gap-2 sm:gap-3 w-full max-w-[280px] mx-auto">
-                    <div className="flex justify-center">
-                      <span
-                      className={`
+                        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-5 gap-4">
+                          {cardData.epiphanies.map((epiphany, index) => (
+                            <div key={index} className="flex flex-col gap-2 sm:gap-3 w-full max-w-[280px] mx-auto">
+                              <div className="flex justify-center">
+                                <span
+                                  className={`
                       px-3 py-1 rounded-full text-xs font-bold tracking-wide 
                       ${getTierColor(epiphany.tier)}`}>
-                       {epiphany.tier} Tier
-                      </span>
-                     </div>
-
-                    {/* Epiphany Card */}
-                    <div className="relative rounded-lg overflow-hidden border-1 border-border hover:border-purple-400/100 transition-all duration-200">
-                      {/* Void Border */}
-                      <div className="absolute left-0 -top-0.5 -bottom-0.5 w-3 z-10">
-                        <img src="/images/card/void-border.png" alt="" className="h-full w-full object-cover" />
-                      </div>
-
-                      <div className="relative aspect-[2/3] bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden rounded-md">
-                        <img
-                          src={cardData.image || "/placeholder.svg"}
-                          alt={cardData.name}
-                          className="w-full h-full object-cover scale-108"
-                        />
-
-                        <div className="absolute inset-0 flex flex-col">
-                          {/* Top Section */}
-                          <div className="p-2 pt-1.5 pl-3">
-                            <div className="flex items-start gap-1.5 relative">
-                              {/* Rarity Image */}
-                              <div className="absolute left-0 top-0 z-20 flex items-center" style={{ transform: 'translateX(-18px)' }}>
-                                <img
-                                  src={
-                                    cardData.name === "Oni Hunt"
-                                      ? "/images/card/card_rarity_legend.png"
-                                      : cardData.name === "Shadow of the Moon"
-                                        ? "/images/card/card_rarity_unique.png"
-                                        : "/images/card/card_rarity_rare.png"
-                                  }
-                                  alt=""
-                                  className="h-11 sm:h-11 object-contain"
-                                />
+                                  {epiphany.tier} Tier
+                                </span>
                               </div>
 
-                              {/* Cost */}
-                              <div className="flex-shrink-0 flex flex-col items-center justify-center ml-3 relative z-30">
-                                <span
-                                  className="font-bold text-2xl sm:text-3xl"
-                                  style={{
-                                    color: "#FFFFFF",
-                                    WebkitTextStroke: "1.3px #2D4CAE",
-                                    textShadow: `
+                              {/* Epiphany Card */}
+                              <div className="relative rounded-lg overflow-hidden border-1 border-border hover:border-purple-400/100 transition-all duration-200">
+                                {/* Void Border */}
+                                <div className="absolute left-0 -top-0.5 -bottom-0.5 w-3 z-10">
+                                  <img src="/images/card/void-border.png" alt="" className="h-full w-full object-cover" />
+                                </div>
+
+                                <div className="relative aspect-[2/3] bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden rounded-md">
+                                  <img
+                                    src={cardData.image || "/placeholder.svg"}
+                                    alt={cardData.name}
+                                    className="w-full h-full object-cover scale-108"
+                                  />
+
+                                  <div className="absolute inset-0 flex flex-col">
+                                    {/* Top Section */}
+                                    <div className="p-2 pt-1.5 pl-3">
+                                      <div className="flex items-start gap-1.5 relative">
+                                        {/* Rarity Image */}
+                                        <div className="absolute left-0 top-0 z-20 flex items-center" style={{ transform: 'translateX(-18px)' }}>
+                                          <img
+                                            src={
+                                              cardData.name === "Oni Hunt"
+                                                ? "/images/card/card_rarity_legend.png"
+                                                : cardData.name === "Shadow of the Moon"
+                                                  ? "/images/card/card_rarity_unique.png"
+                                                  : "/images/card/card_rarity_rare.png"
+                                            }
+                                            alt=""
+                                            className="h-11 sm:h-11 object-contain"
+                                          />
+                                        </div>
+
+                                        {/* Cost */}
+                                        <div className="flex-shrink-0 flex flex-col items-center justify-center ml-3 relative z-30">
+                                          <span
+                                            className="font-bold text-2xl sm:text-3xl"
+                                            style={{
+                                              color: "#FFFFFF",
+                                              WebkitTextStroke: "1.3px #2D4CAE",
+                                              textShadow: `
                                       0 0 2px #5B91FB,
                                       0 0 4px #5B91FB,
                                       0 0 6px #5B91FB,
@@ -1235,280 +1234,270 @@ const [selectedSources, setSelectedSources] = useState<string[]>([]);
                                       -2px  2px 4px rgba(91, 145, 251, 0.8),
                                        2px  2px 4px rgba(91, 145, 251, 0.8)
                                     `,
-                                  }}
-                                >
-                                  {epiphany.cost}
-                                </span>
-                                <div
-                                  className="w-full h-0.5 mt-0.5"
-                                  style={{
-                                    backgroundColor: "#B6C4F9",
-                                    boxShadow: `
+                                            }}
+                                          >
+                                            {epiphany.cost}
+                                          </span>
+                                          <div
+                                            className="w-full h-0.5 mt-0.5"
+                                            style={{
+                                              backgroundColor: "#B6C4F9",
+                                              boxShadow: `
                                       0 0 2px #5B91FB,
                                       0 0 4px #5B91FB,
                                       0 0 6px #5B91FB,
                                       0 0 8px rgba(91, 145, 251, 0.6),
                                       inset 0 1px 0 rgba(255, 255, 255, 0.3)
                                     `,
-                                  }}
-                                />
-                              </div>
+                                            }}
+                                          />
+                                        </div>
 
-                              {/* Name and Type */}
-                              <div className="flex-1 pt-0.5 min-w-0">
-                                <div className="relative w-full">
-                                  <div
-                                    className="absolute"
-                                    style={{
-                                      backgroundImage: `url(${getRarityBackgroundImage(cardData.name)})`,
-                                      backgroundRepeat: "no-repeat",
-                                      backgroundPosition: "left center",
-                                      backgroundSize: "contain",
-                                      left: -50,
-                                      right: 0,
-                                      top: 7,
-                                      bottom: 0,
-                                      height: "70%",
-                                      width: "700%",
-                                    }}
-                                  />
+                                        {/* Name and Type */}
+                                        <div className="flex-1 pt-0.5 min-w-0">
+                                          <div className="relative w-full">
+                                            <div
+                                              className="absolute"
+                                              style={{
+                                                backgroundImage: `url(${getRarityBackgroundImage(cardData.name)})`,
+                                                backgroundRepeat: "no-repeat",
+                                                backgroundPosition: "left center",
+                                                backgroundSize: "contain",
+                                                left: -50,
+                                                right: 0,
+                                                top: 7,
+                                                bottom: 0,
+                                                height: "70%",
+                                                width: "700%",
+                                              }}
+                                            />
 
-                                  <h5
-                                    className="relative font-bold leading-tight drop-shadow-lg overflow-hidden text-ellipsis whitespace-nowrap"
-                                    style={{
-                                      color: getRarityColor(cardData.name),
-                                      fontSize: "clamp(0.9rem, 2.8vw, 0.9rem)",
-                                      padding: "4px 6px",
-                                      textShadow: `
+                                            <h5
+                                              className="relative font-bold leading-tight drop-shadow-lg overflow-hidden text-ellipsis whitespace-nowrap"
+                                              style={{
+                                                color: getRarityColor(cardData.name),
+                                                fontSize: "clamp(0.9rem, 2.8vw, 0.9rem)",
+                                                padding: "4px 6px",
+                                                textShadow: `
                                         -1px -1px 0 #000,
                                          1px -1px 0 #000,
                                         -1px  1px 0 #000,
                                          1px  1px 0 #000
                                       `,
-                                      maxWidth: "100%",
-                                    }}
-                                  >
-                                    {cardData.name}
-                                  </h5>
-                                </div>
+                                                maxWidth: "100%",
+                                              }}
+                                            >
+                                              {cardData.name}
+                                            </h5>
+                                          </div>
 
-                                <div className="flex items-center gap-1 -mt-1" style={{ padding: "4px 6px" }}>
-                                  <img
-                                    src={
-                                      epiphany.type === "attack"
-                                        ? "/images/icon-category-card-attack.webp"
-                                        : epiphany.type === "skill"
-                                          ? "/images/icon-category-card-skill.webp"
-                                          : "/images/icon-category-card-upgrade.webp"
-                                    }
-                                    alt={epiphany.type}
-                                    className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0"
-                                  />
-                                  <span
-                                    className="text-white text-xs sm:text-sm font-medium capitalize drop-shadow"
-                                    style={{
-                                      fontSize: "clamp(0.8rem, 2vw, 0.8rem)",
-                                      textShadow: `
+                                          <div className="flex items-center gap-1 -mt-1" style={{ padding: "4px 6px" }}>
+                                            <img
+                                              src={
+                                                epiphany.type === "attack"
+                                                  ? "/images/icon-category-card-attack.webp"
+                                                  : epiphany.type === "skill"
+                                                    ? "/images/icon-category-card-skill.webp"
+                                                    : "/images/icon-category-card-upgrade.webp"
+                                              }
+                                              alt={epiphany.type}
+                                              className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0"
+                                            />
+                                            <span
+                                              className="text-white text-xs sm:text-sm font-medium capitalize drop-shadow"
+                                              style={{
+                                                fontSize: "clamp(0.8rem, 2vw, 0.8rem)",
+                                                textShadow: `
                                         -1px -1px 0 #000,
                                          1px -1px 0 #000,
                                         -1px  1px 0 #000,
                                          1px  1px 0 #000
                                       `,
-                                    }}
-                                  >
-                                    {epiphany.type}
-                                  </span>
+                                              }}
+                                            >
+                                              {epiphany.type}
+                                            </span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    {/* Description Section - epiphany (active spark) */}
+                                    <div className="mt-auto py-5 bg-gradient-to-t from-black/95 via-black/90 to-transparent flex flex-col items-center justify-center gap-1">
+                                      <img
+                                        src="/images/card/card_frame_spark.png"
+                                        alt=""
+                                        className="w-1/3 mb-0 drop-shadow-2xl"
+                                      />
+                                      {(() => {
+                                        const { bracketedText, remainingText } = parseDescription(epiphany.description);
+                                        return (
+                                          <>
+                                            {bracketedText && (
+                                              <p
+                                                className="text-center font-medium text-xs sm:text-sm leading-snug m-0"
+                                                style={{ color: "#e3b46c" }}
+                                              >
+                                                {bracketedText}
+                                              </p>
+                                            )}
+                                            <p
+                                              className="text-white text-center text-xs sm:text-sm leading-snug m-0 whitespace-pre-line"
+                                              dangerouslySetInnerHTML={{
+                                                __html: remainingText
+                                                  .replace(/(\d+%?)/g, '<span style="color: #7ce2fb">$1</span>')
+                                                  .replace(/Shadow of the\s*Moon\+/gi, '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>')
+                                                  .replace(/Moonslash/gi, '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>'),
+                                              }}
+                                            />
+                                          </>
+                                        );
+                                      })()}
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
+                          ))}
+                        </div>
 
-                          {/* Description Section - epiphany (active spark) */}
-                          <div className="mt-auto py-5 bg-gradient-to-t from-black/95 via-black/90 to-transparent flex flex-col items-center justify-center gap-1">
-                            <img
-                              src="/images/card/card_frame_spark.png"
-                              alt=""
-                              className="w-1/3 mb-0 drop-shadow-2xl"
-                            />
-                            {(() => {
-                              const { bracketedText, remainingText } = parseDescription(epiphany.description);
-                              return (
-                                <>
-                                  {bracketedText && (
-                                    <p
-                                      className="text-center font-medium text-xs sm:text-sm leading-snug m-0"
-                                      style={{ color: "#e3b46c" }}
-                                    >
-                                      {bracketedText}
+                        {/* Epiphany Explanations */}
+                        <div className="mt-6 space-y-3 sm:space-y-4">
+                          <h3 className="text-lg font-bold text-purple-300">Epiphanies Tier</h3>
+                          {cardData.epiphanies.map((epiphany, index) => (
+                            <div key={index} className="p-3 rounded-lg bg-background/50 border border-border">
+                              <div className="flex flex-row items-center sm:flex-row gap-2 mb-2">
+                                <span
+                                  className={`px-3 py-1 rounded-full text-xs font-bold w-fit ${getTierColor(epiphany.tier)}`}
+                                >
+                                  {epiphany.tier} Tier
+                                </span>
+                                <span className="text-sm sm:text-base font-semibold text-foreground">
+                                  {epiphany.id}
+                                </span>
+                              </div>
+                              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{epiphany.reasoning}</p>
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* Divine Epiphanies */}
+                        {cardData.divineEpiphanies && cardData.divineEpiphanies.length > 0 && (
+                          <div className="mt-6 space-y-4">
+                            <h3 className="text-lg font-bold text-purple-300">Divine Epiphanies</h3>
+                            <p className="text-sm text-muted-foreground mb-4">
+                              Good Divine Epiphanies that this card can roll
+                            </p>
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                              {cardData.divineEpiphanies.map((divineEpiphany: any, index: number) => (
+                                <div key={index} className="p-3 rounded-lg bg-gradient-to-br from-purple-900/30 to-purple-800/20 border border-purple-500/40">
+                                  <div className="flex items-center gap-2 mb-2">
+                                    {divineEpiphany.icon && (
+                                      <img
+                                        src={divineEpiphany.icon}
+                                        alt={divineEpiphany.name || "Divine Epiphany"}
+                                        className="w-8 h-8 object-contain flex-shrink-0"
+                                      />
+                                    )}
+                                    <span className="px-2 py-1 rounded-full text-xs font-bold bg-purple-500/30 text-purple-200 border border-purple-400/50">
+                                      Divine
+                                    </span>
+                                    {divineEpiphany.name && (
+                                      <span className="text-sm font-semibold text-purple-200">
+                                        {divineEpiphany.name}
+                                      </span>
+                                    )}
+                                  </div>
+                                  {divineEpiphany.reasoning && (
+                                    <p className="text-sm sm:text-base text-purple-300/80 mt-2 leading-relaxed">
+                                      {divineEpiphany.reasoning}
                                     </p>
                                   )}
-                                  <p
-                                    className="text-white text-center text-xs sm:text-sm leading-snug m-0 whitespace-pre-line"
-                                    dangerouslySetInnerHTML={{
-                                      __html: remainingText
-                                        .replace(/(\d+%?)/g, '<span style="color: #7ce2fb">$1</span>')
-                                        .replace(/Shadow of the\s*Moon\+/gi, '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>')
-                                        .replace(/Moonslash/gi, '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>'),
-                                    }}
-                                  />
-                                </>
-                              );
-                            })()}
+                                </div>
+                              ))}
+                            </div>
                           </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Epiphany Explanations */}
-              <div className="mt-6 space-y-3 sm:space-y-4">
-                <h3 className="text-lg font-bold text-purple-300">Epiphanies Tier</h3>
-                {cardData.epiphanies.map((epiphany, index) => (
-                  <div key={index} className="p-3 rounded-lg bg-background/50 border border-border">
-                    <div className="flex flex-row items-center sm:flex-row gap-2 mb-2">
-                      <span
-                        className={`px-3 py-1 rounded-full text-xs font-bold w-fit ${getTierColor(epiphany.tier)}`}
-                      >
-                        {epiphany.tier} Tier
-                      </span>
-                      <span className="text-sm sm:text-base font-semibold text-foreground">
-                        {epiphany.id}
-                      </span>
-                    </div>
-                    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{epiphany.reasoning}</p>
-                  </div>
-                ))}
-              </div>
-
-              {/* Divine Epiphanies */}
-              {cardData.divineEpiphanies && cardData.divineEpiphanies.length > 0 && (
-                <div className="mt-6 space-y-4">
-                  <h3 className="text-lg font-bold text-purple-300">Divine Epiphanies</h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    Good Divine Epiphanies that this card can roll
-                  </p>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                    {cardData.divineEpiphanies.map((divineEpiphany: any, index: number) => (
-                      <div key={index} className="p-3 rounded-lg bg-gradient-to-br from-purple-900/30 to-purple-800/20 border border-purple-500/40">
-                        <div className="flex items-center gap-2 mb-2">
-                          {divineEpiphany.icon && (
-                            <img
-                              src={divineEpiphany.icon}
-                              alt={divineEpiphany.name || "Divine Epiphany"}
-                              className="w-8 h-8 object-contain flex-shrink-0"
-                            />
-                          )}
-                          <span className="px-2 py-1 rounded-full text-xs font-bold bg-purple-500/30 text-purple-200 border border-purple-400/50">
-                            Divine
-                          </span>
-                          {divineEpiphany.name && (
-                            <span className="text-sm font-semibold text-purple-200">
-                              {divineEpiphany.name}
-                            </span>
-                          )}
-                        </div>
-                        {divineEpiphany.reasoning && (
-                          <p className="text-sm sm:text-base text-purple-300/80 mt-2 leading-relaxed">
-                            {divineEpiphany.reasoning}
-                          </p>
                         )}
-                      </div>
-                    ))}
+                      </DialogContent>
+
+                    </Dialog>
+                  );
+                })}
+              </div>
+            </section>
+
+            {/* 3. Recommended Save Data */}
+            <section id="recommended-save-data" className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-6">
+              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-purple-400 text-center">3. Recommended Save Data</h2>
+              <p className="text-muted-foreground mb-6 sm:mb-8 text-sm sm:text-base text-center px-4 max-w-3xl mx-auto">
+                These are example deck builds. You can adjust based on your playstyle and available cards.
+              </p>
+
+              <div className="space-y-12 sm:space-y-16">
+                {/* Build 1 */}
+                <div className="space-y-5">
+                  <div className="text-center space-y-3">
+                    <h3 className="text-lg sm:text-xl font-bold text-purple-300">Tsukuyomi & Oni Hunt Mixed Build</h3>
+                    <span className="inline-block px-4 py-1.5 rounded-full bg-blue-500/20 border border-blue-500/40 text-blue-400 text-xs sm:text-sm font-bold leading-tight whitespace-normal break-words max-w-full">
+                      [140 Faint Memory Cost without Convert Method]
+                    </span>
                   </div>
+
+                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed text-center max-w-2xl mx-auto px-4">
+                    Optimal Ratio is 3 Tsukuyomi and 2 Oni Hunt<br />
+                    2:3 Oni Hunt is also fine, 4 of one or the other is bad<br />
+                    Oni Hunt II or Oni Hunt V are also an option with <strong>Orlea</strong>
+                  </p>
+
+                  {(() => {
+                    const { topRow, bottomRow, deck } = generateDeckRows("tsukuyomi-oni-mixed");
+                    return (
+                      <div className="space-y-4">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto justify-items-center">
+                          {deck.map((card, index) => (
+                            <CardDisplay key={card.id || index} card={card} />
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })()}
                 </div>
-              )}
-          </DialogContent>
 
-        </Dialog>
-      );
-    })}
-  </div>
-</section>
+                {/* Build 2 */}
+                <div className="space-y-5">
+                  <div className="text-center space-y-3">
+                    <h3 className="text-lg sm:text-xl font-bold text-purple-300">Moonslash Spam</h3>
+                    <span className="inline-block px-4 py-1.5 rounded-full bg-blue-500/20 border border-blue-500/40 text-blue-400 text-xs sm:text-sm font-bold leading-tight whitespace-normal break-words max-w-full">
+                      [140 Faint Memory Cost without Convert Method]
+                    </span>
+                  </div>
 
-{/* 3. Recommended Save Data */}
-<section id="recommended-save-data" className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-6">
-  <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-purple-400 text-center">3. Recommended Save Data</h2>
-  <p className="text-muted-foreground mb-6 sm:mb-8 text-sm sm:text-base text-center px-4 max-w-3xl mx-auto">
-    These are example deck builds. You can adjust based on your playstyle and available cards.
-  </p>
+                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed text-center max-w-2xl mx-auto px-4">
+                    Focuses on spamming low-cost Oni Hunt cards to generate Will-O'-Wisp quickly and trigger Moonslash frequently.
+                  </p>
 
-  <div className="space-y-12 sm:space-y-16">
-    {/* Build 1 */}
-    <div className="space-y-5">
-      <div className="text-center space-y-3">
-        <h3 className="text-lg sm:text-xl font-bold text-purple-300">Tsukuyomi & Oni Hunt Mixed Build</h3>
-        <span className="inline-block px-4 py-1.5 rounded-full bg-blue-500/20 border border-blue-500/40 text-blue-400 text-xs sm:text-sm font-bold leading-tight whitespace-normal break-words max-w-full">
-          [140 Faint Memory Cost without Convert Method]
-        </span>
-      </div>
-
-      <p className="text-sm sm:text-base text-muted-foreground leading-relaxed text-center max-w-2xl mx-auto px-4">
-        Optimal Ratio is 3 Tsukuyomi and 2 Oni Hunt<br />
-        2:3 Oni Hunt is also fine, 4 of one or the other is bad<br />
-        Oni Hunt II or Oni Hunt V are also an option with <strong>Orlea</strong>
-      </p>
-
-      {(() => {
-        const { topRow, bottomRow } = generateDeckRows("tsukuyomi-oni-mixed");
-        return (
-          <div className="space-y-4">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto justify-items-center">
-              {topRow.map((card, index) => (
-                <CardDisplay key={card.id || index} card={card} />
-              ))}
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto justify-items-center">
-              {bottomRow.map((card, index) => (
-                <CardDisplay key={card.id || index} card={card} />
-              ))}
-            </div>
-          </div>
-        );
-      })()}
-    </div>
-
-    {/* Build 2 */}
-    <div className="space-y-5">
-      <div className="text-center space-y-3">
-        <h3 className="text-lg sm:text-xl font-bold text-purple-300">Moonslash Spam</h3>
-        <span className="inline-block px-4 py-1.5 rounded-full bg-blue-500/20 border border-blue-500/40 text-blue-400 text-xs sm:text-sm font-bold leading-tight whitespace-normal break-words max-w-full">
-          [140 Faint Memory Cost without Convert Method]
-        </span>
-      </div>
-
-      <p className="text-sm sm:text-base text-muted-foreground leading-relaxed text-center max-w-2xl mx-auto px-4">
-        Focuses on spamming low-cost Oni Hunt cards to generate Will-O'-Wisp quickly and trigger Moonslash frequently.
-      </p>
-
-      {(() => {
-        const { topRow, bottomRow } = generateDeckRows("oni4-basic");
-        return (
-          <div className="space-y-4">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto justify-items-center">
-              {topRow.map((card, index) => (
-                <CardDisplay key={card.id || index} card={card} />
-              ))}
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto justify-items-center">
-              {bottomRow.map((card, index) => (
-                <CardDisplay key={card.id || index} card={card} />
-              ))}
-            </div>
-          </div>
-        );
-      })()}
-    </div>
-  </div>
-</section>
+                  {(() => {
+                    const { topRow, bottomRow, deck } = generateDeckRows("oni4-basic");
+                    return (
+                      <div className="space-y-4">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto justify-items-center">
+                          {deck.map((card, index) => (
+                            <CardDisplay key={card.id || index} card={card} />
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })()}
+                </div>
+              </div>
+            </section>
 
             {/* 3.1. Equipments */}
             <section id="equipments" className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-6">
               <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-purple-400 text-center">3.1. Equipments</h2>
               <p className="text-muted-foreground mb-6 sm:mb-8 text-sm sm:text-base text-center px-4 max-w-3xl mx-auto">
                 Note that only one unique item can be equipped per character
-                <br/>
+                <br />
                 <strong>Select a Chaos Manifestation from the dropdown below to view its specific loot pool</strong>
               </p>
 
@@ -1546,7 +1535,7 @@ const [selectedSources, setSelectedSources] = useState<string[]>([]);
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
                 {/* Weapon */}
                 <div className="space-y-4">
                   <h3 className="text-xl font-bold text-purple-300 text-center">Weapon</h3>
@@ -1559,7 +1548,7 @@ const [selectedSources, setSelectedSources] = useState<string[]>([]);
                         <Dialog>
                           <DialogTrigger asChild>
                             <div className="flex justify-center w-full">
-                            <button className="flex items-center justify-center gap-2 text-sm w-40 rounded-lg border border-border bg-card hover:border-purple-400 transition-all duration-300 hover:scale-103 py-1 mt-2">                                Show More
+                              <button className="flex items-center justify-center gap-2 text-sm w-40 rounded-lg border border-border bg-card hover:border-purple-400 transition-all duration-300 hover:scale-103 py-1 mt-2">                                Show More
                                 <ChevronDown className="h-4 w-4" />
                               </button>
                             </div>
@@ -1640,7 +1629,7 @@ const [selectedSources, setSelectedSources] = useState<string[]>([]);
                         <Dialog>
                           <DialogTrigger asChild>
                             <div className="flex justify-center w-full">
-                            <button className="flex items-center justify-center gap-2 text-sm w-40 rounded-lg border border-border bg-card hover:border-purple-400 transition-all duration-300 hover:scale-103 py-1 mt-2">                                Show More
+                              <button className="flex items-center justify-center gap-2 text-sm w-40 rounded-lg border border-border bg-card hover:border-purple-400 transition-all duration-300 hover:scale-103 py-1 mt-2">                                Show More
                                 <ChevronDown className="h-4 w-4" />
                               </button>
                             </div>
@@ -1669,408 +1658,408 @@ const [selectedSources, setSelectedSources] = useState<string[]>([]);
               </div>
             </section>
 
- {/* 4. Memory Fragments */}
-<section id="memory-fragments" className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-6">
-  <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-purple-400 text-center">4. Memory Fragments</h2>
-  <p className="text-muted-foreground mb-6 sm:mb-8 text-sm sm:text-base text-center px-4 max-w-3xl mx-auto">
-    
-  </p>
+            {/* 4. Memory Fragments */}
+            <section id="memory-fragments" className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-6">
+              <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-purple-400 text-center">4. Memory Fragments</h2>
+              <p className="text-muted-foreground mb-6 sm:mb-8 text-sm sm:text-base text-center px-4 max-w-3xl mx-auto">
 
-  {/* BEST IN SLOT */}
-  <div className="space-y-8 sm:space-y-12">
-    <div>
-      <div className="text-center mb-4 sm:mb-6">
-        <span className="inline-block px-3 py-1.5 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wider bg-amber-500/20 text-amber-400 border border-amber-500/40 shadow-sm">
-          Best in Slot
-        </span>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-        {[
-          {
-            name: "Black Wing",
-            effect: "+12% Attack",
-            icon: "/images/sets/black-wing.webp",
-            why: "Provides the best 2-set bonus for general damage output",
-          },
-          {
-            name: "Executioner's Tool",
-            effect: "+25% Critical Damage",
-            icon: "/images/sets/executioners-tool.webp",
-            why: "Provides the best 2-set bonus for critical damage builds",
-          },
-          {
-            name: "Cursed Corpse",
-            effect: "Increases damage dealt to target inflicted with Agony by 10%",
-            icon: "/images/sets/cursed-corpse.webp",
-            why: "Optional damage boost if achievable, but not required. Substats are generally more important than this set bonus"
-          },
-        ].map((set) => (
-          <ExpandableSetCard
-            key={set.name + "bis"}
-            set={set}
-            tier="bis"
-            isExpanded={expandedMemorySet === set.name + "bis"}
-            onToggle={() => setExpandedMemorySet(expandedMemorySet === set.name + "bis" ? null : set.name + "bis")}
-          />
-        ))}
-      </div>
-    </div>
-
-    {/* SECONDARY */}
-    <div>
-      <div className="text-center mb-4 sm:mb-6">
-        <span className="inline-block px-3 py-1.5 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wider bg-cyan-500/20 text-cyan-400 border border-cyan-500/40">
-          Alternative
-        </span>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-        {[
-          {
-            name: "Orb of Inhibition",
-            effect: "When Hitting 2 times with 1 Attack Card, +10% Damage Amount to Void Cards for 1 turn (2 times per turn)",
-            icon: "/images/sets/orb-of-inhibition.webp",
-            why: "Weak and conditional, but still better than the Void set because this set bonus is additive and generic"
-          },
-          {
-            name: "Executioner's Tool",
-            effect: "+25% Critical Damage",
-            icon: "/images/sets/executioners-tool.webp",
-            why: "Provides the best 2-set bonus for critical damage builds",
-          },
-        ].map((set) => (
-          <ExpandableSetCard
-            key={set.name + "secondary"}
-            set={set}
-            tier="secondary"
-            isExpanded={expandedMemorySet === set.name + "secondary"}
-            onToggle={() => setExpandedMemorySet(expandedMemorySet === set.name + "secondary" ? null : set.name + "secondary")}
-          />
-        ))}
-      </div>
-    </div>
-  </div>
-
-  {/* Main Stats + Substat Priority */}
-  <div className="mt-8 sm:mt-10 space-y-8">
-    {/* Main Stats */}
-    <div className="grid grid-cols-3 gap-3 sm:gap-4">
-      <div className="text-center">
-        <div className="text-2xl sm:text-3xl font-bold text-purple-400">IV</div>
-        <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1 sm:mb-2">Ideal</div>
-        <div className="py-2 px-3 rounded bg-purple-500/10 border border-purple-500/30 text-xs sm:text-sm font-medium text-purple-300">
-          Critical Rate
-        </div>
-      </div>
-
-      <div className="text-center">
-        <div className="text-2xl sm:text-3xl font-bold text-purple-400">V</div>
-        <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1 sm:mb-2">Desire</div>
-        <div className="py-2 px-3 rounded bg-purple-500/10 border border-purple-500/30 text-xs sm:text-sm font-medium text-purple-300">
-          Void Damage
-        </div>
-      </div>
-
-      <div className="text-center">
-        <div className="text-2xl sm:text-3xl font-bold text-purple-400">IV</div>
-        <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1 sm:mb-2">Ideal</div>
-        <div className="py-2 px-3 rounded bg-purple-500/10 border border-purple-500/30 text-xs sm:text-sm font-medium text-purple-300">
-          Attack %
-        </div>
-      </div>
-    </div>
-
-    {/* Substat Priority */}
-    <div className="mt-8 text-center">
-      {/* Priority Chain */}
-      <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4">
-        <div className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-purple-500/20 border border-purple-500/50 text-xs sm:text-sm font-semibold text-purple-300">
-          Critical Rate
-        </div>
-        <span className="text-xl sm:text-2xl text-muted-foreground/40">=</span>
-        <div className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-purple-500/20 border border-purple-500/50 text-xs sm:text-sm font-semibold text-purple-300">
-          Critical Damage
-        </div>
-        <span className="text-xl sm:text-2xl text-muted-foreground/40">›</span>
-        <div className="px-2.5 py-1 sm:px-3 sm:py-1 rounded-full bg-muted/70 border border-border text-xs sm:text-sm text-muted-foreground">
-          Attack +
-        </div>
-        <span className="text-muted-foreground/60 text-lg sm:text-xl">›</span>
-        <div className="px-2.5 py-1 sm:px-3 sm:py-1 rounded-full bg-muted/70 border border-border text-xs sm:text-sm text-muted-foreground">
-          Attack %
-        </div>
-      </div>
-
-      {/* Explanation */}
-      <div className="mt-6 mx-auto max-w-3xl">
-        <p className="text-xs sm:text-sm leading-relaxed text-muted-foreground text-center px-4">
-          Prioritize Critical Rate and Critical Damage equally to achieve an ideal critical ratio <br/> After that, prioritize Flat Attack and Attack % for additional damage scaling <br/> Void Damage is generally preferred over Attack for most cases
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-{/* 5. Partners */}
-<section id="partners" className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-24">
-  <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-purple-400 text-center">5. Partners</h2>
-   <p className="text-muted-foreground mb-6 text-xs sm:text-sm md:text-base text-center px-4">
-     Click on any partner below to view detailed information about their synergy with Chizuru
-    </p>
-
-  <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
-  {[
-    {
-      id: 1,
-      name: "Itsuku",
-      role: "S+",
-      image: "/images/partners/itsuku.webp",
-      description: "BiS partner\n Her Partner skill greatly boosts damage for one turn.\nThe fixed damage is irrelevant.",
-    },
-    {
-      id: 2,
-      name: "Zatera",
-      role: "S",
-      image: "/images/partners/zatera.webp",
-      description: "Best F2P option\n Provides a strong damage boost and works well as a replacement if you don't have her signature partner.",
-    },
-    {
-      id: 3,
-      name: "Bria",
-      role: "A",
-      image: "/images/partners/bria.webp",
-      description: "Only worth using if you specifically need her Partner Skill utility. Otherwise, her damage contribution is poor.",
-    },
-    {
-      id: 4,
-      name: "Anteia",
-      role: "C",
-      image: "/images/partners/anteia.webp",
-      description: "At Ego 0, she is weaker than Zatera and offers little value for Chizuru.",
-    },
-    {
-      id: 5,
-      name: "Eloise",
-      role: "Bad",
-      image: "/images/partners/eloise.webp",
-      description: "Not usable with Chizuru. Her Partner Skill requires Exhaust cards, which Chizuru does not have.",
-    },
-  ].map((partner) => (
-    <div key={partner.id} className="flex flex-col items-center gap-3">
-      {/* Tier Badge */}
-      <span className={`px-2.5 py-1.5 rounded-full text-xs sm:text-sm font-bold ${getTierColor(partner.role)}`}>
-        {partner.role} Tier
-      </span>
-
-      <Dialog
-        open={selectedPartner === partner.id}
-        onOpenChange={(open) => setSelectedPartner(open ? partner.id : null)}
-      >
-        <DialogTrigger asChild>
-          <div className="relative aspect-[9/16] w-full max-w-[180px] rounded-lg overflow-hidden border-2 border-border hover:border-purple-400 bg-card transition-all duration-300 hover:scale-103 hover:shadow-lg hover:shadow-purple-400/20 cursor-pointer">
-            <img
-              src={partner.image || "/placeholder.svg"}
-              alt={partner.name}
-              className="object-cover w-full h-full"
-            />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-3 pt-8">
-              <p className="text-sm sm:text-base font-semibold text-white text-center drop-shadow-lg">
-                {partner.name}
               </p>
-            </div>
-          </div>
-        </DialogTrigger>
 
-        <DialogContent className="max-w-xl sm:max-w-2xl w-[95vw] max-h-[85vh] overflow-y-auto bg-gray-900/95 border border-gray-800 p-4 sm:p-6 rounded-xl">
-          <DialogHeader className="text-center pb-4">
-            <DialogTitle className="text-xl sm:text-2xl font-bold text-purple-300">
-              {partner.name}
-            </DialogTitle>
-          </DialogHeader>
-
-          <div className="space-y-5">
-            <div className="flex justify-center">
-              <img
-                src={partner.image || "/placeholder.svg"}
-                alt={partner.name}
-                className="w-40 sm:w-48 h-auto rounded-lg border-4 border-purple-500/50 shadow-2xl"
-              />
-            </div>
-
-            <div className="text-center">
-              <span className={`inline-block px-4 py-2 rounded-full text-base sm:text-lg font-bold ${getTierColor(partner.role)}`}>
-                {partner.role} Tier
-              </span>
-            </div>
-
-            <div className="bg-gray-800/50 rounded-lg p-4 sm:p-6 border border-gray-700/60">
-              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed whitespace-pre-line text-center">
-                {partner.description}
-              </p>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
-    </div>
-  ))}
-</div>
-</section>
-
-{/* 6. Teams */}
-<section id="teams" className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-24">
-  <h2 className="text-xl sm:text-2xl font-bold mb-4 text-purple-400 text-center">6. Teams</h2>
-  <p className="text-muted-foreground mb-6 text-sm sm:text-base text-center px-4">
-    Below are two example team compositions optimized for Chizuru as the primary damage dealer.
-    <br/>
-    Click on any team to view detailed synergy explanations and role breakdowns.
-  </p>
-
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-    {[
-      {
-        id: 1,
-        title: "Chizuru Hypercarry",
-        subtitle: "Rei provides damage buffs while Veronica enables card draw",
-        members: [
-          { name: "Chizuru", job: "psionic", ego: "void", image: "/images/characters/chizuruhalf.webp" },
-          { name: "Rei", job: "controller", ego: "void", image: "/images/characters/reihalf.webp" },
-          { name: "Veronica", job: "ranger", ego: "passion", image: "/images/characters/veronicahalf.webp" },
-        ],
-        overview: "This composition maximizes Chizuru's damage potential by providing the two things she needs most: card draw and damage amplification. Chizuru's power comes from stacking Will-O'-Wisp (gained through hits) to empower her Shadow of the Moon attacks. Without proper support, she struggles to cycle through her deck and find key cards like Tsukuyomi and Shadow of the Moon.",
-        synergies: [
-          { highlight: "Rei + Chizuru", text: "Rei provides damage buffs that multiply Chizuru's Shadow of the Moon damage. Both share Void Ego type, creating natural synergy. Rei's support is especially powerful with Tsukuyomi III (adds 2 hits to Shadow of the Moon), allowing for infinite stacking potential." },
-          { highlight: "Veronica + Chizuru", text: "Veronica's Repose (0 cost, Draw 2 other combatant's cards) solves Chizuru's card draw problem. This ensures Chizuru can consistently find her Tsukuyomi cards (which generate 3 Will-O'-Wisp per hit) and Shadow of the Moon cards to unleash her damage." },
-          { highlight: "The Combo", text: "Veronica draws cards → Chizuru finds Tsukuyomi → Chizuru uses attack cards to generate Will-O'-Wisp (3 per hit) → Rei's damage buffs amplify the damage → Chizuru uses Shadow of the Moon with massive Will-O'-Wisp stacks for devastating damage." },
-        ],
-        roles: [
-          "Chizuru: Main DPS - generates Will-O'-Wisp and deals massive damage with Shadow of the Moon",
-          "Rei: Support/Damage Buffer - amplifies Chizuru's damage through buffs",
-          "Veronica: Support/Draw Engine - provides card draw to keep Chizuru's combo going",
-        ],
-      },
-      {
-        id: 2,
-        title: "Mono Void",
-        subtitle: "Rei provides damage buffs while Tressa generates attack cards for Will-O'-Wisp stacking",
-        members: [
-          { name: "Chizuru", job: "psionic", ego: "void", image: "/images/characters/chizuruhalf.webp" },
-          { name: "Tressa", job: "psionic", ego: "void", image: "/images/characters/tressahalf.webp" },
-          { name: "Rei", job: "controller", ego: "void", image: "/images/characters/reihalf.webp" },
-        ],
-        overview: "This variant replaces Veronica with Tressa, taking a different approach to Will-O'-Wisp generation. Instead of relying on card draw to find Chizuru's cards, Tressa generates attack cards that Chizuru can use with Tsukuyomi to generate Will-O'-Wisp stacks. All three characters share Void Ego type, creating strong synergy and team-wide benefits.",
-        synergies: [
-          { highlight: "Tressa + Chizuru", text: "Tressa's ability to spam attack cards directly feeds Chizuru's Will-O'-Wisp generation. When Chizuru uses Tsukuyomi (3 Will-O'-Wisp per hit), Tressa's attack cards provide the hits needed to stack Will-O'-Wisp quickly without relying on card draw RNG." },
-          { highlight: "Rei + Chizuru", text: "Rei's role remains the same - providing damage buffs that amplify Chizuru's Shadow of the Moon attacks. The Void Ego synergy between all three characters enhances their effectiveness." },
-          { highlight: "Triple Void Ego Synergy", text: "Having all three characters share Void Ego type creates natural synergy and provides team-wide benefits. This makes the team more cohesive than mixed Ego type compositions, enhancing overall effectiveness." },
-          { highlight: "The Combo", text: "Tressa spams attack cards → Chizuru uses Tsukuyomi on those attacks → Generates 3 Will-O'-Wisp per hit → Rei's damage buffs amplify → Chizuru unleashes Shadow of the Moon with massive Will-O'-Wisp stacks." },
-        ],
-        roles: [
-          "Chizuru: Main DPS - generates Will-O'-Wisp and deals massive damage with Shadow of the Moon",
-          "Tressa: Support/Hit Generator - spams attack cards to help Chizuru build Will-O'-Wisp stacks",
-          "Rei: Support/Damage Buffer - amplifies Chizuru's damage through buffs",
-        ],
-        comparison: "This team trades Veronica's card draw for Tressa's direct attack card generation. It's more consistent for Will-O'-Wisp stacking but may struggle if you need to find specific Chizuru cards. The triple Void Ego synergy provides stronger team-wide benefits, but you lose Veronica's versatile draw utility. Choose this team when you want more reliable Will-O'-Wisp generation and stronger Ego type synergy.",
-      },   
-
-    ].map((team) => (
-      <Dialog key={team.id}>
-        <DialogTrigger asChild>
-          <div className="group cursor-pointer rounded-xl border-2 border-purple-500/30 bg-gradient-to-br from-purple-500/5 to-transparent p-4 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300 hover:scale-103">
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-2 h-2 rounded-full bg-violet-400"></div>
-              <h3 className="text-base sm:text-lg font-semibold text-violet-400">{team.title}</h3>
-            </div>
-
-            <div className="grid grid-cols-3 gap-2 mb-3">
-              {team.members.map((member) => (
-                <div key={member.name} className="relative aspect-[2/3] rounded-lg overflow-hidden border border-violet-400/50 bg-card shadow-md">
-                  <img src={member.image} alt={member.name} className="object-cover w-full h-full" />
-                  <div className="absolute top-1 left-1 flex flex-col gap-0.5">
-                    <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
-                      <img src={`/images/icon-job-${member.job}.webp`} alt={member.job} className="w-full h-full" />
-                    </div>
-                    <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
-                      <img src={`/images/icon-ego-${member.ego}.webp`} alt={member.ego} className="w-full h-full" />
-                    </div>
+              {/* BEST IN SLOT */}
+              <div className="space-y-8 sm:space-y-12">
+                <div>
+                  <div className="text-center mb-4 sm:mb-6">
+                    <span className="inline-block px-3 py-1.5 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wider bg-amber-500/20 text-amber-400 border border-amber-500/40 shadow-sm">
+                      Best in Slot
+                    </span>
                   </div>
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent px-1 py-1.5">
-                    <p className="text-xs sm:text-sm font-semibold text-white text-center">{member.name}</p>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+                    {[
+                      {
+                        name: "Black Wing",
+                        effect: "+12% Attack",
+                        icon: "/images/sets/black-wing.webp",
+                        why: "Provides the best 2-set bonus for general damage output",
+                      },
+                      {
+                        name: "Executioner's Tool",
+                        effect: "+25% Critical Damage",
+                        icon: "/images/sets/executioners-tool.webp",
+                        why: "Provides the best 2-set bonus for critical damage builds",
+                      },
+                      {
+                        name: "Cursed Corpse",
+                        effect: "Increases damage dealt to target inflicted with Agony by 10%",
+                        icon: "/images/sets/cursed-corpse.webp",
+                        why: "Optional damage boost if achievable, but not required. Substats are generally more important than this set bonus"
+                      },
+                    ].map((set) => (
+                      <ExpandableSetCard
+                        key={set.name + "bis"}
+                        set={set}
+                        tier="bis"
+                        isExpanded={expandedMemorySet === set.name + "bis"}
+                        onToggle={() => setExpandedMemorySet(expandedMemorySet === set.name + "bis" ? null : set.name + "bis")}
+                      />
+                    ))}
                   </div>
                 </div>
-              ))}
-            </div>
 
-            <div className="flex items-center justify-between text-xs text-muted-foreground">
-              <span className="font-medium">{team.subtitle}</span>
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </div>
-          </div>
-        </DialogTrigger>
+                {/* SECONDARY */}
+                <div>
+                  <div className="text-center mb-4 sm:mb-6">
+                    <span className="inline-block px-3 py-1.5 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wider bg-cyan-500/20 text-cyan-400 border border-cyan-500/40">
+                      Alternative
+                    </span>
+                  </div>
 
-        {/* Dialog with sticky header + no scrollbar */}
-        <DialogContent className="max-w-2xl w-[95vw] max-h-[85vh] overflow-hidden bg-gray-900/95 border border-gray-800 rounded-xl flex flex-col p-0">
-          <DialogHeader className="sticky bg-gray-900 border-b border-gray-800 px-6 py-4 pr-12">
-            <DialogTitle className="text-xl sm:text-2xl font-bold text-purple-300">
-              {team.title}
-            </DialogTitle>
-          </DialogHeader>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+                    {[
+                      {
+                        name: "Orb of Inhibition",
+                        effect: "When Hitting 2 times with 1 Attack Card, +10% Damage Amount to Void Cards for 1 turn (2 times per turn)",
+                        icon: "/images/sets/orb-of-inhibition.webp",
+                        why: "Weak and conditional, but still better than the Void set because this set bonus is additive and generic"
+                      },
+                      {
+                        name: "Executioner's Tool",
+                        effect: "+25% Critical Damage",
+                        icon: "/images/sets/executioners-tool.webp",
+                        why: "Provides the best 2-set bonus for critical damage builds",
+                      },
+                    ].map((set) => (
+                      <ExpandableSetCard
+                        key={set.name + "secondary"}
+                        set={set}
+                        tier="secondary"
+                        isExpanded={expandedMemorySet === set.name + "secondary"}
+                        onToggle={() => setExpandedMemorySet(expandedMemorySet === set.name + "secondary" ? null : set.name + "secondary")}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
 
-          <div className="overflow-y-auto px-6 pb-6 pt-4 flex-1 scrollbar-none">
-            <div className="space-y-6">
-              <div className="grid grid-cols-3 gap-3">
-                {team.members.map((member) => (
-                  <div key={member.name} className="relative aspect-[2/3] rounded-lg overflow-hidden border-2 border-purple-500/50 shadow-2xl">
-                    <img src={member.image} alt={member.name} className="object-cover w-full h-full" />
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-3">
-                      <p className="text-base font-bold text-white text-center">{member.name}</p>
+              {/* Main Stats + Substat Priority */}
+              <div className="mt-8 sm:mt-10 space-y-8">
+                {/* Main Stats */}
+                <div className="grid grid-cols-3 gap-3 sm:gap-4">
+                  <div className="text-center">
+                    <div className="text-2xl sm:text-3xl font-bold text-purple-400">IV</div>
+                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1 sm:mb-2">Ideal</div>
+                    <div className="py-2 px-3 rounded bg-purple-500/10 border border-purple-500/30 text-xs sm:text-sm font-medium text-purple-300">
+                      Critical Rate
                     </div>
+                  </div>
+
+                  <div className="text-center">
+                    <div className="text-2xl sm:text-3xl font-bold text-purple-400">V</div>
+                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1 sm:mb-2">Desire</div>
+                    <div className="py-2 px-3 rounded bg-purple-500/10 border border-purple-500/30 text-xs sm:text-sm font-medium text-purple-300">
+                      Void Damage
+                    </div>
+                  </div>
+
+                  <div className="text-center">
+                    <div className="text-2xl sm:text-3xl font-bold text-purple-400">IV</div>
+                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1 sm:mb-2">Ideal</div>
+                    <div className="py-2 px-3 rounded bg-purple-500/10 border border-purple-500/30 text-xs sm:text-sm font-medium text-purple-300">
+                      Attack %
+                    </div>
+                  </div>
+                </div>
+
+                {/* Substat Priority */}
+                <div className="mt-8 text-center">
+                  {/* Priority Chain */}
+                  <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4">
+                    <div className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-purple-500/20 border border-purple-500/50 text-xs sm:text-sm font-semibold text-purple-300">
+                      Critical Rate
+                    </div>
+                    <span className="text-xl sm:text-2xl text-muted-foreground/40">=</span>
+                    <div className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-purple-500/20 border border-purple-500/50 text-xs sm:text-sm font-semibold text-purple-300">
+                      Critical Damage
+                    </div>
+                    <span className="text-xl sm:text-2xl text-muted-foreground/40">›</span>
+                    <div className="px-2.5 py-1 sm:px-3 sm:py-1 rounded-full bg-muted/70 border border-border text-xs sm:text-sm text-muted-foreground">
+                      Attack +
+                    </div>
+                    <span className="text-muted-foreground/60 text-lg sm:text-xl">›</span>
+                    <div className="px-2.5 py-1 sm:px-3 sm:py-1 rounded-full bg-muted/70 border border-border text-xs sm:text-sm text-muted-foreground">
+                      Attack %
+                    </div>
+                  </div>
+
+                  {/* Explanation */}
+                  <div className="mt-6 mx-auto max-w-3xl">
+                    <p className="text-xs sm:text-sm leading-relaxed text-muted-foreground text-center px-4">
+                      Prioritize Critical Rate and Critical Damage equally to achieve an ideal critical ratio <br /> After that, prioritize Flat Attack and Attack % for additional damage scaling <br /> Void Damage is generally preferred over Attack for most cases
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* 5. Partners */}
+            <section id="partners" className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-24">
+              <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-purple-400 text-center">5. Partners</h2>
+              <p className="text-muted-foreground mb-6 text-xs sm:text-sm md:text-base text-center px-4">
+                Click on any partner below to view detailed information about their synergy with Chizuru
+              </p>
+
+              <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
+                {[
+                  {
+                    id: 1,
+                    name: "Itsuku",
+                    role: "S+",
+                    image: "/images/partners/itsuku.webp",
+                    description: "BiS partner\n Her Partner skill greatly boosts damage for one turn.\nThe fixed damage is irrelevant.",
+                  },
+                  {
+                    id: 2,
+                    name: "Zatera",
+                    role: "S",
+                    image: "/images/partners/zatera.webp",
+                    description: "Best F2P option\n Provides a strong damage boost and works well as a replacement if you don't have her signature partner.",
+                  },
+                  {
+                    id: 3,
+                    name: "Bria",
+                    role: "A",
+                    image: "/images/partners/bria.webp",
+                    description: "Only worth using if you specifically need her Partner Skill utility. Otherwise, her damage contribution is poor.",
+                  },
+                  {
+                    id: 4,
+                    name: "Anteia",
+                    role: "C",
+                    image: "/images/partners/anteia.webp",
+                    description: "At Ego 0, she is weaker than Zatera and offers little value for Chizuru.",
+                  },
+                  {
+                    id: 5,
+                    name: "Eloise",
+                    role: "Bad",
+                    image: "/images/partners/eloise.webp",
+                    description: "Not usable with Chizuru. Her Partner Skill requires Exhaust cards, which Chizuru does not have.",
+                  },
+                ].map((partner) => (
+                  <div key={partner.id} className="flex flex-col items-center gap-3">
+                    {/* Tier Badge */}
+                    <span className={`px-2.5 py-1.5 rounded-full text-xs sm:text-sm font-bold ${getTierColor(partner.role)}`}>
+                      {partner.role} Tier
+                    </span>
+
+                    <Dialog
+                      open={selectedPartner === partner.id}
+                      onOpenChange={(open) => setSelectedPartner(open ? partner.id : null)}
+                    >
+                      <DialogTrigger asChild>
+                        <div className="relative aspect-[9/16] w-full max-w-[180px] rounded-lg overflow-hidden border-2 border-border hover:border-purple-400 bg-card transition-all duration-300 hover:scale-103 hover:shadow-lg hover:shadow-purple-400/20 cursor-pointer">
+                          <img
+                            src={partner.image || "/placeholder.svg"}
+                            alt={partner.name}
+                            className="object-cover w-full h-full"
+                          />
+                          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-3 pt-8">
+                            <p className="text-sm sm:text-base font-semibold text-white text-center drop-shadow-lg">
+                              {partner.name}
+                            </p>
+                          </div>
+                        </div>
+                      </DialogTrigger>
+
+                      <DialogContent className="max-w-xl sm:max-w-2xl w-[95vw] max-h-[85vh] overflow-y-auto bg-gray-900/95 border border-gray-800 p-4 sm:p-6 rounded-xl">
+                        <DialogHeader className="text-center pb-4">
+                          <DialogTitle className="text-xl sm:text-2xl font-bold text-purple-300">
+                            {partner.name}
+                          </DialogTitle>
+                        </DialogHeader>
+
+                        <div className="space-y-5">
+                          <div className="flex justify-center">
+                            <img
+                              src={partner.image || "/placeholder.svg"}
+                              alt={partner.name}
+                              className="w-40 sm:w-48 h-auto rounded-lg border-4 border-purple-500/50 shadow-2xl"
+                            />
+                          </div>
+
+                          <div className="text-center">
+                            <span className={`inline-block px-4 py-2 rounded-full text-base sm:text-lg font-bold ${getTierColor(partner.role)}`}>
+                              {partner.role} Tier
+                            </span>
+                          </div>
+
+                          <div className="bg-gray-800/50 rounded-lg p-4 sm:p-6 border border-gray-700/60">
+                            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed whitespace-pre-line text-center">
+                              {partner.description}
+                            </p>
+                          </div>
+                        </div>
+                      </DialogContent>
+                    </Dialog>
                   </div>
                 ))}
               </div>
+            </section>
 
-              <div className="space-y-5 text-sm sm:text-base">
-                <div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2">Team Overview</h3>
-                  <p className="text-muted-foreground leading-relaxed">{team.overview}</p>
-                </div>
+            {/* 6. Teams */}
+            <section id="teams" className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-24">
+              <h2 className="text-xl sm:text-2xl font-bold mb-4 text-purple-400 text-center">6. Teams</h2>
+              <p className="text-muted-foreground mb-6 text-sm sm:text-base text-center px-4">
+                Below are two example team compositions optimized for Chizuru as the primary damage dealer.
+                <br />
+                Click on any team to view detailed synergy explanations and role breakdowns.
+              </p>
 
-                <div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2">Synergies</h3>
-                  <div className="space-y-3 text-muted-foreground">
-                    {team.synergies.map((syn, i) => (
-                      <div key={i}>
-                        <strong className="text-purple-300">{syn.highlight}:</strong> {syn.text}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {[
+                  {
+                    id: 1,
+                    title: "Chizuru Hypercarry",
+                    subtitle: "Rei provides damage buffs while Veronica enables card draw",
+                    members: [
+                      { name: "Chizuru", job: "psionic", ego: "void", image: "/images/characters/chizuruhalf.webp" },
+                      { name: "Rei", job: "controller", ego: "void", image: "/images/characters/reihalf.webp" },
+                      { name: "Veronica", job: "ranger", ego: "passion", image: "/images/characters/veronicahalf.webp" },
+                    ],
+                    overview: "This composition maximizes Chizuru's damage potential by providing the two things she needs most: card draw and damage amplification. Chizuru's power comes from stacking Will-O'-Wisp (gained through hits) to empower her Shadow of the Moon attacks. Without proper support, she struggles to cycle through her deck and find key cards like Tsukuyomi and Shadow of the Moon.",
+                    synergies: [
+                      { highlight: "Rei + Chizuru", text: "Rei provides damage buffs that multiply Chizuru's Shadow of the Moon damage. Both share Void Ego type, creating natural synergy. Rei's support is especially powerful with Tsukuyomi III (adds 2 hits to Shadow of the Moon), allowing for infinite stacking potential." },
+                      { highlight: "Veronica + Chizuru", text: "Veronica's Repose (0 cost, Draw 2 other combatant's cards) solves Chizuru's card draw problem. This ensures Chizuru can consistently find her Tsukuyomi cards (which generate 3 Will-O'-Wisp per hit) and Shadow of the Moon cards to unleash her damage." },
+                      { highlight: "The Combo", text: "Veronica draws cards → Chizuru finds Tsukuyomi → Chizuru uses attack cards to generate Will-O'-Wisp (3 per hit) → Rei's damage buffs amplify the damage → Chizuru uses Shadow of the Moon with massive Will-O'-Wisp stacks for devastating damage." },
+                    ],
+                    roles: [
+                      "Chizuru: Main DPS - generates Will-O'-Wisp and deals massive damage with Shadow of the Moon",
+                      "Rei: Support/Damage Buffer - amplifies Chizuru's damage through buffs",
+                      "Veronica: Support/Draw Engine - provides card draw to keep Chizuru's combo going",
+                    ],
+                  },
+                  {
+                    id: 2,
+                    title: "Mono Void",
+                    subtitle: "Rei provides damage buffs while Tressa generates attack cards for Will-O'-Wisp stacking",
+                    members: [
+                      { name: "Chizuru", job: "psionic", ego: "void", image: "/images/characters/chizuruhalf.webp" },
+                      { name: "Tressa", job: "psionic", ego: "void", image: "/images/characters/tressahalf.webp" },
+                      { name: "Rei", job: "controller", ego: "void", image: "/images/characters/reihalf.webp" },
+                    ],
+                    overview: "This variant replaces Veronica with Tressa, taking a different approach to Will-O'-Wisp generation. Instead of relying on card draw to find Chizuru's cards, Tressa generates attack cards that Chizuru can use with Tsukuyomi to generate Will-O'-Wisp stacks. All three characters share Void Ego type, creating strong synergy and team-wide benefits.",
+                    synergies: [
+                      { highlight: "Tressa + Chizuru", text: "Tressa's ability to spam attack cards directly feeds Chizuru's Will-O'-Wisp generation. When Chizuru uses Tsukuyomi (3 Will-O'-Wisp per hit), Tressa's attack cards provide the hits needed to stack Will-O'-Wisp quickly without relying on card draw RNG." },
+                      { highlight: "Rei + Chizuru", text: "Rei's role remains the same - providing damage buffs that amplify Chizuru's Shadow of the Moon attacks. The Void Ego synergy between all three characters enhances their effectiveness." },
+                      { highlight: "Triple Void Ego Synergy", text: "Having all three characters share Void Ego type creates natural synergy and provides team-wide benefits. This makes the team more cohesive than mixed Ego type compositions, enhancing overall effectiveness." },
+                      { highlight: "The Combo", text: "Tressa spams attack cards → Chizuru uses Tsukuyomi on those attacks → Generates 3 Will-O'-Wisp per hit → Rei's damage buffs amplify → Chizuru unleashes Shadow of the Moon with massive Will-O'-Wisp stacks." },
+                    ],
+                    roles: [
+                      "Chizuru: Main DPS - generates Will-O'-Wisp and deals massive damage with Shadow of the Moon",
+                      "Tressa: Support/Hit Generator - spams attack cards to help Chizuru build Will-O'-Wisp stacks",
+                      "Rei: Support/Damage Buffer - amplifies Chizuru's damage through buffs",
+                    ],
+                    comparison: "This team trades Veronica's card draw for Tressa's direct attack card generation. It's more consistent for Will-O'-Wisp stacking but may struggle if you need to find specific Chizuru cards. The triple Void Ego synergy provides stronger team-wide benefits, but you lose Veronica's versatile draw utility. Choose this team when you want more reliable Will-O'-Wisp generation and stronger Ego type synergy.",
+                  },
+
+                ].map((team) => (
+                  <Dialog key={team.id}>
+                    <DialogTrigger asChild>
+                      <div className="group cursor-pointer rounded-xl border-2 border-purple-500/30 bg-gradient-to-br from-purple-500/5 to-transparent p-4 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300 hover:scale-103">
+                        <div className="flex items-center gap-2 mb-3">
+                          <div className="w-2 h-2 rounded-full bg-violet-400"></div>
+                          <h3 className="text-base sm:text-lg font-semibold text-violet-400">{team.title}</h3>
+                        </div>
+
+                        <div className="grid grid-cols-3 gap-2 mb-3">
+                          {team.members.map((member) => (
+                            <div key={member.name} className="relative aspect-[2/3] rounded-lg overflow-hidden border border-violet-400/50 bg-card shadow-md">
+                              <img src={member.image} alt={member.name} className="object-cover w-full h-full" />
+                              <div className="absolute top-1 left-1 flex flex-col gap-0.5">
+                                <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
+                                  <img src={`/images/icon-job-${member.job}.webp`} alt={member.job} className="w-full h-full" />
+                                </div>
+                                <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
+                                  <img src={`/images/icon-ego-${member.ego}.webp`} alt={member.ego} className="w-full h-full" />
+                                </div>
+                              </div>
+                              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent px-1 py-1.5">
+                                <p className="text-xs sm:text-sm font-semibold text-white text-center">{member.name}</p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+
+                        <div className="flex items-center justify-between text-xs text-muted-foreground">
+                          <span className="font-medium">{team.subtitle}</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </div>
                       </div>
-                    ))}
-                  </div>
-                </div>
+                    </DialogTrigger>
 
-                <div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2">Role Distribution</h3>
-                  <ul className="list-disc list-inside space-y-1 text-muted-foreground ml-4">
-                    {team.roles.map((role, i) => (
-                      <li key={i}><strong className="text-purple-300">{role.split(":")[0]}:</strong>{role.split(":")[1]}</li>
-                    ))}
-                  </ul>
-                </div>
+                    {/* Dialog with sticky header + no scrollbar */}
+                    <DialogContent className="max-w-2xl w-[95vw] max-h-[85vh] overflow-hidden bg-gray-900/95 border border-gray-800 rounded-xl flex flex-col p-0">
+                      <DialogHeader className="sticky bg-gray-900 border-b border-gray-800 px-6 py-4 pr-12">
+                        <DialogTitle className="text-xl sm:text-2xl font-bold text-purple-300">
+                          {team.title}
+                        </DialogTitle>
+                      </DialogHeader>
 
-                {team.comparison && (
-                  <div>
-                    <h3 className="text-lg font-semibold text-foreground mb-2">Team Comparison</h3>
-                    <p className="text-muted-foreground leading-relaxed">{team.comparison}</p>
-                  </div>
-                )}
+                      <div className="overflow-y-auto px-6 pb-6 pt-4 flex-1 scrollbar-none">
+                        <div className="space-y-6">
+                          <div className="grid grid-cols-3 gap-3">
+                            {team.members.map((member) => (
+                              <div key={member.name} className="relative aspect-[2/3] rounded-lg overflow-hidden border-2 border-purple-500/50 shadow-2xl">
+                                <img src={member.image} alt={member.name} className="object-cover w-full h-full" />
+                                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-3">
+                                  <p className="text-base font-bold text-white text-center">{member.name}</p>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+
+                          <div className="space-y-5 text-sm sm:text-base">
+                            <div>
+                              <h3 className="text-lg font-semibold text-foreground mb-2">Team Overview</h3>
+                              <p className="text-muted-foreground leading-relaxed">{team.overview}</p>
+                            </div>
+
+                            <div>
+                              <h3 className="text-lg font-semibold text-foreground mb-2">Synergies</h3>
+                              <div className="space-y-3 text-muted-foreground">
+                                {team.synergies.map((syn, i) => (
+                                  <div key={i}>
+                                    <strong className="text-purple-300">{syn.highlight}:</strong> {syn.text}
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+
+                            <div>
+                              <h3 className="text-lg font-semibold text-foreground mb-2">Role Distribution</h3>
+                              <ul className="list-disc list-inside space-y-1 text-muted-foreground ml-4">
+                                {team.roles.map((role, i) => (
+                                  <li key={i}><strong className="text-purple-300">{role.split(":")[0]}:</strong>{role.split(":")[1]}</li>
+                                ))}
+                              </ul>
+                            </div>
+
+                            {team.comparison && (
+                              <div>
+                                <h3 className="text-lg font-semibold text-foreground mb-2">Team Comparison</h3>
+                                <p className="text-muted-foreground leading-relaxed">{team.comparison}</p>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
+                ))}
               </div>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
-    ))}
-  </div>
-</section>
+            </section>
 
           </div>
         </div>
