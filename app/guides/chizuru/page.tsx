@@ -1922,83 +1922,56 @@ const [selectedSources, setSelectedSources] = useState<string[]>([]);
   <h2 className="text-xl sm:text-2xl font-bold mb-4 text-purple-400 text-center">6. Teams</h2>
   <p className="text-muted-foreground mb-6 text-sm sm:text-base text-center px-4">
     Below are two example team compositions optimized for Chizuru as the primary damage dealer.
-    <br/> 
+    <br/>
     Click on any team to view detailed synergy explanations and role breakdowns.
   </p>
 
   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
     {[
-      // {
-      //   id: 1,
-      //   title: "Chizuru Hypercarry",
-      //   subtitle: "Rei provides damage buffs while Veronica enables card draw",
-      //   members: [
-      //     { name: "Chizuru", job: "psionic", ego: "void", image: "/images/characters/chizuruhalf.webp" },
-      //     { name: "Rei", job: "controller", ego: "void", image: "/images/characters/reihalf.webp" },
-      //     { name: "Veronica", job: "ranger", ego: "passion", image: "/images/characters/veronicahalf.webp" },
-      //   ],
-      //   overview: "This composition maximizes Chizuru's damage potential by providing the two things she needs most: card draw and damage amplification. Chizuru's power comes from stacking Will-O'-Wisp (gained through hits) to empower her Shadow of the Moon attacks. Without proper support, she struggles to cycle through her deck and find key cards like Tsukuyomi and Shadow of the Moon.",
-      //   synergies: [
-      //     { highlight: "Rei + Chizuru", text: "Rei provides damage buffs that multiply Chizuru's Shadow of the Moon damage. Both share Void Ego type, creating natural synergy. Rei's support is especially powerful with Tsukuyomi III (adds 2 hits to Shadow of the Moon), allowing for infinite stacking potential." },
-      //     { highlight: "Veronica + Chizuru", text: "Veronica's Repose (0 cost, Draw 2 other combatant's cards) solves Chizuru's card draw problem. This ensures Chizuru can consistently find her Tsukuyomi cards (which generate 3 Will-O'-Wisp per hit) and Shadow of the Moon cards to unleash her damage." },
-      //     { highlight: "The Combo", text: "Veronica draws cards → Chizuru finds Tsukuyomi → Chizuru uses attack cards to generate Will-O'-Wisp (3 per hit) → Rei's damage buffs amplify the damage → Chizuru uses Shadow of the Moon with massive Will-O'-Wisp stacks for devastating damage." },
-      //   ],
-      //   roles: [
-      //     "Chizuru: Main DPS - generates Will-O'-Wisp and deals massive damage with Shadow of the Moon",
-      //     "Rei: Support/Damage Buffer - amplifies Chizuru's damage through buffs",
-      //     "Veronica: Support/Draw Engine - provides card draw to keep Chizuru's combo going",
-      //   ],
-      // },
-      // {
-      //   id: 2,
-      //   title: "Mono Void",
-      //   subtitle: "Rei provides damage buffs while Tressa generates attack cards for Will-O'-Wisp stacking",
-      //   members: [
-      //     { name: "Chizuru", job: "psionic", ego: "void", image: "/images/characters/chizuruhalf.webp" },
-      //     { name: "Tressa", job: "psionic", ego: "void", image: "/images/characters/tressahalf.webp" },
-      //     { name: "Rei", job: "controller", ego: "void", image: "/images/characters/reihalf.webp" },
-      //   ],
-      //   overview: "This variant replaces Veronica with Tressa, taking a different approach to Will-O'-Wisp generation. Instead of relying on card draw to find Chizuru's cards, Tressa generates attack cards that Chizuru can use with Tsukuyomi to generate Will-O'-Wisp stacks. All three characters share Void Ego type, creating strong synergy and team-wide benefits.",
-      //   synergies: [
-      //     { highlight: "Tressa + Chizuru", text: "Tressa's ability to spam attack cards directly feeds Chizuru's Will-O'-Wisp generation. When Chizuru uses Tsukuyomi (3 Will-O'-Wisp per hit), Tressa's attack cards provide the hits needed to stack Will-O'-Wisp quickly without relying on card draw RNG." },
-      //     { highlight: "Rei + Chizuru", text: "Rei's role remains the same - providing damage buffs that amplify Chizuru's Shadow of the Moon attacks. The Void Ego synergy between all three characters enhances their effectiveness." },
-      //     { highlight: "Triple Void Ego Synergy", text: "Having all three characters share Void Ego type creates natural synergy and provides team-wide benefits. This makes the team more cohesive than mixed Ego type compositions, enhancing overall effectiveness." },
-      //     { highlight: "The Combo", text: "Tressa spams attack cards → Chizuru uses Tsukuyomi on those attacks → Generates 3 Will-O'-Wisp per hit → Rei's damage buffs amplify → Chizuru unleashes Shadow of the Moon with massive Will-O'-Wisp stacks." },
-      //   ],
-      //   roles: [
-      //     "Chizuru: Main DPS - generates Will-O'-Wisp and deals massive damage with Shadow of the Moon",
-      //     "Tressa: Support/Hit Generator - spams attack cards to help Chizuru build Will-O'-Wisp stacks",
-      //     "Rei: Support/Damage Buffer - amplifies Chizuru's damage through buffs",
-      //   ],
-      //   comparison: "This team trades Veronica's card draw for Tressa's direct attack card generation. It's more consistent for Will-O'-Wisp stacking but may struggle if you need to find specific Chizuru cards. The triple Void Ego synergy provides stronger team-wide benefits, but you lose Veronica's versatile draw utility. Choose this team when you want more reliable Will-O'-Wisp generation and stronger Ego type synergy.",
-      // },
       {
         id: 1,
         title: "Chizuru Hypercarry",
-        subtitle: "",
+        subtitle: "Rei provides damage buffs while Veronica enables card draw",
         members: [
           { name: "Chizuru", job: "psionic", ego: "void", image: "/images/characters/chizuruhalf.webp" },
           { name: "Rei", job: "controller", ego: "void", image: "/images/characters/reihalf.webp" },
           { name: "Veronica", job: "ranger", ego: "passion", image: "/images/characters/veronicahalf.webp" },
         ],
-        overview: "",
-        synergies: [],
-        roles: [],
+        overview: "This composition maximizes Chizuru's damage potential by providing the two things she needs most: card draw and damage amplification. Chizuru's power comes from stacking Will-O'-Wisp (gained through hits) to empower her Shadow of the Moon attacks. Without proper support, she struggles to cycle through her deck and find key cards like Tsukuyomi and Shadow of the Moon.",
+        synergies: [
+          { highlight: "Rei + Chizuru", text: "Rei provides damage buffs that multiply Chizuru's Shadow of the Moon damage. Both share Void Ego type, creating natural synergy. Rei's support is especially powerful with Tsukuyomi III (adds 2 hits to Shadow of the Moon), allowing for infinite stacking potential." },
+          { highlight: "Veronica + Chizuru", text: "Veronica's Repose (0 cost, Draw 2 other combatant's cards) solves Chizuru's card draw problem. This ensures Chizuru can consistently find her Tsukuyomi cards (which generate 3 Will-O'-Wisp per hit) and Shadow of the Moon cards to unleash her damage." },
+          { highlight: "The Combo", text: "Veronica draws cards → Chizuru finds Tsukuyomi → Chizuru uses attack cards to generate Will-O'-Wisp (3 per hit) → Rei's damage buffs amplify the damage → Chizuru uses Shadow of the Moon with massive Will-O'-Wisp stacks for devastating damage." },
+        ],
+        roles: [
+          "Chizuru: Main DPS - generates Will-O'-Wisp and deals massive damage with Shadow of the Moon",
+          "Rei: Support/Damage Buffer - amplifies Chizuru's damage through buffs",
+          "Veronica: Support/Draw Engine - provides card draw to keep Chizuru's combo going",
+        ],
       },
       {
         id: 2,
-        title: "Luke Sub DPS",
-        subtitle: "",
+        title: "Mono Void",
+        subtitle: "Rei provides damage buffs while Tressa generates attack cards for Will-O'-Wisp stacking",
         members: [
           { name: "Chizuru", job: "psionic", ego: "void", image: "/images/characters/chizuruhalf.webp" },
-          { name: "Luke", job: "hunter", ego: "order", image: "/images/characters/lukehalf.webp" },
+          { name: "Tressa", job: "psionic", ego: "void", image: "/images/characters/tressahalf.webp" },
           { name: "Rei", job: "controller", ego: "void", image: "/images/characters/reihalf.webp" },
         ],
-        overview: "",
-        synergies: [],
-        roles: [],
-        comparison: "",
-      },      
+        overview: "This variant replaces Veronica with Tressa, taking a different approach to Will-O'-Wisp generation. Instead of relying on card draw to find Chizuru's cards, Tressa generates attack cards that Chizuru can use with Tsukuyomi to generate Will-O'-Wisp stacks. All three characters share Void Ego type, creating strong synergy and team-wide benefits.",
+        synergies: [
+          { highlight: "Tressa + Chizuru", text: "Tressa's ability to spam attack cards directly feeds Chizuru's Will-O'-Wisp generation. When Chizuru uses Tsukuyomi (3 Will-O'-Wisp per hit), Tressa's attack cards provide the hits needed to stack Will-O'-Wisp quickly without relying on card draw RNG." },
+          { highlight: "Rei + Chizuru", text: "Rei's role remains the same - providing damage buffs that amplify Chizuru's Shadow of the Moon attacks. The Void Ego synergy between all three characters enhances their effectiveness." },
+          { highlight: "Triple Void Ego Synergy", text: "Having all three characters share Void Ego type creates natural synergy and provides team-wide benefits. This makes the team more cohesive than mixed Ego type compositions, enhancing overall effectiveness." },
+          { highlight: "The Combo", text: "Tressa spams attack cards → Chizuru uses Tsukuyomi on those attacks → Generates 3 Will-O'-Wisp per hit → Rei's damage buffs amplify → Chizuru unleashes Shadow of the Moon with massive Will-O'-Wisp stacks." },
+        ],
+        roles: [
+          "Chizuru: Main DPS - generates Will-O'-Wisp and deals massive damage with Shadow of the Moon",
+          "Tressa: Support/Hit Generator - spams attack cards to help Chizuru build Will-O'-Wisp stacks",
+          "Rei: Support/Damage Buffer - amplifies Chizuru's damage through buffs",
+        ],
+        comparison: "This team trades Veronica's card draw for Tressa's direct attack card generation. It's more consistent for Will-O'-Wisp stacking but may struggle if you need to find specific Chizuru cards. The triple Void Ego synergy provides stronger team-wide benefits, but you lose Veronica's versatile draw utility. Choose this team when you want more reliable Will-O'-Wisp generation and stronger Ego type synergy.",
+      },   
 
     ].map((team) => (
       <Dialog key={team.id}>
