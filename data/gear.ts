@@ -22,7 +22,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["The Blue Pot"],
   atk: "90",
-  imageName: "Dark-Grip's-Claws",
+  imageName: "dark-grips-claws",
   effect: `Increase Damage dealt by all attacks by 25%`,
 },
 {
@@ -31,7 +31,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["The Blue Pot"],
   atk: "74",
-  imageName: "Dull-Bone-Blade",
+  imageName: "dull-bone-blade",
   effect: `10% Attack, -5% Critical Chance`,
 },
 {
@@ -40,7 +40,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["The Blue Pot", "Twin Star's Shadow"],
   atk: "82",
-  imageName: "Esophagus-of-Madness",
+  imageName: "esophagus-of-madness",
   effect: `+20% Damage against targets with Agony`,
 },
 {
@@ -49,7 +49,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["The Blue Pot"],
   atk: "82",
-  imageName: "Executioner's-Edge",
+  imageName: "executioners-edge",
   effect: `Against enemies with HP below 50%, +35% Damage`,
 },
 {
@@ -58,7 +58,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["The Blue Pot", "City of Mist", "Laboratory 0"],
   atk: "82",
-  imageName: "Mutated-Claws",
+  imageName: "mutated-claws",
   effect: `When drawing a Status Ailment or Curse card, +15% Damage for 1 turn`,
 },
 {
@@ -67,7 +67,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["The Blue Pot"],
   atk: "90",
-  imageName: "Mutated-Order",
+  imageName: "mutated-order",
   effect: `+25% Damage to enemies before they act`,
 },
 {
@@ -76,7 +76,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["The Blue Pot", "City of Mist", "Laboratory 0"],
   atk: "82",
-  imageName: "Nature's-Hostility",
+  imageName: "natures-hostility",
   effect: `When an enemy is defeated, 200% Fixed Damage to all enemies`,
 },
 {
@@ -85,7 +85,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["The Blue Pot"],
   atk: "82",
-  imageName: "Ritual-Dagger",
+  imageName: "ritual-dagger",
   effect: `When an enemy is defeated, +25% Attack Card Damage (Max 2 times)`,
 },
 {
@@ -94,7 +94,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["The Blue Pot"],
   atk: "74",
-  imageName: "Steeler's-Dagger",
+  imageName: "steelers-dagger",
   effect: `Upon Defeat, +5~10 Credits (1 per battle)`,
 },
 
@@ -105,7 +105,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Twin Star's Shadow"],
   atk: "82",
-  imageName: "Abyssal-Bug-Tooth",
+  imageName: "abyssal-bug-tooth",
   effect: `On Critical Hit, 50% chance to inflict 1 Agony`,
 },
 {
@@ -114,7 +114,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Twin Star's Shadow"],
   atk: "74",
-  imageName: "Bug-Killer",
+  imageName: "bug-killer",
   effect: `When using an Attack Card, inflict 1 Agony (1 per turn). If in Invader battle, +2 additional Agony`,
 },
 {
@@ -123,7 +123,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Twin Star's Shadow"],
   atk: "82",
-  imageName: "Formica's-Broken-Spear",
+  imageName: "formicas-broken-spear",
   effect: `+6% Damage per enemy`,
 },
 {
@@ -132,7 +132,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Twin Star's Shadow"],
   atk: "90",
-  imageName: "Formica's-Perfect-Spear",
+  imageName: "formicas-perfect-spear",
   effect: `+7% Damage per enemy. +10% All-Attack Damage`,
 },
 {
@@ -141,7 +141,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Twin Star's Shadow"],
   atk: "90",
-  imageName: "Lepidola's-Whip",
+  imageName: "lepidolas-whip",
   effect: `+25% Damage for Attack Cards costing 1 or less`,
 },
 {
@@ -150,7 +150,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Twin Star's Shadow"],
   atk: "82",
-  imageName: "Mountain-of-Corpses",
+  imageName: "mountain-of-corpses",
   effect: `Increase Damage Amount of Attack Cards by 25% (1 time per turn)`,
 },
 {
@@ -159,7 +159,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Twin Star's Shadow"],
   atk: "90",
-  imageName: "Shell-Bug-Horn",
+  imageName: "shell-bug-horn",
   effect: `+20% Critical Damage`,
 },
 {
@@ -168,7 +168,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Twin Star's Shadow"],
   atk: "82",
-  imageName: "The-Destruction-of-Erysichthon",
+  imageName: "the-destruction-of-erysichthon",
   effect: `When using an Attack Card, 5% chance to gain +1 hit`,
 },
 {
@@ -177,7 +177,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Twin Star's Shadow"],
   atk: "90",
-  imageName: "Twin-Swords-of-Great-and-Lesser-Evil",
+  imageName: "twin-swords-of-great-and-lesser-evil",
   effect: `+30% Damage against Ravaged targets`,
 },
 {
@@ -186,7 +186,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Twin Star's Shadow"],
   atk: "82",
-  imageName: "Violet-Butterfly's-Whip",
+  imageName: "violet-butterflys-whip",
   effect: `+20% Damage for Attack Cards costing 1 or less`,
 },
 
@@ -197,7 +197,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["City of Mist", "Laboratory 0"],
   atk: "82",
-  imageName: "Blood-Giant-Claw",
+  imageName: "blood-giant-claw",
   effect: `On Ravage, deal 150% Fixed Damage to the target`,
 },
 {
@@ -206,7 +206,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["City of Mist", "Event"],
   atk: "82",
-  imageName: "Dream-of-the-Devoured",
+  imageName: "dream-of-the-devoured",
   effect: `When a card is Exhausted, the next card used gains +25% Damage (stacks up to 1 time)`,
 },
 {
@@ -215,7 +215,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["City of Mist", "Laboratory 0"],
   atk: "90",
-  imageName: "Foggy-Crystal-Ball",
+  imageName: "foggy-crystal-ball",
   effect: `+40% Damage for Attack Cards with Cost 0`,
 },
 {
@@ -224,7 +224,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["City of Mist", "Laboratory 0"],
   atk: "82",
-  imageName: "Unexploded-Plasma-Bomb",
+  imageName: "unexploded-plasma-bomb",
   effect: `When a card is Exhausted, deal 40% Fixed Damage to a random enemy`,
 },
 {
@@ -233,7 +233,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["City of Mist"],
   atk: "90",
-  imageName: "Void-of-the-Devourer",
+  imageName: "void-of-the-devourer",
   effect: `When a card is Exhausted, the next card used gains +35% Damage (stacks up to 1 time)`,
 },
 
@@ -244,7 +244,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Swamp of Judgment"],
   atk: "90",
-  imageName: "Branch-of-Eternity",
+  imageName: "branch-of-eternity",
   effect: `On Heal or Recover, deal Fixed Damage to all enemies equal to 50% of Recover amount`,
 },
 {
@@ -253,7 +253,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Swamp of Judgment"],
   atk: "82",
-  imageName: "Branch-of-the-Evil-Tree",
+  imageName: "branch-of-the-evil-tree",
   effect: `On Heal or Recover, deal Fixed Damage to a random enemy equal to 50% of Heal amount`,
 },
 {
@@ -262,7 +262,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Swamp of Judgment"],
   atk: "82",
-  imageName: "Branch-of-the-Sacred-Tree",
+  imageName: "branch-of-the-sacred-tree",
   effect: `On Heal or Recover, deal Fixed Damage to all enemies equal to 35% of Heal amount`,
 },
 {
@@ -271,7 +271,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Swamp of Judgment"],
   atk: "82",
-  imageName: "Cavalry-of-Lightning",
+  imageName: "cavalry-of-lightning",
   effect: `When dealing Damage to a target with Shield, +100% Damage to the next Attack Card used`,
 },
 {
@@ -280,7 +280,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Swamp of Judgment"],
   atk: "82",
-  imageName: "Dagger-That-Tricked-the-Shadow",
+  imageName: "dagger-that-tricked-the-shadow",
   effect: `+12% Critical Damage`,
 },
 {
@@ -289,7 +289,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Swamp of Judgment"],
   atk: "82",
-  imageName: "Sun-Setting-Bow",
+  imageName: "sun-setting-bow",
   effect: `Attack Cards with cost 2 or higher, +30% Damage (1 per turn)`,
 },
 {
@@ -298,7 +298,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Swamp of Judgment"],
   atk: "82",
-  imageName: "Sword-Reflected-in-the-Lake",
+  imageName: "sword-reflected-in-the-lake",
   effect: `If you have 6 or more cards in hand, +25% Damage`,
 },
 {
@@ -307,7 +307,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Swamp of Judgment"],
   atk: "74",
-  imageName: "The-Fading-Flower-of-Life",
+  imageName: "the-fading-flower-of-life",
   effect: `If at max HP, +40% Damage`,
 },
 {
@@ -316,7 +316,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Swamp of Judgment"],
   atk: "82",
-  imageName: "The-Flower-of-Life",
+  imageName: "the-flower-of-life",
   effect: `If at max HP, +50% Damage`,
 },
 
@@ -327,7 +327,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["The Foretold Ruin"],
   atk: "82",
-  imageName: "Flame-of-Purification",
+  imageName: "flame-of-purification",
   effect: `When a card is Exhausted, place 1 Retribution on a random enemy (2 per turn)`,
 },
 {
@@ -336,7 +336,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["The Foretold Ruin"],
   atk: "90",
-  imageName: "Radiant-Orb",
+  imageName: "radiant-orb",
   effect: `+25% Damage to targets with Shield`,
 },
 {
@@ -345,7 +345,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["The Foretold Ruin"],
   atk: "82",
-  imageName: "Rune-Lance",
+  imageName: "rune-lance",
   effect: `If you use more than 5 AP, +25% Damage, Shield Gain, and Healing`,
 },
 {
@@ -354,7 +354,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["The Foretold Ruin"],
   atk: "82",
-  imageName: "Singing-Sword",
+  imageName: "singing-sword",
   effect: `+15% Attack. When dealing damage to a target with Shield, place 1 Retribution`,
 },
 {
@@ -363,7 +363,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["The Foretold Ruin"],
   atk: "74",
-  imageName: "Torch-of-Wrath",
+  imageName: "torch-of-wrath",
   effect: `At the start of a turn, apply 2 Mark to a random enemy`,
 },
 {
@@ -372,7 +372,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["The Foretold Ruin"],
   atk: "82",
-  imageName: "Trumpet-of-Revelation",
+  imageName: "trumpet-of-revelation",
   effect: `When drawing a card, +20% Damage for 1 turn (2 per turn)`,
 },
 
@@ -383,7 +383,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Laboratory 0"],
   atk: "90",
-  imageName: "Chimeranite",
+  imageName: "chimeranite",
   effect: `When you Draw by an ability, +35% Damage to your own Attack Card(s) for 1 turn (Max 1 time per turn)`,
 },
 {
@@ -392,7 +392,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Laboratory 0"],
   atk: "82",
-  imageName: "Mutagenic-Wave-Amplifier",
+  imageName: "mutagenic-wave-amplifier",
   effect: `When Drawing a Status Ailment or Curse Card, +12% Damage for 1 turn`,
 },
 {
@@ -401,7 +401,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Laboratory 0"],
   atk: "82",
-  imageName: "Mutant-Predator-Spike",
+  imageName: "mutant-predator-spike",
   effect: `When you have 6 or more cards in hand, +30% Damage`,
 },
 {
@@ -410,7 +410,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Laboratory 0"],
   atk: "74",
-  imageName: "Overcurrent-Shock-Unit",
+  imageName: "overcurrent-shock-unit",
   effect: `When you Draw by an ability, 50% Fixed Damage to a random enemy`,
 },
 {
@@ -419,7 +419,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Laboratory 0"],
   atk: "82",
-  imageName: "Replica-Core",
+  imageName: "replica-core",
   effect: `When drawing your own Attack Card by an ability, that card gains +50% Damage for 1 turn`,
 },
 {
@@ -428,7 +428,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Laboratory 0"],
   atk: "82",
-  imageName: "W-52-Dopamine-Injector",
+  imageName: "w-52-dopamine-injector",
   effect: `When you Draw by an ability, +20% Damage for 1 turn (Max 2 times per turn)`,
 },
 
@@ -439,7 +439,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Other"],
   atk: "74",
-  imageName: "Big-Game-Hunter",
+  imageName: "big-game-hunter",
   effect: `The first Attack Card used per battle +100% Tenacity Damage`,
 },
 {
@@ -448,7 +448,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Other"],
   atk: "74",
-  imageName: "Bone-Cutter",
+  imageName: "bone-cutter",
   effect: `When hitting a target under Weakened status, +30% Damage`,
 },
 {
@@ -457,7 +457,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Other"],
   atk: "74",
-  imageName: "Command-#108",
+  imageName: "command-108",
   effect: `+40% Attack Card Damage (1 per battle)`,
 },
 {
@@ -466,7 +466,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Other"],
   atk: "82",
-  imageName: "Crimson-Sword",
+  imageName: "crimson-sword",
   effect: `When dealing Damage with a targeting Attack Card, 3 Agony (1 per turn)`,
 },
 {
@@ -475,7 +475,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Other"],
   atk: "74",
-  imageName: "Flashbang",
+  imageName: "flashbang",
   effect: `At the start of battle, apply 3 Weaken to a random enemy`,
 },
 {
@@ -484,7 +484,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Other"],
   atk: "74",
-  imageName: "Gastronomicon",
+  imageName: "gastronomicon",
   effect: `When using an Attack Card with cost 2 or more, 3 Agony`,
 },
 {
@@ -493,8 +493,9 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Other"],
   atk: "90",
-  imageName: "Intellect-of-Discord",
-  effect: `+18% Attack. On Ravage, decrease Stress of allies by 1`,
+  imageName: "intellect-of-discord",
+  effect: `+18% Attack.
+  On Ravage, decrease Stress of allies by 1`,
 },
 {
   name: "M85 Military Grenade",
@@ -502,7 +503,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Other"],
   atk: "74",
-  imageName: "M85-Military-Grenade",
+  imageName: "m85-military-grenade",
   effect: `When using a Buff Card, deal 150% Fixed Damage to all enemies`,
 },
 {
@@ -511,7 +512,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Other"],
   atk: "74",
-  imageName: "Obsidian-Sword",
+  imageName: "obsidian-sword",
   effect: `Increase damage amount by 12%`,
 },
 {
@@ -520,7 +521,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Other"],
   atk: "82",
-  imageName: "RFS-17",
+  imageName: "rfs-17",
   effect: `+10% Critical Chance of Attack Cards with cost 0`,
 },
 {
@@ -529,7 +530,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Other"],
   atk: "82",
-  imageName: "Second-Method",
+  imageName: "second-method",
   effect: `Extra Attack damage +35%`,
 },
 {
@@ -538,7 +539,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Other"],
   atk: "82",
-  imageName: "Sneering-Dagger",
+  imageName: "sneering-dagger",
   effect: `When an enemy is defeated, 2 Vulnerable to all enemies`,
 },
 {
@@ -547,8 +548,9 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Other"],
   atk: "90",
-  imageName: "Tentacles-of-Chaos",
-  effect: `+8% ally Attack. Upon enemy Defeat, -2 Stress to the Combatant with the highest Stress`,
+  imageName: "tentacles-of-chaos",
+  effect: `+8% ally Attack. 
+  Upon enemy Defeat, -2 Stress to the Combatant with the highest Stress`,
 },
 ];
 
@@ -561,7 +563,7 @@ export const armors: GearData[] = [
     slot: "armor",
     source: ["The Blue Pot", "Twin Star's Shadow"],
     def: "31",
-    imageName: "Chains-of-Obsession",
+    imageName: "chains-of-obsession",
     effect: `When using Attack cards, 1% HP Reduction, 60% Fixed Shield`,
   },
   {
@@ -570,7 +572,7 @@ export const armors: GearData[] = [
     slot: "armor",
     source: ["The Blue Pot", "Twin Star's Shadow"],
     def: "31",
-    imageName: "Cursed-Doll",
+    imageName: "cursed-doll",
     effect: `At the start of turn, Heal 60% for each Status Ailment and Curse card in hand`,
   },
   {
@@ -579,7 +581,7 @@ export const armors: GearData[] = [
     slot: "armor",
     source: ["The Blue Pot"],
     def: "34",
-    imageName: "Kentris-Chitin-Armor",
+    imageName: "kentris-chitin-armor",
     effect: `+15% Ally Shield Gain`,
   },
   {
@@ -588,7 +590,7 @@ export const armors: GearData[] = [
     slot: "armor",
     source: ["The Blue Pot"],
     def: "28",
-    imageName: "Resolute-Gauntlets",
+    imageName: "resolute-gauntlets",
     effect: `At the start of Chaos Order battle, +20% Damage, 1 Damage Reduction`,
   },
   {
@@ -597,7 +599,7 @@ export const armors: GearData[] = [
     slot: "armor",
     source: ["The Blue Pot", "City of Mist", "Laboratory 0"],
     def: "31",
-    imageName: "Shield-of-the-Watcher",
+    imageName: "shield-of-the-watcher",
     effect: `When taking Damage, 1 Mark on the attacker`,
   },
   {
@@ -606,7 +608,7 @@ export const armors: GearData[] = [
     slot: "armor",
     source: ["The Blue Pot"],
     def: "31",
-    imageName: "The-Chosen-Vessel",
+    imageName: "the-chosen-vessel",
     effect: `At the start of your turn after 3 turns from battle start, +250% Fixed Shield`,
   },
   {
@@ -615,7 +617,7 @@ export const armors: GearData[] = [
     slot: "armor",
     source: ["The Blue Pot", "Twin Star's Shadow"],
     def: "31",
-    imageName: "Torture-Toolbox",
+    imageName: "torture-toolbox",
     effect: `At the start of turn, +3 Action Count to all enemies`,
   },
   {
@@ -624,7 +626,7 @@ export const armors: GearData[] = [
     slot: "armor",
     source: ["The Blue Pot"],
     def: "34",
-    imageName: "Wild-Fur-Cloak",
+    imageName: "wild-fur-cloak",
     effect: `At turn start, Counter 1`,
   },
   {
@@ -633,7 +635,7 @@ export const armors: GearData[] = [
     slot: "armor",
     source: ["The Blue Pot", "City of Mist", "Laboratory 0"],
     def: "31",
-    imageName: "Wolves-Bane's-Spine",
+    imageName: "wolves-banes-spine",
     effect: `On a Critical Hit, +10% Fixed Shield`,
   },
 
@@ -645,7 +647,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Twin Star's Shadow"],
   def: "28",
-  imageName: "Crustacean-Fluider",
+  imageName: "crustacean-fluider",
   effect: `When taking damage, after 1 turn, +60% Fixed Shield at start of turn`,
 },
 {
@@ -654,7 +656,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Twin Star's Shadow"],
   def: "31",
-  imageName: "Dance-of-the-Night-Butterflies",
+  imageName: "dance-of-the-night-butterflies",
   effect: `On Ravage, +60% Fixed Shield`,
 },
 {
@@ -663,7 +665,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Twin Star's Shadow"],
   def: "31",
-  imageName: "Growing-Carapace",
+  imageName: "growing-carapace",
   effect: `At the start of the turn, gain 40% Fixed Shield`,
 },
 {
@@ -672,7 +674,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Twin Star's Shadow"],
   def: "28",
-  imageName: "Titan-Combat-Suit",
+  imageName: "titan-combat-suit",
   effect: `When taking Damage, Recover 2% HP (1 per turn)`,
 },
 {
@@ -681,7 +683,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Twin Star's Shadow"],
   def: "34",
-  imageName: "Wings-of-the-Swarm",
+  imageName: "wings-of-the-swarm",
   effect: `At the start of battle, gain 2 Immunity`,
 },
 
@@ -692,7 +694,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["City of Mist"],
   def: "28",
-  imageName: "Contaminated-Helmet",
+  imageName: "contaminated-helmet",
   effect: `Max HP +6%, Defense +12%`,
 },
 {
@@ -701,7 +703,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["City of Mist", "Laboratory 0"],
   def: "34",
-  imageName: "Fragment-of-the-Empty-Void",
+  imageName: "fragment-of-the-empty-void",
   effect: `At the start of battle, Discard up to 3 cards, Draw equal to the number`,
 },
 {
@@ -710,7 +712,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["City of Mist", "Laboratory 0"],
   def: "31",
-  imageName: "Gluttonous-Tailcoat",
+  imageName: "gluttonous-tailcoat",
   effect: `When taking damage, after 1 turn, +80% Fixed Shield at start of turn`,
 },
 {
@@ -719,7 +721,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["City of Mist", "Event"],
   def: "37",
-  imageName: "M.S.S-Scope",
+  imageName: "m-s-s-scope",
   effect: `If a harmful effect is inflicted for 1 turn, then +80% Fixed Shield at the end of turn`,
 },
 {
@@ -728,7 +730,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["City of Mist"],
   def: "31",
-  imageName: "Psionic-Combat-Suit",
+  imageName: "psionic-combat-suit",
   effect: `When a card is Exhausted, 30% Fixed Shield`,
 },
 {
@@ -737,7 +739,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["City of Mist", "Laboratory 0"],
   def: "31",
-  imageName: "Regenerative-Ribcage",
+  imageName: "regenerative-ribcage",
   effect: `Max HP +12%`,
 },
 
@@ -748,7 +750,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Swamp of Judgment"],
   def: "31",
-  imageName: "Fairy-King's-Crown",
+  imageName: "fairy-kings-crown",
   effect: `+6% Critical Chance`,
 },
 {
@@ -757,7 +759,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Swamp of Judgment"],
   def: "31",
-  imageName: "Immortal-Scale",
+  imageName: "immortal-scale",
   effect: `When gaining Counterattack via an ability, +1 additional Counterattack`,
 },
 {
@@ -766,7 +768,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Swamp of Judgment"],
   def: "28",
-  imageName: "Lush-Seaweed-Armor",
+  imageName: "lush-seaweed-armor",
   effect: `When gaining Shield, gain 30% Fixed Shield`,
 },
 {
@@ -775,7 +777,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Swamp of Judgment"],
   def: "28",
-  imageName: "Mask-of-Evil-Spirits",
+  imageName: "mask-of-evil-spirits",
   effect: `When taking damage, after 1 turn, +60% Fixed Shield at start of turn`,
 },
 {
@@ -784,7 +786,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Swamp of Judgment"],
   def: "34",
-  imageName: "Mask-of-Flames",
+  imageName: "mask-of-flames",
   effect: `Increase damage dealt to Vulnerable targets by 35%`,
 },
 {
@@ -793,7 +795,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Swamp of Judgment"],
   def: "31",
-  imageName: "Ring-of-the-Seraphim",
+  imageName: "ring-of-the-seraphim",
   effect: `When using an Upgrade card, +30% Damage for 1 turn`,
 },
 {
@@ -802,7 +804,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Swamp of Judgment"],
   def: "34",
-  imageName: "Star-Lit-Cloak",
+  imageName: "star-lit-cloak",
   effect: `-10% Damage (1 per turn)`,
 },
 {
@@ -811,7 +813,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Swamp of Judgment"],
   def: "31",
-  imageName: "Wings-of-Light",
+  imageName: "wings-of-light",
   effect: `When Ego Points are 3 or lower, 0.2 Ego Points on Critical Hit`,
 },
 
@@ -822,7 +824,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["The Foretold Ruin"],
   def: "34",
-  imageName: "Consecrated-Halo",
+  imageName: "consecrated-halo",
   effect: `+25% Shield Gain`,
 },
 {
@@ -831,7 +833,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["The Foretold Ruin"],
   def: "34",
-  imageName: "Primordial-Discipline",
+  imageName: "primordial-discipline",
   effect: `At the start of battle, gain 2 Immunity`,
 },
 {
@@ -840,7 +842,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["The Foretold Ruin"],
   def: "31",
-  imageName: "Twisted-Discipline",
+  imageName: "twisted-discipline",
   effect: `When use 10 or more AP, 2 Immunity`,
 },
 
@@ -852,7 +854,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Laboratory 0"],
   def: "28",
-  imageName: "Brainwave-Blocking-Helmet",
+  imageName: "brainwave-blocking-helmet",
   effect: `When you Draw by an ability, +40% Fixed Shield`,
 },
 {
@@ -861,7 +863,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Laboratory 0"],
   def: "28",
-  imageName: "Incomplete-Carapace",
+  imageName: "incomplete-carapace",
   effect: `At the end of the turn, if you have 5 or more Cards in hand, +140% Fixed Shield`,
 },
 {
@@ -870,7 +872,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Laboratory 0"],
   def: "31",
-  imageName: "Rocket-Adorned-Cape",
+  imageName: "rocket-adorned-cape",
   effect: `At the start of the battle, 1 Damage Reduction and Draw 1`,
 },
 {
@@ -879,7 +881,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Laboratory 0"],
   def: "31",
-  imageName: "Wings-of-Freedom",
+  imageName: "wings-of-freedom",
   effect: `When hit, +10% Damage Amount (Max 3 stacks)`,
 },
 
@@ -890,7 +892,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Other"],
   def: "34",
-  imageName: "Announcement-of-Catastrophe",
+  imageName: "announcement-of-catastrophe",
   effect: `+12% Defense.
   All combatants need 1 fewer card to recover from breakdown`,
 },
@@ -900,7 +902,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Other"],
   def: "31",
-  imageName: "Assault-Boots",
+  imageName: "assault-boots",
   effect: `At the start of your turn after 2 turns from battle start, +200% Fixed Shield`,
 },
 {
@@ -909,7 +911,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Other"],
   def: "28",
-  imageName: "Assault-Gauntlets",
+  imageName: "assault-gauntlets",
   effect: `At the start of battle, gain 3 Counterattack`,
 },
 {
@@ -918,7 +920,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Other"],
   def: "31",
-  imageName: "Cloud-Walking-Shoes",
+  imageName: "cloud-walking-shoes",
   effect: `When an ally is Defeated, +40% Fixed Shield`,
 },
 {
@@ -927,7 +929,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Other"],
   def: "28",
-  imageName: "Gladiator's-Helmet",
+  imageName: "gladiators-helmet",
   effect: `At the start of battle, gain 2 Damage Reduction`,
 },
 {
@@ -936,7 +938,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Other"],
   def: "31",
-  imageName: "Reinforced-Combat-Suit",
+  imageName: "reinforced-combat-suit",
   effect: `At the end of the turn, if there is no Shield, gain 60% Fixed Shield`,
 },
 {
@@ -945,7 +947,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Other"],
   def: "28",
-  imageName: "Scout's-Combat-Boots",
+  imageName: "scouts-combat-boots",
   effect: `On enemy defeat, +60% Fixed Shield`,
 },
 {
@@ -954,7 +956,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Other"],
   def: "34",
-  imageName: "Shell-of-Aberration",
+  imageName: "shell-of-aberration",
   effect: `+12% Defense. 
   When Stress increases, there is a 50% chance that Stress increases by 1 less`,
 },
@@ -964,7 +966,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Other"],
   def: "28",
-  imageName: "Standard-Gas-Mask",
+  imageName: "standard-gas-mask",
   effect: `At the start of battle, gain 1 Immunity`,
 },
 {
@@ -973,7 +975,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Other"],
   def: "28",
-  imageName: "Survivor's-Hood",
+  imageName: "survivors-hood",
   effect: `At the start of battle, gain 140% Fixed Shield`,
 },
 ];
@@ -987,7 +989,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["The Blue Pot", "Twin Star's Shadow"],
     health: "83",
-    imageName: "Bloody-Pendant",
+    imageName: "bloody-pendant",
     effect: `When using Duplicated Cards, all enemies' Action Count does not decrease for 1 turn (1 per battle)`,
   },
   {
@@ -996,7 +998,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["The Blue Pot"],
     health: "75",
-    imageName: "Bloodstone-of-the-Void",
+    imageName: "bloodstone-of-the-void",
     effect: `When an Attack Card is used, Recover 6% of Damage Dealt (1 time per turn)`,
   },
   {
@@ -1005,7 +1007,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["The Blue Pot"],
     health: "83",
-    imageName: "Chaos-Bible",
+    imageName: "chaos-bible",
     effect: `At the start of the fourth turn, 400% Fixed Damage to all enemies`,
   },
   {
@@ -1014,7 +1016,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["The Blue Pot"],
     health: "83",
-    imageName: "Crimson-Bloodstone",
+    imageName: "crimson-bloodstone",
     effect: `When an Attack Card is used, Recover 9% of Damage Dealt (1 time per turn)`,
   },
   {
@@ -1023,7 +1025,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["The Blue Pot"],
     health: "91",
-    imageName: "Dice-of-Discord",
+    imageName: "dice-of-discord",
     effect: `At the end of turn, 40% x 2~6 Fixed Damage to a random enemies, and trigger 200% Fixed Damage on allies with one random 1 effect`,
   },
   {
@@ -1032,7 +1034,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["The Blue Pot", "City of Mist", "Laboratory 0"],
     health: "83",
-    imageName: "Eternal-Stone",
+    imageName: "eternal-stone",
     effect: `At the start of the turn, 25% Fixed Shield for each enemy count`,
   },
   {
@@ -1041,7 +1043,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["The Blue Pot"],
     health: "91",
-    imageName: "Forbidden-Bible",
+    imageName: "forbidden-bible",
     effect: `At the start of the fourth turn, 550% Fixed Damage to all enemies`,
   },
   {
@@ -1050,7 +1052,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["The Blue Pot"],
     health: "91",
-    imageName: "Gloomy-Prime's-Eye",
+    imageName: "gloomy-primes-eye",
     effect: `At the start of battle, +40% Shield`,
   },
   {
@@ -1059,7 +1061,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["The Blue Pot"],
     health: "83",
-    imageName: "Madman's-Masterpiece",
+    imageName: "madmans-masterpiece",
     effect: `At the start of an Elite Battle, +50% Damage`,
   },
   {
@@ -1068,7 +1070,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["The Blue Pot", "City of Mist", "Laboratory 0"],
     health: "83",
-    imageName: "Nature's-Gift",
+    imageName: "natures-gift",
     effect: `Heal 40% at the end of turn`,
   },
   {
@@ -1077,7 +1079,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["The Blue Pot"],
     health: "83",
-    imageName: "Order's-Emblem",
+    imageName: "orders-emblem",
     effect: `In Chaos Order battles, +15% Defense`,
   },
   {
@@ -1086,7 +1088,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["The Blue Pot"],
     health: "75",
-    imageName: "Proof-of-Initiation",
+    imageName: "proof-of-initiation",
     effect: `In Chaos Order battles, +10% Defense`,
   },
 
@@ -1097,7 +1099,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Twin Star's Shadow"],
     health: "75",
-    imageName: "First-Aid-Kit",
+    imageName: "first-aid-kit",
     effect: `At the end of battle, Recover 5% of Max HP`,
   },
   {
@@ -1106,7 +1108,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Twin Star's Shadow"],
     health: "83",
-    imageName: "Kirak's-Core",
+    imageName: "kiraks-core",
     effect: `At the start of the turn, if below 40% of Max HP, Recover 5% of Max HP`,
   },
   {
@@ -1115,7 +1117,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Twin Star's Shadow"],
     health: "83",
-    imageName: "Lepidola's-Wing",
+    imageName: "lepidolas-wing",
     effect: `At the start of the battle, 1 Evade`,
   },
   {
@@ -1124,7 +1126,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Twin Star's Shadow"],
     health: "83",
-    imageName: "Natural-Predator",
+    imageName: "natural-predator",
     effect: `On Ravage, +100% Damage to next 1 Attack Card used`,
   },
   {
@@ -1133,7 +1135,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Twin Star's Shadow"],
     health: "91",
-    imageName: "Pulsating-Egg",
+    imageName: "pulsating-egg",
     effect: `+15% Attack, +10% Max HP`,
   },
   {
@@ -1142,7 +1144,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Twin Star's Shadow"],
     health: "83",
-    imageName: "Voracious-Swarm",
+    imageName: "voracious-swarm",
     effect: `When taking Damage, 4 Agony on the attacker`,
   },
   
@@ -1153,7 +1155,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["City of Mist"],
     health: "91",
-    imageName: "Eye-of-Gluttony",
+    imageName: "eye-of-gluttony",
     effect: `+40% Damage amount. At the end of the turn, 30% chance to Exhaust 1 card in hand`,
   },
   {
@@ -1162,7 +1164,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["City of Mist", "Laboratory 0"], 
     health: "83",
-    imageName: "Eye-of-the-Eyeless",
+    imageName: "eye-of-the-eyeless",
     effect: `Increase damage of Basic attack cards by 40%`,
   },
   {
@@ -1171,7 +1173,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["City of Mist"],
     health: "83",
-    imageName: "Flower-of-Dead-Souls",
+    imageName: "flower-of-dead-souls",
     effect: `Increase Damage Amount of the second Attack Card onward each turn by 20%`,
   },
   {
@@ -1180,7 +1182,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["City of Mist"],
     health: "75",
-    imageName: "M.S.S.-Data-Pad",
+    imageName: "m-s-s-data-pad",
     effect: `At the start of Nihilum battle, 2 Vulnerable to all enemies`,
   },
   {
@@ -1189,7 +1191,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["City of Mist"],
     health: "83",
-    imageName: "M.S.S.-Data-Pad-SE",
+    imageName: "m-s-s-data-pad-se",
     effect: `At the start of Nihilum battle, 3 Vulnerable to all enemies`,
   },
   {
@@ -1198,7 +1200,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["City of Mist", "Laboratory 0"],
     health: "83",
-    imageName: "Palasia's-Orb",
+    imageName: "palasias-orb",
     effect: `When Vulnerable is applied by a card, also 1 Weaken to the target`,
   },
   {
@@ -1207,7 +1209,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["City of Mist"],
     health: "91",
-    imageName: "Revelations-of-Futility",
+    imageName: "revelations-of-futility",
     effect: `When an Attack Card is used, 20% Fixed Shield (10 times per turn)`,
   },
   {
@@ -1216,7 +1218,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["City of Mist"],
     health: "75",
-    imageName: "Soul-Orb",
+    imageName: "soul-orb",
     effect: `When a card is Exhausted, 1 Tenacity Damage to all enemies (1 time per battle)`,
   },
   {
@@ -1225,7 +1227,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["City of Mist"],
     health: "75",
-    imageName: "The-Famished-One's-Belly",
+    imageName: "the-famished-ones-belly",
     effect: `When a card is Exhausted, +25% Damage Amount, Recover 5% of Max HP (1 time per battle)`,
   },
   {
@@ -1234,7 +1236,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["City of Mist", "Laboratory 0"],
     health: "83",
-    imageName: "Torch-That-Should-Not-Be-Extinguished",
+    imageName: "torch-that-should-not-be-extinguished",
     effect: `If you have Shield at the start of turn, 80% Fixed Shield`,
   },
 
@@ -1245,7 +1247,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Swamp of Judgment"],
     health: "83",
-    imageName: "Bone-Ring-of-Wildfire",
+    imageName: "bone-ring-of-wildfire",
     effect: `When an Upgrade Card is used, +30% Damage Amount for 1 turn`,
   },
   {
@@ -1254,7 +1256,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Swamp of Judgment"],
     health: "83",
-    imageName: "Call-of-the-Ancient-Spirit",
+    imageName: "call-of-the-ancient-spirit",
     effect: `On Critical Hit, Heal 10%`,
   },
   {
@@ -1263,7 +1265,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Swamp of Judgment"],
     health: "75",
-    imageName: "Clover-of-the-Forest",
+    imageName: "clover-of-the-forest",
     effect: `When Recover via card, +10% ally Attack for 1 turn (Max 1 stack)`,
   },
   {
@@ -1272,7 +1274,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Swamp of Judgment"],
     health: "91",
-    imageName: "Dormant-Seeds",
+    imageName: "dormant-seeds",
     effect: `When gaining Shield, 100% Fixed Shield (1 time per turn)`,
   },
   {
@@ -1281,7 +1283,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Swamp of Judgment"],
     health: "83",
-    imageName: "Lead-Colored-Holy-Water",
+    imageName: "lead-colored-holy-water",
     effect: `On Ravage, 2 Impair to the target`,
   },
   {
@@ -1290,7 +1292,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Swamp of Judgment"],
     health: "75",
-    imageName: "Poacher's-Pathfinder",
+    imageName: "poachers-pathfinder",
     effect: `In Sekred battle, +25% Damage, 2 Vulnerable to all enemies`,
   },
   {
@@ -1299,7 +1301,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Swamp of Judgment"],
     health: "83",
-    imageName: "The-Golden-Rule",
+    imageName: "the-golden-rule",
     effect: `+20% Damage, +20% Shield at the start of battle`,
   },
   {
@@ -1308,7 +1310,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Swamp of Judgment"],
     health: "83",
-    imageName: "Verdant-Day",
+    imageName: "verdant-day",
     effect: `On odd turns, +8% Attack, +12% Defense`,
   },
   {
@@ -1317,7 +1319,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Swamp of Judgment"],
     health: "83",
-    imageName: "Verdant-Night",
+    imageName: "verdant-night",
     effect: `On even turns, +12% Attack, +8% Defense`,
   },
   {
@@ -1326,7 +1328,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Swamp of Judgment"],
     health: "91",
-    imageName: "Verdant-Shackles",
+    imageName: "verdant-shackles",
     effect: `+12% Attack, +12% Defense`,
   },
   {
@@ -1335,7 +1337,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Swamp of Judgment"],
     health: "83",
-    imageName: "Viadeus's-Reactor",
+    imageName: "viadeuss-reactor",
     effect: `When an Upgrade Card is used, 1 Damage Reduction`,
   },
 
@@ -1346,7 +1348,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["The Foretold Ruin"],
     health: "83",
-    imageName: "Corroded-Core",
+    imageName: "corroded-core",
     effect: `If an attack is perfectly blocked with Shield, 1 Impair on all enemies (1 per turn)`,
   },
   {
@@ -1355,7 +1357,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["The Foretold Ruin"],
     health: "91",
-    imageName: "Corrupted-Core",
+    imageName: "corrupted-core",
     effect: `+15% Defense, Retain +20% Shield`,
   },
   {
@@ -1364,7 +1366,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["The Foretold Ruin"],
     health: "91",
-    imageName: "Eye-of-the-Punisher",
+    imageName: "eye-of-the-punisher",
     effect: `If the enemy is alone, increase damage by 30%`,
   },
   {
@@ -1373,7 +1375,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["The Foretold Ruin"],
     health: "83",
-    imageName: "Guardian-Core",
+    imageName: "guardian-core",
     effect: `When there is an enemy whose Anticipated Action is Attack, 60% Fixed Shield (1 time per turn)`,
   },
   {
@@ -1382,7 +1384,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["The Foretold Ruin"],
     health: "75",
-    imageName: "Rune-Chord",
+    imageName: "rune-chord",
     effect: `At the end of the turn, if there is a Retained card, 60% Fixed Shield`,
   },
   // LABORATORY 0 //
@@ -1392,7 +1394,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Laboratory 0"],
     health: "75",
-    imageName: "Administrator-ID-Badge",
+    imageName: "administrator-id-badge",
     effect: `At the start of the battle, 1 Evade`,
   },
   {
@@ -1401,7 +1403,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Laboratory 0"],
     health: "83",
-    imageName: "Emblem-of-an-Exceptional-Entity",
+    imageName: "emblem-of-an-exceptional-entity",
     effect: `+30% Damage Amount
     Stress received becomes 0 (1 for each battle)`,
   },
@@ -1411,7 +1413,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Laboratory 0"],
     health: "75",
-    imageName: "Hyperimmunity-Hormone",
+    imageName: "hyperimmunity-hormone",
     effect: `When you Draw by an ability, +25% Shield gain for 1 turn (Max 2 times per turn)`,
   },
   {
@@ -1420,7 +1422,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Laboratory 0"],
     health: "75",
-    imageName: "Nerve-Hacking-Module",
+    imageName: "nerve-hacking-module",
     effect: `When an ally uses a Forbidden Card, +20% Damage Amount, +20% Shield Gain Amount (2 times per battle)`,
   },
   {
@@ -1429,7 +1431,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Laboratory 0"],
     health: "83",
-    imageName: "Source-of-the-Forbidden",
+    imageName: "source-of-the-forbidden",
     effect: `When hit, inflict 1 random effects among Vulnerable, Weaken, or Impair to the attacker (3 times per turn)`,
   },
   {
@@ -1438,7 +1440,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Laboratory 0"],
     health: "83",
-    imageName: "Superconductive-Protein",
+    imageName: "superconductive-protein",
     effect: `At the start of the battle, change the cost of 1 card in your hand to 0 for 1 turn`,
   },
   {
@@ -1447,7 +1449,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Laboratory 0"],
     health: "83",
-    imageName: "Unconfirmed-Recovery-Ampule",
+    imageName: "unconfirmed-recovery-ampule",
     effect: `When an ally uses a Forbidden Card, Recover 3% of Max HP, 80% Fixed Shield`,
   },
 
@@ -1458,7 +1460,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Other"],
     health: "75",
-    imageName: "Absolute-Zero-Tetrahedron",
+    imageName: "absolute-zero-tetrahedron",
     effect: `At the start of battle, +20% Shield`,
   },
   {
@@ -1467,7 +1469,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Other"],
     health: "75",
-    imageName: "Amorphous-Cube",
+    imageName: "amorphous-cube",
     effect: `At the start of battle, +25% Damage`,
   },
   {
@@ -1476,7 +1478,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Other"],
     health: "75",
-    imageName: "Arc-Drive",
+    imageName: "arc-drive",
     effect: `Activate Epiphany for the equipped combatant`,
   },
   {
@@ -1485,7 +1487,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Other"],
     health: "91",
-    imageName: "Dice-of-Derangement",
+    imageName: "dice-of-derangement",
     effect: `+8% Max HP. 
     At the end of battle, if HP is below 50%, recover 8% Max HP. 
     At the end of the battle, if HP is 50% or higher, -5 Stress to the Combatant with the highest Stress`,
@@ -1496,7 +1498,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Other"],
     health: "83",
-    imageName: "Dimensional-Cube",
+    imageName: "dimensional-cube",
     effect: `When discarding a card, +10% Damage for 1 turn`,
   },
   {
@@ -1505,7 +1507,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Other"],
     health: "83",
-    imageName: "Grey-Orb",
+    imageName: "grey-orb",
     effect: `At the start of battle, gain 3 Damage Reduction`,
   },
   {
@@ -1514,7 +1516,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Other"],
     health: "83",
-    imageName: "Heart-of-Gold",
+    imageName: "heart-of-gold",
     effect: `At the end of battle, if HP is 50% or less, Recover 8% of Max HP`,
   },
   {
@@ -1523,7 +1525,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Other"],
     health: "83",
-    imageName: "Heart-of-the-Jewel",
+    imageName: "heart-of-the-jewel",
     effect: `X is applied as X+1`,
   },
   {
@@ -1532,7 +1534,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Other"],
     health: "75",
-    imageName: "Magic-Infused-Sapphire",
+    imageName: "magic-infused-sapphire",
     effect: `At the start of battle, if the Initiation card is in hand, 1 Tenacity Damage to all enemies`,
   },
   {
@@ -1541,7 +1543,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Other"],
     health: "83",
-    imageName: "Moon-of-Destruction",
+    imageName: "moon-of-destruction",
     effect: `At the start of battle, 200% Fixed Damage to all enemies`,
   },
   {
@@ -1550,7 +1552,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Other"],
     health: "75",
-    imageName: "Multifaceted-Parallel-Universe-Nexus",
+    imageName: "multifaceted-parallel-universe-nexus",
     effect: `At the start of the turn, activate 1 random Lead card in hand`,
   },
   {
@@ -1559,7 +1561,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Other"],
     health: "83",
-    imageName: "Quantum-Collector",
+    imageName: "quantum-collector",
     effect: `When an ally uses an Upgrade Card, increase Damage, Shield Gain, Heal Amounts by 20% for 1 turn`,
   },
   {
@@ -1568,7 +1570,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Other"],
     health: "91",
-    imageName: "Sphere-of-Randomness",
+    imageName: "sphere-of-randomness",
     effect: `+10% Max HP. 
     At the start of battle, +1 AP, Draw 1`,
   },
@@ -1578,7 +1580,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Other"],
     health: "75",
-    imageName: "Time-Regulator",
+    imageName: "time-regulator",
     effect: `Activate Epiphany for the equipped combatant`,
   },
   {
@@ -1587,7 +1589,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Other"],
     health: "83",
-    imageName: "Water-Drops-of-the-Goddess",
+    imageName: "water-drops-of-the-goddess",
     effect: `At the start of battle, 1 Storage`,
   },
 ];
