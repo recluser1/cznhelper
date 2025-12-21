@@ -73,12 +73,6 @@ export default function CharacterGuidePage() {
     loadData();
   }, [character]);
 
-  console.log(
-    "CharacterGuidePage - characterData:",
-    characterData,
-    "loading:",
-    loading
-  );
   const characterName = character
     .split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
@@ -148,7 +142,7 @@ export default function CharacterGuidePage() {
                 <RecommendedSaveData
                   recommendedSaveData={characterData?.recommendedSaveData || []}
                   uniqueCards={characterData?.uniqueCards || []}
-                  commonCards={[]}
+                  commonCards={characterData?.commonCards || []}
                 />
                 {/* Equipments */}
                 {characterData?.gears && (

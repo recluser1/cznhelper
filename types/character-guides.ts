@@ -41,7 +41,12 @@ export interface Card {
   rarity: CardRarities;
   description?: string;
 }
+export type MemoryFragmentSetRecommendation = {
+  bestInSlot: recommendingFragmentSet[];
+  alternative?: recommendingFragmentSet[];
+};
 export interface CharacterData {
+  commonCards?: Card[];
   uniqueCards: UniqueCard[];
   recommendedSaveData?: SaveData[];
   gears?: {
@@ -49,10 +54,7 @@ export interface CharacterData {
     armors: string[];
     accessories: string[];
   };
-  memoryFragmentSets?: {
-    bestInSlot: recommendingFragmentSet[];
-    alternative?: recommendingFragmentSet[];
-  };
+  memoryFragmentSets?: MemoryFragmentSetRecommendation;
   memoryFragmentMainStats?: MemoryFragmentMainStats[];
   memoryFragmentSubstatsNote?: string;
   // Add other character data as needed (overview, partners, etc.)

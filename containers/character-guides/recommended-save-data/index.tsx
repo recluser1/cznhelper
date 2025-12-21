@@ -40,6 +40,10 @@ export const RecommendedSaveData = (props: Props) => {
             findingCard = foundUniqueCard;
           }
         }
+        //search in common cards
+        if (!findingCard) {
+          findingCard = commonCards.find((card) => card.id === cardId);
+        }
         return findingCard;
       });
     },
