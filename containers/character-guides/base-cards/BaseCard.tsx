@@ -10,13 +10,15 @@ import {
 import { useState } from "react";
 import { TierTag } from "@/components/common/TierTag";
 import { CardRender } from "@/components/common/CardRender";
+import { Attributes } from "@/types/card";
 
 type Props = {
   uniqueCards: UniqueCard[];
+  attribute?: Attributes;
 };
 
 export const BaseCard = (props: Props) => {
-  const { uniqueCards } = props;
+  const { uniqueCards, attribute } = props;
   const [selectedCardForEpiphanies, setSelectedCardForEpiphanies] =
     useState<UniqueCard | null>(null);
 
@@ -49,7 +51,7 @@ export const BaseCard = (props: Props) => {
             >
               <DialogTrigger asChild>
                 {/* Tile - matches Partner tile sizing and interaction */}
-                <CardRender card={cardData} onClick={() => {setSelectedCardForEpiphanies(cardData)}} scaleOnHover />
+                <CardRender card={cardData} onClick={() => {setSelectedCardForEpiphanies(cardData)}} scaleOnHover attribute={attribute} isEpiphany="nospark"/>
               </DialogTrigger>
 
               <DialogContent className="!w-[95vw] !max-w-6xl max-h-[90vh] overflow-y-auto scrollbar-none bg-gray-900/95 border border-gray-800 rounded-xl ">
@@ -75,6 +77,8 @@ export const BaseCard = (props: Props) => {
                           image: cardData.image,
                           rarity: cardData.rarity,
                         }}
+                        attribute={attribute}
+                        isEpiphany={'spark'}
                       />
                     </div>
                   ))}

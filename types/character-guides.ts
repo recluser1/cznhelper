@@ -1,3 +1,4 @@
+import { Attributes } from "./card";
 import {
   MemoryFragmentMainStats,
   MemoryFragmentSet,
@@ -41,6 +42,8 @@ export interface Card {
   cost: number | "X";
   rarity: CardRarities;
   description?: string;
+  isEphiphany?: boolean;
+  isBasic?: boolean;
 }
 export type MemoryFragmentSetRecommendation = {
   bestInSlot: recommendingFragmentSet[];
@@ -52,6 +55,7 @@ export interface MemoryFragmentSubstatPriorities {
   stats: MemoryFragmentSubstats[];
 }
 export interface CharacterData {
+  attribute: Attributes;
   commonCards?: Card[];
   uniqueCards: UniqueCard[];
   recommendedSaveData?: SaveData[];

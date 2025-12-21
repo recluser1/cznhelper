@@ -1,3 +1,4 @@
+import { Attributes } from "@/types/card";
 import {
   CardRarities,
   CharacterData,
@@ -402,6 +403,7 @@ const memoryFragmentSubstatPriorities: MemoryFragmentSubstatPriorities[] = [
   },
 ];
 export const veronicaData: CharacterData = {
+  attribute: Attributes.Passion,
   uniqueCards: uniqueCards,
   recommendedSaveData: recommendedVeronicaSaveData,
   gears: gearsData,
@@ -414,6 +416,6 @@ export const veronicaData: CharacterData = {
   memoryFragmentSubstatsNote: `Prioritize Critical Rate and Critical Damage equally to achieve an
               ideal critical ratio After that, prioritize Flat Attack and
               Attack % for additional damage scaling Void Damage is
-              generally preferred over Attack for most cases`,
+              generally preferred over Attack for most cases testsssss`,
   memoryFragmentSubstatPriorities: memoryFragmentSubstatPriorities,
 };

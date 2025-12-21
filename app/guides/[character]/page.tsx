@@ -137,12 +137,13 @@ export default function CharacterGuidePage() {
               {/* Guide Content Sections */}
               <div className="p-4 sm:p-6 md:p-8 space-y-6 sm:space-y-8">
                 {/* Base Cards */}
-                <BaseCard uniqueCards={characterData?.uniqueCards || []} />
+                <BaseCard uniqueCards={characterData?.uniqueCards || []} attribute={characterData?.attribute}/>
                 {/* Recommended Save Data */}
                 <RecommendedSaveData
                   recommendedSaveData={characterData?.recommendedSaveData || []}
                   uniqueCards={characterData?.uniqueCards || []}
                   commonCards={characterData?.commonCards || []}
+                  attribute={characterData?.attribute}
                 />
                 {/* Equipments */}
                 {characterData?.gears && (

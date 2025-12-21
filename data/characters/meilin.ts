@@ -1,7 +1,9 @@
+import { Attributes } from "@/types/card";
 import { CardRarities, CharacterData } from "@/types/character-guides";
 import { CardTier } from "@/types/character-guides";
 
 export const meilinData: CharacterData = {
+  attribute: Attributes.Passion,
   uniqueCards: [
     {
       id: "flame-dragon-jewel",

@@ -1,3 +1,4 @@
+import { Attributes } from "@/types/card";
 import {
   Card,
   CardRarities,
@@ -348,6 +349,7 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
   ],
 };
 export const reiData: CharacterData = {
+  attribute: Attributes.Void,
   commonCards: commonCards,
   uniqueCards: uniqueCards,
   recommendedSaveData: recommendedSaveData,

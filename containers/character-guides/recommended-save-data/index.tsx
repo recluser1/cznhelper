@@ -1,4 +1,5 @@
 import { CardRender } from "@/components/common/CardRender";
+import { Attributes } from "@/types/card";
 import { Card, UniqueCard } from "@/types/character-guides";
 import { SaveData } from "@/types/save-data";
 import { useCallback } from "react";
@@ -7,9 +8,10 @@ type Props = {
   recommendedSaveData: SaveData[];
   uniqueCards: UniqueCard[];
   commonCards: Card[];
+  attribute?: Attributes;
 };
 export const RecommendedSaveData = (props: Props) => {
-  const { recommendedSaveData, uniqueCards, commonCards } = props;
+  const { recommendedSaveData, uniqueCards, commonCards, attribute } = props;
 
   const generateSaveData = useCallback(
     (cards: string[]) => {
@@ -27,6 +29,7 @@ export const RecommendedSaveData = (props: Props) => {
                 name: card.name,
                 image: card.image,
                 rarity: card.rarity,
+                isEphiphany: true,
               };
             }
           }
@@ -41,8 +44,15 @@ export const RecommendedSaveData = (props: Props) => {
           }
         }
         //search in common cards
-        if (!findingCard) {
-          findingCard = commonCards.find((card) => card.id === cardId);
+        if (!findingCard && commonCards.find((card) => card.id === cardId)) {
+
+          const foundBasicCard = commonCards.find((card) => card.id === cardId);
+          if (foundBasicCard) {
+            findingCard = {
+              ...foundBasicCard,
+              isBasic: true,
+            };
+          }
         }
         return findingCard;
       });
@@ -91,6 +101,9 @@ export const RecommendedSaveData = (props: Props) => {
                         key={cardIndex}
                         card={card}
                         isPlaceholder={!Boolean(card)}
+                        attribute={attribute}
+                        isEpiphany={card.isEphiphany ? "spark" : "nospark"}
+                        isBasic={card.isBasic}
                       />
                     );
                   })}

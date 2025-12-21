@@ -1,13 +1,26 @@
+import { Attributes } from "@/types/card";
 import { Card, CardRarities } from "@/types/character-guides";
+import { useMemo } from "react";
 
 type CardProps = {
   card: Card;
   isPlaceholder?: boolean;
   scaleOnHover?: boolean;
+  attribute?: Attributes;
+  isEpiphany?: "spark" | "nospark";
+  isBasic?: boolean;
   onClick?: (id: string) => void;
 };
 export const CardRender = (props: CardProps) => {
-  const { card, isPlaceholder = false, scaleOnHover = false, onClick } = props;
+  const {
+    card,
+    isPlaceholder = false,
+    scaleOnHover = false,
+    onClick,
+    isEpiphany,
+    isBasic,
+    attribute,
+  } = props;
   // Helper function to get rarity background image based on card name
   function getRarityStripImage(cardRarity: CardRarities): string {
     switch (cardRarity) {
@@ -70,11 +83,11 @@ export const CardRender = (props: CardProps) => {
         scaleOnHover ? "hover:scale-103" : ""
       }`}
     >
-      {/* Void Border */}
+      {/* Attribute Border */}
       <div className="absolute left-0 -top-0.5 -bottom-0.5 w-3 z-10">
         <img
-          src="/images/card/void-border.png"
-          alt="Void Border"
+          src={`/images/card/${attribute ?? "void"}-border.png`}
+          alt={`${attribute} Border`}
           className="h-full w-full object-cover"
         />
       </div>
@@ -241,11 +254,17 @@ export const CardRender = (props: CardProps) => {
               {card.description && (
                 <div className="mt-auto py-5 bg-gradient-to-t from-black/95 via-black/90 to-transparent flex flex-col items-center justify-center gap-1">
                   {/* Card Frame Spark */}
-                  <img
-                    src="/images/card/card_frame_spark.png"
-                    alt=""
-                    className="w-1/2 mb-0 drop-shadow-2xl"
-                  />
+                  {!isBasic && !(card.rarity === CardRarities.Unique) && (
+                    <img
+                      src={
+                        isEpiphany === "spark"
+                          ? "/images/card/card_frame_spark.png"
+                          : "/images/card/card_frame_spark_dis.png"
+                      }
+                      alt=""
+                      className="w-1/2 mb-0 drop-shadow-2xl"
+                    />
+                  )}
                   {(() => {
                     const { bracketedText, remainingText } = parseDescription(
                       card.description
