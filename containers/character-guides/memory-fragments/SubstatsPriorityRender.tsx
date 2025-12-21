@@ -1,3 +1,4 @@
+import { MemoryFragmentSubstatLabels } from "@/constants/character-guides";
 import { MemoryFragmentSubstatPriorities } from "@/types/character-guides";
 import React from "react";
 
@@ -28,11 +29,19 @@ export const SubstatsPriorityRender = (props: Props) => {
                 )}
                 {tier.priority === 1 ? (
                   <div className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-purple-500/20 border border-purple-500/50 text-xs sm:text-sm font-semibold text-purple-300">
-                    {stat}
+                    {
+                      MemoryFragmentSubstatLabels.find(
+                        (label) => label.value === stat
+                      )?.label
+                    }
                   </div>
                 ) : (
                   <div className="px-2.5 py-1 sm:px-3 sm:py-1 rounded-full bg-muted/70 border border-border text-xs sm:text-sm text-muted-foreground">
-                    {stat}
+                    {
+                      MemoryFragmentSubstatLabels.find(
+                        (label) => label.value === stat
+                      )?.label
+                    }
                   </div>
                 )}
               </React.Fragment>
