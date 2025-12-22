@@ -111,9 +111,8 @@ export default function CharacterGuidePage() {
                   <li key={section.id}>
                     <a
                       href={`#${section.id}`}
-                      className={`text-sm text-muted-foreground hover:text-purple-400 transition-colors block py-1 ${
-                        section.level === 2 ? "pl-4" : ""
-                      }`}
+                      className={`text-sm text-muted-foreground hover:text-purple-400 transition-colors block py-1 ${section.level === 2 ? "pl-4" : ""
+                        }`}
                     >
                       {section.title}
                     </a>
@@ -138,7 +137,7 @@ export default function CharacterGuidePage() {
               {/* Guide Content Sections */}
               <div className="p-4 sm:p-6 md:p-8 space-y-6 sm:space-y-8">
                 {/* Base Cards */}
-                <BaseCard uniqueCards={characterData?.uniqueCards || []} attribute={characterData?.attribute}/>
+                <BaseCard uniqueCards={characterData?.uniqueCards || []} attribute={characterData?.attribute} />
                 {/* Recommended Save Data */}
                 <RecommendedSaveData
                   recommendedSaveData={characterData?.recommendedSaveData || []}
@@ -148,7 +147,10 @@ export default function CharacterGuidePage() {
                 />
                 {/* Equipments */}
                 {characterData?.gears && (
-                  <EquipmentSection gears={characterData?.gears} />
+                  <EquipmentSection
+                    gears={characterData.gears}
+                    recommendedSources={characterData.recommendedSources}
+                  />
                 )}
                 {/* Memory Fragments */}
                 {characterData?.memoryFragmentSets && (

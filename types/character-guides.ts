@@ -1,3 +1,4 @@
+// types/character-guides.ts
 import { Attributes } from "./card";
 import { Character } from "./character";
 import {
@@ -76,6 +77,7 @@ export interface CharacterData {
     armors: string[];
     accessories: string[];
   };
+  recommendedSources?: string[];
   memoryFragmentSets?: MemoryFragmentSetRecommendation;
   memoryFragmentMainStats?: MemoryFragmentMainStats[];
   memoryFragmentSubstatsNote?: string;

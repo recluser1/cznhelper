@@ -1,3 +1,4 @@
+// containers/character-guides/equipments/index.tsx
 import { ChevronDown } from "lucide-react";
 import { useMemo, useState } from "react";
 import {
@@ -13,112 +14,86 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+
+// Add recommendedSources to props (optional string[])
 type Props = {
   gears: {
     weapons: string[];
     armors: string[];
     accessories: string[];
   };
+  recommendedSources?: string[]; // e.g. ["Laboratory 0"]
 };
 
-export const EquipmentSection = (props: Props) => {
-  const { gears } = props;
+export const EquipmentSection = ({ gears, recommendedSources = [] }: Props) => {
   const [selectedSources, setSelectedSources] = useState<string>("all");
 
-  const { filteredWeapons, filteredArmors, filteredAccessories } =
-    useMemo(() => {
-      const { weapons, armors, accessories } = gears;
+  // Determine which sources to show in the dropdown
+  const dropdownSources = useMemo<string[]>(() => {
+    // If the character provides explicit recommended sources > use only those
+    if (recommendedSources.length > 0) {
+      return recommendedSources;
+    }
 
-      if (selectedSources === "all") {
-        return {
-          filteredWeapons: weapons
-            .map((w) => weaponsData.find((data) => data.name === w))
-            .filter(Boolean),
-          filteredArmors: armors
-            .map((a) => armorData.find((data) => data.name === a))
-            .filter(Boolean),
-          filteredAccessories: accessories
-            .map((a) => accessoriesData.find((data) => data.name === a))
-            .filter(Boolean),
-        };
+    // Fallback: show all unique sources from the character's gear
+    // (kept for characters that don't have a curated list yet)
+    const allSources = new Set<string>();
+    [...gears.weapons, ...gears.armors, ...gears.accessories].forEach((name) => {
+      const w = weaponsData.find((i) => i.name === name);
+      const a = armorData.find((i) => i.name === name);
+      const c = accessoriesData.find((i) => i.name === name);
+      const item = w ?? a ?? c;
+      if (item?.source && Array.isArray(item.source)) {
+        item.source.forEach((s) => allSources.add(s));
       }
+    });
+    return Array.from(allSources).sort();
+  }, [gears, recommendedSources]);
 
-      // filter through every weapons
-      const filteredWeapons = weapons.filter((gear) => {
-        const currentGearData = weaponsData.find((w) => w.name === gear);
-        if (!currentGearData) return false;
+  // Filtering logic
+  const { filteredWeapons, filteredArmors, filteredAccessories } = useMemo(() => {
+    const { weapons, armors, accessories } = gears;
 
-        if (
-          Array.isArray(currentGearData.source) &&
-          currentGearData.source.includes("Other")
-        ) {
-          return true;
-        }
-
-        if (Array.isArray(currentGearData.source)) {
-          return currentGearData.source.some(
-            (src) => selectedSources && selectedSources.includes(src)
-          );
-        }
-
-        return false;
-      });
-
-      // filter through every armors
-      const filteredArmors = armors.filter((gear) => {
-        const currentGearData = armorData.find((a) => a.name === gear);
-        if (!currentGearData) return false;
-
-        if (
-          Array.isArray(currentGearData.source) &&
-          currentGearData.source.includes("Other")
-        ) {
-          return true;
-        }
-
-        if (Array.isArray(currentGearData.source)) {
-          return currentGearData.source.some(
-            (src) => selectedSources && selectedSources.includes(src)
-          );
-        }
-
-        return false;
-      });
-
-      // filter through every accessories
-      const filteredAccessories = accessories.filter((gear) => {
-        const currentGearData = accessoriesData.find((a) => a.name === gear);
-        if (!currentGearData) return false;
-
-        if (
-          Array.isArray(currentGearData.source) &&
-          currentGearData.source.includes("Other")
-        ) {
-          return true;
-        }
-
-        if (Array.isArray(currentGearData.source)) {
-          return currentGearData.source.some(
-            (src) => selectedSources && selectedSources.includes(src)
-          );
-        }
-
-        return false;
-      });
-
+    if (selectedSources === "all") {
       return {
-        filteredWeapons: filteredWeapons.map((w) =>
-          weaponsData.find((data) => data.name === w)
-        ),
-        filteredArmors: filteredArmors.map((a) =>
-          armorData.find((data) => data.name === a)
-        ),
-        filteredAccessories: filteredAccessories.map((a) =>
-          accessoriesData.find((data) => data.name === a)
-        ),
+        filteredWeapons: weapons
+          .map((w) => weaponsData.find((d) => d.name === w))
+          .filter((i): i is NonNullable<typeof i> => !!i),
+        filteredArmors: armors
+          .map((a) => armorData.find((d) => d.name === a))
+          .filter((i): i is NonNullable<typeof i> => !!i),
+        filteredAccessories: accessories
+          .map((a) => accessoriesData.find((d) => d.name === a))
+          .filter((i): i is NonNullable<typeof i> => !!i),
       };
-    }, [selectedSources, gears]);
+    }
 
+    // Helper to check if an item matches the selected source
+    const matchesSource = (item: { source?: string | string[] } | undefined) => {
+      if (!item || !Array.isArray(item.source)) return false;
+      if (item.source.includes("Other")) return true;
+      return item.source.includes(selectedSources);
+    };
+
+    const filteredWeapons = weapons
+      .filter((name) => matchesSource(weaponsData.find((i) => i.name === name)))
+      .map((name) => weaponsData.find((d) => d.name === name))
+      .filter((i): i is NonNullable<typeof i> => !!i);
+
+    const filteredArmors = armors
+      .filter((name) => matchesSource(armorData.find((i) => i.name === name)))
+      .map((name) => armorData.find((d) => d.name === name))
+      .filter((i): i is NonNullable<typeof i> => !!i);
+
+    const filteredAccessories = accessories
+      .filter((name) => matchesSource(accessoriesData.find((i) => i.name === name)))
+      .map((name) => accessoriesData.find((d) => d.name === name))
+      .filter((i): i is NonNullable<typeof i> => !!i);
+
+    return { filteredWeapons, filteredArmors, filteredAccessories };
+  }, [selectedSources, gears]);
+
+  // Render
   return (
     <section
       id="equipments"
@@ -136,7 +111,7 @@ export const EquipmentSection = (props: Props) => {
         </strong>
       </p>
 
-      {/* Dropdown */}
+      {/* Dropdown - now only recommended sources */}
       <div className="mb-12 flex flex-col items-center">
         <span className="text-purple-300 text-xl font-medium mb-2 tracking-wide">
           Chaos Manifestation
@@ -145,22 +120,21 @@ export const EquipmentSection = (props: Props) => {
           <div className="relative w-55 mt-2 hover:scale-105 transition-all duration-300">
             <select
               value={selectedSources}
-              onChange={(e) => {
-                const value = e.target.value;
-                if (value === "all") setSelectedSources("all");
-                else setSelectedSources(value);
-              }}
+              onChange={(e) => setSelectedSources(e.target.value)}
               className="
-                        appearance-none w-full text-sm font-medium
-                        rounded-xl border border-border bg-card
-                        py-3 px-4 pr-10 text-center
-                        hover:border-purple-400
-                        focus:outline-none
-                      "
+                appearance-none w-full text-sm font-medium
+                rounded-xl border border-border bg-card
+                py-3 px-4 pr-10 text-center
+                hover:border-purple-400
+                focus:outline-none
+              "
             >
               <option value="all">Show All</option>
-              <option value="Laboratory 0">Laboratory 0</option>
-              <option value="Swamp of Judgment">Swamp of Judgment</option>
+              {dropdownSources.map((source) => (
+                <option key={source} value={source}>
+                  {source}
+                </option>
+              ))}
             </select>
 
             <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
@@ -196,7 +170,6 @@ export const EquipmentSection = (props: Props) => {
                   </DialogTrigger>
 
                   <DialogContent className="max-w-2xl w-[95vw] max-h-[85vh] overflow-visible bg-gray-900/95 border border-gray-800 rounded-xl flex flex-col p-0">
-                    {/* Header with LOWER z-index than tooltip */}
                     <DialogHeader className="sticky top-0 z-0 shrink-0 bg-gray-900 border-b border-gray-800 px-6 py-4 pr-12 pointer-events-none">
                       <DialogTitle className="text-xl sm:text-2xl text-center font-bold text-purple-300 pointer-events-auto">
                         Alternative Weapon

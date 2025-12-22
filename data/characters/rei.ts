@@ -1,3 +1,4 @@
+// data/characters/rei.ts
 import { Attributes } from "@/types/card";
 import {
   Card,
@@ -332,6 +333,9 @@ const gearsData = {
   armors: ["Shield of the Watcher"],
   accessories: [],
 };
+
+const recommendedSources = ["Laboratory 0"];
+
 const memoryFragmentSets: MemoryFragmentSetRecommendation = {
   bestInSlot: [
     { id: "black-wing", description: "Provides a solid Attack boost" },
@@ -354,6 +358,7 @@ export const reiData: CharacterData = {
   uniqueCards: uniqueCards,
   recommendedSaveData: recommendedSaveData,
   gears: gearsData,
+  recommendedSources: recommendedSources,
   memoryFragmentSets: memoryFragmentSets,
   memoryFragmentMainStats: [
     MemoryFragmentMainStats.CriticalRate,
