@@ -45,7 +45,7 @@ export const MemoryFragmentsSection = (props: Props) => {
       className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-6"
     >
       <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-purple-400 text-center">
-        4. Memory Fragments
+        3. Memory Fragments
       </h2>
       <p className="text-muted-foreground mb-6 sm:mb-8 text-sm sm:text-base text-center px-4 max-w-3xl mx-auto"></p>
 

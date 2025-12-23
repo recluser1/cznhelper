@@ -89,16 +89,10 @@ export interface CharacterData {
 }
 
 export enum GuideSections {
-  Infographic = "infographic",
-  CharacterOverview = "character-overview",
-  Profile = "profile",
-  Cards = "cards",
-  Potentials = "potentials",
-  ManifestEgos = "manifest-egos",
-  SaveData = "save-data",
+  BaseCards = "base-cards",
+  RecommendedSaveData = "recommended-save-data",
+  Equipments = "equipments",
   MemoryFragments = "memory-fragments",
-  MemoryStats = "memory-stats",
-  MemorySets = "memory-sets",
   Partners = "partners",
   Teams = "teams",
   Credits = "credits",
