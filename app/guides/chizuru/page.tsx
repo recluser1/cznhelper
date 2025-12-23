@@ -1677,18 +1677,21 @@ export default function ChizuruGuidePage() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
                     {[
                       {
+                        id: "black-wing",
                         name: "Black Wing",
                         effect: "+12% Attack",
                         icon: "/images/sets/black-wing.webp",
                         why: "Provides the best 2-set bonus for general damage output",
                       },
                       {
+                        id: "executioners-tool",
                         name: "Executioner's Tool",
                         effect: "+25% Critical Damage",
                         icon: "/images/sets/executioners-tool.webp",
                         why: "Provides the best 2-set bonus for critical damage builds",
                       },
                       {
+                        id: "cursed-corpse",
                         name: "Cursed Corpse",
                         effect: "Increases damage dealt to target inflicted with Agony by 10%",
                         icon: "/images/sets/cursed-corpse.webp",
@@ -1698,7 +1701,6 @@ export default function ChizuruGuidePage() {
                       <ExpandableSetCard
                         key={set.name + "bis"}
                         set={set}
-                        tier="bis"
                         isExpanded={expandedMemorySet === set.name + "bis"}
                         onToggle={() => setExpandedMemorySet(expandedMemorySet === set.name + "bis" ? null : set.name + "bis")}
                       />

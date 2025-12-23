@@ -1,23 +1,17 @@
 // components/ExpandableSetCard.tsx
+import { MemoryFragmentSet } from "@/types/memory-fragments";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
-type Set = {
-  name: string;
-  effect: string;
-  icon: string;
-  why: string;
-};
-
 type Props = {
-  set: Set;
-  tier: "bis" | "secondary";
+  set: MemoryFragmentSet;
+  description?: string;
   isExpanded: boolean;
   onToggle: () => void;
 };
 
 export default function ExpandableSetCard({
   set,
-  tier,
+  description,
   isExpanded,
   onToggle,
 }: Props) {
@@ -62,7 +56,7 @@ export default function ExpandableSetCard({
       >
         <div className="px-1 pb-1">
           <p className="text-m text-muted-foreground/90 leading-relaxed border-l-4 border-purple-400/50 pl-4 py-1 bg-card/50 rounded-r-md">
-            {set.why}
+            {description}
           </p>
         </div>
       </div>

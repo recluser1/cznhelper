@@ -1,6 +1,21 @@
-import { notFound } from "next/navigation"
-import Link from "next/link"
-import { ArrowLeft } from "lucide-react"
+"use client";
+
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+import {
+  CharacterData,
+  Section,
+  GuideSections,
+} from "@/types/character-guides";
+import { BaseCard } from "@/containers/character-guides/base-cards/BaseCard";
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import { defaultSections } from "@/constants/character-guides";
+import { RecommendedSaveData } from "@/containers/character-guides/recommended-save-data";
+import { EquipmentSection } from "@/containers/character-guides/equipments";
+import { MemoryFragmentsSection } from "@/containers/character-guides/memory-fragments";
+import { PartnersSection } from "@/containers/character-guides/partners";
 
 const characters = [
   "rin",
@@ -27,39 +42,42 @@ const characters = [
   "nia",
   "cassius",
   "rei",
-]
+];
 
-const defaultSections = [
-  { id: "infographic", title: "1. Infographic", level: 1 },
-  { id: "character-overview", title: "2. Character Overview", level: 1 },
-  { id: "profile", title: "2.1. Profile", level: 2 },
-  { id: "cards", title: "2.2. Cards", level: 2 },
-  { id: "potentials", title: "2.3. Potentials", level: 2 },
-  { id: "manifest-egos", title: "2.4. Manifest Ego", level: 2 },
-  { id: "save-data", title: "3. Save Data", level: 1 },
-  { id: "memory-fragments", title: "4. Memory Fragments", level: 1 },
-  { id: "memory-stats", title: "4.1. Memory Stats", level: 2 },
-  { id: "memory-sets", title: "4.2. Memory Sets", level: 2 },
-  { id: "partners", title: "5. Partners", level: 1 },
-  { id: "teams", title: "6. Teams", level: 1 },
-  { id: "credits", title: "7. Credits", level: 1 },
-]
+export default function CharacterGuidePage() {
+  const params = useParams();
+  const character = params.character as string;
 
-export default async function CharacterGuidePage({
-  params,
-}: {
-  params: Promise<{ character: string }>
-}) {
-  const { character } = await params
+  const [characterData, setCharacterData] = useState<CharacterData | null>(
+    null
+  );
+  const [loading, setLoading] = useState(true);
 
-  if (!characters.includes(character)) {
-    notFound()
-  }
+  useEffect(() => {
+    if (!characters.includes(character)) {
+      notFound();
+    }
+
+    // Dynamically import character data
+    const loadData = async () => {
+      try {
+        const module = await import(`@/data/characters/${character}`);
+        const data = module[`${character}Data`] as CharacterData;
+        setCharacterData(data);
+      } catch (error) {
+        console.error(`Failed to load data for character: ${character}`, error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, [character]);
 
   const characterName = character
     .split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ")
+    .join(" ");
 
   return (
     <div className="min-h-screen bg-background">
@@ -93,9 +111,8 @@ export default async function CharacterGuidePage({
                   <li key={section.id}>
                     <a
                       href={`#${section.id}`}
-                      className={`text-sm text-muted-foreground hover:text-purple-400 transition-colors block py-1 ${
-                        section.level === 2 ? "pl-4" : ""
-                      }`}
+                      className={`text-sm text-muted-foreground hover:text-purple-400 transition-colors block py-1 ${section.level === 2 ? "pl-4" : ""
+                        }`}
                     >
                       {section.title}
                     </a>
@@ -119,27 +136,47 @@ export default async function CharacterGuidePage({
 
               {/* Guide Content Sections */}
               <div className="p-4 sm:p-6 md:p-8 space-y-6 sm:space-y-8">
-                {defaultSections.map((section) => (
-                  <section key={section.id} id={section.id} className="scroll-mt-24">
-                    <h2 className={`font-bold mb-3 sm:mb-4 text-purple-400 ${section.level === 1 ? "text-xl sm:text-2xl" : "text-lg sm:text-xl"}`}>
-                      {section.title}
-                    </h2>
-                    <p className="text-sm sm:text-base text-muted-foreground">
-                      Content for {section.title.replace(/^\d+(\.\d+)?\.?\s*/, "").toLowerCase()} will be added here.
-                    </p>
-                  </section>
-                ))}
+                {/* Base Cards */}
+                <BaseCard uniqueCards={characterData?.uniqueCards || []} attribute={characterData?.attribute} />
+                {/* Recommended Save Data */}
+                <RecommendedSaveData
+                  recommendedSaveData={characterData?.recommendedSaveData || []}
+                  uniqueCards={characterData?.uniqueCards || []}
+                  commonCards={characterData?.commonCards || []}
+                  attribute={characterData?.attribute}
+                />
+                {/* Equipments */}
+                {characterData?.gears && (
+                  <EquipmentSection
+                    gears={characterData.gears}
+                    recommendedSources={characterData.recommendedSources}
+                  />
+                )}
+                {/* Memory Fragments */}
+                {characterData?.memoryFragmentSets && (
+                  <MemoryFragmentsSection
+                    bestInSlot={characterData.memoryFragmentSets?.bestInSlot}
+                    alternative={characterData.memoryFragmentSets?.alternative}
+                    memoryFragmentMainStats={
+                      characterData.memoryFragmentMainStats
+                    }
+                    memoryFragmentSubstatsNote={
+                      characterData.memoryFragmentSubstatsNote
+                    }
+                    memoryFragmentSubstatsPriorities={
+                      characterData.memoryFragmentSubstatPriorities
+                    }
+                  />
+                )}
+                {/* Partners */}
+                {characterData?.partnersGuide && (
+                  <PartnersSection partnersGuide={characterData.partnersGuide} />
+                )}
               </div>
             </div>
           </div>
         </div>
       </main>
     </div>
-  )
-}
-
-export async function generateStaticParams() {
-  return characters.map((character) => ({
-    character,
-  }))
+  );
 }
