@@ -105,6 +105,11 @@ export const PartnersData = [
     image: "/images/partners/nyx.webp",
   },
   {
+    id: "peko",
+    name: "Peko",
+    image: "/images/partners/peko.webp",
+  },
+  {
     id: "priscilla",
     name: "Priscilla",
     image: "/images/partners/priscilla.webp",

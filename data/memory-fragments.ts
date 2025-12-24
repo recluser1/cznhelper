@@ -80,7 +80,7 @@ export const MemoryFragmentSetData: MemoryFragmentSet[] = [
   {
     id: "judgments-flames",
     name: "Judgment's Flames",
-    icon: "/images/sets/judgments-flames.webp",
+    icon: "images/sets/judgments-flames.webp",
     effect: "+50% Damage Amount to Instinct Cards used against Ravaged targets",
   },
   {

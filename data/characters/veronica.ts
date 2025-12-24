@@ -370,6 +370,7 @@ const gearsData = {
   armors: ["Shield of the Watcher"],
   accessories: [],
 };
+
 const memoryFragmentSets: MemoryFragmentSetRecommendation = {
   bestInSlot: [
     { id: "black-wing", description: "Provides a solid Attack boost" },
