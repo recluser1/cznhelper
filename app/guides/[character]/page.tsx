@@ -21,6 +21,7 @@ const characters = [
   "rin",
   "meilin",
   "yuki",
+  "sereniel",
   "haru",
   "owen",
   "khalipe",

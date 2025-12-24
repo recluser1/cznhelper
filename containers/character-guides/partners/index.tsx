@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/dialog";
 import { PartnersData } from "@/data/partners";
 import { PartnersGuide } from "@/types/character-guides";
-import { useParams } from "next/navigation";
 import { useState } from "react";
 type Props = {
   partnersGuide: PartnersGuide[];
@@ -16,8 +15,6 @@ type Props = {
 export const PartnersSection = (props: Props) => {
   const { partnersGuide } = props;
   const [selectedPartner, setSelectedPartner] = useState<string | null>(null);
-  const params = useParams();
-  const character = params.character as string;
 
   return (
     <section
@@ -25,11 +22,10 @@ export const PartnersSection = (props: Props) => {
       className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-24"
     >
       <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-purple-400 text-center">
-        5. Partners
+        4. Partners
       </h2>
-      <p className="text-muted-foreground mb-6 text-xs sm:text-sm md:text-base text-center px-4">
-        Click on any partner below to view detailed information about their
-         {character.charAt(0).toUpperCase() + character.slice(1)}
+      <p className="text-muted-foreground mb-6 text-xs sm:text-sm md:text-base text-center px-4 whitespace-pre-line">
+        Click on any partner below to view detailed information about their information.
       </p>
 
       <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">

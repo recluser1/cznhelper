@@ -5,23 +5,13 @@ import {
 } from "@/types/memory-fragments";
 
 export const defaultSections: Section[] = [
-  { id: GuideSections.Infographic, title: "1. Infographic", level: 1 },
-  {
-    id: GuideSections.CharacterOverview,
-    title: "2. Character Overview",
-    level: 1,
-  },
-  { id: GuideSections.Profile, title: "2.1. Profile", level: 2 },
-  { id: GuideSections.Cards, title: "2.2. Cards", level: 2 },
-  { id: GuideSections.Potentials, title: "2.3. Potentials", level: 2 },
-  { id: GuideSections.ManifestEgos, title: "2.4. Manifest Ego", level: 2 },
-  { id: GuideSections.SaveData, title: "3. Save Data", level: 1 },
-  { id: GuideSections.MemoryFragments, title: "4. Memory Fragments", level: 1 },
-  { id: GuideSections.MemoryStats, title: "4.1. Memory Stats", level: 2 },
-  { id: GuideSections.MemorySets, title: "4.2. Memory Sets", level: 2 },
-  { id: GuideSections.Partners, title: "5. Partners", level: 1 },
-  { id: GuideSections.Teams, title: "6. Teams", level: 1 },
-  { id: GuideSections.Credits, title: "7. Credits", level: 1 },
+  { id: GuideSections.BaseCards, title: "1. Base Cards", level: 1 },
+  { id: GuideSections.RecommendedSaveData, title: "2. Recommended Save Data", level: 1 },
+  { id: GuideSections.Equipments, title: "2.1 Equipments", level: 2 },
+  { id: GuideSections.MemoryFragments, title: "3. Memory Fragments", level: 1 },
+  { id: GuideSections.Partners, title: "4. Partners", level: 1 },
+  { id: GuideSections.Teams, title: "5. Teams WIP", level: 1 },
+  { id: GuideSections.Credits, title: "6. Credits WIP", level: 1 },
 ];
 
 export const CardTiersLabels = [

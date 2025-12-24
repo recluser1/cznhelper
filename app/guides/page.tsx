@@ -99,6 +99,7 @@ const characters = [
   { id: "renoa", name: "Renoa", job: "hunter", faction: "void", rarity: 5 },
   { id: "rin", name: "Rin", job: "striker", faction: "void", rarity: 5 },
   { id: "selena", name: "Selena", job: "ranger", faction: "passion", rarity: 4 },
+  { id: "sereniel", name: "Sereniel", job: "hunter", faction: "instinct", rarity: 5 },
   { id: "tressa", name: "Tressa", job: "psionic", faction: "void", rarity: 4 },
   { id: "veronica", name: "Veronica", job: "ranger", faction: "passion", rarity: 5 },
   { id: "yuki", name: "Yuki", job: "striker", faction: "order", rarity: 5 },
@@ -224,11 +225,10 @@ export default function CharacterGuidesPage() {
               variant={selectedRarity === 5 ? "default" : "outline"}
               size="sm"
               onClick={() => handleRarityFilter(5)}
-              className={`gap-0.5 transition-all ${
-                selectedRarity === 5
+              className={`gap-0.5 transition-all ${selectedRarity === 5
                   ? "bg-orange-500/20 text-orange-400 border-orange-400/50 hover:bg-orange-500/30"
                   : "bg-card hover:bg-card/80"
-              }`}
+                }`}
             >
               {Array.from({ length: 5 }).map((_, i) => (
                 <span key={i} className="text-orange-400">
@@ -240,11 +240,10 @@ export default function CharacterGuidesPage() {
               variant={selectedRarity === 4 ? "default" : "outline"}
               size="sm"
               onClick={() => handleRarityFilter(4)}
-              className={`gap-0.5 transition-all ${
-                selectedRarity === 4
+              className={`gap-0.5 transition-all ${selectedRarity === 4
                   ? "bg-orange-500/20 text-orange-400 border-orange-400/50 hover:bg-orange-500/30"
                   : "bg-card hover:bg-card/80"
-              }`}
+                }`}
             >
               {Array.from({ length: 4 }).map((_, i) => (
                 <span key={i} className="text-orange-400">
@@ -261,9 +260,8 @@ export default function CharacterGuidesPage() {
                 variant={selectedFaction === faction.id ? "default" : "outline"}
                 size="sm"
                 onClick={() => handleFactionFilter(faction.id)}
-                className={`gap-2 transition-all ${
-                  selectedFaction === faction.id ? faction.color : "bg-card hover:bg-card/80"
-                }`}
+                className={`gap-2 transition-all ${selectedFaction === faction.id ? faction.color : "bg-card hover:bg-card/80"
+                  }`}
               >
                 <img src={faction.icon || "/placeholder.svg"} alt={faction.name} width={20} height={20} />
                 {faction.name}
@@ -278,11 +276,10 @@ export default function CharacterGuidesPage() {
                 variant={selectedJob === job.id ? "default" : "outline"}
                 size="sm"
                 onClick={() => handleJobFilter(job.id)}
-                className={`gap-2 ${
-                  selectedJob === job.id
+                className={`gap-2 ${selectedJob === job.id
                     ? "bg-purple-400/20 text-purple-400 border-purple-400/50 hover:bg-purple-400/30"
                     : "bg-card hover:bg-card/80"
-                }`}
+                  }`}
               >
                 <img src={job.icon || "/placeholder.svg"} alt={job.name} width={20} height={20} />
                 {job.name}

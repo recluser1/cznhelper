@@ -370,6 +370,7 @@ const gearsData = {
   armors: ["Shield of the Watcher"],
   accessories: [],
 };
+
 const memoryFragmentSets: MemoryFragmentSetRecommendation = {
   bestInSlot: [
     { id: "black-wing", description: "Provides a solid Attack boost" },
@@ -392,7 +393,7 @@ const memoryFragmentSubstatPriorities: MemoryFragmentSubstatPriorities[] = [
     priority: 1,
     relation: "equal",
     stats: [
-      MemoryFragmentSubstats.CriticalRate,
+      MemoryFragmentSubstats.CriticalChance,
       MemoryFragmentSubstats.CriticalDamage,
       MemoryFragmentSubstats.ExtraDamage,
     ],
@@ -428,11 +429,11 @@ export const veronicaData: CharacterData = {
   gears: gearsData,
   memoryFragmentSets: memoryFragmentSets,
   memoryFragmentMainStats: [
-    MemoryFragmentMainStats.CriticalRate,
+    MemoryFragmentMainStats.CriticalChance,
     MemoryFragmentMainStats.PassionDamage,
     MemoryFragmentMainStats.Attack,
   ],
-  memoryFragmentSubstatsNote: `Prioritize Critical Rate and Critical Damage equally to achieve an
+  memoryFragmentSubstatsNote: `Prioritize Critical Chance and Critical Damage equally to achieve an
               ideal critical ratio After that, prioritize Flat Attack and
               Attack % for additional damage scaling Void Damage is
               generally preferred over Attack for most cases testsssss`,

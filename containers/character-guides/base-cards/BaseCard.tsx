@@ -28,7 +28,7 @@ export const BaseCard = (props: Props) => {
       className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-6"
     >
       <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-purple-400 text-center">
-        2. Base Cards
+        1. Base Cards
       </h2>
       <p className="text-muted-foreground mb-6 sm:mb-8 text-sm sm:text-base text-center px-4 max-w-3xl mx-auto">
         Click a Base Card to view the Epiphanies Tier List

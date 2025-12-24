@@ -30,12 +30,14 @@ export const MemoryFragmentsSection = (props: Props) => {
 
   const { bestInSlotSets, alternativeSets } = useMemo(() => {
     return {
-      bestInSlotSets: MemoryFragmentSetData.filter((set) =>
-        bestInSlot?.some((ms) => ms.id === set.id)
-      ),
-      alternativeSets: MemoryFragmentSetData.filter((set) =>
-        alternative?.some((ms) => ms.id === set.id)
-      ),
+      bestInSlotSets:
+        bestInSlot
+          ?.map((ms) => MemoryFragmentSetData.find((set) => set.id === ms.id))
+          .filter(Boolean) || [],
+      alternativeSets:
+        alternative
+          ?.map((ms) => MemoryFragmentSetData.find((set) => set.id === ms.id))
+          .filter(Boolean) || [],
     };
   }, [bestInSlot, alternative]);
 
@@ -45,7 +47,7 @@ export const MemoryFragmentsSection = (props: Props) => {
       className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-6"
     >
       <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-purple-400 text-center">
-        4. Memory Fragments
+        3. Memory Fragments
       </h2>
       <p className="text-muted-foreground mb-6 sm:mb-8 text-sm sm:text-base text-center px-4 max-w-3xl mx-auto"></p>
 
@@ -59,23 +61,26 @@ export const MemoryFragmentsSection = (props: Props) => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-            {bestInSlotSets.map((set) => (
-              <ExpandableSetCard
-                key={set.name + "bis"}
-                set={set}
-                description={
-                  bestInSlot?.find((ms) => ms.id === set.id)?.description
-                }
-                isExpanded={expandedMemorySet === set.name + "bis"}
-                onToggle={() =>
-                  setExpandedMemorySet(
-                    expandedMemorySet === set.name + "bis"
-                      ? null
-                      : set.name + "bis"
-                  )
-                }
-              />
-            ))}
+            {bestInSlotSets.map((set) => {
+              if (!set) return null;
+              return (
+                <ExpandableSetCard
+                  key={set.name + "bis"}
+                  set={set}
+                  description={
+                    bestInSlot?.find((ms) => ms.id === set.id)?.description
+                  }
+                  isExpanded={expandedMemorySet === set.name + "bis"}
+                  onToggle={() =>
+                    setExpandedMemorySet(
+                      expandedMemorySet === set.name + "bis"
+                        ? null
+                        : set.name + "bis"
+                    )
+                  }
+                />
+              );
+            })}
           </div>
         </div>
 
@@ -87,24 +92,27 @@ export const MemoryFragmentsSection = (props: Props) => {
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-            {alternativeSets.map((set) => (
-              <ExpandableSetCard
-                key={set.name + "secondary"}
-                set={set}
-                description={
-                  alternative?.find((ms) => ms.id === set.id)?.description
-                }
-                isExpanded={expandedMemorySet === set.name + "secondary"}
-                onToggle={() =>
-                  setExpandedMemorySet(
-                    expandedMemorySet === set.name + "secondary"
-                      ? null
-                      : set.name + "secondary"
-                  )
-                }
-              />
-            ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+            {alternativeSets.map((set) => {
+              if (!set) return null;
+              return (
+                <ExpandableSetCard
+                  key={set.name + "secondary"}
+                  set={set}
+                  description={
+                    alternative?.find((ms) => ms.id === set.id)?.description
+                  }
+                  isExpanded={expandedMemorySet === set.name + "secondary"}
+                  onToggle={() =>
+                    setExpandedMemorySet(
+                      expandedMemorySet === set.name + "secondary"
+                        ? null
+                        : set.name + "secondary"
+                    )
+                  }
+                />
+              );
+            })}
           </div>
         </div>
       </div>
@@ -159,7 +167,9 @@ export const MemoryFragmentsSection = (props: Props) => {
         {/* Substat Priority */}
         <div className="mt-8 text-center">
           {/* Priority Chain */}
-          <SubstatsPriorityRender substatsPriorities={memoryFragmentSubstatsPriorities} />
+          <SubstatsPriorityRender
+            substatsPriorities={memoryFragmentSubstatsPriorities}
+          />
 
           {/* Explanation */}
           <div className="mt-6 mx-auto max-w-3xl">
