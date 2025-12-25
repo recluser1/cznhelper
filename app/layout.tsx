@@ -56,7 +56,7 @@ export async function generateMetadata({ params }: { params: any }): Promise<Met
       siteName: 'CZN Helper',
       images: [
         {
-          url: '/images/unnamed.gif',
+          url: '/images/mibibitireeeeee.webp',
           width: 498,
           height: 498,
           alt: fullTitle,
@@ -64,13 +64,6 @@ export async function generateMetadata({ params }: { params: any }): Promise<Met
       ],
       locale: 'en_US',
       type: 'website',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: fullTitle,
-      description,
-      images: ['/images/unnamed.gif'],
-      creator: '@luciezinha',
     },
     icons: {
       icon: [
