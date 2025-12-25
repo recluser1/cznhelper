@@ -7,20 +7,20 @@ import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 
 const navItems = [
-  { 
-    name: "Home", 
+  {
+    name: "Home",
     href: "/",
-    icon: House 
+    icon: House
   },
-  { 
-    name: "Guides", 
+  {
+    name: "Guides",
     href: "/guides",
-    icon: Users 
+    icon: Users
   },
-  { 
-    name: "Save Data", 
+  {
+    name: "Save Data",
     href: "/calculator",
-    icon: Calculator 
+    icon: Calculator
   }
 ]
 
