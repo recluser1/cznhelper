@@ -2,92 +2,321 @@
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
-
+ 
+/* Complete redesign based on Sanity Gone color scheme */
 :root {
-  --background: oklch(0.98 0 0);
-  --foreground: oklch(0.15 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0 0);
-  --primary: oklch(0.45 0.15 265);
-  --primary-foreground: oklch(0.98 0 0);
-  --secondary: oklch(0.92 0 0);
-  --secondary-foreground: oklch(0.15 0 0);
-  --muted: oklch(0.95 0 0);
-  --muted-foreground: oklch(0.5 0 0);
-  --accent: oklch(0.65 0.2 290);
-  --accent-foreground: oklch(0.98 0 0);
-  --destructive: oklch(0.55 0.22 25);
-  --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.88 0 0);
-  --input: oklch(0.88 0 0);
-  --ring: oklch(0.45 0.15 265);
-  --chart-1: oklch(0.45 0.15 265);
-  --chart-2: oklch(0.65 0.2 290);
-  --chart-3: oklch(0.55 0.18 310);
-  --chart-4: oklch(0.6 0.12 250);
-  --chart-5: oklch(0.5 0.1 270);
-  --radius: 0.5rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --background: #f8f9fa;
+  --foreground: #1b1f25;
+  --card: #ffffff;
+  --card-foreground: #1b1f25;
+  --popover: #ffffff;
+  --popover-foreground: #1b1f25;
+  --primary: #e8485f;
+  --primary-foreground: #ffffff;
+  --secondary: #e9ecef;
+  --secondary-foreground: #1b1f25;
+  --muted: #f1f3f5;
+  --muted-foreground: #868e96;
+  --accent: #49b3ff;
+  --accent-foreground: #ffffff;
+  --destructive: #e8485f;
+  --destructive-foreground: #ffffff;
+  --border: #dee2e6;
+  --input: #e9ecef;
+  --ring: #e8485f;
+  --radius: 0.25rem;
 }
-
+ 
 .dark {
-  --background: #1a1d26;
-  --foreground: #c3c7d0;
-  --card: #22252e;
-  --card-foreground: #c3c7d0;
-  --popover: #22252e;
-  --popover-foreground: #c3c7d0;
-  --primary: #c41729;
-  --primary-foreground: #c3c7d0;
-  --secondary: #2a2d36;
-  --secondary-foreground: #c3c7d0;
-  --muted: #2a2d36;
-  --muted-foreground: #a5aab3;
-  --accent: #4a1890;
-  --accent-foreground: #c3c7d0;
-  --destructive: #c41729;
-  --destructive-foreground: #c3c7d0;
-  --border: #353842;
-  --input: #2a2d36;
-  --ring: #4a1890;
-  --chart-1: #c41729;
-  --chart-2: #4a1890;
-  --chart-3: #19f7e1;
-  --chart-4: #ff601a;
-  --chart-5: #c41729;
-  --chaos-teal: #19f7e1;
-  --ember-orange: #ff601a;
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+  /* Sanity Gone inspired dark theme */
+  --background: #0d1017;
+  --foreground: #e8e8ec;
+  --card: #14181e;
+  --card-foreground: #e8e8ec;
+  --popover: #1b2028;
+  --popover-foreground: #e8e8ec;
+  --primary: #e8485f;
+  --primary-foreground: #ffffff;
+  --secondary: #1b2028;
+  --secondary-foreground: #87888c;
+  --muted: #1b2028;
+  --muted-foreground: #87888c;
+  --accent: #49b3ff;
+  --accent-foreground: #ffffff;
+  --destructive: #e8485f;
+  --destructive-foreground: #ffffff;
+  --border: #24282f;
+  --input: #1b2028;
+  --ring: #e8485f;
+  
+  /* Sanity Gone specific colors */
+  --sg-bg-dark: #0d1017;
+  --sg-card: #14181e;
+  --sg-card-elevated: #1b2028;
+  --sg-border: #24282f;
+  --sg-border-light: #363b44;
+  --sg-text: #e8e8ec;
+  --sg-text-secondary: #87888c;
+  --sg-red: #e8485f;
+  --sg-blue: #49b3ff;
+  --sg-yellow: #ffc107;
+  --sg-orange: #ff8a00;
+  --sg-green: #50c878;
+  --sg-purple: #a855f7;
+  
+  /* Rarity colors */
+  --rarity-6: #ff8a00;
+  --rarity-5: #ffc107;
+  --rarity-4: #a855f7;
+  --rarity-3: #49b3ff;
 }
-
+ 
+/* Scrollbar styling */
 .scrollbar-none::-webkit-scrollbar {
   display: none;
 }
 .scrollbar-none {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
-
-.text-discord-muted {
-  color: #caccd1;
+ 
+/* Custom scrollbar for dark theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
-
+::-webkit-scrollbar-track {
+  background: var(--sg-bg-dark, #0d1017);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--sg-border-light, #363b44);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--sg-text-secondary, #87888c);
+}
+ 
+/* Sanity Gone card styles */
+.sg-card {
+  background: var(--sg-card);
+  border: 1px solid var(--sg-border);
+  border-radius: 0.25rem;
+}
+ 
+.sg-card-elevated {
+  background: var(--sg-card-elevated);
+  border: 1px solid var(--sg-border);
+  border-radius: 0.25rem;
+}
+ 
+/* Sanity Gone button styles */
+.sg-button {
+  background: var(--sg-card-elevated);
+  border: 1px solid var(--sg-border);
+  color: var(--sg-text);
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  transition: all 0.15s ease;
+}
+ 
+.sg-button:hover {
+  background: var(--sg-border);
+  border-color: var(--sg-border-light);
+}
+ 
+.sg-button-primary {
+  background: var(--sg-red);
+  border-color: var(--sg-red);
+  color: white;
+}
+ 
+.sg-button-primary:hover {
+  background: #d43d52;
+  border-color: #d43d52;
+}
+ 
+/* Sanity Gone section headers */
+.sg-section-header {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--sg-text);
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--sg-red);
+  margin-bottom: 1.5rem;
+}
+ 
+/* Sanity Gone tabs */
+.sg-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--sg-border);
+}
+ 
+.sg-tab {
+  padding: 0.75rem 1.5rem;
+  color: var(--sg-text-secondary);
+  border-bottom: 2px solid transparent;
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+ 
+.sg-tab:hover {
+  color: var(--sg-text);
+}
+ 
+.sg-tab.active {
+  color: var(--sg-text);
+  border-bottom-color: var(--sg-red);
+}
+ 
+/* Character card grid styles */
+.sg-character-card {
+  position: relative;
+  background: var(--sg-card);
+  border: 1px solid var(--sg-border);
+  border-radius: 0.25rem;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+ 
+.sg-character-card:hover {
+  border-color: var(--sg-border-light);
+  transform: translateY(-2px);
+}
+ 
+/* Rarity stars */
+.sg-rarity {
+  display: flex;
+  gap: 1px;
+}
+ 
+.sg-rarity-star {
+  color: var(--rarity-6);
+  font-size: 0.75rem;
+}
+ 
+/* Badge styles */
+.sg-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 0.25rem;
+  background: var(--sg-card-elevated);
+  color: var(--sg-text-secondary);
+  border: 1px solid var(--sg-border);
+}
+ 
+.sg-badge-red {
+  background: rgba(232, 72, 95, 0.15);
+  color: var(--sg-red);
+  border-color: rgba(232, 72, 95, 0.3);
+}
+ 
+.sg-badge-blue {
+  background: rgba(73, 179, 255, 0.15);
+  color: var(--sg-blue);
+  border-color: rgba(73, 179, 255, 0.3);
+}
+ 
+.sg-badge-yellow {
+  background: rgba(255, 193, 7, 0.15);
+  color: var(--sg-yellow);
+  border-color: rgba(255, 193, 7, 0.3);
+}
+ 
+/* Table styles */
+.sg-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+ 
+.sg-table th,
+.sg-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--sg-border);
+}
+ 
+.sg-table th {
+  background: var(--sg-card-elevated);
+  color: var(--sg-text-secondary);
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+ 
+.sg-table tr:hover td {
+  background: var(--sg-card-elevated);
+}
+ 
+/* Guide page specific styles */
+.sg-guide-header {
+  position: relative;
+  background: linear-gradient(to bottom, var(--sg-card) 0%, var(--sg-bg-dark) 100%);
+  border-bottom: 1px solid var(--sg-border);
+}
+ 
+.sg-guide-nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--sg-card);
+  border-bottom: 1px solid var(--sg-border);
+}
+ 
+.sg-guide-sidebar {
+  position: sticky;
+  top: 4rem;
+  height: fit-content;
+}
+ 
+/* Stats display */
+.sg-stat-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--sg-border);
+}
+ 
+.sg-stat-label {
+  color: var(--sg-text-secondary);
+  font-size: 0.875rem;
+}
+ 
+.sg-stat-value {
+  color: var(--sg-text);
+  font-weight: 500;
+}
+ 
+@theme inline {
+  --font-sans: 'Geist', 'Geist Fallback', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback', monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+ 
 @theme inline {
   /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
   --color-background: var(--background);
@@ -127,7 +356,7 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 }
-
+ 
 @layer base {
   * {
     @apply border-border outline-ring/50;

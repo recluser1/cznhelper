@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { Search, X, Home, AlertTriangle } from "lucide-react"
+import { Search, X, AlertTriangle } from "lucide-react"
 
 const jobTypes = [
   {
@@ -39,7 +39,7 @@ const jobTypes = [
   },
 ]
 
-const factionTypes = [
+const elementTypes = [
   {
     id: "void",
     name: "Void",
@@ -78,45 +78,45 @@ const factionTypes = [
 ]
 
 const characters = [
-  { id: "amir", name: "Amir", job: "vanguard", faction: "order", rarity: 4 },
-  { id: "beryl", name: "Beryl", job: "ranger", faction: "justice", rarity: 4 },
-  { id: "cassius", name: "Cassius", job: "controller", faction: "instinct", rarity: 4 },
-  { id: "chizuru", name: "Chizuru", job: "psionic", faction: "void", rarity: 5 },
-  { id: "haru", name: "Haru", job: "striker", faction: "justice", rarity: 5 },
-  { id: "hugo", name: "Hugo", job: "ranger", faction: "order", rarity: 5 },
-  { id: "kayron", name: "Kayron", job: "psionic", faction: "void", rarity: 5 },
-  { id: "khalipe", name: "Khalipe", job: "vanguard", faction: "instinct", rarity: 5 },
-  { id: "lucas", name: "Lucas", job: "hunter", faction: "passion", rarity: 4 },
-  { id: "luke", name: "Luke", job: "hunter", faction: "order", rarity: 5 },
-  { id: "magna", name: "Magna", job: "vanguard", faction: "justice", rarity: 5 },
-  { id: "maribell", name: "Maribell", job: "vanguard", faction: "passion", rarity: 4 },
-  { id: "meilin", name: "Mei Lin", job: "striker", faction: "passion", rarity: 5 },
-  { id: "mika", name: "Mika", job: "controller", faction: "justice", rarity: 4 },
-  { id: "nia", name: "Nia", job: "controller", faction: "instinct", rarity: 4 },
-  { id: "orlea", name: "Orlea", job: "controller", faction: "instinct", rarity: 5 },
-  { id: "owen", name: "Owen", job: "striker", faction: "passion", rarity: 4 },
-  { id: "rei", name: "Rei", job: "controller", faction: "void", rarity: 4 },
-  { id: "renoa", name: "Renoa", job: "hunter", faction: "void", rarity: 5 },
-  { id: "rin", name: "Rin", job: "striker", faction: "void", rarity: 5 },
-  { id: "selena", name: "Selena", job: "ranger", faction: "passion", rarity: 4 },
-  { id: "sereniel", name: "Sereniel", job: "hunter", faction: "instinct", rarity: 5 },
-  { id: "tressa", name: "Tressa", job: "psionic", faction: "void", rarity: 4 },
-  { id: "veronica", name: "Veronica", job: "ranger", faction: "passion", rarity: 5 },
-  { id: "yuki", name: "Yuki", job: "striker", faction: "order", rarity: 5 },
+  { id: "amir", name: "Amir", job: "vanguard", element: "order", rarity: 4 },
+  { id: "beryl", name: "Beryl", job: "ranger", element: "justice", rarity: 4 },
+  { id: "cassius", name: "Cassius", job: "controller", element: "instinct", rarity: 4 },
+  { id: "chizuru", name: "Chizuru", job: "psionic", element: "void", rarity: 5 },
+  { id: "haru", name: "Haru", job: "striker", element: "justice", rarity: 5 },
+  { id: "hugo", name: "Hugo", job: "ranger", element: "order", rarity: 5 },
+  { id: "kayron", name: "Kayron", job: "psionic", element: "void", rarity: 5 },
+  { id: "khalipe", name: "Khalipe", job: "vanguard", element: "instinct", rarity: 5 },
+  { id: "lucas", name: "Lucas", job: "hunter", element: "passion", rarity: 4 },
+  { id: "luke", name: "Luke", job: "hunter", element: "order", rarity: 5 },
+  { id: "magna", name: "Magna", job: "vanguard", element: "justice", rarity: 5 },
+  { id: "maribell", name: "Maribell", job: "vanguard", element: "passion", rarity: 4 },
+  { id: "meilin", name: "Mei Lin", job: "striker", element: "passion", rarity: 5 },
+  { id: "mika", name: "Mika", job: "controller", element: "justice", rarity: 4 },
+  { id: "nia", name: "Nia", job: "controller", element: "instinct", rarity: 4 },
+  { id: "orlea", name: "Orlea", job: "controller", element: "instinct", rarity: 5 },
+  { id: "owen", name: "Owen", job: "striker", element: "passion", rarity: 4 },
+  { id: "rei", name: "Rei", job: "controller", element: "void", rarity: 4 },
+  { id: "renoa", name: "Renoa", job: "hunter", element: "void", rarity: 5 },
+  { id: "rin", name: "Rin", job: "striker", element: "void", rarity: 5 },
+  { id: "selena", name: "Selena", job: "ranger", element: "passion", rarity: 4 },
+  { id: "sereniel", name: "Sereniel", job: "hunter", element: "instinct", rarity: 5 },
+  { id: "tressa", name: "Tressa", job: "psionic", element: "void", rarity: 4 },
+  { id: "veronica", name: "Veronica", job: "ranger", element: "passion", rarity: 5 },
+  { id: "yuki", name: "Yuki", job: "striker", element: "order", rarity: 5 },
 ]
 
 export default function CharacterGuidesPage() {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedJob, setSelectedJob] = useState<string | null>(null)
-  const [selectedFaction, setSelectedFaction] = useState<string | null>(null)
+  const [selectedElement, setSelectedElement] = useState<string | null>(null)
   const [selectedRarity, setSelectedRarity] = useState<number | null>(null)
 
   const filteredCharacters = characters.filter((char) => {
     const matchesSearch = char.name.toLowerCase().includes(searchQuery.toLowerCase())
     const matchesJob = !selectedJob || char.job === selectedJob
-    const matchesFaction = !selectedFaction || char.faction === selectedFaction
+    const matchesElement = !selectedElement || char.element === selectedElement
     const matchesRarity = !selectedRarity || char.rarity === selectedRarity
-    return matchesSearch && matchesJob && matchesFaction && matchesRarity
+    return matchesSearch && matchesJob && matchesElement && matchesRarity
   })
 
   console.log("[v0] Total characters:", characters.length)
@@ -134,8 +134,8 @@ export default function CharacterGuidesPage() {
     setSelectedJob(selectedJob === jobId ? null : jobId)
   }
 
-  const handleFactionFilter = (factionId: string) => {
-    setSelectedFaction(selectedFaction === factionId ? null : factionId)
+  const handleElementFilter = (elementId: string) => {
+    setSelectedElement(selectedElement === elementId ? null : elementId)
   }
 
   const handleRarityFilter = (rarity: number) => {
@@ -145,39 +145,17 @@ export default function CharacterGuidesPage() {
   const handleReset = () => {
     setSearchQuery("")
     setSelectedJob(null)
-    setSelectedFaction(null)
+    setSelectedElement(null)
     setSelectedRarity(null)
   }
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="border-b border-border bg-card backdrop-blur-sm sticky top-0 z-10">
-        <div className="container mx-auto px-4 py-4 sm:py-6">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-balance bg-gradient-to-r from-red-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
-              Character Guides
-            </h1>
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
-              <div className="text-left sm:text-right">
-                <p className="text-xs text-muted-foreground">
-                  Made by <span className="text-purple-400 font-semibold">lilyium.box</span>
-                </p>
-                <p className="text-xs text-muted-foreground/70">Thanks to Sproot for the resources & Zyla for helping in development</p>
-              </div>
-              <Link
-                href="/"
-                className="flex items-center gap-2 px-4 py-2 rounded-lg border border-purple-400/30 bg-purple-400/10 hover:bg-purple-400/20 transition-colors w-full sm:w-auto justify-center sm:justify-start"
-              >
-                <Home className="w-4 h-4 text-purple-400" />
-                <span className="text-sm font-medium text-purple-400">Home</span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </header>
 
       <main className="container mx-auto px-4 py-6 sm:py-8">
+
         <div className="space-y-4 sm:space-y-6">
+
           <div className="rounded-lg border-2 border-yellow-500/50 bg-yellow-500/10 p-3 sm:p-4">
             <div className="flex items-start gap-2 sm:gap-3">
               <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 mt-0.5 flex-shrink-0" />
@@ -226,8 +204,8 @@ export default function CharacterGuidesPage() {
               size="sm"
               onClick={() => handleRarityFilter(5)}
               className={`gap-0.5 transition-all ${selectedRarity === 5
-                  ? "bg-orange-500/20 text-orange-400 border-orange-400/50 hover:bg-orange-500/30"
-                  : "bg-card hover:bg-card/80"
+                ? "bg-orange-500/20 text-orange-400 border-orange-400/50 hover:bg-orange-500/30"
+                : "bg-card hover:bg-card/80"
                 }`}
             >
               {Array.from({ length: 5 }).map((_, i) => (
@@ -241,8 +219,8 @@ export default function CharacterGuidesPage() {
               size="sm"
               onClick={() => handleRarityFilter(4)}
               className={`gap-0.5 transition-all ${selectedRarity === 4
-                  ? "bg-orange-500/20 text-orange-400 border-orange-400/50 hover:bg-orange-500/30"
-                  : "bg-card hover:bg-card/80"
+                ? "bg-orange-500/20 text-orange-400 border-orange-400/50 hover:bg-orange-500/30"
+                : "bg-card hover:bg-card/80"
                 }`}
             >
               {Array.from({ length: 4 }).map((_, i) => (
@@ -254,17 +232,17 @@ export default function CharacterGuidesPage() {
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
-            {factionTypes.map((faction) => (
+            {elementTypes.map((element) => (
               <Button
-                key={faction.id}
-                variant={selectedFaction === faction.id ? "default" : "outline"}
+                key={element.id}
+                variant={selectedElement === element.id ? "default" : "outline"}
                 size="sm"
-                onClick={() => handleFactionFilter(faction.id)}
-                className={`gap-2 transition-all ${selectedFaction === faction.id ? faction.color : "bg-card hover:bg-card/80"
+                onClick={() => handleElementFilter(element.id)}
+                className={`gap-2 transition-all ${selectedElement === element.id ? element.color : "bg-card hover:bg-card/80"
                   }`}
               >
-                <img src={faction.icon || "/placeholder.svg"} alt={faction.name} width={20} height={20} />
-                {faction.name}
+                <img src={element.icon || "/placeholder.svg"} alt={element.name} width={20} height={20} />
+                {element.name}
               </Button>
             ))}
           </div>
@@ -277,8 +255,8 @@ export default function CharacterGuidesPage() {
                 size="sm"
                 onClick={() => handleJobFilter(job.id)}
                 className={`gap-2 ${selectedJob === job.id
-                    ? "bg-purple-400/20 text-purple-400 border-purple-400/50 hover:bg-purple-400/30"
-                    : "bg-card hover:bg-card/80"
+                  ? "bg-purple-400/20 text-purple-400 border-purple-400/50 hover:bg-purple-400/30"
+                  : "bg-card hover:bg-card/80"
                   }`}
               >
                 <img src={job.icon || "/placeholder.svg"} alt={job.name} width={20} height={20} />
@@ -290,7 +268,7 @@ export default function CharacterGuidesPage() {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
             {filteredCharacters.map((character) => {
               const job = jobTypes.find((j) => j.id === character.job)
-              const faction = factionTypes.find((f) => f.id === character.faction)
+              const element = elementTypes.find((e) => e.id === character.element)
 
               const imagePath = `/images/characters/${character.id}half.webp`
               console.log(`[v0] Rendering ${character.name} with image:`, imagePath)
@@ -317,8 +295,8 @@ export default function CharacterGuidesPage() {
                       {job && <img src={job.icon || "/placeholder.svg"} alt={job.name} width={20} height={20} className="sm:w-6 sm:h-6" />}
                     </div>
                     <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-md bg-black/70 backdrop-blur-sm border border-white/20 flex items-center justify-center p-1 sm:p-1.5">
-                      {faction && (
-                        <img src={faction.icon || "/placeholder.svg"} alt={faction.name} width={20} height={20} className="sm:w-6 sm:h-6" />
+                      {element && (
+                        <img src={element.icon || "/placeholder.svg"} alt={element.name} width={20} height={20} className="sm:w-6 sm:h-6" />
                       )}
                     </div>
                   </div>

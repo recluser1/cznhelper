@@ -1,3 +1,5 @@
+// types/character.ts
+
 import { Attributes } from "./card";
 
 export enum CharacterJob {
@@ -14,5 +16,5 @@ export interface Character {
   name: string;
   job: CharacterJob;
   attribute: Attributes;
-  rairty?: number;
+  rarity?: number;
 }

@@ -70,8 +70,8 @@ export function GearItem({
         )}
 
         <p className="text-sm text-gray-300 leading-relaxed break-words whitespace-pre-line">
-          {effect.split(/(\d+%?)/g).map((part, i) => 
-            /\d+%?/.test(part) 
+          {effect.split(/(\d+%?)/g).map((part, i) =>
+            /\d+%?/.test(part)
               ? <span key={i} className="text-[#FF8C00]">{part}</span>
               : part
           )}

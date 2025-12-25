@@ -1,7 +1,9 @@
+// types/card.ts
+
 export enum Attributes {
-  Justice = "justice",
-  Passion = "passion",
   Instinct = "instinct",
+  Justice = "justice",
   Order = "order",
+  Passion = "passion",
   Void = "void",
 }

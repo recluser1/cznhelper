@@ -352,7 +352,7 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
       { name: "Absolute Protection", image: "/images/character/khalipe/unique4.png" },
     ],
   },
-    sereniel: {
+  sereniel: {
     portrait: "/images/character/sereniel/portrait.gif",
     starter: [
       { name: "Pulse Fire", image: "/images/character/sereniel/starter1.webp" },
@@ -700,7 +700,7 @@ export function RunTracker() {
     setSelectedCard(null)
   }
 
-  
+
   const duplicateCard = (cardId: string) => {
     const card = deck.find((c) => c.id === cardId)
     if (!card || card.isRemoved) return
@@ -735,14 +735,14 @@ export function RunTracker() {
 
   const getDuplicationCostForCard = (card: DeckCard): number => {
     if (!card.isDuplicated) return 0
-  
+
     // how many duplicates were made BEFORE this one
-    const previousDupes = deck.filter(c => 
-      c.isDuplicated && 
+    const previousDupes = deck.filter(c =>
+      c.isDuplicated &&
       c.id !== card.id &&
       deck.findIndex(dc => dc.id === c.id) < deck.findIndex(dc => dc.id === card.id)
     ).length
-  
+
     if (previousDupes === 0) return 0
     if (previousDupes === 1) return 10
     if (previousDupes === 2) return 30
@@ -754,9 +754,9 @@ export function RunTracker() {
   const convertCard = (cardId: string) => {
     const card = deck.find((c) => c.id === cardId)
     if (!card || card.isRemoved || card.wasConverted || card.cardType === "forbidden") return
-  
+
     const cost = calculateConversionCost(card)
-  
+
     setActionHistory([
       ...actionHistory,
       {
@@ -767,22 +767,22 @@ export function RunTracker() {
         previousConversionCount: conversionCount,
       },
     ])
-  
+
     setDeck(
       deck.map((c) =>
         c.id === cardId
           ? {
-              ...c,
-              cardType: "neutral",
-              wasConverted: true,
-              isStartingCard: false,
-              image: DEFAULT_CARD_IMAGES.neutral,
-              name: "Neutral Card",
-            }
+            ...c,
+            cardType: "neutral",
+            wasConverted: true,
+            isStartingCard: false,
+            image: DEFAULT_CARD_IMAGES.neutral,
+            name: "Neutral Card",
+          }
           : c
       )
     )
-  
+
     setConversionCount(conversionCount + 1)
     setTotalPoints(totalPoints + cost)
     setSelectedCard(null)
@@ -807,12 +807,12 @@ export function RunTracker() {
       deck.map((c) =>
         c.id === cardId
           ? {
-              ...c,
-              isRemoved: true,
-              isMutantSample: true,
-              removalCost: 0,
-              image: "/images/card/remove.png",
-            }
+            ...c,
+            isRemoved: true,
+            isMutantSample: true,
+            removalCost: 0,
+            image: "/images/card/remove.png",
+          }
           : c,
       ),
     )
@@ -847,16 +847,16 @@ export function RunTracker() {
         ? -totalCardPoints + starterTax + scaleCost
         : scaleCost + starterTax - totalCardPoints
 
-        setActionHistory([
-          ...actionHistory,
-          {
-            type: "remove",
-            cardId,
-            previousDeck: [...deck],
-            previousPoints: totalPoints,
-            previousRemovalCount: removalCount,
-          },
-        ])
+    setActionHistory([
+      ...actionHistory,
+      {
+        type: "remove",
+        cardId,
+        previousDeck: [...deck],
+        previousPoints: totalPoints,
+        previousRemovalCount: removalCount,
+      },
+    ])
 
     setDeck(deck.map((c) => (c.id === cardId ? { ...c, isRemoved: true, removalCost } : c)))
     setRemovalCount(newRemovalCount)
@@ -871,7 +871,7 @@ export function RunTracker() {
       forbidden: "Forbidden Card",
       starter: "Starter Card", // just in case
     }
-  
+
     const newCard: DeckCard = {
       id: Date.now().toString(),
       name: nameMap[type],
@@ -883,7 +883,7 @@ export function RunTracker() {
       isRemoved: false,
       wasConverted: false,
     }
-  
+
     setActionHistory([
       ...actionHistory,
       {
@@ -893,7 +893,7 @@ export function RunTracker() {
         previousPoints: totalPoints,
       },
     ])
-  
+
     setDeck([...deck, newCard])
     setTotalPoints(totalPoints + getCardPointValue(newCard))
     setShowAddCard(false)
@@ -1079,28 +1079,28 @@ export function RunTracker() {
       const target = event.target as HTMLElement
 
       if (!selectedCard) return
-  
+
 
       const selectedCardElement = document.getElementById(`card-${selectedCard}`)
       if (!selectedCardElement) return
-  
+
 
       if (selectedCardElement.contains(target)) return
-  
+
 
       setSelectedCard(null)
     }
-  
+
 
     document.addEventListener("click", handleClickOutside)
-  
+
     return () => {
       document.removeEventListener("click", handleClickOutside)
     }
   }, [selectedCard]) //
 
 
-  
+
   return (
     <TooltipProvider>
       <div className="space-y-6">
@@ -1164,11 +1164,10 @@ export function RunTracker() {
                   </div>
                   <div className="h-4 w-full overflow-hidden rounded-full bg-secondary ring-1 ring-border">
                     <div
-                      className={`h-full transition-all ${
-                        percentage > 100
+                      className={`h-full transition-all ${percentage > 100
                           ? "bg-gradient-to-r from-[#C41729] to-[#FF601A]"
                           : "bg-gradient-to-r from-[#5B1FAF] to-[#19F7E1]"
-                      }`}
+                        }`}
                       style={{ width: `${Math.min(percentage, 100)}%` }}
                     />
                   </div>
@@ -1218,7 +1217,7 @@ export function RunTracker() {
                     </Button>
                   </div>
                 </div>
-                
+
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
@@ -1248,17 +1247,15 @@ export function RunTracker() {
                     <div
                       key={card.id}
                       id={`card-${card.id}`}
-                      className={`group relative aspect-[2/3] cursor-pointer rounded-lg transition-all hover:scale-105 ${
-                        selectedCard === card.id ? "shadow-lg shadow-[#5B1FAF]/20" : ""
-                      } ${card.isRemoved ? "opacity-50 grayscale" : ""} ${
-                        card.cardType === "starter"
+                      className={`group relative aspect-[2/3] cursor-pointer rounded-lg transition-all hover:scale-105 ${selectedCard === card.id ? "shadow-lg shadow-[#5B1FAF]/20" : ""
+                        } ${card.isRemoved ? "opacity-50 grayscale" : ""} ${card.cardType === "starter"
                           ? "bg-gradient-to-br from-[#0A0B0F] to-[#06070A]"
                           : card.cardType === "neutral"
                             ? "bg-gradient-to-br from-[#0A0B0F] to-[#06070A] shadow-[#19F7E1]/5"
                             : card.cardType === "monster"
                               ? "bg-gradient-to-br from-[#0A0B0F] to-[#06070A] shadow-[#5B1FAF]/5"
                               : "bg-gradient-to-br from-[#0A0B0F] to-[#06070A] shadow-[#C41729]/5"
-                      }`}
+                        }`}
                       onClick={() => {
                         if (card.isMutantSample) {
                           return
@@ -1284,7 +1281,7 @@ export function RunTracker() {
 
                       <div className="flex w-full h-full flex-col">
                         <div className="relative h-full w-full rounded-md overflow-hidden">
-                        {card.image ? (
+                          {card.image ? (
                             <img
                               src={card.image || "/placeholder.svg"}
                               alt={card.name || "card image"}
@@ -1295,12 +1292,12 @@ export function RunTracker() {
                                   : 'scale(1.10)',           // Normal zoom
                               }}
                             />
-                          ) 
-                          : (
-                            <div className="absolute inset-0 flex items-center justify-center bg-card/50 border-2 border-dashed border-border/30 text-xs text-muted-foreground">
-                              No Image
-                            </div>
-                          )}
+                          )
+                            : (
+                              <div className="absolute inset-0 flex items-center justify-center bg-card/50 border-2 border-dashed border-border/30 text-xs text-muted-foreground">
+                                No Image
+                              </div>
+                            )}
 
                           {["amir", "luke", "hugo", "yuki"].includes(character) && ( // Use character state
                             <img
@@ -1416,7 +1413,7 @@ export function RunTracker() {
                             </div>
                             <div className="text-right">
                               <div className="text-2xl font-bold text-gray-300">
-                              {card.duplicationCost !== undefined ? card.duplicationCost : getCardPointValue(card)}
+                                {card.duplicationCost !== undefined ? card.duplicationCost : getCardPointValue(card)}
                               </div>
                             </div>
                           </div>
@@ -1426,7 +1423,7 @@ export function RunTracker() {
 
                       {selectedCard === card.id && !card.isRemoved && !card.isMutantSample && (
                         <div className="absolute inset-0 z-30 flex flex-col gap-1 rounded-lg bg-[#06070A]/80 p-2 backdrop-blur-sm ring-2 ring-purple-400/100">
-                          
+
                           <Button
                             size="sm"
                             variant="outline"

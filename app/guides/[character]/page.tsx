@@ -1,105 +1,121 @@
+// app/guides/[character]/page.tsx
 "use client";
 
-import { notFound } from "next/navigation";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
-import {
-  CharacterData,
-  Section,
-  GuideSections,
-} from "@/types/character-guides";
-import { BaseCard } from "@/containers/character-guides/base-cards/BaseCard";
-import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { notFound, useParams } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
+
+import type { CharacterData } from "@/types/character-guides";
+
 import { defaultSections } from "@/constants/character-guides";
-import { RecommendedSaveData } from "@/containers/character-guides/recommended-save-data";
+
+import { BaseCard } from "@/containers/character-guides/base-cards/BaseCard";
 import { EquipmentSection } from "@/containers/character-guides/equipments";
 import { MemoryFragmentsSection } from "@/containers/character-guides/memory-fragments";
 import { PartnersSection } from "@/containers/character-guides/partners";
+import { RecommendedSaveData } from "@/containers/character-guides/recommended-save-data";
 
+/* ---------- allowed characters list (inline for now) ---------- */
 const characters = [
-  "rin",
-  "meilin",
-  "yuki",
-  "sereniel",
-  "haru",
-  "owen",
-  "khalipe",
-  "magna",
-  "amir",
-  "maribell",
-  "veronica",
-  "hugo",
-  "selena",
-  "beryl",
-  "luke",
-  "renoa",
-  "lucas",
-  "kayron",
-  "tressa",
-  "chizuru",
-  "orlea",
-  "mika",
-  "nia",
-  "cassius",
-  "rei",
+  "rin", "meilin", "yuki", "sereniel", "haru",
+  "owen", "khalipe", "magna", "amir", "maribell",
+  "veronica", "hugo", "selena", "beryl", "luke",
+  "renoa", "lucas", "kayron", "tressa", "chizuru",
+  "orlea", "mika", "nia", "cassius", "rei",
 ];
 
-export default function CharacterGuidePage() {
-  const params = useParams();
-  const character = params.character as string;
-
-  const [characterData, setCharacterData] = useState<CharacterData | null>(
-    null
+/* ---------- small UI bits ---------- */
+function Loading({ name }: { name: string }) {
+  return (
+    <div className="flex justify-center items-center min-h-[50vh]">
+      <div className="animate-pulse text-gray-400">Loading {name} data...</div>
+    </div>
   );
-  const [loading, setLoading] = useState(true);
+}
+
+function ErrorMessage({ children }: { children: React.ReactNode }) {
+  return <div className="text-center py-12 text-gray-400">{children}</div>;
+}
+
+/* ---------- loader hook ---------- */
+function useCharacterLoader(slug: string | null) {
+  const [data, setData] = useState<CharacterData | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!characters.includes(character)) {
+    if (!slug) return;
+
+    if (!characters.includes(slug)) {
+      // Let Next handle the 404 route
       notFound();
+      return;
     }
 
-    // Dynamically import character data
-    const loadData = async () => {
+    let mounted = true;
+
+    const load = async () => {
+      setLoading(true);
+      setError(null);
+
       try {
-        const module = await import(`@/data/characters/${character}`);
-        const data = module[`${character}Data`] as CharacterData;
-        setCharacterData(data);
-      } catch (error) {
-        console.error(`Failed to load data for character: ${character}`, error);
+        const module = await import(`@/data/characters/${slug}`);
+
+        // Support a few export shapes
+        const maybeData =
+          module?.default ?? module?.[`${slug}Data`] ?? module?.[slug] ?? null;
+
+        if (!maybeData) throw new Error("No exported character data found");
+
+        if (mounted) setData(maybeData as CharacterData);
+      } catch (err) {
+        console.error(`Failed to load data for character: ${slug}`, err);
+        if (mounted) setError("Failed to load character data. Please try again later.");
       } finally {
-        setLoading(false);
+        if (mounted) setLoading(false);
       }
     };
 
-    loadData();
-  }, [character]);
+    load();
 
-  const characterName = character
+    return () => {
+      mounted = false;
+    };
+  }, [slug]);
+
+  return { data, loading, error };
+}
+
+/* ---------- helper ---------- */
+function formatCharacterName(slug: string) {
+  return slug
     .split("-")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
     .join(" ");
+}
+
+/* ---------- page component ---------- */
+export default function CharacterGuidePage() {
+  const params = useParams();
+  const character = (params?.character as string) ?? null;
+
+  const { data: characterData, loading, error } = useCharacterLoader(character);
+
+  const characterName = useMemo(
+    () => (character ? formatCharacterName(character) : "Character"),
+    [character]
+  );
+
+  if (loading) return <Loading name={characterName} />;
+  if (error) return <ErrorMessage>{error}</ErrorMessage>;
+  if (!characterData) return <ErrorMessage>Character not found.</ErrorMessage>;
 
   return (
-    <div className="min-h-screen bg-background">
-      <header className="border-b border-border bg-card backdrop-blur-sm">
-        <div className="container mx-auto px-4 py-4 sm:py-6">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div className="flex-1">
-              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-balance bg-gradient-to-r from-red-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                {characterName} Guide
-              </h1>
-            </div>
-            <Link
-              href="/guides"
-              className="flex items-center gap-2 px-4 py-2 rounded-lg border border-purple-500/20 bg-purple-500/10 text-purple-400 hover:bg-purple-500/20 hover:border-purple-500/40 transition-all duration-200 w-full sm:w-auto justify-center sm:justify-start"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span className="text-sm font-medium">Back to Characters</span>
-            </Link>
-          </div>
-        </div>
-      </header>
+    <div className="max-w-6xl mx-auto">
+      <div className="bg-card/80 backdrop-blur-sm border border-border/50 rounded-xl p-6">
+        <h1 className="text-3xl font-bold text-white mb-6 bg-gradient-to-r from-red-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+          {characterName} Guide
+        </h1>
+      </div>
 
       <main className="container mx-auto px-4 py-6 sm:py-8">
         <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
@@ -138,39 +154,40 @@ export default function CharacterGuidePage() {
               {/* Guide Content Sections */}
               <div className="p-4 sm:p-6 md:p-8 space-y-6 sm:space-y-8">
                 {/* Base Cards */}
-                <BaseCard uniqueCards={characterData?.uniqueCards || []} attribute={characterData?.attribute} />
+                <BaseCard
+                  uniqueCards={characterData.uniqueCards || []}
+                  attribute={characterData.attribute}
+                />
+
                 {/* Recommended Save Data */}
                 <RecommendedSaveData
-                  recommendedSaveData={characterData?.recommendedSaveData || []}
-                  uniqueCards={characterData?.uniqueCards || []}
-                  commonCards={characterData?.commonCards || []}
-                  attribute={characterData?.attribute}
+                  recommendedSaveData={characterData.recommendedSaveData || []}
+                  uniqueCards={characterData.uniqueCards || []}
+                  commonCards={characterData.commonCards || []}
+                  attribute={characterData.attribute}
                 />
+
                 {/* Equipments */}
-                {characterData?.gears && (
+                {characterData.gears && (
                   <EquipmentSection
                     gears={characterData.gears}
                     recommendedSources={characterData.recommendedSources}
                   />
                 )}
+
                 {/* Memory Fragments */}
-                {characterData?.memoryFragmentSets && (
+                {characterData.memoryFragmentSets && (
                   <MemoryFragmentsSection
                     bestInSlot={characterData.memoryFragmentSets?.bestInSlot}
                     alternative={characterData.memoryFragmentSets?.alternative}
-                    memoryFragmentMainStats={
-                      characterData.memoryFragmentMainStats
-                    }
-                    memoryFragmentSubstatsNote={
-                      characterData.memoryFragmentSubstatsNote
-                    }
-                    memoryFragmentSubstatsPriorities={
-                      characterData.memoryFragmentSubstatPriorities
-                    }
+                    memoryFragmentMainStats={characterData.memoryFragmentMainStats}
+                    memoryFragmentSubstatsNote={characterData.memoryFragmentSubstatsNote}
+                    memoryFragmentSubstatsPriorities={characterData.memoryFragmentSubstatPriorities}
                   />
                 )}
+
                 {/* Partners */}
-                {characterData?.partnersGuide && (
+                {characterData.partnersGuide && (
                   <PartnersSection partnersGuide={characterData.partnersGuide} />
                 )}
               </div>

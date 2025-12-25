@@ -1,3 +1,5 @@
+// types/memory-fragments.ts
+
 export type MemoryFragmentSet = {
   id: string;
   name: string;
@@ -5,19 +7,22 @@ export type MemoryFragmentSet = {
   effect: string;
 };
 
-export type recommendingFragmentSet = {
+export type RecommendingFragmentSet = {
   id: string;
   description?: string;
 };
 
 export enum MemoryFragmentMainStats {
   Any = "any",
-  CriticalChance = "critical_chance",
-  CriticalDamage = "critical_damage",
+
   Attack = "%attack",
   Defense = "%defense",
   Health = "%hp",
+
+  CriticalChance = "critical_chance",
+  CriticalDamage = "critical_damage",
   EgoRecovery = "ego_recovery",
+
   VoidDamage = "void_damage",
   PassionDamage = "passion_damage",
   OrderDamage = "order_damage",
@@ -26,15 +31,18 @@ export enum MemoryFragmentMainStats {
 }
 
 export enum MemoryFragmentSubstats {
-  CriticalChance = "critical_chance",
-  CriticalDamage = "critical_damage",
-  AttackFlat = "flat_attack",
-  DefenseFlat = "flat_defense",
-  HealthFlat = "flat_hp",
-  DamageOverTime = "damage_over_time",
-  EgoRecovery = "ego_recovery",
   Attack = "%attack",
   Defense = "%defense",
   Health = "%hp",
+
+  AttackFlat = "flat_attack",
+  DefenseFlat = "flat_defense",
+  HealthFlat = "flat_hp",
+
+  CriticalChance = "critical_chance",
+  CriticalDamage = "critical_damage",
+
+  EgoRecovery = "ego_recovery",
   ExtraDamage = "extra_damage",
+  DamageOverTime = "damage_over_time",
 }

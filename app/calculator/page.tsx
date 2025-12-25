@@ -1,4 +1,4 @@
-import { RunTracker } from "@/components/run-tracker"
+import { RunTracker } from "@/app/calculator/run-tracker"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Link from "next/link"
 import { Home } from "lucide-react"
