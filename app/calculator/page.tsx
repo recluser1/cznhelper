@@ -1,56 +1,13 @@
 import { RunTracker } from "@/app/calculator/run-tracker"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import Link from "next/link"
-import { Home } from "lucide-react"
 
 export default function CalculatorPage() {
+
   return (
     <div className="min-h-screen bg-background">
-      <header className="border-b border-border bg-card backdrop-blur-sm">
-        <div className="container mx-auto px-4 py-4 sm:py-6">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div className="flex-1">
-              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-balance bg-gradient-to-r from-red-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                CZN Save Data Helper
-              </h1>
-              <p className="mt-1 text-xs sm:text-sm text-muted-foreground">Track your progress through the ongoing nightmare</p>
-            </div>
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6 w-full sm:w-auto">
-              <div className="text-left sm:text-right">
-                <p className="text-xs text-muted-foreground">
-                  Made by <span className="text-purple-400 font-semibold">lilyium.box</span>
-                </p>
-                <p className="text-xs text-muted-foreground/70">Thanks to Sproot & Zyla for testing</p>
-              </div>
-              <Link
-                href="/"
-                className="flex items-center gap-2 px-4 py-2 rounded-lg border border-purple-400/30 bg-purple-400/10 hover:bg-purple-400/20 transition-colors w-full sm:w-auto justify-center sm:justify-start"
-              >
-                <Home className="w-4 h-4 text-purple-400" />
-                <span className="text-sm font-medium text-purple-400">Home</span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <main className="container mx-auto px-4 py-6 sm:py-8">
+      <main className="container mx-auto">
+        <h1 className="text-2xl font-bold">CZN Save Data Helper</h1>
         <Tabs defaultValue="tracker" className="space-y-4 sm:space-y-6">
-          <TabsList className="grid w-full max-w-md grid-cols-2 bg-card border border-border">
-            <TabsTrigger
-              value="tracker"
-              className="data-[state=active]:bg-purple-400/20 data-[state=active]:text-purple-400"
-            >
-              Run Tracker
-            </TabsTrigger>
-            <TabsTrigger
-              value="helper"
-              className="data-[state=active]:bg-purple-400/20 data-[state=active]:text-purple-400"
-            >
-              Helper
-            </TabsTrigger>
-          </TabsList>
-
           <TabsContent value="tracker" className="space-y-6">
             <RunTracker />
           </TabsContent>

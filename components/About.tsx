@@ -87,7 +87,7 @@ export function About() {
     };
 
     return (
-        <div className="container mx-auto px-4 py-16">
+        <div className="container mx-auto -mt-16">
             <div className="max-w-5xl mx-auto space-y-8">
                 <div>
                     <h1 className="text-white text-4xl font-bold">About CZN Helper</h1>
@@ -96,7 +96,7 @@ export function About() {
                     </p>
                 </div>
 
-                <section className="bg-[#1a1a24] border border-gray-800 rounded-lg p-8 space-y-8">
+                <section className="bg-transparent rounded-lg p-8 space-y-8">
                     <h2 className="text-white text-2xl font-bold">Team</h2>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-10">
@@ -119,7 +119,7 @@ export function About() {
                         ))}
                     </div>
 
-                    <div className="pt-6 border-t border-gray-800">
+                    <div className="pt-6 border-t border-blue-500/30">
                         <h3 className="text-white font-semibold mb-3">Special Thanks</h3>
                         <div className="space-y-2 text-sm text-gray-400">
                             <p>
@@ -159,8 +159,8 @@ export function About() {
                     </div>
                 </section>
 
-                <section className="bg-[#1a1a24] border border-gray-800 rounded-lg p-6 space-y-4">
-                    <h2 className="text-white pb-2 border-b border-gray-800">Project Overview</h2>
+                <section className="bg-[#0a0a0f] border border-blue-500/30 rounded-lg p-6 space-y-4">
+                    <h2 className="text-white pb-2 border-b border-blue-500/30">Project Overview</h2>
                     <p className="text-gray-400">
                         CZN Helper is an open-source fan guide website inspired by the Sanity;Gone project for Arknights.
                         Our goal is to provide comprehensive, accessible information about characters, cards, builds, and
@@ -173,8 +173,8 @@ export function About() {
                     </p>
                 </section>
 
-                <section className="bg-[#1a1a24] border border-gray-800 rounded-lg p-6 space-y-4">
-                    <h2 className="text-white pb-2 border-b border-gray-800">Contributing</h2>
+                <section className="bg-[#0a0a0f] border border-blue-500/30 rounded-lg p-6 space-y-4">
+                    <h2 className="text-white pb-2 border-b border-blue-500/30">Contributing</h2>
                     <p className="text-gray-400">
                         This is a community project and we welcome contributions!
                     </p>
@@ -201,8 +201,8 @@ export function About() {
                     </p>
                 </section>
 
-                <section className="bg-[#1a1a24] border border-gray-800 rounded-lg p-6 space-y-4">
-                    <h2 className="text-white pb-2 border-b border-gray-800">Technology Stack</h2>
+                <section className="bg-[#0a0a0f] border border-blue-500/30 rounded-lg p-6 space-y-4">
+                    <h2 className="text-white pb-2 border-b border-blue-500/30">Technology Stack</h2>
                     <ul className="space-y-2 text-gray-400 ml-6">
                         <li className="flex items-start gap-2">
                             <span className="text-blue-400 mt-1">•</span>
@@ -223,8 +223,8 @@ export function About() {
                     </ul>
                 </section>
 
-                <section className="bg-[#1a1a24] border border-gray-800 rounded-lg p-6 space-y-4">
-                    <h2 className="text-white pb-2 border-b border-gray-800">Disclaimer</h2>
+                <section className="bg-[#0a0a0f] border border-blue-500/30 rounded-lg p-6 space-y-4">
+                    <h2 className="text-white pb-2 border-b border-blue-500/30">Disclaimer</h2>
                     <p className="text-gray-400 text-sm">
                         CZN Helper is an unofficial, fan-made project and is not affiliated with, endorsed by,
                         or connected to the developers or publishers of Chaos Zero Nightmare.

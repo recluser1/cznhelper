@@ -14,7 +14,6 @@ import { MemoryFragmentsSection } from "@/containers/character-guides/memory-fra
 import { PartnersSection } from "@/containers/character-guides/partners";
 import { RecommendedSaveData } from "@/containers/character-guides/recommended-save-data";
 
-/* ---------- allowed characters list (inline for now) ---------- */
 const characters = [
   "rin", "meilin", "yuki", "sereniel", "haru",
   "owen", "khalipe", "magna", "amir", "maribell",
@@ -23,7 +22,6 @@ const characters = [
   "orlea", "mika", "nia", "cassius", "rei",
 ];
 
-/* ---------- small UI bits ---------- */
 function Loading({ name }: { name: string }) {
   return (
     <div className="flex justify-center items-center min-h-[50vh]">
@@ -36,7 +34,6 @@ function ErrorMessage({ children }: { children: React.ReactNode }) {
   return <div className="text-center py-12 text-gray-400">{children}</div>;
 }
 
-/* ---------- loader hook ---------- */
 function useCharacterLoader(slug: string | null) {
   const [data, setData] = useState<CharacterData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -46,7 +43,6 @@ function useCharacterLoader(slug: string | null) {
     if (!slug) return;
 
     if (!characters.includes(slug)) {
-      // Let Next handle the 404 route
       notFound();
       return;
     }
@@ -60,7 +56,6 @@ function useCharacterLoader(slug: string | null) {
       try {
         const module = await import(`@/data/characters/${slug}`);
 
-        // Support a few export shapes
         const maybeData =
           module?.default ?? module?.[`${slug}Data`] ?? module?.[slug] ?? null;
 
@@ -85,7 +80,6 @@ function useCharacterLoader(slug: string | null) {
   return { data, loading, error };
 }
 
-/* ---------- helper ---------- */
 function formatCharacterName(slug: string) {
   return slug
     .split("-")
@@ -93,7 +87,6 @@ function formatCharacterName(slug: string) {
     .join(" ");
 }
 
-/* ---------- page component ---------- */
 export default function CharacterGuidePage() {
   const params = useParams();
   const character = (params?.character as string) ?? null;
@@ -109,16 +102,19 @@ export default function CharacterGuidePage() {
   if (error) return <ErrorMessage>{error}</ErrorMessage>;
   if (!characterData) return <ErrorMessage>Character not found.</ErrorMessage>;
 
-  return (
-    <div className="max-w-6xl mx-auto">
-      <div className="bg-card/80 backdrop-blur-sm border border-border/50 rounded-xl p-6">
-        <h1 className="text-3xl font-bold text-white mb-6 bg-gradient-to-r from-red-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
-          {characterName} Guide
-        </h1>
-      </div>
+return (
+  <div className="mx-auto"> 
+    
+    <div className="bg-transparent rounded-xl p-6">
+      <h1 className="text-3xl font-bold text-white mb-6 bg-gradient-to-r from-red-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+        {characterName} Guide
+      </h1>
+    </div>
 
-      <main className="container mx-auto px-4 py-6 sm:py-8">
+    <main className="px-4 py-6 sm:py-8"> 
+        
         <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
+
           {/* Sticky Table of Contents */}
           <aside className="hidden lg:block w-64 shrink-0">
             <nav className="sticky top-4 rounded-lg border border-border bg-card p-4">
@@ -142,7 +138,6 @@ export default function CharacterGuidePage() {
           {/* Main Content */}
           <div className="flex-1">
             <div className="rounded-lg border border-border bg-card overflow-hidden">
-              {/* Full Character Artwork */}
               <div className="relative w-full h-[250px] sm:h-[350px] md:h-[400px] bg-gradient-to-br from-purple-900/20 to-black/40 flex items-center justify-center">
                 <img
                   src={`/images/characters/${character}.webp`}

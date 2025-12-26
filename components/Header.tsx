@@ -36,19 +36,12 @@ export function Header() {
             className="flex items-center gap-3 md:gap-4 transition-all duration-300 hover:opacity-90 active:opacity-80"
             aria-label="Go to Home"
           >
-            <div className="relative">
-              <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-blue-500/20 to-purple-600/20 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-lg shadow-purple-500/20 overflow-hidden">
-                <img
-                  src="/images/unnamed.gif"
-                  alt="CZN Logo"
-                  className="w-28 h-28 object-cover"
-                />
-              </div>
-              <div className="absolute inset-0 rounded-full blur-xl bg-gradient-to-r from-cyan-400/30 to-purple-400/30 -z-10" />
+            <div className="relative flex items-center justify-center py-2">
+              {/* Plain text: No gradient, no glow, no extra shadow */}
+              <h1 className="relative z-10 text-2xl md:text-3xl font-black tracking-widest text-white">
+                CZN HELPER
+              </h1>
             </div>
-            <h1 className="hidden sm:block text-2xl md:text-3xl font-black text-white tracking-wider drop-shadow-lg">
-              CZN Helper
-            </h1>
           </Link>
 
           <nav className="flex items-center gap-4 md:gap-6 lg:gap-8 text-sm">

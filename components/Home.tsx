@@ -9,7 +9,7 @@ export function HomePage() {
     <>
       <Banner
         title="CZN HELPER"
-        subtitle="Choose Your Tool"
+        subtitle="CZN Helper"
       />
 
       {/* Cards section - gentle overlap */}
