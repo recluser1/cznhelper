@@ -106,7 +106,7 @@ return (
   <div className="mx-auto"> 
     
     <div className="bg-transparent rounded-xl p-6">
-      <h1 className="text-3xl font-bold text-white mb-6 bg-gradient-to-r from-red-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+      <h1 className="text-3xl font-bold text-white -mb-24 bg-gradient-to-r from-red-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
         {characterName} Guide
       </h1>
     </div>
@@ -117,7 +117,7 @@ return (
 
           {/* Sticky Table of Contents */}
           <aside className="hidden lg:block w-64 shrink-0">
-            <nav className="sticky top-4 rounded-lg border border-border bg-card p-4">
+            <nav className="sticky top-28 rounded-lg border border-border bg-card p-4">
               <h2 className="text-lg font-semibold mb-4">Table of Contents</h2>
               <ul className="space-y-1.5">
                 {defaultSections.map((section) => (

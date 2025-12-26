@@ -1,5 +1,4 @@
 // app/calculator/layout.tsx
-import { Banner } from "@/components/Banner"
 import ScrollToTop from "@/components/ScrollToTop"
 
 import type { Metadata } from 'next'
@@ -18,7 +17,7 @@ export default function CalculatorLayout({
     <div className="min-h-screen flex flex-col">
       <ScrollToTop />
       <main className="flex-1">
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 py-8 -mt-12">
           {children}
         </div>
       </main>
