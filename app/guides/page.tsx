@@ -4,105 +4,81 @@ import { useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { Search, X, AlertTriangle } from "lucide-react"
+import { Search, X, AlertTriangle, CheckSquare, Square } from "lucide-react"
 
 const jobTypes = [
-  {
-    id: "striker",
-    name: "Striker",
-    icon: "/images/icon-job-striker.webp",
-  },
-  {
-    id: "vanguard",
-    name: "Vanguard",
-    icon: "/images/icon-job-vanguard.webp",
-  },
-  {
-    id: "ranger",
-    name: "Ranger",
-    icon: "/images/icon-job-ranger.webp",
-  },
-  {
-    id: "hunter",
-    name: "Hunter",
-    icon: "/images/icon-job-hunter.webp",
-  },
-  {
-    id: "psionic",
-    name: "Psionic",
-    icon: "/images/icon-job-psionic.webp",
-  },
-  {
-    id: "controller",
-    name: "Controller",
-    icon: "/images/icon-job-controller.webp",
-  },
-]
+  { id: "controller", name: "Controller", icon: "/images/icon-job-controller.webp" },
+  { id: "hunter", name: "Hunter", icon: "/images/icon-job-hunter.webp" },
+  { id: "psionic", name: "Psionic", icon: "/images/icon-job-psionic.webp" },
+  { id: "ranger", name: "Ranger", icon: "/images/icon-job-ranger.webp" },
+  { id: "striker", name: "Striker", icon: "/images/icon-job-striker.webp" },
+  { id: "vanguard", name: "Vanguard", icon: "/images/icon-job-vanguard.webp" },
+];
 
 const elementTypes = [
   {
     id: "void",
     name: "Void",
     icon: "/images/icon-ego-void.webp",
-    color: "bg-purple-500/20 border-purple-500/50 text-purple-400 hover:bg-purple-500/30",
-    iconBg: "bg-black/70",
+    color: "bg-purple-500/20 border-purple-500/60 text-purple-400",
+    glow: "shadow-purple-500/30",
   },
   {
     id: "instinct",
     name: "Instinct",
     icon: "/images/icon-ego-instinct.webp",
-    color: "bg-orange-500/20 border-orange-500/50 text-orange-400 hover:bg-orange-500/30",
-    iconBg: "bg-black/70",
+    color: "bg-orange-500/20 border-orange-500/60 text-orange-400",
+    glow: "shadow-orange-500/30",
   },
   {
     id: "passion",
     name: "Passion",
     icon: "/images/icon-ego-passion.webp",
-    color: "bg-red-500/20 border-red-500/50 text-red-400 hover:bg-red-500/30",
-    iconBg: "bg-black/70",
+    color: "bg-red-500/20 border-red-500/60 text-red-400",
+    glow: "shadow-red-500/30",
   },
   {
     id: "justice",
     name: "Justice",
     icon: "/images/icon-ego-justice.webp",
-    color: "bg-blue-500/20 border-blue-500/50 text-blue-400 hover:bg-blue-500/30",
-    iconBg: "bg-black/70",
+    color: "bg-blue-500/20 border-blue-500/60 text-blue-400",
+    glow: "shadow-blue-500/30",
   },
   {
     id: "order",
     name: "Order",
     icon: "/images/icon-ego-order.webp",
-    color: "bg-green-500/20 border-green-500/50 text-green-400 hover:bg-green-500/30",
-    iconBg: "bg-black/70",
+    color: "bg-green-500/20 border-green-500/60 text-green-400",
+    glow: "shadow-green-500/30",
   },
 ]
 
 const characters = [
-  { id: "amir", name: "Amir", job: "vanguard", element: "order", rarity: 4 },
-  { id: "beryl", name: "Beryl", job: "ranger", element: "justice", rarity: 4 },
-  { id: "cassius", name: "Cassius", job: "controller", element: "instinct", rarity: 4 },
-  { id: "chizuru", name: "Chizuru", job: "psionic", element: "void", rarity: 5 },
-  { id: "haru", name: "Haru", job: "striker", element: "justice", rarity: 5 },
-  { id: "hugo", name: "Hugo", job: "ranger", element: "order", rarity: 5 },
-  { id: "kayron", name: "Kayron", job: "psionic", element: "void", rarity: 5 },
-  { id: "khalipe", name: "Khalipe", job: "vanguard", element: "instinct", rarity: 5 },
-  { id: "lucas", name: "Lucas", job: "hunter", element: "passion", rarity: 4 },
-  { id: "luke", name: "Luke", job: "hunter", element: "order", rarity: 5 },
-  { id: "magna", name: "Magna", job: "vanguard", element: "justice", rarity: 5 },
-  { id: "maribell", name: "Maribell", job: "vanguard", element: "passion", rarity: 4 },
-  { id: "meilin", name: "Mei Lin", job: "striker", element: "passion", rarity: 5 },
-  { id: "mika", name: "Mika", job: "controller", element: "justice", rarity: 4 },
-  { id: "nia", name: "Nia", job: "controller", element: "instinct", rarity: 4 },
-  { id: "orlea", name: "Orlea", job: "controller", element: "instinct", rarity: 5 },
-  { id: "owen", name: "Owen", job: "striker", element: "passion", rarity: 4 },
-  { id: "rei", name: "Rei", job: "controller", element: "void", rarity: 4 },
-  { id: "renoa", name: "Renoa", job: "hunter", element: "void", rarity: 5 },
-  { id: "rin", name: "Rin", job: "striker", element: "void", rarity: 5 },
-  { id: "selena", name: "Selena", job: "ranger", element: "passion", rarity: 4 },
-  { id: "sereniel", name: "Sereniel", job: "hunter", element: "instinct", rarity: 5 },
-  { id: "tressa", name: "Tressa", job: "psionic", element: "void", rarity: 4 },
-  { id: "veronica", name: "Veronica", job: "ranger", element: "passion", rarity: 5 },
-  { id: "yuki", name: "Yuki", job: "striker", element: "order", rarity: 5 },
+  { id: "amir", name: "Amir", job: "vanguard", element: "order", rarity: 4, hasGuide: false },
+  { id: "beryl", name: "Beryl", job: "ranger", element: "justice", rarity: 4, hasGuide: false },
+  { id: "cassius", name: "Cassius", job: "controller", element: "instinct", rarity: 4, hasGuide: false },
+  { id: "chizuru", name: "Chizuru", job: "psionic", element: "void", rarity: 5, hasGuide: true },
+  { id: "haru", name: "Haru", job: "striker", element: "justice", rarity: 5, hasGuide: false },
+  { id: "hugo", name: "Hugo", job: "ranger", element: "order", rarity: 5, hasGuide: false },
+  { id: "kayron", name: "Kayron", job: "psionic", element: "void", rarity: 5, hasGuide: false },
+  { id: "khalipe", name: "Khalipe", job: "vanguard", element: "instinct", rarity: 5, hasGuide: false },
+  { id: "lucas", name: "Lucas", job: "hunter", element: "passion", rarity: 4, hasGuide: false },
+  { id: "luke", name: "Luke", job: "hunter", element: "order", rarity: 5, hasGuide: false },
+  { id: "magna", name: "Magna", job: "vanguard", element: "justice", rarity: 5, hasGuide: false },
+  { id: "maribell", name: "Maribell", job: "vanguard", element: "passion", rarity: 4, hasGuide: false },
+  { id: "meilin", name: "Mei Lin", job: "striker", element: "passion", rarity: 5, hasGuide: false },
+  { id: "mika", name: "Mika", job: "controller", element: "justice", rarity: 4, hasGuide: false },
+  { id: "nia", name: "Nia", job: "controller", element: "instinct", rarity: 4, hasGuide: false },
+  { id: "orlea", name: "Orlea", job: "controller", element: "instinct", rarity: 5, hasGuide: false },
+  { id: "owen", name: "Owen", job: "striker", element: "passion", rarity: 4, hasGuide: false },
+  { id: "rei", name: "Rei", job: "controller", element: "void", rarity: 4, hasGuide: true },
+  { id: "renoa", name: "Renoa", job: "hunter", element: "void", rarity: 5, hasGuide: false },
+  { id: "rin", name: "Rin", job: "striker", element: "void", rarity: 5, hasGuide: false },
+  { id: "selena", name: "Selena", job: "ranger", element: "passion", rarity: 4, hasGuide: false },
+  { id: "sereniel", name: "Sereniel", job: "hunter", element: "instinct", rarity: 5, hasGuide: true },
+  { id: "tressa", name: "Tressa", job: "psionic", element: "void", rarity: 4, hasGuide: false },
+  { id: "veronica", name: "Veronica", job: "ranger", element: "passion", rarity: 5, hasGuide: true },
+  { id: "yuki", name: "Yuki", job: "striker", element: "order", rarity: 5, hasGuide: false },
 ]
 
 export default function CharacterGuidesPage() {
@@ -110,25 +86,20 @@ export default function CharacterGuidesPage() {
   const [selectedJob, setSelectedJob] = useState<string | null>(null)
   const [selectedElement, setSelectedElement] = useState<string | null>(null)
   const [selectedRarity, setSelectedRarity] = useState<number | null>(null)
+  const [onlyWithGuide, setOnlyWithGuide] = useState(true)
+
 
   const filteredCharacters = characters.filter((char) => {
     const matchesSearch = char.name.toLowerCase().includes(searchQuery.toLowerCase())
     const matchesJob = !selectedJob || char.job === selectedJob
     const matchesElement = !selectedElement || char.element === selectedElement
     const matchesRarity = !selectedRarity || char.rarity === selectedRarity
-    return matchesSearch && matchesJob && matchesElement && matchesRarity
+    const matchesGuide = !onlyWithGuide || char.hasGuide
+
+
+    return matchesSearch && matchesJob && matchesElement && matchesRarity && matchesGuide
   })
 
-  console.log("[v0] Total characters:", characters.length)
-  console.log("[v0] Filtered characters:", filteredCharacters.length)
-  console.log(
-    "[v0] Tressa in filtered?",
-    filteredCharacters.find((c) => c.id === "tressa"),
-  )
-  console.log(
-    "[v0] Yuki in filtered?",
-    filteredCharacters.find((c) => c.id === "yuki"),
-  )
 
   const handleJobFilter = (jobId: string) => {
     setSelectedJob(selectedJob === jobId ? null : jobId)
@@ -147,188 +118,315 @@ export default function CharacterGuidesPage() {
     setSelectedJob(null)
     setSelectedElement(null)
     setSelectedRarity(null)
+    setOnlyWithGuide(false)
   }
+  const hasActiveFilters =
+    searchQuery !== "" ||
+    selectedJob !== null ||
+    selectedElement !== null ||
+    selectedRarity !== null
+
+
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
+      <main className="container mx-auto py-8 sm:py-12">
+        <div className="max-w-7xl mx-auto space-y-6">
 
-      <main className="container mx-auto px-4 py-6 sm:py-8">
+          {/* Filters Section */}
+          <div className="space-y-4">
 
-        <div className="space-y-4 sm:space-y-6">
-
-          <div className="rounded-lg border-2 border-yellow-500/50 bg-yellow-500/10 p-3 sm:p-4">
-            <div className="flex items-start gap-2 sm:gap-3">
-              <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 mt-0.5 flex-shrink-0" />
-              <div>
-                <h3 className="text-sm sm:text-base font-semibold text-yellow-400 mb-1">Work in Progress</h3>
-                <p className="text-xs sm:text-sm text-yellow-400/90">
-                  Character guides are currently being developed. Some information may be incomplete or subject to
-                  change.
-                </p>
+            {/* Search */}
+            <div className="flex flex-col sm:flex-row gap-4 items-center justify-start">
+              <div className="relative w-full sm:max-w-md py-2">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                <Input
+                  type="text"
+                  placeholder="Search characters..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10 bg-card/80 border-border/50 focus:border-purple-500/50 transition-all"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => setSearchQuery("")}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
+                )}
               </div>
-            </div>
-          </div>
 
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-            <div className="relative flex-1 w-full sm:max-w-md">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="text"
-                placeholder="Search characters..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-9 bg-card border-border"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery("")}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+              {/* Right */}
+              <div className="flex items-center gap-3 ml-auto">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => handleReset()}
+                  className={`
+                    gap-2 transition-all
+                    ${hasActiveFilters
+                      ? "bg-purple-500/20 border-purple-500/60 text-purple-400 shadow-md shadow-purple-500/20"
+                      : "bg-card/80 border-border/50 text-muted-foreground hover:bg-card"
+                    }`}
                 >
                   <X className="h-4 w-4" />
-                </button>
-              )}
+                  Clear
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setOnlyWithGuide(v => !v)}
+                  className={`
+                    gap-2 transition-all
+                    ${onlyWithGuide
+                      ? "bg-purple-500/20 border-purple-500/60 text-purple-400 shadow-md shadow-purple-500/20"
+                      : "bg-card/80 border-border/50 text-muted-foreground hover:bg-card"
+                    }`}
+                >
+                  {onlyWithGuide ? (
+                    <CheckSquare className="h-4 w-4" />
+                  ) : (
+                    <Square className="h-4 w-4" />
+                  )}
+                  Guide Available
+                </Button>
+              </div>
+
             </div>
-            <Button
-              variant="outline"
-              onClick={handleReset}
-              className="gap-2 text-red-400 hover:text-red-300 border-red-400/50 hover:bg-red-400/10 bg-transparent"
-            >
-              <X className="h-4 w-4" />
-              Reset
-            </Button>
+
+            {/* Main Filters */}
+            <div className="flex flex-col gap-5">
+
+              {/* Rarity Filter */}
+              <div className="flex items-center gap-3">
+                {[5, 4].map((rarity) => {
+                  const isFiveStar = rarity === 5
+                  const isActive = selectedRarity === rarity
+
+                  const activeClasses = isFiveStar
+                    ? "bg-purple-500/20 border-purple-500/60 text-purple-400 shadow-md shadow-purple-500/20"
+                    : "bg-orange-500/20 border-orange-500/60 text-orange-400 shadow-md shadow-orange-500/20"
+
+                  return (
+                    <Button
+                      key={rarity}
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleRarityFilter(rarity)}
+                      className={`
+                      group relative px-6 py-2.5 rounded-full transition-all duration-200
+                      ${isActive
+                          ? `${activeClasses} scale-105`
+                          : "bg-card/80 backdrop-blur-sm border-border/50 hover:bg-card hover:border-current/40 hover:translate-y-[-2px]"
+                        }
+                      `}
+                    >
+                      {/* Number + Star */}
+                      <span className="flex items-center gap-1.5 font-medium">
+                        {/* Number */}
+                        <span className={`
+                         text-sm transition-colors duration-200
+                         ${isActive ? (isFiveStar ? "text-purple-300" : "text-orange-300") : "text-white"}
+                         group-hover:text-white
+                        `}>
+                          {rarity}
+                        </span>
+                        {/* Star */}
+                        <span className={`
+                         text-sm transition-colors duration-200
+                         ${isActive ? (isFiveStar ? "text-purple-300" : "text-orange-300") : "text-white"}
+                         group-hover:text-white
+                        `}>
+                          ★
+                        </span>
+                      </span>
+                    </Button>
+                  )
+                })}
+              </div>
+
+              {/* Element Filter */}
+              <div className="flex items-center gap-3">
+                <div className="flex flex-wrap gap-2">
+                  {elementTypes.map((element) => (
+                    <Button
+                      key={element.id}
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleElementFilter(element.id)}
+                      className={`
+                        gap-2 px-4 py-2 rounded-full transition-all duration-200
+                        ${selectedElement === element.id
+                          ? `
+                        ${element.color}
+                        shadow-md ${element.glow}
+                        scale-105
+                      `
+                          : `
+                        bg-card/80 backdrop-blur-sm border-border/50
+                        hover:translate-y-[-2px]
+                        hover:text-white
+                        hover:shadow-md hover:${element.glow}
+                      `}`}>
+                      <img src={element.icon || "/placeholder.svg"} alt={element.name} width={20} height={20} className="rounded-sm" />
+                      <span className="text-sm font-medium">{element.name}</span>
+                    </Button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Job Filter */}
+              <div className="flex items-center gap-3">
+                <div className="flex flex-wrap gap-2">
+                  {jobTypes.map((job) => (
+                    <Button
+                      key={job.id}
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleJobFilter(job.id)}
+                      className={`
+                        gap-2 px-4 py-2 rounded-full transition-all duration-200 ${selectedJob === job.id
+                          ? "bg-purple-500/20 border-purple-500/60 text-purple-400 shadow-md shadow-purple-500/20 scale-105"
+                          : "bg-card/80 backdrop-blur-sm border-border/50 hover:border-purple-500/40 hover:bg-purple-500/5 hover:translate-y-[-2px]"
+                        }`}>
+                      <img src={job.icon || "/placeholder.svg"} alt={job.name} width={20} height={20} className="rounded-sm" />
+                      <span className="text-sm font-medium">{job.name}</span>
+                    </Button>
+                  ))}
+                </div>
+              </div>
+
+            </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <Button
-              variant={selectedRarity === 5 ? "default" : "outline"}
-              size="sm"
-              onClick={() => handleRarityFilter(5)}
-              className={`gap-0.5 transition-all ${selectedRarity === 5
-                ? "bg-orange-500/20 text-orange-400 border-orange-400/50 hover:bg-orange-500/30"
-                : "bg-card hover:bg-card/80"
-                }`}
-            >
-              {Array.from({ length: 5 }).map((_, i) => (
-                <span key={i} className="text-orange-400">
-                  ★
-                </span>
-              ))}
-            </Button>
-            <Button
-              variant={selectedRarity === 4 ? "default" : "outline"}
-              size="sm"
-              onClick={() => handleRarityFilter(4)}
-              className={`gap-0.5 transition-all ${selectedRarity === 4
-                ? "bg-orange-500/20 text-orange-400 border-orange-400/50 hover:bg-orange-500/30"
-                : "bg-card hover:bg-card/80"
-                }`}
-            >
-              {Array.from({ length: 4 }).map((_, i) => (
-                <span key={i} className="text-orange-400">
-                  ★
-                </span>
-              ))}
-            </Button>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-2">
-            {elementTypes.map((element) => (
-              <Button
-                key={element.id}
-                variant={selectedElement === element.id ? "default" : "outline"}
-                size="sm"
-                onClick={() => handleElementFilter(element.id)}
-                className={`gap-2 transition-all ${selectedElement === element.id ? element.color : "bg-card hover:bg-card/80"
-                  }`}
-              >
-                <img src={element.icon || "/placeholder.svg"} alt={element.name} width={20} height={20} />
-                {element.name}
-              </Button>
-            ))}
-          </div>
-
-          <div className="flex flex-wrap items-center gap-2">
-            {jobTypes.map((job) => (
-              <Button
-                key={job.id}
-                variant={selectedJob === job.id ? "default" : "outline"}
-                size="sm"
-                onClick={() => handleJobFilter(job.id)}
-                className={`gap-2 ${selectedJob === job.id
-                  ? "bg-purple-400/20 text-purple-400 border-purple-400/50 hover:bg-purple-400/30"
-                  : "bg-card hover:bg-card/80"
-                  }`}
-              >
-                <img src={job.icon || "/placeholder.svg"} alt={job.name} width={20} height={20} />
-                {job.name}
-              </Button>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
+          {/* Character Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-5">
             {filteredCharacters.map((character) => {
-              const job = jobTypes.find((j) => j.id === character.job)
-              const element = elementTypes.find((e) => e.id === character.element)
-
-              const imagePath = `/images/characters/${character.id}half.webp`
-              console.log(`[v0] Rendering ${character.name} with image:`, imagePath)
-
+              const job = jobTypes.find((j) => j.id === character.job);
+              const element = elementTypes.find((e) => e.id === character.element);
+              const imagePath = `/images/characters/${character.id}half.webp`;
+              const isDisabled = !character.hasGuide && !onlyWithGuide
               return (
                 <Link
                   key={character.id}
-                  href={`/guides/${character.id}`}
-                  className="group relative aspect-[3/4] rounded-lg overflow-hidden border-2 border-border bg-card hover:border-purple-400 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-400/20"
-                >
-                  <div className="absolute inset-0">
+                  href={character.hasGuide ? `/guides/${character.id}` : "#"}
+                  className={`
+                    group block rounded-xl overflow-hidden transition-all duration-300
+                    ${isDisabled
+                      ? "opacity-40 grayscale cursor-not-allowed pointer-events-none"
+                      : "bg-card/80 backdrop-blur-sm border border-border/50 hover:border-purple-500/60 hover:shadow-lg hover:shadow-purple-500/10 hover:-translate-y-1"
+                    }`}>
+                  <div className="relative aspect-[3/4]">
                     <img
                       src={imagePath || "/placeholder.svg"}
                       alt={character.name}
                       className="object-cover w-full h-full"
-                      onError={(e) => {
-                        console.error(`[v0] Failed to load image for ${character.name}:`, imagePath)
-                      }}
                     />
-                  </div>
+                    {isDisabled && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+                        <span className="text-xs font-semibold tracking-wide text-white/80">
+                          No Guide
+                        </span>
+                      </div>
+                    )}
 
-                  <div className="absolute top-1.5 sm:top-2 left-1.5 sm:left-2 flex flex-col gap-0.5 sm:gap-1">
-                    <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-md bg-black/70 backdrop-blur-sm border border-white/20 flex items-center justify-center p-1 sm:p-1.5">
-                      {job && <img src={job.icon || "/placeholder.svg"} alt={job.name} width={20} height={20} className="sm:w-6 sm:h-6" />}
-                    </div>
-                    <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-md bg-black/70 backdrop-blur-sm border border-white/20 flex items-center justify-center p-1 sm:p-1.5">
+                    {/* Icons */}
+                    <div className="absolute top-2 left-2 flex flex-col gap-2">
+                      {job && (
+                        <div className="w-8 h-8 rounded-lg bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center p-1.5">
+                          <img src={job.icon} alt={job.name} className="w-full h-full" />
+                        </div>
+                      )}
                       {element && (
-                        <img src={element.icon || "/placeholder.svg"} alt={element.name} width={20} height={20} className="sm:w-6 sm:h-6" />
+                        <div className="w-8 h-8 rounded-lg bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center p-1.5">
+                          <img src={element.icon} alt={element.name} className="w-full h-full" />
+                        </div>
                       )}
                     </div>
-                  </div>
 
-                  <div className="absolute top-1.5 sm:top-2 right-1.5 sm:right-2 flex gap-0.5">
-                    {Array.from({ length: character.rarity }).map((_, i) => (
-                      <div key={i} className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-orange-400 text-xs sm:text-sm">
-                        ★
+                    {/* Bottom Section */}
+                    <div className="absolute inset-x-0 bottom-0 pointer-events-none">
+
+                      {/* Readability Gradient */}
+                      <div className="
+                        absolute inset-x-0 bottom-0
+                        pointer-events-none
+                        transition-all duration-100 ease-out
+                        bg-gradient-to-t from-black/80 via-black/40 to-transparent
+                        h-32 group-hover:h-64
+                      "/>
+
+                      {/* Text block */}
+                      <div className="
+                        absolute inset-x-0 bottom-0 p-4
+                        transition-all duration-50 ease-out
+                        group-hover:bottom-4
+                      ">
+
+                        {/* Name */}
+                        <h3 className="font-semibold text-white text-balance">
+                          {character.name}
+                        </h3>
+
+                        {/* Job + Rarity */}
+                        <div className="mt-1 flex justify-between items-center">
+                          <span className={`text-xs font-bold drop-shadow-2xl ${character.rarity === 5 ? "text-purple-300" : "text-orange-300"}`}>
+                            {character.job.charAt(0).toUpperCase() + character.job.slice(1)}
+                          </span>
+                          <span className={`text-xs font-bold drop-shadow-2xl ${character.rarity === 5 ? "text-purple-300" : "text-orange-300"}`}>
+                            {character.rarity}
+                            <span className="ml-1 align-middle">★</span>
+                          </span>
+                        </div>
                       </div>
-                    ))}
-                  </div>
 
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/60 to-transparent p-2 sm:p-3 pt-6 sm:pt-8">
-                    <h3 className="text-sm sm:text-base font-semibold text-white text-center text-balance">{character.name}</h3>
-                  </div>
+                      {/* Gradient Line */}
+                      <div
+                        className={`
+                        absolute inset-x-0 bottom-0 transition-all duration-50 ease-out
+                         ${character.rarity === 5
+                            ? "bg-gradient-to-r from-purple-300 via-purple-400 to-purple-500"
+                            : "bg-gradient-to-r from-orange-300 via-orange-400 to-orange-500"
+                          }
+                        h-1 group-hover:h-5
+                        `} />
 
-                  <div className="absolute inset-0 bg-purple-400/0 group-hover:bg-purple-400/10 transition-colors duration-300" />
+                      <div className="absolute inset-x-0 bottom-0 flex items-center justify-center h-5 opacity-0 group-hover:opacity-100 transition-opacity duration-50">
+                        <span className="text-black font-sm text-base">
+                          Read Guide
+                        </span>
+                      </div>
+                    </div>
+                    {/* Shine Effect */}
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-700">
+                      <div className="
+                      absolute inset-0 bg-gradient-to-t from-transparent via-white/10 to-transparent translate-y-full 
+                      group-hover:translate-y-0 transition-transform duration-1000" />
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/8 to-transparent -translate-x-full 
+                      group-hover:translate-x-full transition-transform duration-1200 delay-75" />
+                    </div>
+                  </div>
                 </Link>
-              )
+              );
             })}
           </div>
 
+          {/* Empty State */}
           {filteredCharacters.length === 0 && (
-            <div className="text-center py-12">
-              <p className="text-muted-foreground text-lg">No characters found</p>
-              <Button variant="ghost" onClick={handleReset} className="mt-4 text-purple-400 hover:text-purple-300">
-                Clear filters
+            <div className="text-center py-16">
+              <p className="text-xl text-muted-foreground mb-6">No characters found matching your filters</p>
+              <Button
+                variant="outline"
+                onClick={handleReset}
+                className="border-purple-500/50 text-purple-400 hover:bg-purple-500/10"
+              >
+                Clear All Filters
               </Button>
             </div>
           )}
         </div>
       </main>
     </div>
-  )
+  );
 }

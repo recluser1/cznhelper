@@ -1,3 +1,5 @@
+// components/Home.tsx
+
 import Link from "next/link";
 import { BookOpen, Calculator, AlertTriangle } from "lucide-react";
 import { Banner } from "@/components/Banner";

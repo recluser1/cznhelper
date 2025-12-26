@@ -23,7 +23,7 @@ export function Banner({
                 }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
-            <div className="relative h-full flex flex-col items-center justify-center px-6 text-center">
+            <div className="relative h-full flex flex-col justify-center items-center px-6">
                 {/* <h1 className="text-5xl md:text-7xl lg:text-9xl font-black text-white tracking-wider drop-shadow-2xl mb-6">
           {title}
         </h1> */}
@@ -40,6 +40,7 @@ export function Banner({
                     </div>
                 )}
             </div>
+            <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-background" />
         </section>
     );
 }
