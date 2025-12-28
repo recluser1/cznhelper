@@ -342,6 +342,18 @@ const partnersGuide: PartnersGuide[] = [
 
 export const serenielData: CharacterData = {
   attribute: Attributes.Instinct,
+  job: "Hunter",
+  role: "Main DPS",
+  // bannerUrl: "https://blog.emptyblue.it/uploads/3572fe7b-b2fd-4887-ab3f-59bf74f9f420_sereniel_past.webp",
+  // avatarUrl: "/images/characters/sereniel/avatar.webp",
+
+  overview: `
+TBA
+  `.trim(),
+  strengths: ["TBA"],
+
+  weaknesses: ["TBA"],
+
   commonCards: commonCards,
   uniqueCards: uniqueCards,
   recommendedSaveData: recommendedSaveData,

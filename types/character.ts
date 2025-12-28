@@ -3,12 +3,12 @@
 import { Attributes } from "./card";
 
 export enum CharacterJob {
-  Striker = "striker",
-  Vanguard = "vanguard",
-  Hunter = "hunter",
-  Ranger = "ranger",
-  Psionic = "psionic",
-  Controller = "controller",
+  Striker = "Striker",
+  Vanguard = "Vanguard",
+  Hunter = "Hunter",
+  Ranger = "Ranger",
+  Psionic = "Psionic",
+  Controller = "Controller",
 }
 
 export interface Character {

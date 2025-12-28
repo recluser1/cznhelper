@@ -1,6 +1,6 @@
+// common/CardRender.tsx
 import { Attributes } from "@/types/card";
 import { Card, CardRarities } from "@/types/character-guides";
-import { useMemo } from "react";
 
 type CardProps = {
   card: Card;
@@ -9,7 +9,9 @@ type CardProps = {
   attribute?: Attributes;
   isEpiphany?: "spark" | "nospark";
   onClick?: (id: string) => void;
+  size?: "large" | "small";
 };
+
 export const CardRender = (props: CardProps) => {
   const {
     card,
@@ -18,8 +20,26 @@ export const CardRender = (props: CardProps) => {
     onClick,
     isEpiphany,
     attribute,
+    size = "large",
   } = props;
-  // Helper function to get rarity background image based on card name
+
+  const isSmall = size === "small";
+
+  const costSize = isSmall
+    ? "text-4xl sm:text-4xl md:text-6xl lg:text-3xl xl:text-3xl"
+    : "text-4xl sm:text-4xl md:text-6xl lg:text-3xl xl:text-6xl";
+
+  const nameSize = isSmall
+    ? "text-base sm:text-sm md:text-xl lg:text-base xl:text-sm"
+    : "text-base sm:text-lg md:text-xl lg:text-base xl:text-xl";
+
+  const typeSize = isSmall
+    ? "text-base sm:text-sm md:text-lg lg:text-sm xl:text-base"
+    : "text-sm sm:text-sm md:text-lg lg:text-sm xl:text-base";
+  const descSize = isSmall
+    ? "text-xs sm:text-xs md:text-sm lg:text-base xl:text-xs"
+    : "text-xs sm:text-xs md:text-sm lg:text-xs xl:text-base";
+
   function getRarityStripImage(cardRarity: CardRarities): string {
     switch (cardRarity) {
       case CardRarities.Legendary:
@@ -35,16 +55,15 @@ export const CardRender = (props: CardProps) => {
     }
   }
 
-  // Helper function to get rarity color based on card name
   function getRarityColor(cardRarity: CardRarities): string {
     if (cardRarity === CardRarities.Legendary) {
-      return "#FFD700"; // Legend - Gold
+      return "#FFD700";
     } else if (cardRarity === CardRarities.Unique) {
-      return "#E9A1FC"; // Unique - Purple
+      return "#E9A1FC";
     } else if (cardRarity === CardRarities.Common) {
-      return "#FFFFFF"; // Common - Gray
+      return "#FFFFFF";
     } else {
-      return "#6FB0FC"; // Rare - Blue
+      return "#6FB0FC"; // Default for Rare
     }
   }
 
@@ -58,7 +77,6 @@ export const CardRender = (props: CardProps) => {
     return { bracketedText: null, remainingText: desc };
   };
 
-  // Helper function to get rarity background image based on card name
   function getRarityBackgroundImage(cardRarity: CardRarities): string {
     switch (cardRarity) {
       case CardRarities.Legendary:
@@ -77,12 +95,10 @@ export const CardRender = (props: CardProps) => {
   return (
     <div
       onClick={() => onClick?.(card.id)}
-      className={`relative rounded-lg overflow-hidden border-2 border-border hover:border-purple-400/100 transition-all duration-200 max-w-[280px] mx-auto ${
-        scaleOnHover ? "hover:scale-103" : ""
-      }`}
+      className={`relative overflow-hidden rounded-xl shadow-xl`}
     >
       {/* Attribute Border */}
-      <div className="absolute left-0 -top-0.5 -bottom-0.5 w-3 z-10">
+      <div className="absolute inset-0 w-6 z-10 left-0 scale-103">
         <img
           src={`/images/card/${attribute ?? "void"}-border.png`}
           alt={`${attribute} Border`}
@@ -90,126 +106,104 @@ export const CardRender = (props: CardProps) => {
         />
       </div>
 
-      <div className="relative aspect-[2/3] bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden rounded-md">
+      <div className="relative bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden rounded-lg shadow-lg">
         {isPlaceholder ? (
           <div className="w-full h-full flex flex-col items-center justify-center">
-            <span className="text-sm text-muted-foreground font-semibold">
-              Placeholder
-            </span>
-            <span className="text-xs text-muted-foreground/70">
-              [Empty Slot]
-            </span>
+            <span className="text-sm text-gray-400 font-semibold">No Card</span>
+            <span className="text-xs text-gray-500/70">[Empty Slot]</span>
           </div>
         ) : (
           <>
             <img
               src={card.image || "/placeholder.svg"}
               alt={card.name}
-              className="w-full h-full object-cover scale-108"
+              className="w-full h-full object-cover scale-105"
             />
 
             <div className="absolute inset-0 flex flex-col">
-              {/* Top Section: Cost + Name + Type */}
-              <div className="p-2 pt-1.5 pl-3">
-                <div className="flex items-start gap-1.5 relative">
+              {/* Top Section */}
+              <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/60 via-black/30 to-transparent pointer-events-none z-0" />
+              <div className="p-4 pt-4 pl-3">
+                <div className="flex items-start gap-2 relative">
                   {/* Rarity Image */}
                   <div
-                    className="absolute left-0 top-0 z-20 flex items-center"
-                    style={{ transform: "translateX(-18px)" }}
+                    className="absolute left-0 top-0 z-10"
+                    style={{ transform: "translateX(-19px)" }}
                   >
                     <img
                       src={getRarityStripImage(card.rarity)}
-                      alt=""
-                      className="h-11 sm:h-13 object-contain"
+                      alt="Rarity Label"
+                      className="h-12 sm:h-16 object-cover"
                     />
                   </div>
-
                   {/* Cost */}
-                  <div className="flex-shrink-0 flex flex-col items-center justify-center ml-3 relative z-30">
+                  <div className="flex-shrink-0 flex flex-col items-center justify-center ml-4 relative z-20 mb-1">
                     <span
-                      className="font-bold text-3xl sm:text-4xl md:text-2xl lg:text-4xl"
+                      className={`${costSize} font-bold`}
                       style={{
                         color: "#FFFFFF",
-                        WebkitTextStroke: "1.3px #2D4CAE",
+                        WebkitTextStroke: "1px #294297ff",
                         textShadow: `
-                        0 0 2px #5B91FB,
-                        0 0 4px #5B91FB,
-                        0 0 6px #5B91FB,
-                        0 0 8px #5B91FB,
-                        0 0 12px #5B91FB,
-                        0 0 16px #5B91FB,
-                        -1px -1px 0 #5B91FB,
-                         1px -1px 0 #5B91FB,
-                        -1px  1px 0 #5B91FB,
-                         1px  1px 0 #5B91FB,
-                        -2px -2px 4px rgba(91, 145, 251, 0.8),
-                         2px -2px 4px rgba(91, 145, 251, 0.8),
-                        -2px  2px 4px rgba(91, 145, 251, 0.8),
-                         2px  2px 4px rgba(91, 145, 251, 0.8)
-                      `,
+                          0 0 2px #5B91FB,
+                          0 0 4px #5B91FB,
+                          0 0 6px #5B91FB,
+                          0 0 8px #5B91FB
+                        `,
                       }}
                     >
                       {card.cost}
                     </span>
                     <div
-                      className="w-full h-0.5 mt-0.5"
+                      className="w-full h-0.5 "
                       style={{
-                        backgroundColor: "#B6C4F9",
+                        backgroundColor: "#ffffffff",
                         boxShadow: `
                           0 0 2px #5B91FB,
                           0 0 4px #5B91FB,
                           0 0 6px #5B91FB,
-                          0 0 8px rgba(91, 145, 251, 0.6),
-                          inset 0 1px 0 rgba(255, 255, 255, 0.3)
+                          0 0 8px #5B91FB
                         `,
                       }}
                     />
                   </div>
-
-                  {/* Name and Type */}
-                  <div className="flex-1 pt-0.5 min-w-0">
-                    <div className="relative w-full">
-                      {/* Background Image - can be positioned separately */}
-                      <div
-                        className="absolute"
-                        style={{
-                          backgroundImage: `url(${getRarityBackgroundImage(
-                            card.rarity
-                          )})`,
-                          backgroundRepeat: "no-repeat",
-                          backgroundPosition: "left center",
-                          backgroundSize: "contain",
-                          left: -30,
-                          right: 0,
-                          top: 8,
-                          bottom: 0,
-                          height: "45%",
-                          width: "700%",
-                        }}
-                      />
-
+                  <div className="flex-0 pt-2">
+                    {/* Background Image */}
+                    <div className="w-full h-full overflow-hidden">
+                      {/* Title Background Stripe - FIXED ALIGNMENT */}
+                      <div className="absolute inset-x-0 top-0 h-12 z-0 pointer-events-none">
+                        <img
+                          src={getRarityBackgroundImage(card.rarity)}
+                          alt=""
+                          className="h-full w-full object-left object-contain scale-125"
+                          style={{
+                            transform: isSmall
+                              ? "translateY(-9%)"
+                              : "translateY(-5%)",
+                          }}
+                        />
+                      </div>
                       {/* Card Name */}
-                      <h5
-                        className="relative font-bold leading-tight drop-shadow-lg overflow-hidden text-ellipsis whitespace-nowrap"
-                        style={{
-                          color: getRarityColor(card.rarity),
-                          fontSize: "clamp(0.8rem, 2.8vw, 1.1rem)",
-                          padding: "4px 6px",
-                          textShadow: `
-                        -1px -1px 0 #000,
-                         1px -1px 0 #000,
-                        -1px  1px 0 #000,
-                         1px  1px 0 #000
-                      `,
-                          transform: "scaleX(1)",
-                          transformOrigin: "left",
-                          maxWidth: "100%",
-                        }}
+                      <div
+                        className={`relative z-10 ${
+                          isSmall ? "pl-1 pt-0.5" : "pl-2 pt-0"
+                        }`}
                       >
-                        {card.name}
-                      </h5>
+                        <h5
+                          className={`font-bold leading-tight drop-shadow-lg overflow-hidden text-ellipsis whitespace-nowrap ${nameSize}`}
+                          style={{
+                            color: getRarityColor(card.rarity),
+                            textShadow: `
+                              -0.6px -0.6px 0 #000,
+                              0.6px -0.6px 0 #000,
+                              -0.6px 0.6px 0 #000,
+                              0.6px 0.6px 0 #000
+                            `,
+                          }}
+                        >
+                          {card.name}
+                        </h5>
+                      </div>
                     </div>
-
                     {/* Type Icon + Text */}
                     <div
                       className="flex items-center gap-1 -mt-1"
@@ -229,16 +223,18 @@ export const CardRender = (props: CardProps) => {
                         className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0"
                       />
                       <span
-                        className="text-white text-xs sm-text-sm font-medium capitalize drop-shadow"
+                        className={`text-white font-medium capitalize drop-shadow ${typeSize}`}
                         style={{
+                          fontSize: isSmall
+                            ? "0.75rem"
+                            : "clamp(0.7rem, 2vw, 0.9rem)",
                           padding: "0px 0px",
-                          fontSize: "clamp(0.7rem, 2vw, 0.9rem)",
                           textShadow: `
-                        -1px -1px 0 #000,
-                         1px -1px 0 #000,
-                        -1px  1px 0 #000,
-                         1px  1px 0 #000
-                      `,
+                          -1px -1px 0 #000,
+                          1px -1px 0 #000,
+                          -1px  1px 0 #000,
+                          1px  1px 0 #000
+                        `,
                         }}
                       >
                         {card.type}
@@ -247,10 +243,14 @@ export const CardRender = (props: CardProps) => {
                   </div>
                 </div>
               </div>
-
+              <div
+                className={`absolute inset-x-0 bottom-0 pointer-events-none z-0 ${
+                  isSmall ? "h-44" : "h-48"
+                } bg-gradient-to-t from-black/85 via-black/70 to-transparent`}
+              />
               {/* Description Section */}
               {card.description && (
-                <div className="mt-auto py-5 bg-gradient-to-t from-black/95 via-black/90 to-transparent flex flex-col items-center justify-center gap-1">
+                <div className="mt-auto relative z-20 py-8 flex flex-col items-center justify-center gap-2">
                   {/* Card Frame Spark */}
                   {![CardRarities.Common, CardRarities.Unique].includes(
                     card.rarity
@@ -262,7 +262,7 @@ export const CardRender = (props: CardProps) => {
                           : "/images/card/card_frame_spark_dis.png"
                       }
                       alt=""
-                      className="w-1/2 mb-0 drop-shadow-2xl"
+                      className="w-1/2 -mb-1 drop-shadow-2xl"
                     />
                   )}
                   {(() => {
@@ -273,28 +273,19 @@ export const CardRender = (props: CardProps) => {
                       <>
                         {bracketedText && (
                           <p
-                            className="text-center font-medium text-xs sm:text-base leading-snug m-0"
-                            style={{ color: "#e3b46c" }}
+                            className="text-center font-semibold text-xs sm:text-sm leading-snug -mb-1"
+                            style={{ color: "#dda95cff" }}
                           >
                             {bracketedText}
                           </p>
                         )}
                         <p
-                          className="text-white text-center text-xs sm:text-sm leading-snug m-0 whitespace-pre-line px-2"
+                          className={`text-white text-center leading-snug -mb-4 whitespace-pre-line ${descSize}`}
                           dangerouslySetInnerHTML={{
-                            __html: remainingText
-                              .replace(
-                                /(\d+%?)/g,
-                                '<span style="color: #7ce2fb">$1</span>'
-                              )
-                              .replace(
-                                /Shadow of the\s*Moon\+/gi,
-                                '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>'
-                              )
-                              .replace(
-                                /Moonslash/gi,
-                                '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>'
-                              ),
+                            __html: remainingText.replace(
+                              /(\d+%?)/g,
+                              '<span style="color: #7ce2fb; font-weight: bold;">$1</span>'
+                            ),
                           }}
                         />
                       </>

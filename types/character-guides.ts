@@ -97,6 +97,15 @@ export interface Team {
 
 export interface CharacterData {
   attribute: Attributes;
+  job?: string;
+  role?: string;
+
+  // bannerUrl?: string;
+  // avatarUrl?: string;
+
+  overview?: string;
+  strengths?: string[];
+  weaknesses?: string[];
 
   commonCards?: Card[];
   uniqueCards: UniqueCard[];

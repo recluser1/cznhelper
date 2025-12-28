@@ -1,14 +1,14 @@
-// app/calculator/layout.tsx
+// app/guides/[character]/layout.tsx
 import ScrollToTop from "@/components/ScrollToTop";
 
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Character Guide",
-  description: "Track your progress and calculate Faint Memory points",
+  description: "",
 };
 
-export default function CalculatorLayout({
+export default function CharacterGuideLayout({
   children,
 }: {
   children: React.ReactNode;
