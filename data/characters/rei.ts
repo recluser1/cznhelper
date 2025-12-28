@@ -1,5 +1,5 @@
 // data/characters/rei.ts
-import { Attributes } from "@/types/card";
+import { Attributes } from "@/types/card"
 import {
   Card,
   CardRarities,
@@ -8,13 +8,13 @@ import {
   MemoryFragmentSetRecommendation,
   UniqueCard,
   PartnersGuide,
-} from "@/types/character-guides";
+} from "@/types/character-guides"
 import {
   MemoryFragmentSet,
   MemoryFragmentMainStats,
   MemoryFragmentSubstats,
-} from "@/types/memory-fragments";
-import { SaveData } from "@/types/save-data";
+} from "@/types/memory-fragments"
+import { SaveData } from "@/types/save-data"
 
 const commonCards: Card[] = [
   {
@@ -35,7 +35,7 @@ const commonCards: Card[] = [
     rarity: CardRarities.Common,
     description: "Heal 100%",
   },
-];
+]
 const uniqueCards: UniqueCard[] = [
   {
     id: "strike-of-darkness",
@@ -359,7 +359,7 @@ const uniqueCards: UniqueCard[] = [
     description: "300% Damage\nFor 1 turn 4 Morale",
     epiphanies: [],
   },
-];
+]
 const recommendedSaveData: SaveData[] = [
   {
     id: "draw-focused-build",
@@ -394,7 +394,7 @@ const recommendedSaveData: SaveData[] = [
       "Predator's Blade",
     ],
   },
-];
+]
 
 const gearsData = {
   weapons: [
@@ -416,9 +416,9 @@ const gearsData = {
     "Water Drops of the Goddess",
     "Multifaceted Parallel Universe Nexus",
   ],
-};
+}
 
-const recommendedSources = ["Laboratory 0", "Swamp of Judgment"];
+const recommendedSources = ["Laboratory 0", "Swamp of Judgment"]
 
 const memoryFragmentSets: MemoryFragmentSetRecommendation = {
   bestInSlot: [
@@ -435,7 +435,7 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
       description: "",
     },
   ],
-};
+}
 
 const partnersGuide: PartnersGuide[] = [
   {
@@ -463,10 +463,21 @@ const partnersGuide: PartnersGuide[] = [
     description: "Gives 3 morale.",
     tier: CardTier.S,
   },
-];
+]
 
 export const reiData: CharacterData = {
   attribute: Attributes.Void,
+  job: "Controller",
+  role: "Support",
+  // bannerUrl: "https://blog.emptyblue.it/uploads/3572fe7b-b2fd-4887-ab3f-59bf74f9f420_sereniel_past.webp",
+  // avatarUrl: "/images/characters/sereniel/avatar.webp",
+
+  overview: `
+TBA
+  `.trim(),
+  strengths: ["TBA"],
+
+  weaknesses: ["TBA"],
   commonCards: commonCards,
   uniqueCards: uniqueCards,
   recommendedSaveData: recommendedSaveData,
@@ -501,4 +512,4 @@ export const reiData: CharacterData = {
   memoryFragmentSubstatsNote:
     "Just prioritize Ego Recovery, DEF and HP is not that important.",
   partnersGuide: partnersGuide,
-};
+}

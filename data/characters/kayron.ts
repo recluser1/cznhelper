@@ -1,5 +1,5 @@
 // data/characters/kayron.ts
-import { Attributes } from "@/types/card";
+import { Attributes } from "@/types/card"
 import {
   Card,
   CardRarities,
@@ -8,13 +8,13 @@ import {
   MemoryFragmentSetRecommendation,
   UniqueCard,
   PartnersGuide,
-} from "@/types/character-guides";
+} from "@/types/character-guides"
 import {
   MemoryFragmentSet,
   MemoryFragmentMainStats,
   MemoryFragmentSubstats,
-} from "@/types/memory-fragments";
-import { SaveData } from "@/types/save-data";
+} from "@/types/memory-fragments"
+import { SaveData } from "@/types/save-data"
 
 const commonCards: Card[] = [
   {
@@ -35,7 +35,7 @@ const commonCards: Card[] = [
     rarity: CardRarities.Common,
     description: "100% Shield",
   },
-];
+]
 
 const uniqueCards: UniqueCard[] = [
   {
@@ -296,7 +296,7 @@ const uniqueCards: UniqueCard[] = [
       "240% Damage\nCreate 3 Futility Cards\n+40% Damage Amount\nfor each",
     epiphanies: [],
   },
-];
+]
 
 const recommendedSaveData: SaveData[] = [
   {
@@ -314,7 +314,7 @@ const recommendedSaveData: SaveData[] = [
     faintMemoryNote: "X Faint Memory Cost without Convert Method(s)",
     cards: [],
   },
-];
+]
 
 const gearsData = {
   weapons: [
@@ -347,9 +347,9 @@ const gearsData = {
     "Multifaceted Parallel Universe Nexus",
     "Water Drops of the Goddess",
   ],
-};
+}
 
-const recommendedSources = ["Laboratory 0"];
+const recommendedSources = ["Laboratory 0"]
 
 const memoryFragmentSets: MemoryFragmentSetRecommendation = {
   bestInSlot: [
@@ -381,7 +381,7 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
         "If Agony uptime is near 100%, you get free damage bonus, which makes this set better than other options.",
     },
   ],
-};
+}
 
 const partnersGuide: PartnersGuide[] = [
   {
@@ -412,10 +412,22 @@ const partnersGuide: PartnersGuide[] = [
     description: "Just don't.",
     tier: CardTier.Bad,
   },
-];
+]
 
 export const kayronData: CharacterData = {
   attribute: Attributes.Void,
+  job: "Psionic",
+  role: "Main DPS",
+  // bannerUrl: "https://blog.emptyblue.it/uploads/3572fe7b-b2fd-4887-ab3f-59bf74f9f420_sereniel_past.webp",
+  // avatarUrl: "/images/characters/sereniel/avatar.webp",
+
+  overview: `
+TBA
+  `.trim(),
+  strengths: ["TBA"],
+
+  weaknesses: ["TBA"],
+
   commonCards: commonCards,
   uniqueCards: uniqueCards,
   recommendedSaveData: recommendedSaveData,
@@ -444,4 +456,4 @@ export const kayronData: CharacterData = {
   ],
   memoryFragmentSubstatsNote: "",
   partnersGuide: partnersGuide,
-};
+}

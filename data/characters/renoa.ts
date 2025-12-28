@@ -1,5 +1,5 @@
 // data/characters/renoa.ts
-import { Attributes } from "@/types/card";
+import { Attributes } from "@/types/card"
 import {
   Card,
   CardRarities,
@@ -8,13 +8,13 @@ import {
   MemoryFragmentSetRecommendation,
   UniqueCard,
   PartnersGuide,
-} from "@/types/character-guides";
+} from "@/types/character-guides"
 import {
   MemoryFragmentSet,
   MemoryFragmentMainStats,
   MemoryFragmentSubstats,
-} from "@/types/memory-fragments";
-import { SaveData } from "@/types/save-data";
+} from "@/types/memory-fragments"
+import { SaveData } from "@/types/save-data"
 
 const commonCards: Card[] = [
   {
@@ -35,7 +35,7 @@ const commonCards: Card[] = [
     rarity: CardRarities.Common,
     description: "100% Shield",
   },
-];
+]
 
 const uniqueCards: UniqueCard[] = [
   {
@@ -281,7 +281,7 @@ const uniqueCards: UniqueCard[] = [
       "150% Damage (+0%)\nDiscard all Dirge Bullet,\n+50% Damage Amount for\neach",
     epiphanies: [],
   },
-];
+]
 
 const recommendedSaveData: SaveData[] = [
   {
@@ -299,7 +299,7 @@ const recommendedSaveData: SaveData[] = [
     faintMemoryNote: "X Faint Memory Cost without Convert Method(s)",
     cards: [],
   },
-];
+]
 
 const gearsData = {
   weapons: [
@@ -323,9 +323,9 @@ const gearsData = {
     "Superconductive Protein",
     "Source of the Forbidden",
   ],
-};
+}
 
-const recommendedSources = ["Laboratory 0", "Swamp of Judgment"];
+const recommendedSources = ["Laboratory 0", "Swamp of Judgment"]
 
 const memoryFragmentSets: MemoryFragmentSetRecommendation = {
   bestInSlot: [
@@ -356,7 +356,7 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
         "If Agony uptime is near 100%, you get free damage bonus, which makes this set better than other options.",
     },
   ],
-};
+}
 
 const partnersGuide: PartnersGuide[] = [
   {
@@ -387,10 +387,21 @@ const partnersGuide: PartnersGuide[] = [
       "[ (NOT) Best in Slot / Signature Partner ] Activation Condition is unreliable and the damage boost is not that great.",
     tier: CardTier.C,
   },
-];
+]
 
 export const renoaData: CharacterData = {
   attribute: Attributes.Void,
+  job: "Hunter",
+  role: "Main DPS",
+  // bannerUrl: "https://blog.emptyblue.it/uploads/3572fe7b-b2fd-4887-ab3f-59bf74f9f420_sereniel_past.webp",
+  // avatarUrl: "/images/characters/sereniel/avatar.webp",
+
+  overview: `
+TBA
+  `.trim(),
+  strengths: ["TBA"],
+
+  weaknesses: ["TBA"],
   commonCards: commonCards,
   uniqueCards: uniqueCards,
   recommendedSaveData: recommendedSaveData,
@@ -423,4 +434,4 @@ export const renoaData: CharacterData = {
   ],
   memoryFragmentSubstatsNote: "",
   partnersGuide: partnersGuide,
-};
+}

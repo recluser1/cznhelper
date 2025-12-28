@@ -1,5 +1,5 @@
 // data/characters/sereniel.ts
-import { Attributes } from "@/types/card";
+import { Attributes } from "@/types/card"
 import {
   Card,
   CardRarities,
@@ -8,13 +8,13 @@ import {
   MemoryFragmentSetRecommendation,
   UniqueCard,
   PartnersGuide,
-} from "@/types/character-guides";
+} from "@/types/character-guides"
 import {
   MemoryFragmentSet,
   MemoryFragmentMainStats,
   MemoryFragmentSubstats,
-} from "@/types/memory-fragments";
-import { SaveData } from "@/types/save-data";
+} from "@/types/memory-fragments"
+import { SaveData } from "@/types/save-data"
 
 const commonCards: Card[] = [
   {
@@ -35,7 +35,7 @@ const commonCards: Card[] = [
     rarity: CardRarities.Common,
     description: "100% Shield",
   },
-];
+]
 
 const uniqueCards: UniqueCard[] = [
   {
@@ -275,7 +275,7 @@ const uniqueCards: UniqueCard[] = [
     description: "",
     epiphanies: [],
   },
-];
+]
 
 const recommendedSaveData: SaveData[] = [
   {
@@ -292,15 +292,15 @@ const recommendedSaveData: SaveData[] = [
     faintMemoryNote: "140 Faint Memory Cost without Convert Method",
     cards: [],
   },
-];
+]
 
 const gearsData = {
   weapons: [],
   armors: [],
   accessories: [],
-};
+}
 
-const recommendedSources = ["Laboratory 0"];
+const recommendedSources = ["Laboratory 0"]
 
 const memoryFragmentSets: MemoryFragmentSetRecommendation = {
   bestInSlot: [
@@ -320,7 +320,7 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
         "Increase damage dealth to targets inflicted with Agony by 10%",
     },
   ],
-};
+}
 
 const partnersGuide: PartnersGuide[] = [
   {
@@ -338,7 +338,7 @@ const partnersGuide: PartnersGuide[] = [
     description: "",
     tier: CardTier.A,
   },
-];
+]
 
 export const serenielData: CharacterData = {
   attribute: Attributes.Instinct,
@@ -382,4 +382,4 @@ TBA
   ],
   memoryFragmentSubstatsNote: "",
   partnersGuide: partnersGuide,
-};
+}
