@@ -1,5 +1,6 @@
 // data/characters/sereniel.ts
 import { Attributes } from "@/types/card";
+import { CharacterClass, CharacterRole } from "@/types/character";
 import {
   Card,
   CardRarities,
@@ -342,17 +343,17 @@ const partnersGuide: PartnersGuide[] = [
 
 export const serenielData: CharacterData = {
   attribute: Attributes.Instinct,
-  job: "Hunter",
-  role: "Main DPS",
-  // bannerUrl: "https://blog.emptyblue.it/uploads/3572fe7b-b2fd-4887-ab3f-59bf74f9f420_sereniel_past.webp",
-  // avatarUrl: "/images/characters/sereniel/avatar.webp",
+  job: CharacterClass.Hunter,
+  role: CharacterRole.MainDPS,
+  // bannerUrl: "/images/guides/sereniel/banner.webp",
+  // avatarUrl: "/images/guides/sereniel/avatar.webp",
 
   overview: `
-TBA
+  
   `.trim(),
-  strengths: ["TBA"],
+  strengths: [""],
 
-  weaknesses: ["TBA"],
+  weaknesses: [""],
 
   commonCards: commonCards,
   uniqueCards: uniqueCards,

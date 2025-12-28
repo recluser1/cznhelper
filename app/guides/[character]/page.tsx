@@ -170,20 +170,12 @@ export default function CharacterGuidePage() {
                     <div>
                       <div className="text-gray-400 mb-1">Class</div>
                       <div className="text-gray-200">
-                        {characterClass
-                          ? characterClass.charAt(0).toUpperCase() +
-                            characterClass.slice(1).toLowerCase()
-                          : "None"}
+                        {characterClass ?? "None"}
                       </div>
                     </div>
                     <div>
                       <div className="text-gray-400 mb-1">Role</div>
-                      <div className="text-gray-200">
-                        {role
-                          ? role.charAt(0).toUpperCase() +
-                            role.slice(1).toLowerCase()
-                          : "None"}
-                      </div>
+                      <div className="text-gray-200">{role ?? "None"}</div>
                     </div>
                   </div>
                 </div>

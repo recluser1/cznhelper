@@ -1,28 +1,28 @@
-import { CharacterJob } from "@/types/character";
+import { CharacterClass } from "@/types/character";
 
-export const CharacterJobLabels = [
+export const CharacterClassLabels = [
   {
-    id: CharacterJob.Striker,
+    id: CharacterClass.Striker,
     label: "Striker",
   },
   {
-    id: CharacterJob.Hunter,
+    id: CharacterClass.Hunter,
     label: "Hunter",
   },
   {
-    id: CharacterJob.Ranger,
+    id: CharacterClass.Ranger,
     label: "Ranger",
   },
   {
-    id: CharacterJob.Psionic,
+    id: CharacterClass.Psionic,
     label: "Psionic",
   },
   {
-    id: CharacterJob.Vanguard,
+    id: CharacterClass.Vanguard,
     label: "Vanguard",
   },
   {
-    id: CharacterJob.Controller,
+    id: CharacterClass.Controller,
     label: "Controller",
   },
 ];
