@@ -18,8 +18,7 @@ export const metadata: Metadata = {
     default: "CZN Helper",
     template: "%s | CZN Helper",
   },
-  description:
-    "CZN Helper is a community-driven hub for Chaos Zero Nightmare, featuring tools like Save Data Calculator and Damage Calculator, in-depth character guides, and more.",
+  description: "CZN Helper is a Community-Driven hub for Chaos Zero Nightmare.",
   metadataBase: new URL(siteUrl),
   openGraph: {
     siteName: "CZN Helper",

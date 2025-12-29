@@ -24,7 +24,7 @@ export function GearTooltip({ sources }: GearTooltipProps) {
         onMouseEnter={() => setOpen(true)}
         onMouseLeave={() => setOpen(false)}
       >
-        <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-800/90 border border-purple-600/50 text-purple-300 text-xs font-bold hover:bg-purple-900/60 hover:border-purple-500 transition-all cursor-help shadow-lg">
+        <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-800/90 border border-gray-600/50 text-gray-300 text-xs font-bold hover:bg-gray-900/60 hover:border-gray-500 transition-all cursor-help shadow-lg">
           ?
         </div>
       </div>
@@ -45,10 +45,10 @@ export function GearTooltip({ sources }: GearTooltipProps) {
             <div
               className="
               bg-gray-900/95 backdrop-blur-md
-              border border-purple-500/50
+              border border-gray-500/50
               rounded-lg px-4 py-3
               text-gray-200 text-sm font-medium
-              shadow-2xl shadow-purple-900/40
+              shadow-2xl shadow-gray-900/40
               min-w-max
             "
             >

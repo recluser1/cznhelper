@@ -62,7 +62,7 @@ export const BaseCard = ({ uniqueCards, attribute }: Props) => {
                 overflow-hidden
                 cursor-pointer
                 transition-all duration-300
-                rounded-lg
+                rounded-xl
                 "
                 onMouseMove={(e) => {
                   const rect = e.currentTarget.getBoundingClientRect();
@@ -119,8 +119,7 @@ export const BaseCard = ({ uniqueCards, attribute }: Props) => {
                       group
                       relative
                       overflow-hidden
-                      rounded-lg
-                      cursor-pointer
+                      rounded-xl
                       transition-all duration-500
                       "
                       onMouseMove={(e) => {
@@ -176,7 +175,7 @@ export const BaseCard = ({ uniqueCards, attribute }: Props) => {
               </div>
 
               {/* Epiphany Explanations */}
-              <div className="mt-6 space-y-4 px-4 sm:px-6 pb-6">
+              <div className="mt-2 space-y-4 px-4 sm:px-6 pb-4 sm:pb-6">
                 <h3 className="text-lg font-bold text-gray-300">
                   Epiphanies Tier Explanation
                 </h3>
@@ -201,7 +200,7 @@ export const BaseCard = ({ uniqueCards, attribute }: Props) => {
               {/* Divine Epiphanies */}
               {cardData.divineEpiphanies &&
                 cardData.divineEpiphanies.length > 0 && (
-                  <div className="mt-6 space-y-4 px-4 sm:px-6 pb-6">
+                  <div className="mt-6 space-y-4 px-4 sm:px-6 pb-6 sm:pb-12">
                     <h3 className="text-lg font-bold text-gray-300">
                       Divine Epiphanies
                     </h3>
@@ -212,7 +211,7 @@ export const BaseCard = ({ uniqueCards, attribute }: Props) => {
                       {cardData.divineEpiphanies.map((divine) => (
                         <div
                           key={divine.name || divine.icon}
-                          className="p-4 rounded-lg bg-gradient-to-br from-gray-900/30 to-gray-800/20 border border-gray-500/40"
+                          className="p-4 bg-gradient-to-br from-gray-900/30 to-gray-800/20 border border-gray-500/40 rounded-lg"
                         >
                           <div className="flex items-center gap-3 mb-3">
                             {divine.icon && (
@@ -222,9 +221,11 @@ export const BaseCard = ({ uniqueCards, attribute }: Props) => {
                                 className="w-10 h-10 object-contain"
                               />
                             )}
-                            <span className="px-3 py-1 rounded-full text-xs font-bold bg-gray-500/30 text-gray-200 border border-gray-400/50">
-                              Divine
-                            </span>
+                            {divine.name && (
+                              <h4 className="font-semibold text-gray-200 mb-2">
+                                {divine.name}
+                              </h4>
+                            )}
                           </div>
                           {divine.name && (
                             <h4 className="font-semibold text-gray-200 mb-2">

@@ -62,7 +62,10 @@ export function GearItem({
         </div>
       </div>
 
-      <div className="flex-1 min-w-0 flex flex-col">
+      <div className="absolute top-3 right-3">
+        <GearTooltip sources={source} />
+      </div>
+      <div className="relative flex-1 min-w-0 flex flex-col">
         <h4 className="text-lg font-bold mb-2" style={{ color: nameColor }}>
           {name}
         </h4>
@@ -77,7 +80,6 @@ export function GearItem({
                 {atk || def || health}
               </span>
             </div>
-            <GearTooltip sources={source} />
           </div>
         )}
 

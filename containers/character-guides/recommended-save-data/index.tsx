@@ -97,7 +97,7 @@ export const RecommendedSaveData = ({
               </div>
 
               {saveData.description && (
-                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed text-center max-w-2xl mx-auto px-4">
+                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed text-center max-w-2xl mx-auto px-4 whitespace-pre-line">
                   {saveData.description}
                 </p>
               )}
@@ -118,9 +118,8 @@ export const RecommendedSaveData = ({
                         group
                         relative
                         overflow-hidden
-                        cursor-pointer
                         transition-all duration-300
-                        rounded-lg
+                        rounded-xl
                         "
                         onMouseMove={(e) => {
                           const rect = e.currentTarget.getBoundingClientRect();

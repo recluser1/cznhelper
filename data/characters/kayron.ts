@@ -269,7 +269,7 @@ const uniqueCards: UniqueCard[] = [
         id: "Oath of Vanity IV",
         tier: CardTier.WIP,
         cost: 0,
-        type: "upgrade",
+        type: "skill",
         description:
           "[ Exhaust / Retain ] Exhaust all Futility\nStatus Ailments, and\nCurse Cards in hand\nDraw for each",
         reasoning: "",
@@ -302,92 +302,107 @@ const uniqueCards: UniqueCard[] = [
 const recommendedSaveData: SaveData[] = [
   {
     id: "deck-1",
-    name: "Kayron's Best Deck",
-    description: "This is the best deck for Kayron",
+    name: "Extended Fight",
+    description: `Oath of Vanity II (Initiation) if you don't have Bria or Manifest Ego 3
+    Brand of Annihilation I or II can also be used.`,
     faintMemoryNote: "140 Faint Memory Cost without Convert Method(s)",
     cards: [
-      "Echoes of True Abyss",
-      "Echoes of True Abyss",
-      "Echoes of True Abyss",
-      "Brand of Annihilation I",
-      "Brand of Annihilation II",
+      "Echo of Futility V",
+      "Echo of Futility V",
+      "Echo of Futility V",
+      "Echo of Futility V",
       "Brand of Annihilation III",
-      "Brand of Annihilation IV",
-      "Brand of Annihilation V",
+      "Black Hole II",
+      "Oath of Vanity III",
+      "Echoes of True Abyss",
     ],
   },
   {
-    id: "",
-    name: "",
-    description: "",
-    faintMemoryNote: "",
-    cards: [],
+    id: "deck-2",
+    name: "Burst Build",
+    description: ``,
+    faintMemoryNote: "140 Faint Memory Cost without Convert Method(s)",
+    cards: [
+      "Echo of Futility I",
+      "Brand of Annihilation III",
+      "Brand of Annihilation III",
+      "Brand of Annihilation III",
+      "Black Hole II",
+      "Oath of Vanity IV",
+      "Oath of Vanity IV",
+      "Echoes of True Abyss",
+    ],
+  },
+  {
+    id: "deck-3",
+    name: "Kayron OTK",
+    description: `Niche Build`,
+    faintMemoryNote: "140 Faint Memory Cost without Convert Method(s)",
+    cards: [
+      "Echo of Futility I",
+      "Brand of Annihilation IV",
+      "Brand of Annihilation IV",
+      "Brand of Annihilation IV",
+      "Black Hole II",
+      "Oath of Vanity IV",
+      "Oath of Vanity IV",
+      "Echoes of True Abyss",
+    ],
   },
 ];
 
 const gearsData = {
   weapons: [
-    "Intellect of Discord",
-    "Tentacles of Chaos",
-    "Foggy Crystal Ball",
     "Mutant Predator Spike",
-    "W-52 Dopamine Injector",
-    "RFS-17",
+    "Foggy Crystal Ball",
+    "Intellect of Discord",
     "Unexploded Plasma Bomb",
-    "Over Current Shocker",
-    "Crimson Sword",
-    "Flashbang",
+    "Obsidian Sword",
+    "Tentacles of Chaos",
+    "RFS-17",
   ],
   armors: [
-    "Fragment of the Empty Void",
     "Wings of Freedom",
+    "Fragment of the Empty Void",
     "Rocket-Adorned Cape",
-    "Psionic Combat Suit",
-    "Brainwave-Blocking Helmet",
   ],
   accessories: [
-    "Emblem of an Exceptional Entity",
-    "Amorphous Cube",
     "Nerve Hacking Module",
+    "Emblem of an Exceptional Entity",
     "Dimensional Cube",
-    "Sphere of Randomness",
-    "Superconductive Protein",
-    "Source of the Forbidden",
-    "Multifaceted Parallel Universe Nexus",
-    "Water Drops of the Goddess",
+    "Eye of Gluttony",
+    "Amorphous Cube",
+    "Flower of Dead Souls",
   ],
 };
 
-const recommendedSources = ["Laboratory 0"];
+const recommendedSources = ["Laboratory 0", "City of Mist"];
 
 const memoryFragmentSets: MemoryFragmentSetRecommendation = {
   bestInSlot: [
     {
       id: "offering-of-the-void",
       description:
-        "Ever so slightly worse than the 2-2-2 Option, but its completely fine to use this 4 piece set.",
+        "Generally higher raw damage than 2/2/2. Black Wing + Executioner's 2/2 becomes viable at high card multiplier scaling.",
     },
     {
       id: "executioners-tool",
-      description:
-        "If Crit Rate is reliably high, having more Crit Damage results in more damage.",
+      description: "",
     },
   ],
   alternative: [
     {
       id: "black-wing",
-      description:
-        "Attack is a powerhouse of a stat in the game, and considering how bad 4 piece sets are designed, Attack wins over easily.",
+      description: "Standard Attack set for raw damage scaling.",
     },
     {
       id: "executioners-tool",
-      description:
-        "If Crit Rate is reliably high, having more Crit Damage results in more damage.",
+      description: "Standard Critical Damage set for crit-focused builds.",
     },
     {
       id: "cursed-corpse",
       description:
-        "If Agony uptime is near 100%, you get free damage bonus, which makes this set better than other options.",
+        "Alternative to 4/2 that can outperform with consistent Agony uptime.",
     },
   ],
 };
@@ -395,30 +410,37 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
 const partnersGuide: PartnersGuide[] = [
   {
     id: "bria",
-    description:
-      "[ Best in Slot / Signature Partner ] Unlocks an entirely new playstyle for Kayron and is the best and strongest Partner for Kayron.",
+    description: `[ Best in Slot / Signature ] 
+    Provides massive multiplicative damage scaling and strong utility. 
+    Her Ego Skill grants 25% additive card damage on first Futility generation, plus 10% multiplicative damage per card generated (up to 3x). 
+    Essential for maximizing Kayron's damage potential in extended fights.
+    `,
+    tier: CardTier.SPlus,
+  },
+  {
+    id: "eloise",
+    description: `Strong multiplicative damage boost: 20% passive card damage plus 24% multiplicative for 1 turn after exhausting cards. 
+    Excellent synergy with Kayron's Exhaust-heavy playstyle.
+    `,
     tier: CardTier.SPlus,
   },
   {
     id: "zatera",
-    description: "Best Free To Play option, massive Attack stat stick.",
+    description: `Solid F2P option providing 16% ATK—a rare stat that scales well. 
+    However, Kayron benefits more from multiplicative card damage (which scales his innate ramping effects).
+    `,
     tier: CardTier.S,
   },
-  {
-    id: "itsuku",
-    description:
-      "Worse than Zatera but provides a little more burst with her Ego Skill.",
-    tier: CardTier.A,
-  },
-  {
-    id: "eloise",
-    description:
-      "Decent damage increase, viable if you want/need to spam Weaken.",
-    tier: CardTier.A,
-  },
+  // {
+  //   id: "eloise",
+  //   description: `Single copy loses significant damage potential compared to higher investments.
+  //   Still provides decent multiplicative scaling but falls behind other options.
+  //   `,
+  //   tier: CardTier.A,
+  // },
   {
     id: "anteia",
-    description: "Just don't.",
+    description: `Nyx would be a better choice`,
     tier: CardTier.Bad,
   },
 ];
@@ -431,11 +453,26 @@ export const kayronData: CharacterData = {
   // avatarUrl: "",
 
   overview: `
-  
+  Kayron's expensive cards generate or consume Futility—a 1-cost Status Ailment that exhausts with no base effect. 
+  His Oath of Vanity Epiphanies define his Futility-centered playstyle.
+  Gameplan: Upgrade Futility via Oath of Vanity to enable his kit, then reduce card costs through Epiphanies, Exhausts, and team synergy to maximize damage output.
   `.trim(),
-  strengths: [""],
 
-  weaknesses: [""],
+  strengths: [
+    "Strong at just Manifest Ego 1",
+    "Versatile DPS",
+    "High ST and AoE damage",
+    "Can solo DPS/Sustain Chaos",
+    "Fast Basin/Simulation clear",
+  ],
+
+  weaknesses: [
+    "Requires Manifest Ego 1",
+    "Reliant on Bria for optimal damage and QoL",
+    "Very AP-reliant",
+    "Hard to play",
+    "Annoying to farm Save Data",
+  ],
 
   commonCards: commonCards,
   uniqueCards: uniqueCards,

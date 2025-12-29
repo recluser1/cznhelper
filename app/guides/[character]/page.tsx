@@ -276,7 +276,7 @@ export default function CharacterGuidePage() {
             <h3 className="text-xl sm:text-2xl text-sky-300">
               Memory Fragment
             </h3>
-            <div className="bg-slate-800/40 rounded-lg p-6 sm:p-8 border border-slate-700/50 text-center">
+            {/* <div className="bg-slate-800/40 rounded-lg p-6 sm:p-8 border border-slate-700/50 text-center">
               <p className="text-gray-500">
                 Memory Fragment guide coming soon...
               </p>
@@ -284,8 +284,8 @@ export default function CharacterGuidePage() {
                 This section will contain detailed information about which
                 Memory Fragments to use on {characterName}.
               </p>
-            </div>
-            {/* {characterData?.memoryFragmentSets && (
+            </div> */}
+            {characterData?.memoryFragmentSets && (
               <MemoryFragmentsSection
                 bestInSlot={characterData.memoryFragmentSets?.bestInSlot}
                 alternative={characterData.memoryFragmentSets?.alternative}
@@ -297,7 +297,7 @@ export default function CharacterGuidePage() {
                   characterData.memoryFragmentSubstatPriorities
                 }
               />
-            )} */}
+            )}
           </div>
         );
 
@@ -305,16 +305,16 @@ export default function CharacterGuidePage() {
         return (
           <div className="space-y-4 sm:space-y-6">
             <h3 className="text-xl sm:text-2xl text-sky-300">Partner</h3>
-            <div className="bg-slate-800/40 rounded-lg p-6 sm:p-8 border border-slate-700/50 text-center">
+            {/* <div className="bg-slate-800/40 rounded-lg p-6 sm:p-8 border border-slate-700/50 text-center">
               <p className="text-gray-500">Partner guide coming soon...</p>
               <p className="text-sm text-gray-600 mt-2">
                 This section will contain detailed information about optimal
                 partners for {characterName}.
               </p>
-            </div>
-            {/* {characterData?.partnersGuide && (
+            </div> */}
+            {characterData?.partnersGuide && (
               <PartnersSection partnersGuide={characterData.partnersGuide} />
-            )} */}
+            )}
           </div>
         );
 
