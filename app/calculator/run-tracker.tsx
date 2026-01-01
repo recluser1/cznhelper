@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   Card,
   CardContent,
@@ -11,14 +11,15 @@ import {
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Plus, HelpCircle, RotateCcw, X, Undo } from "lucide-react";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  X,
+  Undo,
+  RotateCcw,
+  Plus,
+  HelpCircle,
+  ChevronsUpDown,
+  Check,
+} from "lucide-react";
 import {
   Tooltip,
   TooltipProvider,
@@ -33,7 +34,19 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 type CardEntry = { name: string; image?: string };
 
@@ -42,7 +55,7 @@ const CHARACTER_CARDS: Record<
   { portrait?: string; starter: CardEntry[]; unique: CardEntry[] }
 > = {
   rei: {
-    portrait: "/images/character/rei/portrait.gif",
+    portrait: "images/characters/reiportrait.webp",
     starter: [
       { name: "Dark Blade", image: "/images/character/rei/starter1.png" },
       { name: "Dark Blade", image: "/images/character/rei/starter2.png" },
@@ -66,7 +79,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   owen: {
-    portrait: "/images/character/owen/portrait.gif",
+    portrait: "images/characters/owenportrait.webp",
     starter: [
       { name: "Downward Cut", image: "/images/character/owen/starter1.png" },
       { name: "Downward Cut", image: "/images/character/owen/starter2.png" },
@@ -81,7 +94,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   cassius: {
-    portrait: "/images/character/cassius/portrait.gif",
+    portrait: "images/characters/cassiusportrait.webp",
     starter: [
       { name: "Cards", image: "/images/character/cassius/starter1.png" },
       { name: "Wild Card", image: "/images/character/cassius/starter2.png" },
@@ -99,7 +112,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   beryl: {
-    portrait: "/images/character/beryl/portrait.gif",
+    portrait: "/images/characters/berylportrait.webp",
     starter: [
       { name: "Launcher", image: "/images/character/beryl/starter1.png" },
       {
@@ -123,7 +136,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   mika: {
-    portrait: "/images/character/mika/portrait.gif",
+    portrait: "images/characters/mikaportrait.webp",
     starter: [
       { name: "Water Arrow", image: "/images/character/mika/starter1.png" },
       { name: "Water Barrier", image: "/images/character/mika/starter2.png" },
@@ -144,7 +157,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   maribell: {
-    portrait: "/images/character/maribell/portrait.gif",
+    portrait: "images/characters/maribellportrait.webp",
     starter: [
       {
         name: "Shelter Kick",
@@ -177,7 +190,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   lucas: {
-    portrait: "/images/character/lucas/portrait.gif",
+    portrait: "images/characters/lucasportrait.webp",
     starter: [
       { name: "Machine Gun", image: "/images/character/lucas/starter1.png" },
       { name: "Machine Gun", image: "/images/character/lucas/starter2.png" },
@@ -198,7 +211,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   amir: {
-    portrait: "/images/character/amir/portrait.gif",
+    portrait: "/images/characters/amirportrait.webp",
     starter: [
       { name: "Rapier", image: "/images/character/amir/starter1.png" },
       { name: "Rapier", image: "/images/character/amir/starter2.png" },
@@ -216,7 +229,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   tressa: {
-    portrait: "/images/character/tressa/portrait.gif",
+    portrait: "/images/characters/tressaportrait.webp",
     starter: [
       { name: "Dagger Throw", image: "/images/character/tressa/starter1.png" },
       { name: "Dagger Throw", image: "/images/character/tressa/starter2.png" },
@@ -237,7 +250,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   selena: {
-    portrait: "/images/character/selena/portrait.gif",
+    portrait: "/images/characters/selenaportrait.webp",
     starter: [
       {
         name: "Engagament Fire",
@@ -270,7 +283,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   nia: {
-    portrait: "/images/character/nia/portrait.gif",
+    portrait: "/images/characters/niaportrait.webp",
     starter: [
       { name: "Stroke", image: "/images/character/nia/starter1.png" },
       { name: "AMP Therapy", image: "/images/character/nia/starter2.png" },
@@ -285,7 +298,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   kayron: {
-    portrait: "/images/character/kayron/portrait.gif",
+    portrait: "/images/characters/kayronportrait.webp",
     starter: [
       { name: "Elimination", image: "/images/character/kayron/starter1.png" },
       { name: "Elimination", image: "/images/character/kayron/starter2.png" },
@@ -309,7 +322,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   haru: {
-    portrait: "/images/character/haru/portrait.gif",
+    portrait: "/images/characters/haruportrait.webp",
     starter: [
       { name: "Anchor", image: "/images/character/haru/starter1.png" },
       { name: "Power Anchor", image: "/images/character/haru/starter2.png" },
@@ -324,7 +337,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   yuki: {
-    portrait: "/images/character/yuki/portrait.gif",
+    portrait: "/images/characters/yukiportrait.webp",
     starter: [
       { name: "Longsword Slash", image: "/images/character/yuki/starter1.png" },
       { name: "Rapid Slash", image: "/images/character/yuki/starter2.png" },
@@ -342,7 +355,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   hugo: {
-    portrait: "/images/character/hugo/portrait.gif",
+    portrait: "/images/characters/hugoportrait.webp",
     starter: [
       { name: "Throw Dagger", image: "/images/character/hugo/starter1.png" },
       { name: "Throw Dagger", image: "/images/character/hugo/starter2.png" },
@@ -360,7 +373,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   renoa: {
-    portrait: "/images/character/renoa/portrait.gif",
+    portrait: "/images/characters/renoaportrait.webp",
     starter: [
       {
         name: "Annihilation Shot",
@@ -393,7 +406,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   veronica: {
-    portrait: "/images/character/veronica/portrait.gif",
+    portrait: "/images/characters/veronicaportrait.webp",
     starter: [
       { name: "Rapid Fire", image: "/images/character/veronica/starter1.png" },
       { name: "Rapid Fire", image: "/images/character/veronica/starter2.png" },
@@ -420,7 +433,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   "mei-lin": {
-    portrait: "/images/character/mei-lin/portrait.gif",
+    portrait: "/images/characters/meilinportrait.webp",
     starter: [
       { name: "Strike", image: "/images/character/mei-lin/starter1.png" },
       { name: "Strike", image: "/images/character/mei-lin/starter2.png" },
@@ -453,7 +466,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   orlea: {
-    portrait: "/images/character/orlea/portrait.gif",
+    portrait: "/images/characters/orleaportrait.webp",
     starter: [
       {
         name: "Attack, My Minions",
@@ -483,7 +496,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   rin: {
-    portrait: "/images/character/rin/portrait.gif",
+    portrait: "/images/characters/rinportrait.webp",
     starter: [
       {
         name: "Dark Mist Sword: First Form",
@@ -516,7 +529,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   magna: {
-    portrait: "/images/character/magna/portrait.gif",
+    portrait: "/images/characters/magnaportrait.webp",
     starter: [
       { name: "Frozen Fist", image: "/images/character/magna/starter1.png" },
       { name: "Frost Shield", image: "/images/character/magna/starter3.png" },
@@ -537,7 +550,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   khalipe: {
-    portrait: "/images/character/khalipe/portrait.gif",
+    portrait: "/images/characters/khalipeportrait.webp",
     starter: [
       { name: "Lashing", image: "/images/character/khalipe/starter1.png" },
       { name: "Upward Slash", image: "/images/character/khalipe/starter2.png" },
@@ -561,7 +574,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   sereniel: {
-    portrait: "/images/character/sereniel/portrait.gif",
+    portrait: "/images/characters/serenielportrait.webp",
     starter: [
       { name: "Pulse Fire", image: "/images/character/sereniel/starter1.webp" },
       { name: "Pulse Fire", image: "/images/character/sereniel/starter2.webp" },
@@ -594,7 +607,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   chizuru: {
-    portrait: "/images/character/chizuru/portrait.gif",
+    portrait: "/images/characters/chizuruportrait.webp",
     starter: [
       { name: "Moonslash", image: "/images/character/chizuru/starter1.png" },
       { name: "Moonslash", image: "/images/character/chizuru/starter2.png" },
@@ -618,7 +631,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   luke: {
-    portrait: "/images/character/luke/portrait.gif",
+    portrait: "/images/characters/lukeportrait.webp",
     starter: [
       { name: "Single Shot", image: "/images/character/luke/starter1.png" },
       { name: "Single Shot", image: "/images/character/luke/starter2.png" },
@@ -643,16 +656,14 @@ const CHARACTER_CARDS: Record<
   },
 };
 
-const DEFAULT_CARD_IMAGES: Record<
-  "neutral" | "monster" | "forbidden" | "starter" | "placeholder",
-  string
-> = {
+const DEFAULT_CARD_IMAGES = {
   neutral: "/images/card/neutral.png",
   monster: "/images/card/monster.png",
   forbidden: "/images/card/forbidden.png",
   starter: "/images/card/starter.png",
   placeholder: "/images/card/placeholder.png",
-};
+  remove: "/images/card/remove.png",
+} as const;
 
 const TIER_LIMITS: Record<number, number> = {
   1: 30,
@@ -669,11 +680,51 @@ const TIER_LIMITS: Record<number, number> = {
   12: 140,
   13: 150,
   14: 160,
+  15: 170,
+};
+
+// prettier-ignore
+const FACTION_BORDER_MAP: Record<string, string[]> = {
+  "/images/card/order-border.png": [
+    "amir",
+    "luke", 
+    "hugo", 
+    "yuki"
+    ],
+  "/images/card/void-border.png": [
+    "tressa",
+    "rin",
+    "renoa",
+    "rei",
+    "kayron",
+    "chizuru",
+  ],
+  "/images/card/instinct-border.png": [
+    "nia",
+    "khalipe",
+    "orlea",
+    "cassius",
+    "sereniel",
+  ],
+  "/images/card/passion-border.png": [
+    "selena",
+    "lucas",
+    "mei-lin",
+    "maribell",
+    "veronica",
+    "owen",
+  ],
+  "/images/card/justice-border.png": [
+    "magna", 
+    "mika", 
+    "beryl", 
+    "haru"
+  ],
 };
 
 type CardType = "neutral" | "monster" | "forbidden" | "starter";
 
-type DeckCard = {
+interface DeckCard {
   id: string;
   name: string;
   image?: string;
@@ -683,13 +734,14 @@ type DeckCard = {
   hasDivineEpiphany: boolean;
   isRemoved: boolean;
   wasConverted: boolean;
-  removalCost?: number;
   isMutantSample?: boolean;
   isDuplicated?: boolean;
+  isAdded?: boolean;
   duplicationCost?: number;
-};
+  removalCost?: number;
+}
 
-type Action = {
+interface Action {
   type:
     | "epiphany"
     | "divine"
@@ -697,82 +749,79 @@ type Action = {
     | "convert"
     | "remove"
     | "add"
-    | "restore"
     | "mutant";
   cardId: string;
-  previousState?: DeckCard;
   previousDeck?: DeckCard[];
   previousPoints?: number;
   previousRemovalCount?: number;
   previousDuplicationCount?: number;
   previousConversionCount?: number;
-};
+}
 
-const formatCharacterName = (key: string) =>
+const formatCharacterName = (key: string): string =>
   key
     .split(/[-_ ]+/)
-    .map((part) => (part ? part.charAt(0).toUpperCase() + part.slice(1) : ""))
+    .map((part) => (part ? part[0].toUpperCase() + part.slice(1) : ""))
     .join(" ");
 
 export function RunTracker() {
-  const [character, setCharacter] = useState("none"); // Set default character to "none" instead of empty string
+  const [character, setCharacter] = useState<string>("none");
   const [tier, setTier] = useState(1);
   const [nightmareMode, setNightmareMode] = useState(false);
+  const [deck, setDeck] = useState<DeckCard[]>([]);
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
   const [showAddCard, setShowAddCard] = useState(false);
+  const [open, setOpen] = useState(false);
+
   const [removalCount, setRemovalCount] = useState(0);
   const [duplicationCount, setDuplicationCount] = useState(0);
   const [conversionCount, setConversionCount] = useState(0);
   const [totalPoints, setTotalPoints] = useState(0);
   const [actionHistory, setActionHistory] = useState<Action[]>([]);
-  const [deck, setDeck] = useState<DeckCard[]>([]);
 
+  const limit = TIER_LIMITS[tier] + (nightmareMode ? 10 : 0);
+  const percentage = (totalPoints / limit) * 100;
+
+  // Load from sessionStorage
   useEffect(() => {
-    const savedState = sessionStorage.getItem("czn-run-tracker");
-    if (savedState) {
+    const saved = sessionStorage.getItem("czn-run-tracker");
+    if (saved) {
       try {
-        const parsed = JSON.parse(savedState);
-        setCharacter(parsed.character || "none");
-        setTier(parsed.tier || 1);
-        setNightmareMode(parsed.isNightmare || false);
-        setDeck(parsed.deck || []);
-        setActionHistory(parsed.actionHistory || []);
-        setRemovalCount(parsed.removalCount || 0);
-        setDuplicationCount(parsed.duplicationCount || 0);
-        setConversionCount(parsed.conversionCount || 0);
-      } catch (error) {
-        console.error("Failed to parse saved state:", error);
+        const parsed = JSON.parse(saved);
+        setCharacter(parsed.character ?? "none");
+        setTier(parsed.tier ?? 1);
+        setNightmareMode(parsed.isNightmare ?? false);
+        setDeck(parsed.deck ?? []);
+        setActionHistory(parsed.actionHistory ?? []);
+        setRemovalCount(parsed.removalCount ?? 0);
+        setDuplicationCount(parsed.duplicationCount ?? 0);
+        setConversionCount(parsed.conversionCount ?? 0);
+        setTotalPoints(parsed.totalPoints ?? 0);
+      } catch (e) {
+        console.error("Failed to load saved state", e);
       }
     } else {
-      const placeholderDeck: DeckCard[] = Array.from({ length: 8 }, (_, i) => ({
-        id: String(i + 1),
-        name: "",
-        image: undefined,
-        cardType: "starter" as CardType,
-        isStartingCard: true,
-        hasNormalEpiphany: false,
-        hasDivineEpiphany: false,
-        isRemoved: false,
-        wasConverted: false,
-      }));
-      setDeck(placeholderDeck);
+      initializePlaceholderDeck();
     }
   }, []);
 
+  // Save to sessionStorage
   useEffect(() => {
-    // Only save if we have some data to save
-    if (character || deck.length > 0) {
-      const state = {
-        character,
-        tier,
-        isNightmare: nightmareMode,
-        deck,
-        actionHistory,
-        removalCount,
-        duplicationCount,
-        conversionCount,
-      };
-      sessionStorage.setItem("czn-run-tracker", JSON.stringify(state));
+    if (character !== "none" || deck.length > 0) {
+      sessionStorage.setItem(
+        "czn-run-tracker",
+        JSON.stringify({
+          character,
+          tier,
+          isNightmare: nightmareMode,
+          deck,
+          actionHistory,
+          removalCount,
+          duplicationCount,
+          conversionCount,
+          totalPoints,
+        })
+      );
     }
   }, [
     character,
@@ -783,243 +832,148 @@ export function RunTracker() {
     removalCount,
     duplicationCount,
     conversionCount,
+    totalPoints,
   ]);
 
-  const handleCharacterChange = (character: string) => {
-    const actualCharacter = character === "none" ? "" : character;
-    setCharacter(character); // Use the passed character string directly
-
-    if (!actualCharacter) {
-      const placeholderDeck: DeckCard[] = Array.from({ length: 8 }, (_, i) => ({
+  const initializePlaceholderDeck = () => {
+    setDeck(
+      Array.from({ length: 8 }, (_, i) => ({
         id: String(i + 1),
         name: "",
-        image: undefined,
         cardType: "starter" as CardType,
         isStartingCard: true,
         hasNormalEpiphany: false,
         hasDivineEpiphany: false,
         isRemoved: false,
         wasConverted: false,
-      }));
-      setDeck(placeholderDeck);
-    } else {
-      // Get character data
-      const characterData = CHARACTER_CARDS[actualCharacter];
-      if (!characterData) return;
-
-      const initialDeck: DeckCard[] = [
-        // 4 starter cards
-        ...characterData.starter.map((card, index) => ({
-          id: String(index + 1),
-          name: card.name,
-          image: card.image,
-          cardType: "starter" as CardType,
-          isStartingCard: true,
-          hasNormalEpiphany: false,
-          hasDivineEpiphany: false,
-          isRemoved: false,
-          wasConverted: false,
-        })),
-        // 4 unique cards
-        ...characterData.unique.map((card, index) => ({
-          id: String(index + 5),
-          name: card.name,
-          image: card.image,
-          cardType: "starter" as CardType,
-          isStartingCard: true,
-          hasNormalEpiphany: false,
-          hasDivineEpiphany: false,
-          isRemoved: false,
-          wasConverted: false,
-        })),
-      ];
-      setDeck(initialDeck);
-    }
+      }))
+    );
   };
 
-  const limit = TIER_LIMITS[tier] + (nightmareMode ? 10 : 0); // Deep Trauma
-
-  const calculateRemovalCost = (
-    card: DeckCard,
-    currentRemovalCount: number
-  ): number => {
-    const count = currentRemovalCount + 1;
-    let cost = 0;
-
-    if (count === 1) {
-      cost = 0;
-    } else if (count === 2) {
-      cost = 10;
-    } else if (count === 3) {
-      cost = 30;
-    } else if (count === 4) {
-      cost = 50;
-    } else {
-      cost = 70;
+  const handleCharacterChange = (value: string) => {
+    setCharacter(value);
+    if (value === "none") {
+      initializePlaceholderDeck();
+      return;
     }
 
-    // +20 if removing a starting card (that wasn't converted) or a card with a normal epiphany
-    if ((card.isStartingCard || card.hasNormalEpiphany) && !card.wasConverted) {
-      cost += 20;
-    }
+    const data = CHARACTER_CARDS[value];
+    if (!data) return;
 
-    // Subtract the base value for non-starter neutrals and monsters so removal undoes the original add/convert cost
-    if (card.cardType === "neutral" && !card.isStartingCard) {
-      cost -= 20;
-    } else if (card.cardType === "monster" && !card.isStartingCard) {
-      cost -= 80;
-    }
+    const newDeck: DeckCard[] = [
+      ...data.starter.map((c, i) => ({
+        id: String(i + 1),
+        name: c.name,
+        image: c.image,
+        cardType: "starter",
+        isStartingCard: true,
+        hasNormalEpiphany: false,
+        hasDivineEpiphany: false,
+        isRemoved: false,
+        wasConverted: false,
+      })),
+      ...data.unique.map((c, i) => ({
+        id: String(i + 5),
+        name: c.name,
+        image: c.image,
+        cardType: "starter",
+        isStartingCard: true,
+        hasNormalEpiphany: false,
+        hasDivineEpiphany: false,
+        isRemoved: false,
+        wasConverted: false,
+      })),
+    ];
 
-    return cost;
+    setDeck(newDeck);
   };
 
-  const calculateDuplicationCost = (originalCard: DeckCard): number => {
-    const count = duplicationCount + 1;
-    let cost = 0;
-
-    if (count === 1) {
-      cost = 0;
-    } else if (count === 2) {
-      cost = 10;
-    } else if (count === 3) {
-      cost = 30;
-    } else if (count === 4) {
-      cost = 50;
-    } else {
-      cost = 70;
-    }
-
-    cost += getCardPointValue(originalCard);
-
-    return cost;
+  const recordAction = (action: Action) => {
+    setActionHistory((prev) => [...prev, action]);
   };
 
-  const calculateConversionCost = (card: DeckCard): number => {
-    let cost = 10;
+  const getCardPointValue = (card: DeckCard): number => {
+    if (card.isRemoved) return 0;
+    let points = 0;
+    if (card.cardType === "neutral") points += 20;
+    if (card.cardType === "monster") points += 80;
+    if (card.cardType === "forbidden") points += 20;
 
-    if (card.cardType === "starter") {
-      cost += 20;
-    }
-
-    // Divine conversion cost is 30 for neutral cards, otherwise 20.
     if (card.hasDivineEpiphany) {
-      cost += card.cardType === "neutral" ? 30 : 20;
+      points += card.cardType === "neutral" ? 30 : 20;
     } else if (card.hasNormalEpiphany && card.cardType !== "starter") {
-      cost += 10;
+      points += 10;
     }
-
-    return cost;
+    return points;
   };
 
-  const toggleNormalEpiphany = (cardId: string) => {
+  const toggleEpiphany = (cardId: string, type: "normal" | "divine") => {
     const card = deck.find((c) => c.id === cardId);
     if (!card || card.isRemoved || card.cardType === "forbidden") return;
 
-    if (!card.hasNormalEpiphany && card.hasDivineEpiphany) return;
+    const isDivine = type === "divine";
+    const current = isDivine ? card.hasDivineEpiphany : card.hasNormalEpiphany;
+    const opposite = isDivine ? card.hasNormalEpiphany : card.hasDivineEpiphany;
 
-    const isRemoving = card.hasNormalEpiphany;
+    if (current && opposite) return;
 
-    setActionHistory([
-      ...actionHistory,
-      {
-        type: "epiphany",
-        cardId,
-        previousDeck: [...deck],
-        previousPoints: totalPoints,
-      },
-    ]);
+    recordAction({
+      type: isDivine ? "divine" : "epiphany",
+      cardId,
+      previousDeck: [...deck],
+      previousPoints: totalPoints,
+    });
 
-    const updatedDeck = deck.map((c) =>
-      c.id === cardId ? { ...c, hasNormalEpiphany: !c.hasNormalEpiphany } : c
+    setDeck((prev) =>
+      prev.map((c) =>
+        c.id === cardId
+          ? {
+              ...c,
+              [isDivine ? "hasDivineEpiphany" : "hasNormalEpiphany"]: !current,
+            }
+          : c
+      )
     );
-    setDeck(updatedDeck);
 
-    if (card.cardType !== "starter") {
-      setTotalPoints(totalPoints + (isRemoving ? -10 : 10));
-    }
+    const delta = isDivine
+      ? card.cardType === "neutral"
+        ? 30
+        : 20
+      : card.cardType !== "starter"
+      ? 10
+      : 0;
 
-    setSelectedCard(null);
-  };
-
-  const toggleDivineEpiphany = (cardId: string) => {
-    const card = deck.find((c) => c.id === cardId);
-    if (!card || card.isRemoved || card.cardType === "forbidden") return;
-
-    if (!card.hasDivineEpiphany && card.hasNormalEpiphany) return;
-
-    const isRemoving = card.hasDivineEpiphany;
-
-    setActionHistory([
-      ...actionHistory,
-      {
-        type: "divine",
-        cardId,
-        previousDeck: [...deck],
-        previousPoints: totalPoints,
-      },
-    ]);
-
-    const updatedDeck = deck.map((c) =>
-      c.id === cardId ? { ...c, hasDivineEpiphany: !c.hasDivineEpiphany } : c
-    );
-    setDeck(updatedDeck);
-
-    // Use 30 points for neutral cards, otherwise 20:
-    const delta = card.cardType === "neutral" ? 30 : 20;
-    setTotalPoints(totalPoints + (isRemoving ? -delta : delta));
-
+    setTotalPoints((p) => p + (current ? -delta : delta));
     setSelectedCard(null);
   };
 
   const duplicateCard = (cardId: string) => {
     const card = deck.find((c) => c.id === cardId);
     if (!card || card.isRemoved) return;
-    // if (card.cardType === "forbidden") return
 
-    const cost = calculateDuplicationCost(card);
+    const cost = [0, 10, 30, 50, 70][duplicationCount] ?? 70;
+    const totalCost = cost + getCardPointValue(card);
+
     const newCard: DeckCard = {
       ...card,
       id: Date.now().toString(),
-      name: card.name,
-      isRemoved: false,
       isDuplicated: true,
-      duplicationCost: cost,
+      duplicationCost: totalCost,
+      isRemoved: false,
     };
 
-    setActionHistory([
-      ...actionHistory,
-      {
-        type: "duplicate",
-        cardId,
-        previousDeck: [...deck],
-        previousPoints: totalPoints,
-        previousDuplicationCount: duplicationCount,
-      },
-    ]);
+    recordAction({
+      type: "duplicate",
+      cardId,
+      previousDeck: [...deck],
+      previousPoints: totalPoints,
+      previousDuplicationCount: duplicationCount,
+    });
 
-    setDeck([...deck, newCard]);
-    setDuplicationCount(duplicationCount + 1);
-    setTotalPoints(totalPoints + cost);
+    setDeck((prev) => [...prev, newCard]);
+    setDuplicationCount((c) => c + 1);
+    setTotalPoints((p) => p + totalCost);
     setSelectedCard(null);
-  };
-
-  const getDuplicationCostForCard = (card: DeckCard): number => {
-    if (!card.isDuplicated) return 0;
-
-    // how many duplicates were made BEFORE this one
-    const previousDupes = deck.filter(
-      (c) =>
-        c.isDuplicated &&
-        c.id !== card.id &&
-        deck.findIndex((dc) => dc.id === c.id) <
-          deck.findIndex((dc) => dc.id === card.id)
-    ).length;
-
-    if (previousDupes === 0) return 0;
-    if (previousDupes === 1) return 10;
-    if (previousDupes === 2) return 30;
-    if (previousDupes === 3) return 50;
-    return 70;
   };
 
   const convertCard = (cardId: string) => {
@@ -1032,69 +986,36 @@ export function RunTracker() {
     )
       return;
 
-    const cost = calculateConversionCost(card);
+    let cost = 10;
+    if (card.cardType === "starter") cost += 20;
+    if (card.hasDivineEpiphany) cost += card.cardType === "neutral" ? 30 : 20;
+    else if (card.hasNormalEpiphany && card.cardType !== "starter") cost += 10;
 
-    setActionHistory([
-      ...actionHistory,
-      {
-        type: "convert",
-        cardId,
-        previousDeck: [...deck],
-        previousPoints: totalPoints,
-        previousConversionCount: conversionCount,
-      },
-    ]);
+    recordAction({
+      type: "convert",
+      cardId,
+      previousDeck: [...deck],
+      previousPoints: totalPoints,
+      previousConversionCount: conversionCount,
+    });
 
-    setDeck(
-      deck.map((c) =>
+    setDeck((prev) =>
+      prev.map((c) =>
         c.id === cardId
           ? {
               ...c,
               cardType: "neutral",
               wasConverted: true,
               isStartingCard: false,
-              image: DEFAULT_CARD_IMAGES.neutral,
               name: "Neutral Card",
+              image: DEFAULT_CARD_IMAGES.neutral,
             }
           : c
       )
     );
 
-    setConversionCount(conversionCount + 1);
-    setTotalPoints(totalPoints + cost);
-    setSelectedCard(null);
-  };
-
-  const convertToMutantSample = (cardId: string) => {
-    const card = deck.find((c) => c.id === cardId);
-    if (!card || card.isRemoved) return;
-    if (card.cardType === "forbidden") return;
-
-    setActionHistory([
-      ...actionHistory,
-      {
-        type: "mutant",
-        cardId,
-        previousDeck: [...deck],
-        previousPoints: totalPoints,
-      },
-    ]);
-
-    setDeck(
-      deck.map((c) =>
-        c.id === cardId
-          ? {
-              ...c,
-              isRemoved: true,
-              isMutantSample: true,
-              removalCost: 0,
-              image: "/images/card/remove.png",
-            }
-          : c
-      )
-    );
-
-    // No cost and doesn't increase removal count
+    setConversionCount((c) => c + 1);
+    setTotalPoints((p) => p + cost);
     setSelectedCard(null);
   };
 
@@ -1102,937 +1023,697 @@ export function RunTracker() {
     const card = deck.find((c) => c.id === cardId);
     if (!card || card.isRemoved || card.cardType === "forbidden") return;
 
-    const newRemovalCount = removalCount + 1;
+    const newCount = removalCount + 1;
+    const scaleCost = [0, 10, 30, 50, 70][newCount - 1] ?? 70;
+    const starterTax =
+      (card.isStartingCard && !card.wasConverted) || card.hasNormalEpiphany
+        ? 20
+        : 0;
+    const cardPoints = getCardPointValue(card);
 
-    // Scaling cost: 0, 10, 30, 50, 70
-    let scaleCost = 0;
-    if (newRemovalCount === 1) scaleCost = 0;
-    else if (newRemovalCount === 2) scaleCost = 10;
-    else if (newRemovalCount === 3) scaleCost = 30;
-    else if (newRemovalCount === 4) scaleCost = 50;
-    else scaleCost = 70;
-
-    // Starter/base card tax (+20) if applicable
-    const starterTax = card.isStartingCard ? 20 : 0;
-    // Total points contributed by the card (base + epiphanies)
-    const totalCardPoints = getCardPointValue(card);
-
-    // Final removal cost = scaleCost + starterTax - totalCardPoints
-    // Ensure that any card with normal/divine epiphany is fully removed (neutral/monster cards)
     const removalCost =
       card.cardType === "neutral" || card.cardType === "monster"
-        ? -totalCardPoints + starterTax + scaleCost
-        : scaleCost + starterTax - totalCardPoints;
+        ? scaleCost + starterTax - cardPoints
+        : scaleCost + starterTax - cardPoints;
 
-    setActionHistory([
-      ...actionHistory,
-      {
-        type: "remove",
-        cardId,
-        previousDeck: [...deck],
-        previousPoints: totalPoints,
-        previousRemovalCount: removalCount,
-      },
-    ]);
+    recordAction({
+      type: "remove",
+      cardId,
+      previousDeck: [...deck],
+      previousPoints: totalPoints,
+      previousRemovalCount: removalCount,
+    });
 
-    setDeck(
-      deck.map((c) =>
+    setDeck((prev) =>
+      prev.map((c) =>
         c.id === cardId ? { ...c, isRemoved: true, removalCost } : c
       )
     );
-    setRemovalCount(newRemovalCount);
-    setTotalPoints(totalPoints + removalCost);
+    setRemovalCount(newCount);
+    setTotalPoints((p) => p + removalCost);
+    setSelectedCard(null);
+  };
+
+  const convertToMutantSample = (cardId: string) => {
+    const card = deck.find((c) => c.id === cardId);
+    if (!card || card.isRemoved || card.cardType === "forbidden") return;
+
+    recordAction({
+      type: "mutant",
+      cardId,
+      previousDeck: [...deck],
+      previousPoints: totalPoints,
+    });
+
+    setDeck((prev) =>
+      prev.map((c) =>
+        c.id === cardId
+          ? {
+              ...c,
+              isRemoved: true,
+              isMutantSample: true,
+              image: DEFAULT_CARD_IMAGES.remove,
+            }
+          : c
+      )
+    );
     setSelectedCard(null);
   };
 
   const addNewCard = (type: CardType) => {
-    const nameMap = {
+    const names = {
       neutral: "Neutral Card",
       monster: "Monster Card",
       forbidden: "Forbidden Card",
-      starter: "Starter Card", // just in case
+      starter: "Starter Card",
     };
-
     const newCard: DeckCard = {
       id: Date.now().toString(),
-      name: nameMap[type],
-      image: DEFAULT_CARD_IMAGES[type] ?? DEFAULT_CARD_IMAGES.placeholder,
+      name: names[type],
+      image: DEFAULT_CARD_IMAGES[type],
       cardType: type,
       isStartingCard: false,
       hasNormalEpiphany: false,
       hasDivineEpiphany: false,
       isRemoved: false,
       wasConverted: false,
+      isAdded: true,
     };
 
-    setActionHistory([
-      ...actionHistory,
-      {
-        type: "add",
-        cardId: newCard.id,
-        previousDeck: [...deck],
-        previousPoints: totalPoints,
-      },
-    ]);
+    recordAction({
+      type: "add",
+      cardId: newCard.id,
+      previousDeck: [...deck],
+      previousPoints: totalPoints,
+    });
 
-    setDeck([...deck, newCard]);
-    setTotalPoints(totalPoints + getCardPointValue(newCard));
+    setDeck((prev) => [...prev, newCard]);
+    setTotalPoints((p) => p + getCardPointValue(newCard));
     setShowAddCard(false);
   };
 
-  // const restoreCard = (cardId: string) => {
-  //   const card = deck.find((c) => c.id === cardId)
-  //   if (!card || !card.isRemoved) return
-
-  //   const cost = card.removalCost || 0
-
-  //   setActionHistory([
-  //     ...actionHistory,
-  //     {
-  //       type: "restore",
-  //       cardId,
-  //       previousDeck: [...deck],
-  //       previousPoints: totalPoints,
-  //       previousRemovalCount: removalCount,
-  //     },
-  //   ])
-
-  //   setDeck(deck.map((c) => (c.id === cardId ? { ...c, isRemoved: false, removalCost: undefined } : c)))
-  //   setRemovalCount(removalCount - 1)
-  //   setTotalPoints(totalPoints - cost)
-  // }
-
   const resetDeck = () => {
-    const characterData =
-      character !== "none" ? CHARACTER_CARDS[character] : null; // Use character state
-
-    setDeck([
-      {
-        id: "1",
-        name: characterData ? (characterData.starter[0] as CardEntry).name : "",
-        image: characterData
-          ? (characterData.starter[0] as CardEntry).image
-          : undefined,
-        cardType: "starter",
-        isStartingCard: true,
-        hasNormalEpiphany: false,
-        hasDivineEpiphany: false,
-        isRemoved: false,
-        wasConverted: false,
-      },
-      {
-        id: "2",
-        name: characterData ? (characterData.starter[1] as CardEntry).name : "",
-        image: characterData
-          ? (characterData.starter[1] as CardEntry).image
-          : undefined,
-        cardType: "starter",
-        isStartingCard: true,
-        hasNormalEpiphany: false,
-        hasDivineEpiphany: false,
-        isRemoved: false,
-        wasConverted: false,
-      },
-      {
-        id: "3",
-        name: characterData ? (characterData.starter[2] as CardEntry).name : "",
-        image: characterData
-          ? (characterData.starter[2] as CardEntry).image
-          : undefined,
-        cardType: "starter",
-        isStartingCard: true,
-        hasNormalEpiphany: false,
-        hasDivineEpiphany: false,
-        isRemoved: false,
-        wasConverted: false,
-      },
-      {
-        id: "4",
-        name: characterData ? (characterData.starter[3] as CardEntry).name : "",
-        image: characterData
-          ? (characterData.starter[3] as CardEntry).image
-          : undefined,
-        cardType: "starter",
-        isStartingCard: true,
-        hasNormalEpiphany: false,
-        hasDivineEpiphany: false,
-        isRemoved: false,
-        wasConverted: false,
-      },
-      {
-        id: "5",
-        name: characterData ? (characterData.unique[0] as CardEntry).name : "",
-        image: characterData
-          ? (characterData.unique[0] as CardEntry).image
-          : undefined,
-        cardType: "starter", // Defaulting to starter
-        isStartingCard: true,
-        hasNormalEpiphany: false,
-        hasDivineEpiphany: false,
-        isRemoved: false,
-        wasConverted: false,
-      },
-      {
-        id: "6",
-        name: characterData ? (characterData.unique[1] as CardEntry).name : "",
-        image: characterData
-          ? (characterData.unique[1] as CardEntry).image
-          : undefined,
-        cardType: "starter", // Defaulting to starter
-        isStartingCard: true,
-        hasNormalEpiphany: false,
-        hasDivineEpiphany: false,
-        isRemoved: false,
-        wasConverted: false,
-      },
-      {
-        id: "7",
-        name: characterData ? (characterData.unique[2] as CardEntry).name : "",
-        image: characterData
-          ? (characterData.unique[2] as CardEntry).image
-          : undefined,
-        cardType: "starter", // Defaulting to starter
-        isStartingCard: true,
-        hasNormalEpiphany: false,
-        hasDivineEpiphany: false,
-        isRemoved: false,
-        wasConverted: false,
-      },
-      {
-        id: "8",
-        name: characterData ? (characterData.unique[3] as CardEntry).name : "",
-        image: characterData
-          ? (characterData.unique[3] as CardEntry).image
-          : undefined,
-        cardType: "starter", // Defaulting to starter
-        isStartingCard: true,
-        hasNormalEpiphany: false,
-        hasDivineEpiphany: false,
-        isRemoved: false,
-        wasConverted: false,
-      },
-    ]);
+    handleCharacterChange(character);
     setRemovalCount(0);
     setDuplicationCount(0);
     setConversionCount(0);
     setTotalPoints(0);
-    setSelectedCard(null);
     setActionHistory([]);
   };
 
-  const deleteCard = (cardId: string) => {
-    setDeck(deck.filter((c) => c.id !== cardId));
-  };
-
-  const getCardPointValue = (card: DeckCard): number => {
-    if (card.isRemoved) return 0;
-
-    let points = 0;
-
-    if (card.cardType === "neutral") points += 20;
-    if (card.cardType === "monster") points += 80;
-    if (card.cardType === "forbidden") points += 20;
-    if (card.cardType === "starter") points += 0;
-
-    // Divine gives 30 if the card is neutral, otherwise 20.
-    if (card.hasDivineEpiphany) {
-      points += card.cardType === "neutral" ? 30 : 20;
-    } else if (card.hasNormalEpiphany && card.cardType !== "starter") {
-      points += 10;
-    }
-
-    return points;
-  };
-
-  const percentage = (totalPoints / limit) * 100;
-
   const undoLastAction = () => {
     if (actionHistory.length === 0) return;
+    const last = actionHistory[actionHistory.length - 1];
 
-    const lastAction = actionHistory[actionHistory.length - 1];
+    if (last.previousDeck) setDeck(last.previousDeck);
+    if (last.previousPoints !== undefined) setTotalPoints(last.previousPoints);
+    if (last.previousRemovalCount !== undefined)
+      setRemovalCount(last.previousRemovalCount);
+    if (last.previousDuplicationCount !== undefined)
+      setDuplicationCount(last.previousDuplicationCount);
+    if (last.previousConversionCount !== undefined)
+      setConversionCount(last.previousConversionCount);
 
-    if (lastAction.previousDeck) {
-      setDeck(lastAction.previousDeck);
-    }
-    if (lastAction.previousPoints !== undefined) {
-      setTotalPoints(lastAction.previousPoints);
-    }
-    if (lastAction.previousRemovalCount !== undefined) {
-      setRemovalCount(lastAction.previousRemovalCount);
-    }
-    if (lastAction.previousDuplicationCount !== undefined) {
-      setDuplicationCount(lastAction.previousDuplicationCount);
-    }
-    if (lastAction.previousConversionCount !== undefined) {
-      setConversionCount(lastAction.previousConversionCount);
-    }
-
-    setActionHistory(actionHistory.slice(0, -1));
+    setActionHistory((prev) => prev.slice(0, -1));
     setSelectedCard(null);
   };
 
+  const deleteCard = (cardId: string) => {
+    setDeck((prev) => prev.filter((c) => c.id !== cardId));
+  };
+
+  // Click outside to deselect
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as HTMLElement;
-
+    const handler = (e: MouseEvent) => {
       if (!selectedCard) return;
-
-      const selectedCardElement = document.getElementById(
-        `card-${selectedCard}`
-      );
-      if (!selectedCardElement) return;
-
-      if (selectedCardElement.contains(target)) return;
-
-      setSelectedCard(null);
+      const el = document.getElementById(`card-${selectedCard}`);
+      if (el && !el.contains(e.target as Node)) {
+        setSelectedCard(null);
+      }
     };
+    document.addEventListener("click", handler);
+    return () => document.removeEventListener("click", handler);
+  }, [selectedCard]);
 
-    document.addEventListener("click", handleClickOutside);
+  const renderCard = (card: DeckCard, isBase: boolean) => {
+    const isSelected = selectedCard === card.id;
+    const factionBorder = Object.entries(FACTION_BORDER_MAP).find(([, chars]) =>
+      chars.includes(character)
+    )?.[0];
 
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, [selectedCard]); //
+    return (
+      <div
+        key={card.id}
+        id={`card-${card.id}`}
+        className={`group relative aspect-[2/3] cursor-pointer rounded-md overflow-hidden transition-all hover:scale-105 ${
+          isSelected ? "ring-1 ring-purple-400" : ""
+        } ${
+          card.isRemoved ? "opacity-50" : ""
+        } bg-black/40 backdrop-blur-sm border border-white/10`}
+        onClick={() => {
+          if (card.isMutantSample) return;
+          card.isRemoved
+            ? undoLastAction()
+            : setSelectedCard(isSelected ? null : card.id);
+        }}
+      >
+        {card.isRemoved && (
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              deleteCard(card.id);
+            }}
+            className="absolute top-1 right-1 z-20 p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+          >
+            <X className="h-4 w-4 text-white" />
+          </button>
+        )}
 
-  return (
-    <TooltipProvider>
-      <div className="space-y-6">
-        <div className="space-y-1">
-          <h2 className="text-2xl font-bold">Save Data Calculator</h2>
-          <p className="text-sm text-muted-foreground">
-            Track your current run progress
-          </p>
+        {card.image ? (
+          <img
+            src={card.image}
+            alt={card.name}
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{
+              transform: card.isDuplicated
+                ? "scaleX(-1) scale(1.05)"
+                : "scale(1.05)",
+            }}
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center text-white/40 text-xs">
+            No Image
+          </div>
+        )}
+
+        {/* Faction / Type Borders */}
+        {isBase && factionBorder && (
+          <img
+            src={factionBorder}
+            alt="Faction border"
+            className="z-10 scale-105 absolute left-0 top-0 bottom-0 w-auto h-full object-cover object-left pointer-events-none opacity-90"
+          />
+        )}
+        {card.cardType === "neutral" && !card.isStartingCard && (
+          <img
+            src="/images/card/neutral-border.png"
+            className="z-10 scale-105 absolute left-0 top-0 bottom-0 w-auto h-full object-cover object-left pointer-events-none opacity-90"
+          />
+        )}
+        {card.cardType === "monster" && (
+          <img
+            src="/images/card/monster-border.png"
+            className="z-10 scale-105 absolute left-0 top-0 bottom-0 w-auto h-full object-cover object-left pointer-events-none opacity-90"
+          />
+        )}
+        {card.isDuplicated && (
+          <img
+            src="/images/card/deco_card_copy.png"
+            className="z-10 scale-105 absolute right-0 top-0 bottom-0 w-auto h-full object-cover object-left pointer-events-none opacity-90"
+          />
+        )}
+
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/70 p-2 flex flex-col justify-between text-xs text-white">
+          <div>
+            {!card.isRemoved && (
+              <span className="font-sm pl-1">{card.name}</span>
+            )}
+            <div className="flex gap-1 mt-1 pl-2">
+              {card.hasDivineEpiphany && (
+                <img
+                  src="/images/card/icon_card_battle_expand_circen.png"
+                  alt="Divine"
+                  className="h-12 w-8"
+                />
+              )}
+              {card.hasNormalEpiphany && (
+                <img
+                  src="/images/card/icon_card_battle_expand_default.png"
+                  alt="Epiphany"
+                  className="h-12 w-12"
+                />
+              )}
+            </div>
+          </div>
+          <div className="text-right font-bold drop-shadow-md">
+            {card.duplicationCost ?? getCardPointValue(card)}
+          </div>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-3">
-          <div className="space-y-4 lg:col-span-2">
-            <Card>
-              <CardHeader>
-                <CardTitle>Run Configuration</CardTitle>
-                <CardDescription>Select your Tier</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-end gap-4">
-                  <div className="flex-1 space-y-2">
-                    <Label>Tier</Label>
-                    <Select
-                      value={tier.toString()}
-                      onValueChange={(val) => setTier(Number.parseInt(val))}
-                    >
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {Object.keys(TIER_LIMITS).map((t) => (
-                          <SelectItem key={t} value={t}>
-                            Tier {t} - {TIER_LIMITS[Number.parseInt(t)]} points
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
+        {isSelected && !card.isRemoved && !card.isMutantSample && (
+          <div className="absolute inset-0 flex flex-col justify-center gap-1 p-2 z-30 bg-black/60 backdrop-blur-sm rounded-md">
+            {/* Card Actions Modal */}
+            <Dialog
+              open={!!selectedCard}
+              onOpenChange={(open) => !open && setSelectedCard(null)}
+            >
+              <DialogContent className="sm:max-w-xs">
+                <DialogHeader>
+                  <DialogTitle className="text-xl text-center">
+                    {selectedCard &&
+                      deck.find((c) => c.id === selectedCard)?.name}
+                  </DialogTitle>
+                </DialogHeader>
 
-                  <div className="flex items-center gap-2 pb-2">
-                    <Checkbox
-                      id="nightmare"
-                      checked={nightmareMode}
-                      onCheckedChange={(checked) =>
-                        setNightmareMode(checked as boolean)
-                      } // Use setNightmareMode
-                    />
-                    <Label htmlFor="nightmare" className="cursor-pointer">
-                      Nightmare Mode
-                    </Label>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <HelpCircle className="h-4 w-4 text-muted-foreground" />
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>Increases the Save Data cap by 10 points</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </div>
-                </div>
+                {selectedCard &&
+                  (() => {
+                    const card = deck.find((c) => c.id === selectedCard)!;
+                    if (card.isRemoved || card.isMutantSample) return null;
 
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Points Used</span>
-                    <span className="font-bold">
-                      {totalPoints} / {limit}
-                    </span>
-                  </div>
-                  <div className="h-4 w-full overflow-hidden rounded-full bg-secondary ring-1 ring-border">
-                    <div
-                      className={`h-full transition-all ${
-                        percentage > 100
-                          ? "bg-gradient-to-r from-[#C41729] to-[#FF601A]"
-                          : "bg-gradient-to-r from-[#5B1FAF] to-[#19F7E1]"
-                      }`}
-                      style={{ width: `${Math.min(percentage, 100)}%` }}
-                    />
-                  </div>
-                  {percentage > 100 && (
-                    <p className="text-xs text-red-400 font-semibold">
-                      Over limit by {totalPoints - limit} points!
-                    </p>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
+                    const cardPosition = parseInt(card.id);
+                    const isProtectedBaseCard =
+                      !isNaN(cardPosition) &&
+                      (cardPosition <= 3 || cardPosition === 8);
 
-            <Card>
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <CardTitle>Deck Cards</CardTitle>
-                    <CardDescription>
-                      Click a card to apply effects
-                    </CardDescription>
-                  </div>
-                  <div className="flex gap-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={undoLastAction}
-                      disabled={actionHistory.length === 0}
-                      className="gap-2 
-                        !border !border-[#5B1FAF]/50 
-                        !bg-[#5B1FAF]/10 
-                        hover:!bg-[#5B1FAF]/20 
-                        hover:!border-[#5B1FAF]/70
-                        disabled:opacity-50"
-                    >
-                      <Undo className="h-4 w-4" />
-                      Undo
-                    </Button>
-
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={resetDeck}
-                      className="gap-2 
-                        !border !border-[#C41729]/50 
-                        !bg-[#C41729]/10 
-                        hover:!bg-[#C41729]/20 
-                        hover:!border-[#C41729]/70"
-                    >
-                      <RotateCcw className="h-4 w-4" />
-                      Reset
-                    </Button>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-2">
-                  <Label>Character</Label>
-                  <Select
-                    value={character}
-                    onValueChange={handleCharacterChange}
-                  >
-                    {" "}
-                    {/* Use character state */}
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a character..." />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="none">None</SelectItem>
-                      {Object.keys(CHARACTER_CARDS)
-                        .sort()
-                        .map((char) => (
-                          <SelectItem key={char} value={char}>
-                            {formatCharacterName(char)}
-                          </SelectItem>
-                        ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 max-w-[780px] mx-auto">
-                  {deck.map((card, index) => (
-                    <div
-                      key={card.id}
-                      id={`card-${card.id}`}
-                      className={`group relative aspect-[2/3] cursor-pointer rounded-lg transition-all hover:scale-105 ${
-                        selectedCard === card.id
-                          ? "shadow-lg shadow-[#5B1FAF]/20"
-                          : ""
-                      } ${card.isRemoved ? "opacity-50 grayscale" : ""} ${
-                        card.cardType === "starter"
-                          ? "bg-gradient-to-br from-[#0A0B0F] to-[#06070A]"
-                          : card.cardType === "neutral"
-                          ? "bg-gradient-to-br from-[#0A0B0F] to-[#06070A] shadow-[#19F7E1]/5"
-                          : card.cardType === "monster"
-                          ? "bg-gradient-to-br from-[#0A0B0F] to-[#06070A] shadow-[#5B1FAF]/5"
-                          : "bg-gradient-to-br from-[#0A0B0F] to-[#06070A] shadow-[#C41729]/5"
-                      }`}
-                      onClick={() => {
-                        if (card.isMutantSample) {
-                          return;
-                        }
-                        if (card.isRemoved) {
-                          undoLastAction();
-                        } else {
-                          setSelectedCard(
-                            selectedCard === card.id ? null : card.id
-                          );
-                        }
-                      }}
-                    >
-                      {card.isRemoved && (
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            deleteCard(card.id);
-                          }}
-                          className="absolute right-2 top-2 z-10 rounded-full bg-[#1A1B20] p-1 text-[#C3C7D0] opacity-0 shadow-lg ring-2 ring-border transition-all hover:bg-[#C41729]/20 hover:ring-[#C41729]/50 group-hover:opacity-100"
-                        >
-                          <X className="h-4 w-4" />
-                        </button>
-                      )}
-
-                      <div className="flex w-full h-full flex-col">
-                        <div className="relative h-full w-full rounded-md overflow-hidden">
-                          {card.image ? (
-                            <img
-                              src={card.image || "/placeholder.svg"}
-                              alt={card.name || "card image"}
-                              className="absolute inset-0 w-full h-full object-cover object-center [backface-visibility:hidden] [transform:translateZ(0)]"
-                              style={{
-                                transform: card.isDuplicated
-                                  ? "scaleX(-1) scale(1.10)" // Flip + zoom for duplicated
-                                  : "scale(1.10)", // Normal zoom
-                              }}
-                            />
-                          ) : (
-                            <div className="absolute inset-0 flex items-center justify-center bg-card/50 border-2 border-dashed border-border/30 text-xs text-muted-foreground">
-                              No Image
-                            </div>
-                          )}
-
-                          {["amir", "luke", "hugo", "yuki"].includes(
-                            character
-                          ) && ( // Use character state
-                            <img
-                              src="/images/card/order-border.png"
-                              alt="Order border"
-                              className="absolute left-0 top-0.5 h-full w-auto z-[5] pointer-events-none scale-104"
-                            />
-                          )}
-
-                          {[
-                            "tressa",
-                            "rin",
-                            "renoa",
-                            "rei",
-                            "kayron",
-                            "chizuru",
-                          ].includes(character) && ( // Use character state
-                            <img
-                              src="/images/card/void-border.png"
-                              alt="Void border"
-                              className="absolute left-0 top-0.5 h-full w-auto z-[5] pointer-events-none scale-104"
-                            />
-                          )}
-
-                          {[
-                            "nia",
-                            "khalipe",
-                            "orlea",
-                            "cassius",
-                            "sereniel",
-                          ].includes(character) && ( // Use character state
-                            <img
-                              src="/images/card/instinct-border.png"
-                              alt="Instinct border"
-                              className="absolute left-0 top-0.5 h-full w-auto z-[5] pointer-events-none scale-104"
-                            />
-                          )}
-
-                          {[
-                            "selena",
-                            "lucas",
-                            "mei-lin",
-                            "maribell",
-                            "veronica",
-                            "owen",
-                          ].includes(character) && ( // Use character state
-                            <img
-                              src="/images/card/passion-border.png"
-                              alt="Passion border"
-                              className="absolute left-0 top-0.5 h-full w-auto z-[5] pointer-events-none scale-104"
-                            />
-                          )}
-
-                          {["magna", "mika", "beryl", "haru"].includes(
-                            character
-                          ) && ( // Use character state
-                            <img
-                              src="/images/card/justice-border.png"
-                              alt="Justice border"
-                              className="absolute left-0 top-0.5 h-full w-auto z-[5] pointer-events-none scale-104"
-                            />
-                          )}
-
-                          {/* Neutral border */}
-                          {card.cardType === "neutral" &&
-                            !card.isStartingCard && (
-                              <img
-                                src="/images/card/neutral-border.png"
-                                alt="Neutral border"
-                                className="absolute left-0 top-0.5 h-full w-auto z-[5] pointer-events-none scale-104"
-                              />
-                            )}
-
-                          {/* Monster border */}
-                          {card.cardType === "monster" && (
-                            <img
-                              src="/images/card/monster-border.png"
-                              alt="Monster Card Border"
-                              className="absolute left-0 top-0.5 h-full w-auto z-[5] pointer-events-none scale-104"
-                            />
-                          )}
-
-                          {card.isDuplicated && (
-                            <img
-                              src="/images/card/deco_card_copy.png"
-                              alt="Duplicate border"
-                              className="absolute right-0 top-0 h-full w-auto z-[5] pointer-events-none scale-101"
-                            />
-                          )}
-
-                          {/* Overlay content — z-10 so it sits above the image. gradient to keep text readable */}
-                          <div className="absolute inset-0 z-0 pointer-events-none flex flex-col justify-between p-4 pl-5 bg-gradient-to-b from-black/60 via-transparent to-black/60">
-                            <div className="space-y-4">
-                              {!card.isRemoved && (
-                                <div className="flex items-center gap-2">
-                                  <div
-                                    className={`text-base font-medium leading-tight break-words ${
-                                      card.wasConverted
-                                        ? "text-white"
-                                        : "text-white"
-                                    }`}
-                                  >
-                                    {card.name}
-                                  </div>
-                                </div>
-                              )}
-
-                              <div className="space-y-1">
-                                <div className="flex items-start gap-1.5">
-                                  {card.hasDivineEpiphany && (
-                                    <img
-                                      src="/images/card/icon_card_battle_expand_circen.png"
-                                      alt="Divine Epiphany"
-                                      className="w-12 h-12 flex-shrink-0 object-contain"
-                                    />
-                                  )}
-                                  {card.hasNormalEpiphany && (
-                                    <img
-                                      src="/images/card/icon_card_battle_expand_default.png"
-                                      alt="Epiphany"
-                                      className="w-12 h-12 flex-shrink-0 object-contain"
-                                    />
-                                  )}
-                                  {/* <div className="space-y-1">
-                                    {card.wasConverted && (
-                                      <Badge
-                                        variant="outline"
-                                        className="h-5 text-[10px] border-neutral-400/40 bg-neutral-700/40 text-white font-semibold"
-                                        style={{
-                                          textShadow:
-                                            "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0 0 3px #000",
-                                        }}
-                                      >
-                                        Neutral Card
-                                      </Badge>
-                                    )}
-                                  </div> */}
-                                </div>
-                              </div>
-                            </div>
-                            <div className="text-right">
-                              <div className="text-2xl font-bold text-gray-300">
-                                {card.duplicationCost !== undefined
-                                  ? card.duplicationCost
-                                  : getCardPointValue(card)}
-                              </div>
-                            </div>
-                          </div>
+                    const isForbidden = card.cardType === "forbidden";
+                    if (isForbidden) {
+                      return (
+                        <div className="grid gap-3 py-4">
+                          <Button
+                            variant="outline"
+                            onClick={() => duplicateCard(card.id)}
+                          >
+                            Duplicate Card
+                          </Button>
                         </div>
-                      </div>
+                      );
+                    }
 
-                      {selectedCard === card.id &&
-                        !card.isRemoved &&
-                        !card.isMutantSample && (
-                          <div className="absolute inset-0 z-30 flex flex-col gap-1 rounded-lg bg-[#06070A]/80 p-2 backdrop-blur-sm ring-2 ring-purple-400/100">
+                    return (
+                      <div className="grid gap-3 py-4">
+                        {!isProtectedBaseCard && (
+                          <>
                             <Button
-                              size="sm"
-                              variant="outline"
-                              className="h-8 text-xs border-border hover:bg-secondary bg-transparent"
-                              disabled={
-                                card.hasDivineEpiphany ||
-                                card.cardType === "forbidden"
+                              variant={
+                                card.hasNormalEpiphany ? "destructive" : "ghost"
                               }
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                toggleNormalEpiphany(card.id);
-                              }}
+                              disabled={card.hasDivineEpiphany}
+                              onClick={() => toggleEpiphany(card.id, "normal")}
                             >
                               {card.hasNormalEpiphany
                                 ? "Remove Epiphany"
-                                : "Epiphany"}
+                                : "Add Epiphany"}
                             </Button>
+
                             <Button
-                              size="sm"
-                              variant="outline"
-                              className="h-8 text-xs border-border hover:bg-secondary bg-transparent"
-                              disabled={
-                                card.hasNormalEpiphany ||
-                                card.cardType === "forbidden"
+                              variant={
+                                card.hasDivineEpiphany ? "destructive" : "ghost"
                               }
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                toggleDivineEpiphany(card.id);
-                              }}
+                              disabled={card.hasNormalEpiphany}
+                              onClick={() => toggleEpiphany(card.id, "divine")}
                             >
                               {card.hasDivineEpiphany
                                 ? "Remove Divine Epiphany"
-                                : "Divine Epiphany"}
+                                : "Add Divine Epiphany"}
                             </Button>
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              className="h-8 text-xs border-border hover:bg-secondary bg-transparent"
-                              // disabled={card.cardType === "forbidden"}
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                duplicateCard(card.id);
-                              }}
-                            >
-                              Duplicate
-                            </Button>
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              className="h-8 text-xs border-border hover:bg-secondary bg-transparent"
-                              disabled={
-                                card.wasConverted ||
-                                card.cardType === "forbidden"
-                              }
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                convertCard(card.id);
-                              }}
-                            >
-                              Convert
-                            </Button>
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              className="h-8 text-xs border-purple-400/50 bg-purple-400/10 hover:bg-purple-400/20"
-                              disabled={card.cardType === "forbidden"}
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                convertToMutantSample(card.id);
-                              }}
-                            >
-                              Convert to [Remove]
-                            </Button>
-                            <Button
-                              size="sm"
-                              variant="destructive"
-                              className="h-8 text-xs bg-red-400/20 border-red-400/50 hover:bg-red-400/30"
-                              // disabled={card.cardType === "forbidden"}
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                removeCard(card.id);
-                              }}
-                            >
-                              Remove
-                            </Button>
-                          </div>
+                          </>
                         )}
-                    </div>
+
+                        <Button
+                          variant="outline"
+                          onClick={() => duplicateCard(card.id)}
+                        >
+                          Duplicate Card
+                        </Button>
+
+                        <Button
+                          variant="outline"
+                          disabled={card.wasConverted}
+                          onClick={() => convertCard(card.id)}
+                        >
+                          Convert to Neutral
+                        </Button>
+
+                        <Button
+                          variant="outline"
+                          onClick={() => convertToMutantSample(card.id)}
+                        >
+                          To Mutant Sample
+                        </Button>
+
+                        <Button
+                          variant="destructive"
+                          onClick={() => {
+                            removeCard(card.id);
+                            setSelectedCard(null);
+                          }}
+                        >
+                          Remove Card
+                        </Button>
+                      </div>
+                    );
+                  })()}
+              </DialogContent>
+            </Dialog>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const baseCards = deck.filter((c) => {
+    const id = parseInt(c.id);
+    return (
+      !isNaN(id) && id >= 1 && id <= 8 && !c.wasConverted && !c.isDuplicated
+    );
+  });
+
+  const addedCards = deck.filter(
+    (c) => c.isDuplicated || c.wasConverted || c.isAdded || c.isMutantSample
+  );
+
+  return (
+    <TooltipProvider>
+      <div className="space-y-6 max-w-7xl mx-auto px-6">
+        <div className="text-center py-8 -mt-8">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-wide drop-shadow-2xl leading-tight text-left">
+            Save Data Helper
+          </h2>
+        </div>
+
+        {/* Run Configuration */}
+        <Card className="border-border/60 bg-card/40 backdrop-blur-sm">
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold bg-gradient-to-r from-sky-300 via-purple-300 to-pink-300 bg-clip-text text-transparent">
+              Run Configuration
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-8">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+              <div className="flex-1 space-y-3 w-full">
+                <Label className="text-base font-medium">
+                  Faint Memory Tier
+                </Label>
+                <div className="grid grid-cols-4 sm:grid-cols-7 gap-2">
+                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map((t) => (
+                    <Button
+                      key={t}
+                      variant={tier === t ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => setTier(t)}
+                      className={
+                        tier === t
+                          ? "bg-gradient-to-r from-purple-500 to-cyan-500 text-white hover:from-purple-600 hover:to-cyan-600"
+                          : ""
+                      }
+                    >
+                      {t}
+                    </Button>
                   ))}
                 </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <Checkbox
+                  id="nightmare"
+                  checked={nightmareMode}
+                  onCheckedChange={(v) => setNightmareMode(!!v)}
+                />
+                <Label htmlFor="nightmare" className="cursor-pointer">
+                  Nightmare Mode
+                </Label>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <HelpCircle className="h-5 w-5" />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>+10 points to Faint Memory Limit</p>
+                  </TooltipContent>
+                </Tooltip>
+              </div>
+            </div>
 
-                <Dialog open={showAddCard} onOpenChange={setShowAddCard}>
-                  <DialogTrigger asChild>
-                    <Button
-                      variant="outline"
-                      className="w-full border-[#5B1FAF]/30 bg-[#5B1FAF]/10 hover:bg-[#5B1FAF]/20 hover:border-[#5B1FAF]/50"
-                    >
-                      <Plus className="mr-2 h-4 w-4" />
-                      Add Card
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className="bg-[#0A0B0F] border-[#1F2127]">
-                    <DialogHeader>
-                      <DialogTitle>Add New Card</DialogTitle>
-                      <DialogDescription>
-                        Select the type of card to add to your deck
-                      </DialogDescription>
-                    </DialogHeader>
-                    <div className="grid gap-3">
-                      <Button
-                        variant="outline"
-                        className="h-20 border-cyan-400/20 bg-[#0A0B0F] text-[#C3C7D0] hover:border-cyan-400/40 hover:bg-cyan-400/10 hover:text-cyan-400"
-                        onClick={() => addNewCard("neutral")}
-                      >
-                        <div className="text-center">
-                          <div className="text-lg font-bold">Neutral Card</div>
-                          <div className="text-sm text-muted-foreground">
-                            20 points
+            <div className="space-y-2">
+              <Label>Character</Label>
+              <Popover open={open} onOpenChange={setOpen}>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className="w-full justify-between h-20 px-3"
+                  >
+                    <div className="flex items-center gap-3">
+                      {character === "none" ? (
+                        <>
+                          <div className="w-16 h-16 rounded-xl border-2 border-dashed border-muted-foreground/50 flex items-center justify-center bg-secondary">
+                            <X className="h-6 w-6 text-muted-foreground" />
                           </div>
-                        </div>
-                      </Button>
-                      <Button
-                        variant="outline"
-                        className="h-20 border-purple-400/20 bg-[#0A0B0F] text-[#C3C7D0] hover:border-purple-400/40 hover:bg-purple-400/10 hover:text-purple-400"
-                        onClick={() => addNewCard("monster")}
-                      >
-                        <div className="text-center">
-                          <div className="text-lg font-bold">Monster Card</div>
-                          <div className="text-sm text-muted-foreground">
-                            80 points
+                          <span className="text-muted-foreground">
+                            Select a character
+                          </span>
+                        </>
+                      ) : character && CHARACTER_CARDS[character]?.portrait ? (
+                        <>
+                          <div className="w-16 h-16 rounded-xl overflow-hidden border-1 border-gray-500/50 shadow-md">
+                            <img
+                              src={CHARACTER_CARDS[character].portrait}
+                              alt={formatCharacterName(character)}
+                              className="w-full h-full object-contain"
+                            />
                           </div>
-                        </div>
-                      </Button>
-                      <Button
-                        variant="outline"
-                        className="h-20 border-[#C41729]/20 bg-[#0A0B0F] text-[#C3C7D0] hover:border-[#C41729]/40 hover:bg-[#C41729]/10 hover:text-[#C41729]"
-                        onClick={() => addNewCard("forbidden")}
-                      >
-                        <div className="text-center">
-                          <div className="text-lg font-bold">
-                            Forbidden Card
+                          <span className="font-medium">
+                            {formatCharacterName(character)}
+                          </span>
+                        </>
+                      ) : (
+                        // Fallback if portrait missing
+                        <>
+                          <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center text-white font-bold">
+                            {formatCharacterName(character)[0]}
                           </div>
-                          <div className="text-sm text-muted-foreground">
-                            20 points
-                          </div>
-                        </div>
-                      </Button>
+                          <span>{formatCharacterName(character)}</span>
+                        </>
+                      )}
                     </div>
-                  </DialogContent>
-                </Dialog>
-              </CardContent>
-            </Card>
-          </div>
+                    <ChevronsUpDown className="h-4 w-4 opacity-80 shrink-0" />
+                  </Button>
+                </PopoverTrigger>
 
-          <div className="space-y-4">
-            <Card className="sticky top-4">
-              <CardHeader>
-                <CardTitle>Run Summary</CardTitle>
-                <CardDescription>Current run statistics</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Tier</span>
-                    <span className="font-bold text-cyan-400">
-                      {nightmareMode ? `${tier + 1} (Nightmare)` : tier}
-                    </span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Points</span>
-                    <span
-                      className={`font-bold ${
-                        percentage > 100 ? "text-red-400" : "text-cyan-400"
-                      }`}
-                    >
-                      {totalPoints} / {limit}
-                    </span>
+                <PopoverContent
+                  className="w-full p-0"
+                  align="start"
+                  sideOffset={5}
+                >
+                  <Command className="max-h-76 overflow-y-auto">
+                    <CommandInput placeholder="Search character..." />
+                    <CommandList>
+                      <CommandEmpty>No character found.</CommandEmpty>
+                      <CommandGroup>
+                        {/* None Option */}
+                        <CommandItem
+                          value="none"
+                          onSelect={() => {
+                            handleCharacterChange("none");
+                            setOpen(false);
+                          }}
+                        >
+                          <div className="flex items-center gap-4 w-full">
+                            <div className="w-10 h-10 rounded-xl border-2 border-dashed border-muted-foreground/50 flex items-center justify-center bg-secondary">
+                              <X className="h-6 w-6 text-muted-foreground" />
+                            </div>
+                            <span className="font-medium">None</span>
+                          </div>
+                          {character === "none" && (
+                            <Check className="ml-auto h-5 w-5" />
+                          )}
+                        </CommandItem>
+
+                        {/* Character List with Portraits */}
+                        {Object.keys(CHARACTER_CARDS)
+                          .sort()
+                          .map((key) => {
+                            const portrait = CHARACTER_CARDS[key].portrait;
+
+                            return (
+                              <CommandItem
+                                key={key}
+                                value={key}
+                                onSelect={() => {
+                                  handleCharacterChange(key);
+                                  setOpen(false);
+                                }}
+                              >
+                                <div className="flex items-center gap-4 w-full">
+                                  {portrait ? (
+                                    <div className="w-10 h-10 rounded-xl overflow-hidden border-1 border-gray-500/30 shadow">
+                                      <img
+                                        src={portrait}
+                                        alt={formatCharacterName(key)}
+                                        className="w-full h-full object-cover object-top scale-100"
+                                      />
+                                    </div>
+                                  ) : (
+                                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500/80 to-cyan-500/80 flex items-center justify-center text-white font-bold">
+                                      {formatCharacterName(key)[0]}
+                                    </div>
+                                  )}
+                                  <span className="font-medium">
+                                    {formatCharacterName(key)}
+                                  </span>
+                                </div>
+                                {character === key && (
+                                  <Check className="ml-auto h-5 w-5" />
+                                )}
+                              </CommandItem>
+                            );
+                          })}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
+            </div>
+
+            <div className="space-y-3">
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">Points Used</span>
+                <span
+                  className={`font-bold text-lg ${
+                    percentage > 100 ? "text-red-400" : ""
+                  }`}
+                >
+                  {totalPoints} / {limit} {nightmareMode && "(+10)"}
+                </span>
+              </div>
+              <div className="h-3 rounded-full bg-secondary overflow-hidden">
+                <div
+                  className={`h-full transition-all ${
+                    percentage > 100
+                      ? "bg-red-500"
+                      : "bg-gradient-to-r from-purple-500 to-cyan-400"
+                  }`}
+                  style={{ width: `${Math.min(percentage, 100)}%` }}
+                />
+              </div>
+              {percentage > 100 && (
+                <p className="text-sm text-red-400">
+                  Over cap by {totalPoints - limit} points
+                </p>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Cards Grid */}
+        <div className="grid gap-4 md:grid-cols-2">
+          <Card className="border-border/60 bg-card/40 backdrop-blur-sm">
+            <CardHeader className="pb-4">
+              <div className="flex justify-between items-center">
+                <div>
+                  <CardTitle className="text-xl">Base Cards</CardTitle>
+                </div>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={undoLastAction}
+                    disabled={!actionHistory.length}
+                  >
+                    <Undo className="h-4 w-4" />
+                  </Button>
+                  <Button variant="outline" size="sm" onClick={resetDeck}>
+                    <RotateCcw className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                {baseCards.map((card) => renderCard(card, true))}
+              </div>
+            </CardContent>
+          </Card>
+          {/* Added Cards */}
+          <Card className="border-border/60 bg-card/40 backdrop-blur-sm">
+            <CardHeader className="pb-4">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-xl font-semibold">
+                  Added Cards
+                </CardTitle>
+                <span className="text-sm text-muted-foreground">
+                  {addedCards.length} card{addedCards.length !== 0 ? "s" : ""}
+                </span>
+              </div>
+            </CardHeader>
+
+            <CardContent className="space-y-4">
+              {addedCards.length === 0 ? (
+                <div className="flex flex-col items-center justify-center py-12 text-center">
+                  <div className="w-20 h-20 rounded-full bg-muted/50 flex items-center justify-center mb-4">
+                    <Plus className="h-10 w-10 text-muted-foreground" />
                   </div>
                 </div>
-
-                <div className="h-px bg-border" />
-
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Active Cards</span>
-                    <span className="font-bold">
-                      {deck.filter((c) => !c.isRemoved).length}
-                    </span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Total Cards</span>
-                    <span className="font-bold">{deck.length}</span>
-                  </div>
+              ) : (
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {addedCards.map((card) => renderCard(card, false))}
                 </div>
+              )}
 
-                <div className="h-px bg-border" />
+              <Dialog open={showAddCard} onOpenChange={setShowAddCard}>
+                <DialogTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className="w-full h-12 text-base font-medium border-dashed border-2 hover:border-purple-400 hover:bg-accent/50 transition-all"
+                  >
+                    <Plus className="mr-2 h-5 w-5" />
+                    Add New Card
+                  </Button>
+                </DialogTrigger>
 
-                <div className="space-y-2">
-                  <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                    Modifications
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Cards Removed</span>
-                    <span className="font-bold">{removalCount}</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">
-                      Cards Duplicated
-                    </span>
-                    <span className="font-bold">{duplicationCount}</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">
-                      Cards Converted
-                    </span>
-                    <span className="font-bold">{conversionCount}</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">
-                      Normal Epiphanies
-                    </span>
-                    <span className="font-bold">
-                      {deck.filter((c) => c.hasNormalEpiphany).length}
-                    </span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">
-                      Divine Epiphanies
-                    </span>
-                    <span className="font-bold">
-                      {deck.filter((c) => c.hasDivineEpiphany).length}
-                    </span>
-                  </div>
-                  <div className="flex-col flex gap-2">
+                <DialogContent className="sm:max-w-md">
+                  <DialogHeader>
+                    <DialogTitle className="text-2xl text-center mb-2">
+                      Add a New Card
+                    </DialogTitle>
+                  </DialogHeader>
+
+                  <div className="grid gap-4 py-4">
                     <Button
+                      size="lg"
                       variant="outline"
-                      size="sm"
-                      onClick={undoLastAction}
-                      disabled={actionHistory.length === 0}
-                      className="gap-2 
-                        !border !border-[#5B1FAF]/50 
-                        !bg-[#5B1FAF]/10 
-                        hover:!bg-[#5B1FAF]/20 
-                        hover:!border-[#5B1FAF]/70
-                        disabled:opacity-50"
+                      className="h-20 flex flex-col gap-2 border-2 hover:border-purple-400 hover:bg-purple-500/10 transition-all"
+                      onClick={() => addNewCard("neutral")}
                     >
-                      <Undo className="h-4 w-4" />
-                      Undo
+                      <div>
+                        <div className="font-semibold">Neutral Card</div>
+                        <div className="text-xs text-muted-foreground mt-1">
+                          +20
+                        </div>
+                      </div>
                     </Button>
 
                     <Button
+                      size="lg"
                       variant="outline"
-                      size="sm"
-                      onClick={resetDeck}
-                      className="gap-2 
-                        !border !border-[#C41729]/50 
-                        !bg-[#C41729]/10 
-                        hover:!bg-[#C41729]/20 
-                        hover:!border-[#C41729]/70"
+                      className="h-20 flex flex-col gap-2 border-2 hover:border-red-400 hover:bg-red-500/10 transition-all"
+                      onClick={() => addNewCard("monster")}
                     >
-                      <RotateCcw className="h-4 w-4" />
-                      Reset
+                      <div>
+                        <div className="font-semibold">Monster Card</div>
+                        <div className="text-xs text-muted-foreground mt-1">
+                          +80
+                        </div>
+                      </div>
+                    </Button>
+
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      className="h-20 flex flex-col gap-2 border-2 hover:border-yellow-400 hover:bg-yellow-500/10 transition-all"
+                      onClick={() => addNewCard("forbidden")}
+                    >
+                      <div>
+                        <div className="font-semibold text-yellow-400">
+                          Forbidden Card
+                        </div>
+                        <div className="text-xs text-muted-foreground mt-1">
+                          +20
+                        </div>
+                      </div>
                     </Button>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+                </DialogContent>
+              </Dialog>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </TooltipProvider>

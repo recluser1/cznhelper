@@ -3,13 +3,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function CalculatorPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       <main className="container mx-auto">
-        <h1 className="text-2xl font-bold">CZN Save Data Helper</h1>
         <Tabs defaultValue="tracker" className="space-y-4 sm:space-y-6">
-          <TabsList className="grid w-full grid-cols-2 max-w-md">
-            <TabsTrigger value="tracker">Run Tracker</TabsTrigger>
-            <TabsTrigger value="helper">Helper Guide</TabsTrigger>
+          <TabsList className="grid grid-cols-2 w-full max-w-xs mx-auto">
+            <TabsTrigger value="tracker">Calculator</TabsTrigger>
+            <TabsTrigger value="helper">Math Helper</TabsTrigger>
           </TabsList>
           <TabsContent value="tracker" className="space-y-6">
             <RunTracker />

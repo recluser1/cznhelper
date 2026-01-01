@@ -654,11 +654,11 @@ export default function CharacterGuidesPage() {
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-700">
                       <div
                         className="
-                      absolute inset-0 bg-gradient-to-t from-transparent via-white/10 to-transparent translate-y-full 
+                      absolute inset-0 bg-from-transparent via-white/10 to-transparent translate-y-full
                       group-hover:translate-y-0 transition-transform duration-1000"
                       />
                       <div
-                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/8 to-transparent -translate-x-full 
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/8 to-transparent -translate-x-full
                       group-hover:translate-x-full transition-transform duration-1200 delay-75"
                       />
                     </div>
