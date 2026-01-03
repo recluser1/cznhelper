@@ -54,7 +54,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description: "360% Damage\nCreate 3 Futility\nCard(s)",
-        reasoning: "",
+        reasoning: "Fast ramping, good base damage for burst build",
       },
       {
         id: "Echo of Futility II",
@@ -63,7 +63,7 @@ const uniqueCards: UniqueCard[] = [
         type: "attack",
         description:
           "240% Damage\nCreate 2 Futility\nCard(s)\n+20% Damage Amount\nfor each Exhausted\nFutility",
-        reasoning: "",
+        reasoning: "Bad scaling, not comparable to 0cost epi, need 12+ fulity EXHAUSTED to beat Echo1",
       },
       {
         id: "Echo of Futility III",
@@ -72,7 +72,7 @@ const uniqueCards: UniqueCard[] = [
         type: "attack",
         description:
           "240% Damage\nCreate 2 Futility\nCard(s)\nApply Ephemeral on\nthat card",
-        reasoning: "",
+        reasoning: "Ap friendly, not excell in burst or lose scaling power",
       },
       {
         id: "Echo of Futility IV",
@@ -81,7 +81,7 @@ const uniqueCards: UniqueCard[] = [
         type: "attack",
         description:
           "50% Damage\n+150% Damage\nAmount for each X\nCreate X+1 Futility\nCard(s)",
-        reasoning: "",
+        reasoning: "Bad value scale with ap ratio",
       },
       {
         id: "Echo of Futility V",
@@ -90,7 +90,7 @@ const uniqueCards: UniqueCard[] = [
         type: "attack",
         description:
           "30% Damage\nCreate 2 Futility\nCard(s)\n+30% Damage Amount\nfor each Futility\ncreated during this\nbattle",
-        reasoning: "",
+        reasoning: "Easy scaling and good damage, ap efficient",
       },
     ],
     divineEpiphanies: [
@@ -131,7 +131,7 @@ const uniqueCards: UniqueCard[] = [
         type: "attack",
         description:
           "450% Damage to all enemies\nWhen a card is\nExhausted,\ndecrease Cost of this\ncard by 1 for 1 turn",
-        reasoning: "",
+        reasoning: "Good if no 7ap, can use first ramping/rotation without e1",
       },
       {
         id: "Brand of Annihilation II",
@@ -140,7 +140,7 @@ const uniqueCards: UniqueCard[] = [
         type: "attack",
         description:
           "300% Damage x 2 to a\nrandom enemy\nWhen a card is\nExhausted,\ndecrease Cost of this\ncard by 1 for 1 turn",
-        reasoning: "",
+        reasoning: "Really good damage for st fight, usually boss",
       },
       {
         id: "Brand of Annihilation III",
@@ -149,7 +149,7 @@ const uniqueCards: UniqueCard[] = [
         type: "attack",
         description:
           "500% Damage to all\nenemies\nDecrease Cost for each\nExhausted Futility",
-        reasoning: "",
+        reasoning: "Brand become 0 for entire battle after ramping, high base, easy to use",
       },
       {
         id: "Brand of Annihilation IV",
@@ -158,7 +158,7 @@ const uniqueCards: UniqueCard[] = [
         type: "attack",
         description:
           "200% Damage to all\nenemies\n+40% Damage Amount\nfor each card\nExhausted this turn",
-        reasoning: "",
+        reasoning: "Only good for 1 turn burst, damage only higher if exhaust more than 8-10 CARD*, still cost 1ap and damage reset after round",
       },
       {
         id: "Brand of Annihilation V",
@@ -167,7 +167,7 @@ const uniqueCards: UniqueCard[] = [
         type: "attack",
         description:
           "300% Damage to all\nenemies\nIf any card was\nExhausted this turn, 3\nAgony to all enemies",
-        reasoning: "",
+        reasoning: "Ew",
       },
     ],
     divineEpiphanies: [
@@ -201,7 +201,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 2,
         type: "attack",
         description: "360% Damage\nActivate 2 Futility\nCard(s) from hand",
-        reasoning: "",
+        reasoning: "Ap save to spend fulity, not worth droping his scaling power",
       },
       {
         id: "Black Hole II",
@@ -210,7 +210,7 @@ const uniqueCards: UniqueCard[] = [
         type: "attack",
         description:
           "360% Damage\n+60% Damage Amount\nfor each Exhausted\nFutility",
-        reasoning: "",
+        reasoning: "Good scaling",
       },
       {
         id: "Black Hole III",
@@ -219,7 +219,7 @@ const uniqueCards: UniqueCard[] = [
         type: "attack",
         description:
           "60% Damage to a\nrandom enemy\nAdd 1 Hit for each\nExhausted Futility (max\n5 times)",
-        reasoning: "",
+        reasoning: "When usable",
       },
       {
         id: "Black Hole IV",
@@ -228,16 +228,16 @@ const uniqueCards: UniqueCard[] = [
         type: "attack",
         description:
           "300% Damage\nAdd 1 Hit for each 5\nExhausted Futility (max\n2 times)",
-        reasoning: "",
+        reasoning: "Only higher damage on 5 and 10-12 fulity exhaust, Not worth droping his scaling power",
       },
       {
         id: "Black Hole V",
-        tier: CardTier.S,
+        tier: CardTier.A,
         cost: 1,
         type: "upgrade",
         description:
           "When Futility is\nExhausted, 100% Fixed\nDamage to a random\nenemy",
-        reasoning: "",
+        reasoning: "If u didnt get scaling Bh, damage is a bit worse than scaling asume u can get value of every fulity, otherwise suck. Fixed damge => no scale from other source",
       },
     ],
     divineEpiphanies: [
@@ -273,16 +273,16 @@ const uniqueCards: UniqueCard[] = [
         description:
           "[ Unique ] When Futility is\ncreated, change those\ncards into a 1-cost\nAttack Card with 120%\nDamage and Heal\neffects",
         reasoning:
-          "[ For All Epiphanies ] To Be Determined by the Community, for the Community.\nMake sure to reach out to us on Discord: _zyla or lilyium.box to help us build this website for everyone to take advantage of!",
+          "Damage and sustain, worth for long extended fight",
       },
       {
         id: "Oath of Vanity II",
-        tier: CardTier.SPlus,
+        tier: CardTier.S,
         cost: 0,
         type: "upgrade",
         description:
           "[ Unique / Initiation ] When Futility is\ncreated, change those\ncards into a 1-cost\nAttack Card with 80%\nDamage and Heal\neffects",
-        reasoning: "",
+        reasoning: "Mainly for initiation, losing value in long term compare to Oath of Vanity I and Oath of Vanity III, good if no e3",
       },
       {
         id: "Oath of Vanity III",
@@ -291,7 +291,7 @@ const uniqueCards: UniqueCard[] = [
         type: "upgrade",
         description:
           "[ Unique ] When creating Futility,\nit changes to an Attack\nCard with 180%\nDamage, Cost 1",
-        reasoning: "",
+        reasoning: "Really big damage, worth for long extended fight",
       },
       {
         id: "Oath of Vanity IV",
@@ -300,7 +300,7 @@ const uniqueCards: UniqueCard[] = [
         type: "skill",
         description:
           "[ Exhaust / Retain ] Exhaust all Futility\nStatus Ailments, and\nCurse Cards in hand\nDraw for each",
-        reasoning: "",
+        reasoning: "Give u access to the whole deck and ramping every card for first few turn, for burst damage playstyle",
       },
       {
         id: "Oath of Vanity V",
@@ -309,7 +309,7 @@ const uniqueCards: UniqueCard[] = [
         type: "upgrade",
         description:
           "When 3 Futility Cards\nare Exhausted, 2 Agony\nto all enemies",
-        reasoning: "",
+        reasoning: "Why",
       },
     ],
     divineEpiphanies: [
