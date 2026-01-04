@@ -177,7 +177,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 0,
         type: "skill",
         description:
-          "[ Unique ] For 1 turn, +80% Damage Amount of cards with Cost 1",
+           "For 1 turn, +80% Damage Amount of cards with Cost 1",
         reasoning:
           "Highest damage boost but only 1 turn. Requires high draw support to set up and burst in the same turn.",
       },
@@ -383,7 +383,7 @@ const recommendedSaveData: SaveData[] = [
     id: "deck-2",
     name: "Void Focused Build",
     shortDescription: "",
-    description: `Snack Time II for Renoa, Snack Time V for Kayron`,
+    description: `Snack Time II for Renoa, Snack Time III/V for Kayron`,
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Strike of Darkness V",
@@ -442,29 +442,39 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
 const partnersGuide: PartnersGuide[] = [
   {
     id: "nyx",
-    description: ``,
-    tier: CardTier.WIP,
+    description: `[ Best in Slot ]
+    Provide extra damage for your team after draw
+    Discard dead card and provide big draw, really good to manage hand and keep the rotation going.`,
+    tier: CardTier.SPlus,
   },
   {
-    id: "arwen",
-    description: ``,
-    tier: CardTier.WIP,
-  },
-  {
-    id: "alyssa",
-    description: ``,
-    tier: CardTier.WIP,
-  },
-  {
-    id: "yvonne",
-    description: ``,
-    tier: CardTier.WIP,
+    id: "yuri",
+    description: `Draw 2, provide good draw
+    Alternative if no nyx`,
+    tier: CardTier.SPlus,
   },
   {
     id: "ritochka",
-    description: ``,
-    tier: CardTier.WIP,
+    description: `Gain 3 morale, with predator blade combo provide massive morale boost for burst damage`,
+    tier: CardTier.S,
   },
+  {
+    id: "arwen",
+    description: `Good sustain for chaos`,
+    tier: CardTier.A,
+  },
+  {
+    id: "yvonne",
+    description: `Good sustain in chaos, good alternative if u dont have arwen`,
+    tier: CardTier.A,
+  },
+  {
+    id: "alyssa",
+    description: `just use yvonne/arwen or ritochka`,
+    tier: CardTier.B,
+  },
+
+
 ];
 
 export const reiData: CharacterData = {
@@ -473,11 +483,19 @@ export const reiData: CharacterData = {
   role: CharacterRole.Support,
 
   overview: `
-  
+  Rei kit provide massive damage burst and draw engine as a support
+  Using snack time and her other card, it enable your teamate combo and put out massive damage output
   `.trim(),
-  strengths: [""],
+  strengths: [
+    "Good draw engine",
+    "Strong damage buff for burst",
+    "Has 2 unique card for data farming (1 more than mika)",
+  ],
 
-  weaknesses: [""],
+  weaknesses: [
+    "Draw engine is exhausted after use (snack time), bad in long extended fight",
+    "Bad sustain in chaos",
+  ],
 
   externalResources: [
     {
