@@ -141,6 +141,7 @@ export default function CharacterGuidePage() {
     { id: "memory", label: "Memory Fragment" },
     { id: "partner", label: "Partner" },
     { id: "ego", label: "Manifest Ego" },
+    { id: "credits", label: "Credits" },
   ];
 
   const renderContent = () => {
@@ -311,6 +312,66 @@ export default function CharacterGuidePage() {
         return (
           <div className="text-center py-12 text-gray-500">
             Manifest Ego guide coming soon...
+          </div>
+        );
+      case "credits":
+        return (
+          <div className="space-y-8">
+            {characterData.externalResources && (
+              <div className="rounded-2xl bg-gray-900/50 border border-gray-800 p-6">
+                <h3 className="text-xl font-bold text-gray-200 mb-4">
+                  External Resources
+                </h3>
+                <ul className="space-y-3 text-gray-300">
+                  {characterData.externalResources.map((res, i) => (
+                    <li key={i}>
+                      {res.url ? (
+                        <a
+                          href={res.url}
+                          target="_blank"
+                          className="text-sky-400 hover:underline"
+                        >
+                          {res.label}
+                        </a>
+                      ) : (
+                        <span className="text-gray-200">{res.label}</span>
+                      )}
+                      {res.note && (
+                        <div className="text-sm text-gray-500">{res.note}</div>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {characterData.credits && (
+              <div className="rounded-2xl bg-gray-900/50 border border-gray-800 p-6">
+                <h3 className="text-xl font-bold text-gray-200 mb-4">
+                  Credits
+                </h3>
+                <ul className="space-y-3 text-gray-300">
+                  {characterData.credits.map((c, i) => (
+                    <li key={i}>
+                      <span className="font-semibold text-gray-100">
+                        {c.link ? (
+                          <a
+                            href={c.link}
+                            target="_blank"
+                            className="hover:underline"
+                          >
+                            {c.name}
+                          </a>
+                        ) : (
+                          c.name
+                        )}
+                      </span>
+                      <span className="text-gray-500"> — {c.contribution}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         );
 

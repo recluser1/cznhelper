@@ -82,6 +82,18 @@ export interface MemoryFragmentSubstatPriorities {
   stats: MemoryFragmentSubstats[];
 }
 
+export interface ExternalResource {
+  label: string;
+  url?: string;
+  note?: string;
+}
+
+export interface CreditEntry {
+  name: string;
+  contribution: string;
+  link?: string;
+}
+
 export interface PartnersGuide {
   id: string;
   description: string;
@@ -99,9 +111,6 @@ export interface CharacterData {
   attribute: Attributes;
   job?: string;
   role?: string;
-
-  // bannerUrl?: string;
-  // avatarUrl?: string;
 
   overview?: string;
   strengths?: string[];
@@ -130,6 +139,10 @@ export interface CharacterData {
   // team?: Team[];
   // teamGuideDescription?: string;
   // I will add team guide later
+
+  // NEW
+  externalResources?: ExternalResource[];
+  credits?: CreditEntry[];
 }
 
 export type Section = {

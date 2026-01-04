@@ -9,6 +9,7 @@ import {
   MemoryFragmentSetRecommendation,
   UniqueCard,
   PartnersGuide,
+  CreditEntry,
 } from "@/types/character-guides";
 import {
   MemoryFragmentSet,
@@ -522,6 +523,34 @@ export const kayronData: CharacterData = {
     "Reliant on Bria for QoL",
     "Very AP-reliant",
     "Hard to play",
+  ],
+
+  externalResources: [
+    {
+      label: "CZN Official Discord",
+      url: "https://discord.gg/chaoszeronightmare",
+      note: "Guide discussion and validation",
+    },
+    {
+      label: "Sproot's Nightmare",
+      url: "https://docs.google.com/spreadsheets/d/1-KkQUFrjD_2Un3zMDmypCwZFVF5VmowswqYdLt9MOw8/edit?gid=1855295740#gid=1855295740",
+      note: "Theorycrafting and math base",
+    },
+  ],
+
+  credits: [
+    {
+      name: "recluser1",
+      contribution: "Kayron main, testing and feedback",
+    },
+    {
+      name: "notmiseryfell",
+      contribution: "Kayron main, testing and feedback",
+    },
+    {
+      name: "Lucie",
+      contribution: "Guide author",
+    },
   ],
 
   commonCards: commonCards,
