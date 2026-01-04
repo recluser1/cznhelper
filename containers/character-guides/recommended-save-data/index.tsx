@@ -139,7 +139,7 @@ export const RecommendedSaveData = ({
       <Dialog open={!!openDialogId} onOpenChange={() => setOpenDialogId(null)}>
         <DialogContent
           className="
-          !w-[99vw] !max-w-7xl max-h-[99vh] overflow-y-auto
+          !w-[60vw] !max-w-7xl max-h-[80vh] overflow-y-auto
           bg-gray-950/95 backdrop-blur-xl border border-gray-800
           rounded-2xl p-0
         "
