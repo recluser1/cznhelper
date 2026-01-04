@@ -1,5 +1,4 @@
 // data/partners.ts
-
 export type Partner = {
   id: string;
   name: string;

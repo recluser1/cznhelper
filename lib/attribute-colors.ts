@@ -1,3 +1,4 @@
+// lib/attribute-colors.ts
 import { Attributes } from "@/types/card";
 
 export const ATTRIBUTE_COLORS: Record<
@@ -9,52 +10,58 @@ export const ATTRIBUTE_COLORS: Record<
     hover: string;
     gradientFrom: string;
     gradientTo: string;
-    badgeBg: string;
+    accent: string;
+    accentLight: string;
   }
 > = {
-  Instinct: {
-    bg: "bg-yellow-50",
-    border: "border-yellow-200",
-    text: "text-yellow-800",
-    hover: "hover:bg-yellow-100",
-    gradientFrom: "from-yellow-400",
-    gradientTo: "to-yellow-600",
-    badgeBg: "bg-yellow-100",
-  },
-  Justice: {
-    bg: "bg-blue-50",
-    border: "border-blue-200",
-    text: "text-blue-800",
-    hover: "hover:bg-blue-100",
-    gradientFrom: "from-blue-400",
-    gradientTo: "to-blue-600",
-    badgeBg: "bg-blue-100",
-  },
-  Order: {
-    bg: "bg-green-50",
-    border: "border-green-200",
-    text: "text-green-800",
-    hover: "hover:bg-green-100",
-    gradientFrom: "from-green-400",
-    gradientTo: "to-green-600",
-    badgeBg: "bg-green-100",
-  },
   Passion: {
-    bg: "bg-red-50",
-    border: "border-red-200",
-    text: "text-red-800",
-    hover: "hover:bg-red-100",
-    gradientFrom: "from-red-400",
-    gradientTo: "to-red-600",
-    badgeBg: "bg-red-100",
+    bg: "bg-red-900/20",
+    border: "border-red-500/50",
+    text: "text-red-400",
+    hover: "hover:bg-red-900/40",
+    gradientFrom: "from-red-600",
+    gradientTo: "to-pink-700",
+    accent: "bg-red-600",
+    accentLight: "bg-red-500/30",
   },
   Void: {
-    bg: "bg-purple-50",
-    border: "border-purple-200",
-    text: "text-purple-800",
-    hover: "hover:bg-purple-100",
-    gradientFrom: "from-purple-400",
-    gradientTo: "to-purple-600",
-    badgeBg: "bg-purple-100",
+    bg: "bg-purple-900/20",
+    border: "border-purple-500/50",
+    text: "text-purple-400",
+    hover: "hover:bg-purple-900/40",
+    gradientFrom: "from-purple-600",
+    gradientTo: "to-indigo-700",
+    accent: "bg-purple-600",
+    accentLight: "bg-purple-500/30",
+  },
+  Instinct: {
+    bg: "bg-amber-900/20",
+    border: "border-amber-500/50",
+    text: "text-amber-400",
+    hover: "hover:bg-amber-900/40",
+    gradientFrom: "from-amber-500",
+    gradientTo: "to-orange-600",
+    accent: "bg-amber-500",
+    accentLight: "bg-amber-500/30",
+  },
+  Order: {
+    bg: "bg-emerald-900/20",
+    border: "border-emerald-500/50",
+    text: "text-emerald-400",
+    hover: "hover:bg-emerald-900/40",
+    gradientFrom: "from-emerald-500",
+    gradientTo: "to-teal-600",
+    accent: "bg-emerald-500",
+    accentLight: "bg-emerald-500/30",
+  },
+  Justice: {
+    bg: "bg-cyan-900/20",
+    border: "border-cyan-500/50",
+    text: "text-cyan-400",
+    hover: "hover:bg-cyan-900/40",
+    gradientFrom: "from-cyan-500",
+    gradientTo: "to-blue-600",
+    accent: "bg-cyan-500",
+    accentLight: "bg-cyan-500/30",
   },
 };

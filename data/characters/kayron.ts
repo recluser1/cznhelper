@@ -25,7 +25,7 @@ const commonCards: Card[] = [
     cost: 1,
     type: "attack",
     rarity: CardRarities.Common,
-    description: "150% Damage\nCreate 1 Futility\nCard(s)",
+    description: "150% Damage Create 1 Futility Card(s)",
   },
   {
     id: "Sphere",
@@ -34,7 +34,7 @@ const commonCards: Card[] = [
     cost: 1,
     type: "skill",
     rarity: CardRarities.Common,
-    description: "100% Shield",
+    description: "100% Shield Create 1 Futility Card(s)",
   },
 ];
 
@@ -46,15 +46,15 @@ const uniqueCards: UniqueCard[] = [
     type: "attack",
     cost: 1,
     rarity: CardRarities.Rare,
-    description: "240% Damage\nCreate 2 Futility\nCard(s)",
+    description: "240% Damage Create 2 Futility Card(s)",
     epiphanies: [
       {
         id: "Echo of Futility I",
         tier: CardTier.SPlus,
         cost: 1,
         type: "attack",
-        description: "360% Damage\nCreate 3 Futility\nCard(s)",
-        reasoning: "",
+        description: "360% Damage Create 3 Futility Card(s)",
+        reasoning: "Fast ramp and high base damage works well for burst builds",
       },
       {
         id: "Echo of Futility II",
@@ -62,8 +62,9 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description:
-          "240% Damage\nCreate 2 Futility\nCard(s)\n+20% Damage Amount\nfor each Exhausted\nFutility",
-        reasoning: "",
+          "240% Damage Create 2 Futility Card(s) +20% Damage Amount for each Exhausted Futility",
+        reasoning:
+          "Bad scaling, not worth using compared to Echo of Futility V and needs ~12 Futility to beat Echo of Futility I",
       },
       {
         id: "Echo of Futility III",
@@ -71,8 +72,8 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description:
-          "240% Damage\nCreate 2 Futility\nCard(s)\nApply Ephemeral on\nthat card",
-        reasoning: "",
+          "240% Damage Create 2 Futility Card(s) Apply Ephemeral on that card",
+        reasoning: "Saves AP helps with rotations but adds little damage",
       },
       {
         id: "Echo of Futility IV",
@@ -80,8 +81,8 @@ const uniqueCards: UniqueCard[] = [
         cost: "X",
         type: "attack",
         description:
-          "50% Damage\n+150% Damage\nAmount for each X\nCreate X+1 Futility\nCard(s)",
-        reasoning: "",
+          "50% Damage +150% Damage Amount for each X Create X+1 Futility Card(s)",
+        reasoning: "Low value scales only with AP ratio, not worth the cost",
       },
       {
         id: "Echo of Futility V",
@@ -89,8 +90,9 @@ const uniqueCards: UniqueCard[] = [
         cost: 0,
         type: "attack",
         description:
-          "30% Damage\nCreate 2 Futility\nCard(s)\n+30% Damage Amount\nfor each Futility\ncreated during this\nbattle",
-        reasoning: "",
+          "30% Damage Create 2 Futility Card(s) +30% Damage Amount for each Futility created during this battle",
+        reasoning:
+          "Very high scaling and good AP efficiency, strong over longer fights",
       },
     ],
     divineEpiphanies: [
@@ -107,7 +109,7 @@ const uniqueCards: UniqueCard[] = [
         description: "",
       },
       {
-        name: "Increase Damage by 30%",
+        name: "Increases Damage by 30%",
         reasoning: "",
         icon: "/images/card/icon_card_battle_expand_diallos.png",
         description: "",
@@ -122,7 +124,7 @@ const uniqueCards: UniqueCard[] = [
     cost: 3,
     rarity: CardRarities.Rare,
     description:
-      "300% Damage to all\nenemies\nWhen a card is\nExhausted,\ndecrease Cost of this\ncard by 1 for 1 turn.",
+      "300% Damage to all enemies When a card is Exhausted, decrease Cost of this card by 1 for 1 turn",
     epiphanies: [
       {
         id: "Brand of Annihilation I",
@@ -130,8 +132,8 @@ const uniqueCards: UniqueCard[] = [
         cost: 3,
         type: "attack",
         description:
-          "450% Damage to all enemies\nWhen a card is\nExhausted,\ndecrease Cost of this\ncard by 1 for 1 turn",
-        reasoning: "",
+          "450% Damage to all enemies When a card is Exhausted, decrease Cost of this card by 1 for 1 turn",
+        reasoning: "Good, usable for first rotations without E1",
       },
       {
         id: "Brand of Annihilation II",
@@ -139,8 +141,8 @@ const uniqueCards: UniqueCard[] = [
         cost: 3,
         type: "attack",
         description:
-          "300% Damage x 2 to a\nrandom enemy\nWhen a card is\nExhausted,\ndecrease Cost of this\ncard by 1 for 1 turn",
-        reasoning: "",
+          "300% Damage x 2 to a random enemy When a card is Exhausted, decrease Cost of this card by 1 for 1 turn",
+        reasoning: "High damage in single target fights, mainly bosses",
       },
       {
         id: "Brand of Annihilation III",
@@ -148,8 +150,9 @@ const uniqueCards: UniqueCard[] = [
         cost: 7,
         type: "attack",
         description:
-          "500% Damage to all\nenemies\nDecrease Cost for each\nExhausted Futility",
-        reasoning: "",
+          "500% Damage to all enemies Decrease Cost for each Exhausted Futility",
+        reasoning:
+          "Becomes 0 cost for the whole battle after ramp, high base damage, easy to use",
       },
       {
         id: "Brand of Annihilation IV",
@@ -157,17 +160,18 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description:
-          "200% Damage to all\nenemies\n+40% Damage Amount\nfor each card\nExhausted this turn",
-        reasoning: "",
+          "200% Damage to all enemies +40% Damage Amount for each card Exhausted this turn",
+        reasoning:
+          "Only good for one turn burst, damage higher only if exhausting more than ~8 cards, still costs 1 ap, damage resets next round",
       },
       {
         id: "Brand of Annihilation V",
-        tier: CardTier.C,
+        tier: CardTier.Bad,
         cost: 2,
         type: "attack",
         description:
-          "300% Damage to all\nenemies\nIf any card was\nExhausted this turn, 3\nAgony to all enemies",
-        reasoning: "",
+          "300% Damage to all enemies If any card was Exhausted this turn, 3 Agony to all enemies",
+        reasoning: "Restart the run",
       },
     ],
     divineEpiphanies: [
@@ -178,7 +182,7 @@ const uniqueCards: UniqueCard[] = [
         description: "",
       },
       {
-        name: "Increase Damage by 30%",
+        name: "Increases Damage by 30%",
         reasoning: "",
         icon: "/images/card/icon_card_battle_expand_secred.png",
         description: "",
@@ -192,16 +196,15 @@ const uniqueCards: UniqueCard[] = [
     type: "attack",
     cost: 2,
     rarity: CardRarities.Rare,
-    description:
-      "240% Damage\n+40% Damage Amount\nfor each Exhausted\nFutility",
+    description: "240% Damage +40% Damage Amount for each Exhausted Futility",
     epiphanies: [
       {
         id: "Black Hole I",
         tier: CardTier.C,
         cost: 2,
         type: "attack",
-        description: "360% Damage\nActivate 2 Futility\nCard(s) from hand",
-        reasoning: "",
+        description: "360% Damage Activate 2 Futility Card(s) from hand",
+        reasoning: "AP save to dump Futility, loses too much long term scaling",
       },
       {
         id: "Black Hole II",
@@ -209,8 +212,8 @@ const uniqueCards: UniqueCard[] = [
         cost: 2,
         type: "attack",
         description:
-          "360% Damage\n+60% Damage Amount\nfor each Exhausted\nFutility",
-        reasoning: "",
+          "360% Damage +60% Damage Amount for each Exhausted Futility",
+        reasoning: "Insane scaling, massive burst damage",
       },
       {
         id: "Black Hole III",
@@ -218,8 +221,8 @@ const uniqueCards: UniqueCard[] = [
         cost: 2,
         type: "attack",
         description:
-          "60% Damage to a\nrandom enemy\nAdd 1 Hit for each\nExhausted Futility (max\n5 times)",
-        reasoning: "",
+          "60% Damage to a random enemy Add 1 Hit for each Exhausted Futility (max 5 times)",
+        reasoning: "No reason to pick",
       },
       {
         id: "Black Hole IV",
@@ -227,22 +230,24 @@ const uniqueCards: UniqueCard[] = [
         cost: 2,
         type: "attack",
         description:
-          "300% Damage\nAdd 1 Hit for each 5\nExhausted Futility (max\n2 times)",
-        reasoning: "",
+          "300% Damage Add 1 Hit for each 5 Exhausted Futility (max 2 times)",
+        reasoning:
+          "Damage only pulls ahead at specific exhaust counts, sacrifices scaling for short burst",
       },
       {
         id: "Black Hole V",
-        tier: CardTier.S,
+        tier: CardTier.A,
         cost: 1,
         type: "upgrade",
         description:
-          "When Futility is\nExhausted, 100% Fixed\nDamage to a random\nenemy",
-        reasoning: "",
+          "When Futility is Exhausted, 100% Fixed Damage to a random enemy",
+        reasoning:
+          "Fallback option when Black Hole II is unavailable, fixed damage is limited, only works if futility is fully converted every turn",
       },
     ],
     divineEpiphanies: [
       {
-        name: "Increase Damage by 30%",
+        name: "Increases Damage by 30%",
         reasoning: "",
         icon: "/images/card/icon_card_battle_expand_vitor.png",
         description: "",
@@ -263,7 +268,7 @@ const uniqueCards: UniqueCard[] = [
     cost: 1,
     rarity: CardRarities.Legendary,
     description:
-      "[ Unique ] When Futility is\ncreated, change those cards into a 1-cost\nAttack Card with 80%\nDamage and Heal\neffects",
+      "[ Unique ] When Futility is created, change those cards into a 1-cost Attack Card with 80% Damage and Heal effects",
     epiphanies: [
       {
         id: "Oath of Vanity I",
@@ -271,9 +276,8 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "upgrade",
         description:
-          "[ Unique ] When Futility is\ncreated, change those\ncards into a 1-cost\nAttack Card with 120%\nDamage and Heal\neffects",
-        reasoning:
-          "[ For All Epiphanies ] To Be Determined by the Community, for the Community.\nMake sure to reach out to us on Discord: _zyla or lilyium.box to help us build this website for everyone to take advantage of!",
+          "[ Unique ] When Futility is created, change those cards into a 1-cost Attack Card with 120% Damage and Heal effects",
+        reasoning: "Damage + sustain, good for long extended fights",
       },
       {
         id: "Oath of Vanity II",
@@ -281,8 +285,8 @@ const uniqueCards: UniqueCard[] = [
         cost: 0,
         type: "upgrade",
         description:
-          "[ Unique / Initiation ] When Futility is\ncreated, change those\ncards into a 1-cost\nAttack Card with 80%\nDamage and Heal\neffects",
-        reasoning: "",
+          "[ Unique / Initiation ] When Futility is created, change those cards into a 1-cost Attack Card with 80% Damage and Heal effects",
+        reasoning: "Used mainly for initiation without his E3",
       },
       {
         id: "Oath of Vanity III",
@@ -290,8 +294,8 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "upgrade",
         description:
-          "[ Unique ] When creating Futility,\nit changes to an Attack\nCard with 180%\nDamage, Cost 1",
-        reasoning: "",
+          "[ Unique ] When creating Futility, it changes to an Attack Card with 180% Damage, Cost 1",
+        reasoning: "Very high damage, pays off in long extended fights",
       },
       {
         id: "Oath of Vanity IV",
@@ -299,8 +303,9 @@ const uniqueCards: UniqueCard[] = [
         cost: 0,
         type: "skill",
         description:
-          "[ Exhaust / Retain ] Exhaust all Futility\nStatus Ailments, and\nCurse Cards in hand\nDraw for each",
-        reasoning: "",
+          "[ Exhaust / Retain ] Exhaust all Futility Status Ailments, and Curse Cards in hand Draw for each",
+        reasoning:
+          "Full deck access early, ramps every card for first turns, good for burst playstyle",
       },
       {
         id: "Oath of Vanity V",
@@ -308,8 +313,8 @@ const uniqueCards: UniqueCard[] = [
         cost: 0,
         type: "upgrade",
         description:
-          "When 3 Futility Cards\nare Exhausted, 2 Agony\nto all enemies",
-        reasoning: "",
+          "When 3 Futility Cards are Exhausted, 2 Agony to all enemies",
+        reasoning: "Restart the run",
       },
     ],
     divineEpiphanies: [
@@ -347,7 +352,7 @@ const uniqueCards: UniqueCard[] = [
     cost: 2,
     rarity: CardRarities.Unique,
     description:
-      "240% Damage\nCreate 3 Futility Cards\n+40% Damage Amount\nfor each",
+      "240% Damage Create 3 Futility Cards +40% Damage Amount for each",
     epiphanies: [],
   },
 ];
@@ -482,17 +487,10 @@ const partnersGuide: PartnersGuide[] = [
   {
     id: "zatera",
     description: `Solid F2P option providing 16% ATK—a rare stat that scales well. 
-    However, Kayron benefits more from multiplicative card damage (which scales his innate ramping effects).
+    However, Kayron benefits more from multiplicative card damage (which scales his innate effects).
     `,
     tier: CardTier.S,
   },
-  // {
-  //   id: "eloise",
-  //   description: `Single copy loses significant damage potential compared to higher investments.
-  //   Still provides decent multiplicative scaling but falls behind other options.
-  //   `,
-  //   tier: CardTier.A,
-  // },
   {
     id: "anteia",
     description: `Nyx would be a better choice`,
@@ -504,8 +502,6 @@ export const kayronData: CharacterData = {
   attribute: Attributes.Void,
   job: CharacterClass.Psionic,
   role: CharacterRole.MainDPS,
-  // bannerUrl: "",
-  // avatarUrl: "",
 
   overview: `
   Kayron's expensive cards generate or consume Futility—a 1-cost Status Ailment that exhausts with no base effect. 
@@ -516,17 +512,16 @@ export const kayronData: CharacterData = {
   strengths: [
     "Strong at just Manifest Ego 1",
     "Versatile DPS",
-    "High ST and AoE damage",
-    "Can solo DPS/Sustain Chaos",
-    "Fast Basin/Simulation clear",
+    "High ST and AoE",
+    "Solo DPS/Sustain in Chaos",
+    "Fast Basin/Simulation",
   ],
 
   weaknesses: [
     "Requires Manifest Ego 1",
-    "Reliant on Bria for optimal damage and QoL",
+    "Reliant on Bria for QoL",
     "Very AP-reliant",
     "Hard to play",
-    "Annoying to farm Save Data",
   ],
 
   commonCards: commonCards,

@@ -1,5 +1,4 @@
 // src/data/gear.ts
-
 export type GearRarity = "rare" | "legend" | "unique";
 export type GearSlot = "weapon" | "armor" | "accessory";
 

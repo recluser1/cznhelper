@@ -1,5 +1,4 @@
 // src/data/team.ts
-
 export type TeamMember = {
   name: string;
   role: string;

@@ -96,19 +96,17 @@ export default function CharacterGuidePage() {
   } = useCharacterLoader(characterSlug);
 
   const colors = useMemo(() => {
-    if (!characterData?.attribute)
-      return {
-        gradientFrom: "from-gray-400",
-        gradientTo: "to-gray-600",
-        accent: "purple-500",
-        accentLight: "purple-400",
-      };
+    if (!characterData?.attribute) return;
     const attr = ATTRIBUTE_COLORS[characterData.attribute];
     return {
+      bg: attr.bg,
+      border: attr.border,
+      text: attr.text,
+      hover: attr.hover,
       gradientFrom: attr.gradientFrom,
       gradientTo: attr.gradientTo,
-      accent: attr.accent || "purple-500",
-      accentLight: attr.accentLight || "purple-400",
+      accent: attr.accent,
+      accentLight: attr.accentLight,
     };
   }, [characterData?.attribute]);
 
@@ -182,9 +180,7 @@ export default function CharacterGuidePage() {
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-sm">
                     <div>
                       <div className="text-gray-500 mb-1">Attribute</div>
-                      <div
-                        className={`font-semibold text-${colors.accentLight}`}
-                      >
+                      <div className={`font-semibold ${colors?.text}`}>
                         {attribute
                           ? attribute.charAt(0).toUpperCase() +
                             attribute.slice(1)
@@ -210,9 +206,7 @@ export default function CharacterGuidePage() {
 
             {/* Overview Text */}
             <div className="rounded-2xl bg-gray-900/50 border border-gray-800 p-6 md:p-8">
-              <h3
-                className={`text-xl font-bold mb-4 text-${colors.accentLight}`}
-              >
+              <h3 className={`text-xl font-bold mb-4 ${colors?.text}`}>
                 Overview
               </h3>
               <p className="text-gray-300 leading-relaxed whitespace-pre-line">
@@ -339,7 +333,7 @@ export default function CharacterGuidePage() {
 
         {/* Page Title */}
         <h1
-          className={`text-4xl md:text-5xl font-bold mb-10 bg-gradient-to-r ${colors.gradientFrom} via-white ${colors.gradientTo} bg-clip-text text-transparent`}
+          className={`text-4xl md:text-5xl font-bold mb-10 bg-gradient-to-r ${colors?.gradientFrom} via-white ${colors?.gradientTo} bg-clip-text text-transparent`}
         >
           {characterName.toUpperCase()}
         </h1>
@@ -369,7 +363,7 @@ export default function CharacterGuidePage() {
                   px-6 py-4 font-medium transition-all duration-200
                   ${
                     activeSection === tab.id
-                      ? `text-${colors.accentLight} border-b-2 border-${colors.accent}`
+                      ? `${colors?.text} border-b-2 ${colors?.border}`
                       : "text-gray-500 hover:text-gray-300"
                   }
                 `}

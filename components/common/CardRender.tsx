@@ -37,8 +37,8 @@ export const CardRender = (props: CardProps) => {
     ? "text-base sm:text-sm md:text-lg lg:text-sm xl:text-base"
     : "text-sm sm:text-sm md:text-lg lg:text-sm xl:text-base";
   const descSize = isSmall
-    ? "text-xs sm:text-xs md:text-sm lg:text-base xl:text-xs"
-    : "text-xs sm:text-xs md:text-sm lg:text-xs xl:text-base";
+    ? "text-xs sm:text-xs md:text-sm lg:text-base xl:text-sm"
+    : "text-xs sm:text-xs md:text-sm lg:text-xs xl:text-lg";
 
   function getRarityStripImage(cardRarity: CardRarities): string {
     switch (cardRarity) {
