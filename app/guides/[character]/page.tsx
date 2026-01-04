@@ -9,7 +9,7 @@ import { EquipmentSection } from "@/containers/character-guides/equipments";
 import { MemoryFragmentsSection } from "@/containers/character-guides/memory-fragments";
 import { PartnersSection } from "@/containers/character-guides/partners";
 import { RecommendedSaveData } from "@/containers/character-guides/recommended-save-data";
-import { ATTRIBUTE_COLORS } from "@/lib/attribute-colors";
+import { ATTRIBUTE_COLORS, AttributeColorsType } from "@/lib/attribute-colors";
 
 import type { CharacterData } from "@/types/character-guides";
 
@@ -41,20 +41,9 @@ const characters = [
   "rei",
 ];
 
-export const ThemeContext = createContext<
-  | {
-      bg: string;
-      border: string;
-      text: string;
-      hover: string;
-      gradientFrom: string;
-      gradientTo: string;
-      accent: string;
-      accentLight: string;
-      shadow: string;
-    }
-  | undefined
->(ATTRIBUTE_COLORS.Passion);
+export const ThemeContext = createContext<AttributeColorsType | undefined>(
+  ATTRIBUTE_COLORS.Passion
+);
 
 function useCharacterLoader(slug: string | null) {
   const [data, setData] = useState<CharacterData | null>(null);
@@ -117,12 +106,13 @@ export default function CharacterGuidePage() {
       bg: attr.bg,
       border: attr.border,
       text: attr.text,
+      textGradient: attr.textGradient,
       hover: attr.hover,
       gradientFrom: attr.gradientFrom,
       gradientTo: attr.gradientTo,
       accent: attr.accent,
       accentLight: attr.accentLight,
-      shadow: attr.shadow
+      shadow: attr.shadow,
     };
   }, [characterData?.attribute]);
 
@@ -411,7 +401,7 @@ export default function CharacterGuidePage() {
 
           {/* Page Title */}
           <h1
-            className={`text-4xl md:text-5xl font-bold mb-10 bg-gradient-to-r ${colors?.gradientFrom} via-white ${colors?.gradientTo} bg-clip-text text-transparent`}
+            className={`text-4xl md:text-5xl font-bold mb-10 bg-gradient-to-r ${colors?.textGradient} via-white bg-clip-text text-transparent`}
           >
             {characterName.toUpperCase()}
           </h1>
